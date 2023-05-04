@@ -25,6 +25,12 @@
     },
     "web": {
       "favicon": "./assets/favicon.png"
-    }
+    },
+    "extra": {
+      "eas": {
+        "projectId": "3956857f-8943-448e-bb07-26747b7d714a"
+      }
+    },
+    "owner": "dahernandez"
   }
 }
