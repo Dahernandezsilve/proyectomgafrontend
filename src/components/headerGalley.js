@@ -54,19 +54,26 @@ const HeaderGalley = () => {
 const styles = StyleSheet.create({
   headerContainer: {
     backgroundColor: '#FFFFFF',
-    padding: 16,
+    padding: 20,
     borderBottomWidth: 1,
     borderBottomColor: '#CCCCCC',
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.5,
+    shadowRadius: 2,
+    elevation: 2,   
   },
   headerText: {
-    fontSize: 20,
-    fontWeight: 'bold',
+    fontSize: 30,
+    fontWeight: 'black',
     marginBottom: 8,
-    textAlign: 'center'
+    textAlign: 'center',
+    fontFamily: 'Roboto'
   },
   buttonContainer: {
+    paddingTop: 10,
     flexDirection: 'row',
-    justifyContent: 'space-between',
+    justifyContent: 'space-around',
     alignItems: 'center'
   },
   tabButton: {
@@ -82,8 +89,9 @@ const styles = StyleSheet.create({
   },
   tabButtonText: {
     fontSize: 25,
-    fontWeight: 'bold',
     color: '#000000',
+    fontFamily: 'Roboto',
+    fontWeight: 'bold'
   },
   activeTabButtonText: {
     color: '#FFFFFF',

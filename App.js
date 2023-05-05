@@ -7,6 +7,7 @@ import { ModalComponent } from './src/components/modalComponent';
 import CardGalera from './src/components/CardGalera';
 import HeaderGalley from './src/components/headerGalley';
 import HeaderInformation from './src/components/headerInformation';
+import TextCard from './src/components/TextCard';
 
 
 function HomeScreen({ navigation }) {
@@ -20,6 +21,7 @@ function HomeScreen({ navigation }) {
       <StatusBar barStyle="light-content" backgroundColor="#fff" />
       <StatusBar barStyle="dark-content" backgroundColor="#fff" />
       <ScrollView contentContainerStyle={{ alignItems: 'center' }}>
+        <TextCard number='10000'/>
         <CardGalera galera='Galera 14' ca='red' navigateToGaleras={navigateToGaleras}/>
         <CardGalera galera='Galera 8' ca='green' navigateToGaleras={navigateToGaleras}/>
         <CardGalera galera='Galera 6' ca='orange' navigateToGaleras={navigateToGaleras}/>

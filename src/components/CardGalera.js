@@ -69,16 +69,23 @@ const styles = StyleSheet.create({
     backgroundColor: 'red',
     borderRadius: 5,
     marginBottom: 5,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.5,
+    shadowRadius: 2,
+    elevation: 2,   
   },
   smallText: {
     fontSize: 20,
     fontWeight: 'bold',
     marginBottom: 5,
+    fontFamily: 'Roboto'
   },
   text: {
     fontSize: 30,
     fontWeight: 'bold',
-    textAlign: 'center'
+    textAlign: 'center',
+    fontFamily: 'Roboto'
   },
 });
 
