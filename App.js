@@ -5,13 +5,15 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { SliderComponent} from './src/components/sliderComponent';
 import { ModalComponent } from './src/components/modalComponent';
 import CardGalera from './src/components/CardGalera';
-
+import HeaderGalley from './src/components/headerGalley';
+import HeaderInformation from './src/components/headerInformation';
 
 
 function HomeScreen({ navigation }) {
   const navigateToGaleras = () => {
     navigation.navigate('Galeras');
   };
+
 
   return (
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center', backgroundColor:'#D3D3D3' }}>
@@ -47,20 +49,24 @@ function DetailsScreen({ navigation }) {
 
 function CreacionScreen({ navigation }) {
   return (
-    <View style={{ flex: 2, alignItems: 'center', justifyContent: 'center' }}>
-      <Text>Details Screen</Text>
-      <Button
-        title="Ir a Home"
-        onPress={() => navigation.navigate('Home')}
-      />
+    <View style={{flex: 1}}>
+      <HeaderInformation></HeaderInformation>
+      <View style={{ height: 2, width: '100%', backgroundColor: '#2B4985' }} />
+      <View style={{ flex: 2, alignItems: 'center', justifyContent: 'center' }}>
+          <Text>Details Screen</Text>
+          <Button
+            title="Ir a Home"
+            onPress={() => navigation.navigate('Home')}
+          />
 
-      <Text>Cantidad de pollos pesados</Text>
-    <SliderComponent></SliderComponent>
-    <Text>Cantidad de alimento proporcionado</Text>
-    <SliderComponent></SliderComponent>
-    <Text>Peso medido</Text>
-    <SliderComponent></SliderComponent>
-    <ModalComponent></ModalComponent>
+          <Text>Cantidad de pollos pesados</Text>
+        <SliderComponent></SliderComponent>
+        <Text>Cantidad de alimento proporcionado</Text>
+        <SliderComponent></SliderComponent>
+        <Text>Peso medido</Text>
+        <SliderComponent></SliderComponent>
+        <ModalComponent></ModalComponent>
+      </View>
     </View>
   );
 }
@@ -69,22 +75,14 @@ const Stack = createNativeStackNavigator();
 
 
 function App() {
+
+  const renderHeader = () => <HeaderGalley/>;
+
   return (
     <NavigationContainer>
       <Stack.Navigator initialRouteName="Home">
         <Stack.Screen name="Home" component={HomeScreen}
-            options={{
-              headerTitle: 'Galeras y tareas pendientes',
-              headerStyle: {
-                backgroundColor: '#fff',
-                elevation: 0, // para eliminar la sombra en Android
-              },
-              headerTintColor: '#000',
-              headerTitleStyle: {
-                fontSize: 25,
-              },
-              headerTitleAlign: 'center', // centrar el título
-            }}
+            options={{header: renderHeader}}
           />
         <Stack.Screen name="Galeras" component={DetailsScreen} />
         <Stack.Screen name="Creacion" component={CreacionScreen} />
