@@ -51,6 +51,7 @@ const styles = StyleSheet.create({
     marginTop: 22,
   },
   modalView: {
+    flex: 1,
     margin: 20,
     backgroundColor: 'white',
     borderRadius: 20,
@@ -67,11 +68,12 @@ const styles = StyleSheet.create({
   },
   button: {
     borderRadius: 20,
-    padding: 10,
+    padding: 5,
     elevation: 2,
   },
   buttonOpen: {
     backgroundColor: '#F194FF',
+    width: '100%'
   },
   buttonClose: {
     backgroundColor: '#2196F3',
