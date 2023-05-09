@@ -46,7 +46,7 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     backgroundColor: '#FFFFFF',
     marginHorizontal: 15,
-    marginTop: 20,
+    marginTop: 15,
     shadowColor: '#000',
     shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.5,
@@ -65,7 +65,7 @@ const styles = StyleSheet.create({
   },
   square: {
     width: 80,
-    height: 70,
+    height: 50,
     backgroundColor: 'red',
     borderRadius: 5,
     marginBottom: 5,
@@ -82,7 +82,7 @@ const styles = StyleSheet.create({
     fontFamily: 'Roboto'
   },
   text: {
-    fontSize: 30,
+    fontSize: 50,
     fontWeight: 'bold',
     textAlign: 'center',
     fontFamily: 'Roboto'
