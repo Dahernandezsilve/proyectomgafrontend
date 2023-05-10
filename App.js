@@ -72,10 +72,10 @@ function CreacionScreen({ navigation }) {
       <StatusBar barStyle="dark-content" backgroundColor="#fff" /> 
       <View style={{ height: 2, width: '100%', backgroundColor: '#2B4985'}} />          
         <ScrollView contentContainerStyle={{ alignItems: 'center' }}>     
-          <SliderContainer title='Cantidad de pollos pesados: ' minimumValue={20} maximumValue={100} step={1} medida='pollos' />  
-          <SliderContainer title='Cantidad de alimento proporcionado: '  minimumValue={0} maximumValue={20} step={0.01} medida='qq'/>
-          <SliderContainer title='Peso medido: '  minimumValue={0} maximumValue={200} step={0.01} medida='lbs'/>
-          <SliderContainer title='Cantidad de decesos: '  minimumValue={0} maximumValue={3000} step={1} medida='pollos' />
+          <SliderContainer title='Cantidad de pollos pesados: ' minimumValue={20} maximumValue={100} step={1} medida='pollos' fixed='0' />  
+          <SliderContainer title='Cantidad de alimento proporcionado: '  minimumValue={0} maximumValue={20} step={0.01} medida='qq' fixed='2' />
+          <SliderContainer title='Peso medido: '  minimumValue={0} maximumValue={200} step={0.01} medida='lbs' fixed='2' />
+          <SliderContainer title='Cantidad de decesos: '  minimumValue={0} maximumValue={3000} step={1} medida='pollos' fixed='0' />
           <CommentsComponent/>
           <ModalComponent />
         </ScrollView>

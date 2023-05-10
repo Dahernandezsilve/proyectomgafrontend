@@ -1,14 +1,15 @@
 import React, { useState } from 'react';
-import { View, Text, StyleSheet, Dimensions, TouchableWithoutFeedback, Animated, Slider } from 'react-native';
+import { View, Text, StyleSheet, Dimensions, TouchableWithoutFeedback, Animated } from 'react-native';
+import Slider from '@react-native-community/slider';
 
 const windowWidth = Dimensions.get('window').width;
 
-const SliderContainer = ({title, minimumValue, maximumValue, step, medida}) => {
+const SliderContainer = ({title, minimumValue, maximumValue, step, medida, fixed}) => {
     const [value, setValue] = useState(0.0);
     return (
       <View style={styles.container}>
         <View style={styles.valueContainer}>
-          <Text style={styles.valueText}>{value.toFixed(2)}</Text>
+          <Text style={styles.valueText}>{value.toFixed(fixed)}</Text>
         </View>
         <Text style={[styles.title, {textAlign: 'left'}]}>{title}</Text>
         <Slider
