@@ -22,8 +22,7 @@ function HomeScreen({ navigation }) {
   }
 
   const navigateToGaleras =  async () => {
-    navigation.navigate('Galeras');
-    await handleObtainGaleras()
+    navigation.navigate('Creacion');
   };
 
   React.useEffect(() => {
@@ -68,7 +67,8 @@ function DetailsScreen({ navigation }) {
 function CreacionScreen({ navigation }) {
   return (
     <View style={{flex: 1, backgroundColor: '#d3d3d3'}}>
-      <HeaderInformation/>
+      <StatusBar barStyle="light-content" backgroundColor="#fff" />
+      <StatusBar barStyle="dark-content" backgroundColor="#fff" />
       <View style={{ height: 2, width: '100%', backgroundColor: '#2B4985' }} />
       <View style={{ flex: 2, alignItems: 'center', justifyContent: 'center' }}>
           <Text>Details Screen</Text>
@@ -101,15 +101,24 @@ const Stack = createNativeStackNavigator();
 function App() {
 
   const renderHeader = () => <HeaderGalley lotes={['Lote 1', 'Lote 2']}/>;
+  const renderInformation = () => <HeaderInformation/>
 
   return (
     <NavigationContainer>
       <Stack.Navigator initialRouteName="Home">
-        <Stack.Screen name="Home" component={HomeScreen}
-            options={{header: renderHeader}}
+        <Stack.Screen
+          name="Home"
+          component={HomeScreen}
+          options={{header: renderHeader}}
           />
-        <Stack.Screen name="Galeras" component={DetailsScreen} />
-        <Stack.Screen name="Creacion" component={CreacionScreen} />
+        <Stack.Screen 
+          name="Galeras"
+          component={DetailsScreen}
+          />
+        <Stack.Screen
+          name="Creacion"
+          component={CreacionScreen}
+          options={{header: renderInformation}}/>
       </Stack.Navigator>
     </NavigationContainer>
   );

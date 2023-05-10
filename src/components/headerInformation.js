@@ -5,7 +5,7 @@ const HeaderInformation = () => {
     return (
       <View style={styles.container}>
         <View style={styles.titleContainer}>
-          <Text style={styles.title}>Información Requerida</Text>
+          <Text style={styles.title}>Información requerida</Text>
         </View>
         <View style={styles.infoContainer}>
           <Text style={styles.info}>Lote #1</Text>
@@ -18,11 +18,12 @@ const HeaderInformation = () => {
   
   const styles = StyleSheet.create({
     container: {
-      backgroundColor: '#F8F8F8',
+      backgroundColor: '#FFFFFF',
       borderBottomWidth: 1,
       borderBottomColor: '#EAEAEA',
       paddingHorizontal: 16,
       paddingVertical: 8,
+      paddingTop: 20,
     },
     titleContainer: {
       justifyContent: 'center',
@@ -30,14 +31,14 @@ const HeaderInformation = () => {
       marginBottom: 10,
     },
     title: {
-      fontSize: 22,
+      fontSize: 30,
       fontWeight: 'normal',
       textAlign: 'center',
       fontFamily: 'Roboto',
     },
     infoContainer: {
       flexDirection: 'row',
-      justifyContent: 'space-between',
+      justifyContent: 'space-around',
       alignItems: 'center',
       marginHorizontal: 20,
       marginBottom: 10,
