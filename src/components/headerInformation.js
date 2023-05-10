@@ -9,7 +9,7 @@ const HeaderInformation = () => {
   return (
     <View style={styles.container}>
       <View style={styles.header}>
-        <TouchableOpacity onPress={() => {navigation.goBack()}}>
+        <TouchableOpacity onPress={() => {navigation.goBack()}} hitSlop={{ top: 30, bottom: 30, left: 30, right: 30 }}>
           <View style={styles.iconContainer}>
             <Ionicons name="arrow-back" size={28} color="#2B4985" />
           </View>

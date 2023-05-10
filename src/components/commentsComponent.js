@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { View, TextInput, Button, StyleSheet } from 'react-native';
 
-const CommentsComponent = () => {
+const CommentsComponent = ({handleRegistrar}) => {
   const [comentario, setComentario] = useState('');
 
   const handleComentarioChange = (text) => {
@@ -25,7 +25,7 @@ const CommentsComponent = () => {
         />
       </View>
       <View style={styles.buttonContainer}>
-        <Button title="Completar" color='#2e4a85' onPress={handleCompletar} />
+        <Button title="Completar" color='#2e4a85' onPress={() => handleRegistrar(comentario)} />
       </View>
     </View>
   );

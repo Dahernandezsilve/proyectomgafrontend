@@ -66,17 +66,31 @@ function DetailsScreen({ navigation }) {
 }
 
 function CreacionScreen({ navigation }) {
+  const [response, loading, handleRequest] = useApi()
+  const [registro, setRegistro] = useState({
+    cantidadAlimento: 200,
+    decesos: 2,
+    observaciones: "Some observations",
+    idGalera: 20,
+    pesado: 20.00
+  })
+  
+  const handleRegistrar = (observacionesf) => {
+    handleRequest('POST', '/makeRegister', { cant_alimento: registro.cantidadAlimento, deceso: registro.decesos, observacion: observacionesf, id_gale: registro.idGalera, pesa: registro.pesado })
+    console.log(response);
+  }
+  
   return (
     <View style={{backgroundColor: '#d3d3d3'}}>
       <StatusBar barStyle="light-content" backgroundColor="#fff" />
       <StatusBar barStyle="dark-content" backgroundColor="#fff" /> 
       <View style={{ height: 2, width: '100%', backgroundColor: '#2B4985'}} />          
         <ScrollView contentContainerStyle={{ alignItems: 'center' }}>     
-          <SliderContainer title='Cantidad de pollos pesados: ' minimumValue={20} maximumValue={100} step={1} medida='pollos' fixed='0' />  
-          <SliderContainer title='Cantidad de alimento proporcionado: '  minimumValue={0} maximumValue={20} step={0.01} medida='qq' fixed='2' />
-          <SliderContainer title='Peso medido: '  minimumValue={0} maximumValue={200} step={0.01} medida='lbs' fixed='2' />
-          <SliderContainer title='Cantidad de decesos: '  minimumValue={0} maximumValue={3000} step={1} medida='pollos' fixed='0' />
-          <CommentsComponent/>
+          <SliderContainer title='Cantidad de pollos pesados: ' minimumValue={20} maximumValue={100} step={1} medida='pollos' fixed='0'  />  
+          <SliderContainer title='Cantidad de alimento proporcionado: '  minimumValue={0} maximumValue={20} step={1} medida='qq' fixed='0' registro={registro} setRegistro={setRegistro} info='cantidadAlimento' />
+          <SliderContainer title='Peso medido: '  minimumValue={0} maximumValue={200} step={1} medida='lbs' fixed='0' />
+          <SliderContainer title='Cantidad de decesos: '  minimumValue={0} maximumValue={3000} step={1} medida='pollos' fixed='0' registro={registro} setRegistro={setRegistro} info='decesos' />
+          <CommentsComponent handleRegistrar={handleRegistrar} registro={registro}/>
           <ModalComponent />
         </ScrollView>
     </View>

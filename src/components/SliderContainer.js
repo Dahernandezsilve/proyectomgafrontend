@@ -1,15 +1,21 @@
 import React, { useState } from 'react';
-import { View, Text, StyleSheet, Dimensions, TouchableWithoutFeedback, Animated } from 'react-native';
+import { View, Text, StyleSheet, Dimensions, TextInput, ToastAndroid } from 'react-native';
 import Slider from '@react-native-community/slider';
 
 const windowWidth = Dimensions.get('window').width;
 
-const SliderContainer = ({title, minimumValue, maximumValue, step, medida, fixed}) => {
+const SliderContainer = ({title, minimumValue, maximumValue, step, medida, fixed, registro, setRegistro, info}) => {
     const [value, setValue] = useState(0.0);
+
+    const handleSliderChange = (info, value) => {
+      if (value !== undefined){
+      setRegistro({ ...registro, info: value });
+    }
+    };
     return (
       <View style={styles.container}>
         <View style={styles.valueContainer}>
-          <Text style={styles.valueText}>{value.toFixed(fixed)}</Text>
+          <TextInput style={styles.valueText} >{value.toFixed(fixed)}</TextInput>
         </View>
         <Text style={[styles.title, {textAlign: 'left'}]}>{title}</Text>
         <Slider
@@ -23,7 +29,12 @@ const SliderContainer = ({title, minimumValue, maximumValue, step, medida, fixed
         thumbTintColor="#2e4a85"
         thumbStyle={styles.sliderThumb}
         trackStyle={[styles.sliderTrack, {width: 10}]}
-        onValueChange={(newValue) => setValue(newValue)}
+        onValueChange={(newValue) => {
+          if (newValue !== undefined){
+            setValue(newValue)
+            handleSliderChange(info, newValue)
+          }          
+        }}
         />
         <View style={styles.sliderTextContainer}>
           <Text style={styles.sliderText}>{`${minimumValue} ${medida}`}</Text>
