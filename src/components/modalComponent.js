@@ -48,10 +48,10 @@ export class ModalComponent extends Component {
           </View>
         </Modal>
         <Pressable
-          style={[styles.button, styles.buttonOpen]}
+          style={styles.floatingButton}
           onPress={() => this.setState({ modalVisible: true })}
         >
-          <Text style={styles.textStyle}>Mostrar info</Text>
+          <Text style={[styles.textStyle, {color: '#2e4a85'}]}>+</Text>
         </Pressable>
       </View>
     );
@@ -88,7 +88,7 @@ const styles = StyleSheet.create({
   },
   buttonOpen: {
     backgroundColor: "#F194FF",
-    width: "100%",
+    width: "20%",
   },
   buttonClose: {
     backgroundColor: "#2196F3",
@@ -109,5 +109,20 @@ const styles = StyleSheet.create({
   },
   textoGaleraInfo: {
     flex: 2,
+  },
+  floatingButton: {
+    position: 'absolute',
+    bottom: 20,
+    left: 140,
+    borderRadius: 20,
+    width: 50,
+    height: 50,
+    justifyContent: 'center',
+    alignItems: 'center',
+    border: 10,
+    borderColor: '#2e4a85',
+    backgroundColor: '#FFF',
+    elevation: 3,
+    color: '#2e4a85',
   },
 });

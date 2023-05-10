@@ -43,11 +43,22 @@ function HomeScreen({ navigation }) {
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center', backgroundColor:'#D3D3D3' }}>
       <StatusBar barStyle="light-content" backgroundColor="#fff" />
       <StatusBar barStyle="dark-content" backgroundColor="#fff" />
-      <ScrollView contentContainerStyle={{ alignItems: 'center' }}>
+      <ScrollView contentContainerStyle={{ alignItems: 'center', marginBottom: 15 }}>
         <TextCard number='10000'/>
         {
-          galeras.map(galer => <CardGalera  key={galer.idGalera} galera={`Galera ${galer.numeroGalera}`} ca='green' navigateToGaleras={navigateToGaleras} />)
-        }
+          galeras.map(galer => {
+          if (parseFloat(galer.ca) > 4.9){
+            return <CardGalera  key={galer.idGalera} galera={`Galera ${galer.numeroGalera}`} ca='red' navigateToGaleras={navigateToGaleras} />
+          }
+
+          if (parseFloat(galer.ca) < 2.6) {
+            return <CardGalera  key={galer.idGalera} galera={`Galera ${galer.numeroGalera}`} ca='green' navigateToGaleras={navigateToGaleras} />
+          }
+
+          if (parseFloat(galer.ca) > 2.6 && galer.ca < 4.9) {
+            return <CardGalera  key={galer.idGalera} galera={`Galera ${galer.numeroGalera}`} ca='orange' navigateToGaleras={navigateToGaleras} />
+          }})
+        } 
       </ScrollView>
     </View>
   );
@@ -89,7 +100,7 @@ function CreacionScreen({ navigation }) {
       <StatusBar barStyle="light-content" backgroundColor="#fff" />
       <StatusBar barStyle="dark-content" backgroundColor="#fff" /> 
       <View style={{ height: 2, width: '100%', backgroundColor: '#2B4985'}} />          
-        <ScrollView contentContainerStyle={{ alignItems: 'center' }}>     
+        <ScrollView contentContainerStyle={{ alignItems: 'center', marginBottom: 10 }}>     
           <SliderContainer title='Cantidad de pollos pesados: ' minimumValue={20} maximumValue={100} step={1} medida='pollos' fixed='0'  />  
           <SliderContainer title='Cantidad de alimento proporcionado: '  minimumValue={0} maximumValue={20} step={1} medida='qq' fixed='0' registro={registro} setRegistro={setRegistro} info='cantidadAlimento' />
           <SliderContainer title='Peso medido: '  minimumValue={0} maximumValue={200} step={1} medida='lbs' fixed='0' />
@@ -97,7 +108,9 @@ function CreacionScreen({ navigation }) {
           <CommentsComponent handleRegistrar={handleRegistrar} />
           <ModalComponent />
         </ScrollView>
+
     </View>
+    
   );
 }
 

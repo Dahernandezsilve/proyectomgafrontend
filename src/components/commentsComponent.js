@@ -45,6 +45,7 @@ const styles = StyleSheet.create({
     width: '90%', 
     height: 150, 
     alignSelf: 'center',
+    marginBottom: 20,
   },
   comentariosContainer: {
     marginBottom: 10,
