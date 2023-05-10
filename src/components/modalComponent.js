@@ -1,5 +1,13 @@
-import React, {Component} from 'react';
-import {Alert, Modal, StyleSheet, Text, Pressable, View, Image} from 'react-native';
+import React, { Component } from "react";
+import {
+  Alert,
+  Modal,
+  StyleSheet,
+  Text,
+  Pressable,
+  View,
+  Image,
+} from "react-native";
 
 export class ModalComponent extends Component {
   state = {
@@ -7,37 +15,46 @@ export class ModalComponent extends Component {
   };
 
   render() {
-    const {modalVisible} = this.state;
+    const { modalVisible } = this.state;
     return (
       <View style={styles.centeredView}>
         <Modal
-          animationType="slide"
+          animationType="fade"
           transparent={true}
           visible={modalVisible}
           onRequestClose={() => {
-            Alert.alert('Modal has been closed.');
-            this.setState({modalVisible: !modalVisible});
-          }}>
+            Alert.alert("Modal has been closed.");
+            this.setState({ modalVisible: !modalVisible });
+          }}
+        >
           <View style={styles.centeredView}>
             <View style={styles.modalView}>
               <Text style={styles.modalText}>¡Información de Galeras!</Text>
               <Image
-          style={styles.tinyLogo}
-          source={require('../components/iconInfo.png')}
-        />
+                style={styles.tinyLogo}
+                source={require("../components/iconInfo.png")}
+              />
+              <Text style={[styles.tituloGalera]}>Galera</Text>
+              <Text style={[styles.textoGaleraInfo]}>Cantidad de pollos :</Text>
+              <Text style={[styles.textoGaleraInfo]}>Tipo de población :</Text>
+              <Text style={[styles.textoGaleraInfo]}>Edad de los pollos :</Text>
               <Pressable
                 style={[styles.button, styles.buttonClose]}
-                onPress={() => this.setState({modalVisible: !modalVisible})}>
-                <Text style={styles.textStyle}>Hide Modal</Text>
+                onPress={() => this.setState({ modalVisible: !modalVisible })}
+              >
+                <Text style={styles.textStyle}>Esconder Info</Text>
               </Pressable>
             </View>
           </View>
         </Modal>
         <Pressable
           style={[styles.button, styles.buttonOpen]}
-          onPress={() => this.setState({modalVisible: true})}>
-          <Text style={styles.textStyle}>Show Modal</Text>
+          onPress={() => this.setState({ modalVisible: true })}
+        >
+          <Text style={styles.textStyle}>Mostrar info</Text>
         </Pressable>
+
+        <Image style={styles.imagestyle} source={require("./iconInfo.png")} />
       </View>
     );
   }
@@ -46,18 +63,18 @@ export class ModalComponent extends Component {
 const styles = StyleSheet.create({
   centeredView: {
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
+    justifyContent: "center",
+    alignItems: "center",
     marginTop: 22,
   },
   modalView: {
     flex: 1,
     margin: 20,
-    backgroundColor: 'white',
+    backgroundColor: "white",
     borderRadius: 20,
     padding: 35,
-    alignItems: 'center',
-    shadowColor: '#000',
+    alignItems: "center",
+    shadowColor: "#000",
     shadowOffset: {
       width: 0,
       height: 2,
@@ -72,20 +89,27 @@ const styles = StyleSheet.create({
     elevation: 2,
   },
   buttonOpen: {
-    backgroundColor: '#F194FF',
-    width: '100%'
+    backgroundColor: "#F194FF",
+    width: "100%",
   },
   buttonClose: {
-    backgroundColor: '#2196F3',
+    backgroundColor: "#2196F3",
   },
   textStyle: {
-    color: 'white',
-    fontWeight: 'bold',
-    textAlign: 'center',
+    color: "white",
+    fontWeight: "bold",
+    textAlign: "center",
   },
   modalText: {
     marginBottom: 15,
-    textAlign: 'center',
+    textAlign: "center",
+  },
+  tituloGalera: {
+    fontSize: 24,
+    fontWeight: "bold",
+    flex: 1,
+  },
+  textoGaleraInfo: {
+    flex: 2,
   },
 });
-
