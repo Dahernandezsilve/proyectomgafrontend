@@ -101,7 +101,7 @@ const Stack = createNativeStackNavigator();
 function App() {
 
   const renderHeader = () => <HeaderGalley lotes={['Lote 1', 'Lote 2']}/>;
-  const renderInformation = () => <HeaderInformation/>
+  const renderInformation = () => <HeaderInformation />
 
   return (
     <NavigationContainer>
