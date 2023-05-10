@@ -75,11 +75,15 @@ function CreacionScreen({ navigation }) {
     pesado: 20.00
   })
   
-  const handleRegistrar = (observacionesf) => {
-    handleRequest('POST', '/makeRegister', { cant_alimento: registro.cantidadAlimento, deceso: registro.decesos, observacion: observacionesf, id_gale: registro.idGalera, pesa: registro.pesado })
+  const handleRegistrar = () => {
+    handleRequest('POST', '/makeRegister', { 
+      cantidadAlimento: registro.cantidadAlimento,
+      decesos: registro.decesos,
+      observaciones: registro.observaciones,
+      idGalera: registro.idGalera,
+      pesado: registro.pesado })
     console.log(response);
   }
-  
   return (
     <View style={{backgroundColor: '#d3d3d3'}}>
       <StatusBar barStyle="light-content" backgroundColor="#fff" />

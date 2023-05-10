@@ -25,7 +25,7 @@ const CommentsComponent = ({handleRegistrar}) => {
         />
       </View>
       <View style={styles.buttonContainer}>
-        <Button title="Completar" color='#2e4a85' onPress={() => handleRegistrar(comentario)} />
+        <Button title="Completar" color='#2e4a85' onPress={() => handleRegistrar()} />
       </View>
     </View>
   );

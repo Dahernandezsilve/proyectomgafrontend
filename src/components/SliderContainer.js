@@ -7,11 +7,6 @@ const windowWidth = Dimensions.get('window').width;
 const SliderContainer = ({title, minimumValue, maximumValue, step, medida, fixed, registro, setRegistro, info}) => {
     const [value, setValue] = useState(0.0);
 
-    const handleSliderChange = (info, value) => {
-      if (value !== undefined){
-      setRegistro({ ...registro, info: value });
-    }
-    };
     return (
       <View style={styles.container}>
         <View style={styles.valueContainer}>
@@ -32,7 +27,6 @@ const SliderContainer = ({title, minimumValue, maximumValue, step, medida, fixed
         onValueChange={(newValue) => {
           if (newValue !== undefined){
             setValue(newValue)
-            handleSliderChange(info, newValue)
           }          
         }}
         />
@@ -66,9 +60,9 @@ const SliderContainer = ({title, minimumValue, maximumValue, step, medida, fixed
       borderRadius: 10, // radio del botón
     },
     sliderTrack: {
-        height: 100,
-        width: '90%',
-      },      
+      height: 100,
+      width: '90%',
+    },        
     valueContainer: {
       backgroundColor: '#EFEFEF', // Color gris claro
       padding: 5,
