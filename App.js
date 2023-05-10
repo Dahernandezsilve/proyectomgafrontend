@@ -19,7 +19,7 @@ function HomeScreen({ navigation }) {
   
   const handleObtainGaleras = () => {
     handleRequest('POST', '/galeras', { numLote: 20 })
-    console.log('Respuesta', response)
+    console.log('Respuesta', response.data)
   }
 
   const navigateToGaleras =  async () => {
@@ -46,7 +46,7 @@ function HomeScreen({ navigation }) {
       <ScrollView contentContainerStyle={{ alignItems: 'center' }}>
         <TextCard number='10000'/>
         {
-          galeras.map(galer => <CardGalera  key={galer.idGalera} galera={`Galera ${galer.idGalera}`} ca='green' navigateToGaleras={navigateToGaleras} />)
+          galeras.map(galer => <CardGalera  key={galer.idGalera} galera={`Galera ${galer.numeroGalera}`} ca='green' navigateToGaleras={navigateToGaleras} />)
         }
       </ScrollView>
     </View>
@@ -71,7 +71,7 @@ function CreacionScreen({ navigation }) {
     cantidadAlimento: 200,
     decesos: 2,
     observaciones: "Some observations",
-    idGalera: 20,
+    idGalera: 1,
     pesado: 20.00
   })
   
@@ -94,7 +94,7 @@ function CreacionScreen({ navigation }) {
           <SliderContainer title='Cantidad de alimento proporcionado: '  minimumValue={0} maximumValue={20} step={1} medida='qq' fixed='0' registro={registro} setRegistro={setRegistro} info='cantidadAlimento' />
           <SliderContainer title='Peso medido: '  minimumValue={0} maximumValue={200} step={1} medida='lbs' fixed='0' />
           <SliderContainer title='Cantidad de decesos: '  minimumValue={0} maximumValue={3000} step={1} medida='pollos' fixed='0' registro={registro} setRegistro={setRegistro} info='decesos' />
-          <CommentsComponent handleRegistrar={handleRegistrar} registro={registro}/>
+          <CommentsComponent handleRegistrar={handleRegistrar} />
           <ModalComponent />
         </ScrollView>
     </View>
