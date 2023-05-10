@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { useState } from 'react';
 import { Button, View, Text, ScrollView, StatusBar } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
@@ -9,13 +10,34 @@ import HeaderGalley from './src/components/headerGalley';
 import HeaderInformation from './src/components/headerInformation';
 import TextCard from './src/components/TextCard';
 import CommentsComponent from './src/components/commentsComponent';
-
+import useApi from './src/hooks/useApi/useApi'
 
 function HomeScreen({ navigation }) {
-  const navigateToGaleras = () => {
+  const [response, loading, handleRequest] = useApi()
+  const [galeras, setGaleras] = useState([])
+  
+  const handleObtainGaleras = () => {
+    handleRequest('POST', '/galeras', { numLote: 20 })
+    console.log('Respuesta', response)
+  }
+
+  const navigateToGaleras =  async () => {
     navigation.navigate('Galeras');
+    await handleObtainGaleras()
   };
 
+  React.useEffect(() => {
+    if(response.data === undefined || response.data === null) {
+      console.log('No ha pasado')
+    } else {
+      setGaleras(response.data)
+    }
+  }, [response])
+
+
+  React.useEffect(() => {
+    handleObtainGaleras()    
+  }, [])
 
   return (
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center', backgroundColor:'#D3D3D3' }}>
@@ -23,16 +45,9 @@ function HomeScreen({ navigation }) {
       <StatusBar barStyle="dark-content" backgroundColor="#fff" />
       <ScrollView contentContainerStyle={{ alignItems: 'center' }}>
         <TextCard number='10000'/>
-        <CardGalera galera='Galera 14' ca='red' navigateToGaleras={navigateToGaleras}/>
-        <CardGalera galera='Galera 8' ca='green' navigateToGaleras={navigateToGaleras}/>
-        <CardGalera galera='Galera 6' ca='orange' navigateToGaleras={navigateToGaleras}/>
-        <CardGalera galera='Galera 9' ca='red' navigateToGaleras={navigateToGaleras}/>
-        <CardGalera galera='Galera 18' ca='green' navigateToGaleras={navigateToGaleras}/>
-        <CardGalera galera='Galera 17' ca='red' navigateToGaleras={navigateToGaleras}/>
-        <CardGalera galera='Galera 13' ca='orange' navigateToGaleras={navigateToGaleras}/>
-        <CardGalera galera='Galera 1' ca='red' navigateToGaleras={navigateToGaleras}/>
-        <CardGalera galera='Galera 9' ca='orange' navigateToGaleras={navigateToGaleras}/>
-        <CardGalera galera='Galera 15' ca='green' navigateToGaleras={navigateToGaleras}/>
+        {
+          galeras.map(galer => <CardGalera  key={galer.idGalera} galera={`Galera ${galer.idGalera}`} ca='green' navigateToGaleras={navigateToGaleras} />)
+        }
       </ScrollView>
     </View>
   );
