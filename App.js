@@ -11,6 +11,7 @@ import HeaderInformation from './src/components/headerInformation';
 import TextCard from './src/components/TextCard';
 import CommentsComponent from './src/components/commentsComponent';
 import useApi from './src/hooks/useApi/useApi'
+import SliderContainer from './src/components/SliderContainer';
 
 function HomeScreen({ navigation }) {
   const [response, loading, handleRequest] = useApi()
@@ -66,31 +67,18 @@ function DetailsScreen({ navigation }) {
 
 function CreacionScreen({ navigation }) {
   return (
-    <View style={{flex: 1, backgroundColor: '#d3d3d3'}}>
+    <View style={{backgroundColor: '#d3d3d3'}}>
       <StatusBar barStyle="light-content" backgroundColor="#fff" />
-      <StatusBar barStyle="dark-content" backgroundColor="#fff" />
-      <View style={{ height: 2, width: '100%', backgroundColor: '#2B4985' }} />
-      <View style={{ flex: 2, alignItems: 'center', justifyContent: 'center' }}>
-          <Text>Details Screen</Text>
-          <Button
-            title="Ir a Home"
-            onPress={() => navigation.navigate('Home')}
-          />
-          <View style={{flex: 4, backgroundColor: 'white', padding: 10,borderRadius: 10, width: '90%',height: 150,marginBottom:10}}>
-          <Text>Cantidad de pollos pesados</Text>
-        <SliderComponent></SliderComponent>
-        </View>
-        <View style={{flex: 4, backgroundColor: 'white', padding: 10,borderRadius: 10, width: '90%',height: 150,marginBottom:10}}>
-          <Text>Cantidad de alimento proporcionado</Text>
-          <SliderComponent></SliderComponent>
-        </View>
-        <View style={{flex: 4, backgroundColor: 'white', padding: 10,borderRadius: 10, width: '90%',height: 150,marginBottom:10}}>
-          <Text>Peso medido</Text>
-          <SliderComponent></SliderComponent>
-        </View>
-        <CommentsComponent/>
-        <ModalComponent></ModalComponent>
-      </View>
+      <StatusBar barStyle="dark-content" backgroundColor="#fff" /> 
+      <View style={{ height: 2, width: '100%', backgroundColor: '#2B4985'}} />          
+        <ScrollView contentContainerStyle={{ alignItems: 'center' }}>     
+          <SliderContainer title='Cantidad de pollos pesados: ' minimumValue={20} maximumValue={100} step={1} medida='pollos' />  
+          <SliderContainer title='Cantidad de alimento proporcionado: '  minimumValue={0} maximumValue={20} step={0.01} medida='qq'/>
+          <SliderContainer title='Peso medido: '  minimumValue={0} maximumValue={200} step={0.01} medida='lbs'/>
+          <SliderContainer title='Cantidad de decesos: '  minimumValue={0} maximumValue={3000} step={1} medida='pollos' />
+          <CommentsComponent/>
+          <ModalComponent />
+        </ScrollView>
     </View>
   );
 }
