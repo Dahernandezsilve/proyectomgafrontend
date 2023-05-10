@@ -53,8 +53,6 @@ export class ModalComponent extends Component {
         >
           <Text style={styles.textStyle}>Mostrar info</Text>
         </Pressable>
-
-        <Image style={styles.imagestyle} source={require("./iconInfo.png")} />
       </View>
     );
   }
