@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 
-const HeaderGalley = ({lotes}) => {
+const HeaderGalley = ({lotes, title}) => {
   const [activeTab, setActiveTab] = useState('lote1');
 
   const handleTabPress = (tabName) => {
@@ -10,7 +10,7 @@ const HeaderGalley = ({lotes}) => {
 
   return (
     <View style={styles.headerContainer}>
-      <Text style={styles.headerText}>Galeras y tareas pendientes</Text>
+      <Text style={styles.headerText}>{ title }</Text>
       <View style={styles.buttonContainer}>
         <TouchableOpacity
           style={[

@@ -6,11 +6,13 @@ import HeaderInformation from './src/components/headerInformation'
 import HomeWorkerScreen from './src/screens/HomeWorkerScreen'
 import CreationScreen from './src/screens/CreationScreen'
 import DetailsScreen from './src/screens/DetailsScreen'
+import ReportScreenAdmin from './src/screens/ReportScreenAdmin'
 
 const Stack = createNativeStackNavigator();
 
 const App = () => {
-  const renderHeader = () => <HeaderGalley lotes={['Lote 1', 'Lote 2']}/>;
+  const renderHeaderGalley = () => <HeaderGalley title='Galeras y tareas pendientes' lotes={['Lote 1', 'Lote 2']}/>;
+  const renderHeaderInform = () => <HeaderGalley title='Informe' lotes={['Lote 1', 'Lote 2', 'Lote 3']}/>;
   const renderInformation = () => <HeaderInformation />
 
   return (
@@ -18,8 +20,8 @@ const App = () => {
       <Stack.Navigator initialRouteName="Home">
         <Stack.Screen
           name="Home"
-          component={HomeWorkerScreen}
-          options={{header: renderHeader}}
+          component={ReportScreenAdmin}
+          options={{header: renderHeaderInform}}
           />
         <Stack.Screen 
           name="Galeras"
