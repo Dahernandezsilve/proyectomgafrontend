@@ -21,8 +21,7 @@ const SelectDate = ({ number, onPress, selectedDate }) => {
 
 const styles = StyleSheet.create({
   container: {
-    width: '55%',
-    alignSelf: 'flex-start',
+    width: '85%',
     padding: 10,
     borderRadius: 10,
     backgroundColor: '#FFFFFF',
@@ -36,10 +35,6 @@ const styles = StyleSheet.create({
     elevation: 2,   
   },
   contentContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'space-between',
-    width: '100%',
   },
   text: {
     fontSize: 18,

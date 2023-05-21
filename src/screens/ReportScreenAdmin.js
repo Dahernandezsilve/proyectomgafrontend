@@ -6,23 +6,21 @@ import useApi from "../hooks/useApi/useApi"
 import DateTimePicker from '@react-native-community/datetimepicker'
 import SelectDate from "../components/SelectDate"
 import SelectOption from "../components/SelectOption"
+import TrafficLight from "../components/TrafficLight"
 
 const ReportScreenAdmin = ({ navigation }) => {
   const [response, loading, handleRequest] = useApi()
   const [galeras, setGaleras] = useState([])
   const [selectedDate, setSelectedDate] = useState(new Date())
-  const [showDatePicker, setShowDatePicker] = useState(false) // Variable de estado para controlar la visibilidad del DateTimePicker
+  const [showDatePicker, setShowDatePicker] = useState(false)
   const [selectedOption, setSelectedOption] = useState(null);
 
-  
   const handleDateChange = (event, date) => {
-    console.log("Fecha seleccionada:", date);
     setSelectedDate(date);
-    setShowDatePicker(false); // Cerrar el DateTimePicker después de seleccionar una fecha
+    setShowDatePicker(false);
   }
 
   const handleSelectDatePress = () => {
-    // Mostrar u ocultar el DateTimePicker al presionar el SelectDate
     setShowDatePicker(!showDatePicker);
   };
 
@@ -52,30 +50,40 @@ const ReportScreenAdmin = ({ navigation }) => {
       <StatusBar barStyle="light-content" backgroundColor="#fff" />
       <StatusBar barStyle="dark-content" backgroundColor="#fff" />
       <ScrollView contentContainerStyle={{ alignItems: 'center', marginBottom: 15 }}>
-      <SelectDate onPress={handleSelectDatePress} selectedDate={selectedDate} />
-        {showDatePicker && (
-          <DateTimePicker
-            value={selectedDate}
-            mode="date"
-            placeholder="Seleccionar fecha"
-            format="DD-MM-YYYY"
-            onChange={handleDateChange}
+        <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'flex-start' }}>
+          <View style={{ flexDirection: 'column', alignItems: 'center', flexGrow: 1, justifyContent: 'flex-start'}}>
+            <SelectDate onPress={handleSelectDatePress} selectedDate={selectedDate} />
+            {showDatePicker && (
+              <DateTimePicker
+                value={selectedDate}
+                mode="date"
+                placeholder="Seleccionar fecha"
+                format="DD-MM-YYYY"
+                onChange={handleDateChange}
+              />
+            )}
+            <SelectOption selectedOption={selectedOption} options={['Messi', 'El Chavo', 'Ramón']} setSelectedOption={setSelectedOption} />
+          </View>
+          <TrafficLight
+            topValue={1}  // Valor para el cuadro verde
+            middleValue={2}  // Valor para el cuadro naranja
+            bottomValue={3}  // Valor para el cuadro rojo
           />
-        )}
-      <SelectOption selectedOption={selectedOption} options={['Messi', 'El Chavo', 'Ramón']} setSelectedOption={setSelectedOption} />
-      <TextCard number={10000} ></TextCard>
-      {
-        galeras.map(galer => {
-          if (parseFloat(galer.ca) > 4.9) {
-            return <CardGalera  key={galer.idGalera} galera={`Galera ${galer.numeroGalera}`} ca='red' navigateToGaleras={navigateToGaleras} />
-          }
-          if (parseFloat(galer.ca) < 2.6) {
-            return <CardGalera  key={galer.idGalera} galera={`Galera ${galer.numeroGalera}`} ca='green' navigateToGaleras={navigateToGaleras} />
-          }
-          if (parseFloat(galer.ca) > 2.6 && galer.ca < 4.9) {
-            return <CardGalera  key={galer.idGalera} galera={`Galera ${galer.numeroGalera}`} ca='orange' navigateToGaleras={navigateToGaleras} />
-          }
-        })}
+        </View>
+        <TextCard number={10000} ></TextCard>
+        {
+          galeras.map(galer => {
+            if (parseFloat(galer.ca) > 4.9) {
+              return <CardGalera  key={galer.idGalera} galera={`Galera ${galer.numeroGalera}`} ca='red' navigateToGaleras={navigateToGaleras} />
+            }
+            if (parseFloat(galer.ca) < 2.6) {
+              return <CardGalera  key={galer.idGalera} galera={`Galera ${galer.numeroGalera}`} ca='green' navigateToGaleras={navigateToGaleras} />
+            }
+            if (parseFloat(galer.ca) > 2.6 && galer.ca < 4.9) {
+              return <CardGalera  key={galer.idGalera} galera={`Galera ${galer.numeroGalera}`} ca='orange' navigateToGaleras={navigateToGaleras} />
+            }
+          })
+        }
       </ScrollView>
     </View>
   );

@@ -43,8 +43,7 @@ const SelectOption = ({ selectedOption, options, setSelectedOption }) => {
 const styles = StyleSheet.create({
   container: {
     position: 'relative', // Añadido para contener las opciones
-    width: '45%',
-    alignSelf: 'flex-start',
+    width: '85%',
     padding: 10,
     borderRadius: 10,
     backgroundColor: '#FFFFFF',
