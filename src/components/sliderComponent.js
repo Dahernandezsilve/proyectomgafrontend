@@ -4,7 +4,7 @@ import {AppRegistry, StyleSheet, View, Text} from 'react-native';
 
 export class SliderComponent extends React.Component {
     state = {
-        value: 0.2,
+        value: 20,
     };
 
     render() {
@@ -22,7 +22,6 @@ export class SliderComponent extends React.Component {
 
 const styles = StyleSheet.create({
     container: {
-        flex: 4,
         marginLeft: 10,
         marginRight: 10,
         alignItems: 'stretch',

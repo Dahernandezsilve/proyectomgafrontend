@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 
-const HeaderGalley = () => {
+const HeaderGalley = ({lotes}) => {
   const [activeTab, setActiveTab] = useState('lote1');
 
   const handleTabPress = (tabName) => {
@@ -26,24 +26,24 @@ const HeaderGalley = () => {
               activeTab === 'lote1' ? styles.activeTabButtonText : null,
             ]}
           >
-            Lote #1
+            {lotes[0]}
           </Text>
         </TouchableOpacity>
         <TouchableOpacity
           style={[
             styles.tabButton,
-            activeTab === 'lote3' ? styles.activeTabButton : null,
+            activeTab === 'lote2' ? styles.activeTabButton : null,
           ]}
           activeOpacity={0.7}
-          onPress={() => handleTabPress('lote3')}
+          onPress={() => handleTabPress('lote2')}
         >
           <Text
             style={[
               styles.tabButtonText,
-              activeTab === 'lote3' ? styles.activeTabButtonText : null,
+              activeTab === 'lote2' ? styles.activeTabButtonText : null,
             ]}
           >
-            Lote #2
+            {lotes[1]}
           </Text>
         </TouchableOpacity>
       </View>
@@ -54,39 +54,56 @@ const HeaderGalley = () => {
 const styles = StyleSheet.create({
   headerContainer: {
     backgroundColor: '#FFFFFF',
-    padding: 16,
+    paddingTop: 20,
     borderBottomWidth: 1,
     borderBottomColor: '#CCCCCC',
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.5,
+    shadowRadius: 2,
+    elevation: 2,   
   },
   headerText: {
-    fontSize: 20,
+    fontSize: 30,
     fontWeight: 'bold',
     marginBottom: 8,
-    textAlign: 'center'
+    textAlign: 'center',
+    fontFamily: 'Roboto'
   },
   buttonContainer: {
+    paddingTop: 1,
     flexDirection: 'row',
-    justifyContent: 'space-between',
+    justifyContent: 'space-around',
     alignItems: 'center'
   },
   tabButton: {
+    width: '50%',
     backgroundColor: 'transparent',
     paddingVertical: 8,
     paddingHorizontal: 16,
     borderRadius: 0,
     marginHorizontal: 4,
+    borderBottomWidth: 3,
+    color: '#FFC107',
+    borderBottomColor: '#CCCCCC',
   },
   activeTabButton: {
-    backgroundColor: '#FFC107',
-    borderRadius: 8,
+    width: '50%',
+    color: '#FFC107',
+    backgroundColor: '#FFFFFF',
+    borderBottomWidth: 3,
+    borderBottomColor: '#FFC107',
   },
   tabButtonText: {
-    fontSize: 25,
-    fontWeight: 'bold',
+    fontSize: 30,
     color: '#000000',
+    fontFamily: 'Roboto',
+    fontWeight: 'bold',
+    textAlign: 'center',
   },
   activeTabButtonText: {
-    color: '#FFFFFF',
+    color: '#FFC107',
+    textAlign: 'center',
   },
 });
 

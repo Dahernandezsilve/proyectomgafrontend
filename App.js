@@ -1,97 +1,37 @@
-import * as React from 'react';
-import { Button, View, Text, ScrollView, StatusBar } from 'react-native';
-import { NavigationContainer } from '@react-navigation/native';
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import { SliderComponent} from './src/components/sliderComponent';
-import { ModalComponent } from './src/components/modalComponent';
-import CardGalera from './src/components/CardGalera';
-import HeaderGalley from './src/components/headerGalley';
-import HeaderInformation from './src/components/headerInformation';
-
-
-function HomeScreen({ navigation }) {
-  const navigateToGaleras = () => {
-    navigation.navigate('Galeras');
-  };
-
-
-  return (
-    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center', backgroundColor:'#D3D3D3' }}>
-      <StatusBar barStyle="light-content" backgroundColor="#fff" />
-      <StatusBar barStyle="dark-content" backgroundColor="#fff" />
-      <ScrollView contentContainerStyle={{ alignItems: 'center' }}>
-        <CardGalera galera='Galera 14' ca='red' navigateToGaleras={navigateToGaleras}/>
-        <CardGalera galera='Galera 8' ca='green' navigateToGaleras={navigateToGaleras}/>
-        <CardGalera galera='Galera 6' ca='orange' navigateToGaleras={navigateToGaleras}/>
-        <CardGalera galera='Galera 9' ca='red' navigateToGaleras={navigateToGaleras}/>
-        <CardGalera galera='Galera 18' ca='green' navigateToGaleras={navigateToGaleras}/>
-        <CardGalera galera='Galera 17' ca='red' navigateToGaleras={navigateToGaleras}/>
-        <CardGalera galera='Galera 13' ca='orange' navigateToGaleras={navigateToGaleras}/>
-        <CardGalera galera='Galera 1' ca='red' navigateToGaleras={navigateToGaleras}/>
-        <CardGalera galera='Galera 9' ca='orange' navigateToGaleras={navigateToGaleras}/>
-        <CardGalera galera='Galera 15' ca='green' navigateToGaleras={navigateToGaleras}/>
-      </ScrollView>
-    </View>
-  );
-}
-
-function DetailsScreen({ navigation }) {
-  return (
-    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-      <Text>Details Screen</Text>
-      <Button
-        title="Ir a creacion de Galeras"
-        onPress={() => navigation.navigate('Creacion')}
-      />
-    </View>
-  );
-}
-
-function CreacionScreen({ navigation }) {
-  return (
-    <View style={{flex: 1}}>
-      <HeaderInformation></HeaderInformation>
-      <View style={{ height: 2, width: '100%', backgroundColor: '#2B4985' }} />
-      <View style={{ flex: 2, alignItems: 'center', justifyContent: 'center' }}>
-          <Text>Details Screen</Text>
-          <Button
-            title="Ir a Home"
-            onPress={() => navigation.navigate('Home')}
-          />
-
-          <Text>Cantidad de pollos pesados</Text>
-        <SliderComponent></SliderComponent>
-        <Text>Cantidad de alimento proporcionado</Text>
-        <SliderComponent></SliderComponent>
-        <Text>Peso medido</Text>
-        <SliderComponent></SliderComponent>
-        <ModalComponent></ModalComponent>
-      </View>
-    </View>
-  );
-}
+import * as React from 'react'
+import { NavigationContainer } from '@react-navigation/native'
+import { createNativeStackNavigator } from '@react-navigation/native-stack'
+import HeaderGalley from './src/components/headerGalley'
+import HeaderInformation from './src/components/headerInformation'
+import HomeWorkerScreen from './src/screens/HomeWorkerScreen'
+import CreationScreen from './src/screens/CreationScreen'
+import DetailsScreen from './src/screens/DetailsScreen'
 
 const Stack = createNativeStackNavigator();
 
-
-function App() {
-
-  const renderHeader = () => <HeaderGalley/>;
+const App = () => {
+  const renderHeader = () => <HeaderGalley lotes={['Lote 1', 'Lote 2']}/>;
+  const renderInformation = () => <HeaderInformation />
 
   return (
     <NavigationContainer>
       <Stack.Navigator initialRouteName="Home">
-        <Stack.Screen name="Home" component={HomeScreen}
-            options={{header: renderHeader}}
+        <Stack.Screen
+          name="Home"
+          component={HomeWorkerScreen}
+          options={{header: renderHeader}}
           />
-        <Stack.Screen name="Galeras" component={DetailsScreen} />
-        <Stack.Screen name="Creacion" component={CreacionScreen} />
+        <Stack.Screen 
+          name="Galeras"
+          component={DetailsScreen}
+          />
+        <Stack.Screen
+          name="Creacion"
+          component={CreationScreen}
+          options={{header: renderInformation}}/>
       </Stack.Navigator>
     </NavigationContainer>
-  );
+  )
 }
 
-
-
-
-export default App;
+export default App

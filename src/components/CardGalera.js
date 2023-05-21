@@ -25,7 +25,6 @@ const CardGalera = ({galera='Default', ca='red', navigateToGaleras}) => {
   return (
     <TouchableWithoutFeedback onPress={() => navigateToGaleras()} onPressIn={onPressIn} onPressOut={onPressOut}>
       <Animated.View style={[styles.container, { width: windowWidth - 30, opacity: opacityValue }]}>
-        
         <View style={styles.caContainer}>
           <Text style={styles.smallText}>C.A</Text>
           <View style={[styles.square, {backgroundColor:ca}]}></View>
@@ -44,9 +43,10 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     padding: 20,
     borderRadius: 10,
-    backgroundColor: '#f5f5f5',
+    backgroundColor: '#FFFFFF',
     marginHorizontal: 15,
-    marginTop: 20,
+    marginTop: 10,
+    marginBottom: 10,
     shadowColor: '#000',
     shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.5,
@@ -65,20 +65,27 @@ const styles = StyleSheet.create({
   },
   square: {
     width: 80,
-    height: 70,
+    height: 50,
     backgroundColor: 'red',
     borderRadius: 5,
     marginBottom: 5,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.5,
+    shadowRadius: 2,
+    elevation: 2,   
   },
   smallText: {
     fontSize: 20,
     fontWeight: 'bold',
     marginBottom: 5,
+    fontFamily: 'Roboto'
   },
   text: {
-    fontSize: 30,
+    fontSize: 50,
     fontWeight: 'bold',
-    textAlign: 'center'
+    textAlign: 'center',
+    fontFamily: 'Roboto'
   },
 });
 
