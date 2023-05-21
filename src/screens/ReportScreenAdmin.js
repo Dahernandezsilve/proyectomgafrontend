@@ -50,7 +50,7 @@ const ReportScreenAdmin = ({ navigation }) => {
       <StatusBar barStyle="light-content" backgroundColor="#fff" />
       <StatusBar barStyle="dark-content" backgroundColor="#fff" />
       <ScrollView contentContainerStyle={{ alignItems: 'center', marginBottom: 15 }}>
-        <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'flex-start' }}>
+        <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'flex-start', zIndex: 2 }}>
           <View style={{ flexDirection: 'column', alignItems: 'center', flexGrow: 1, justifyContent: 'flex-start'}}>
             <SelectDate onPress={handleSelectDatePress} selectedDate={selectedDate} />
             {showDatePicker && (
@@ -62,10 +62,10 @@ const ReportScreenAdmin = ({ navigation }) => {
                 onChange={handleDateChange}
               />
             )}
-            <SelectOption selectedOption={selectedOption} options={['Messi', 'El Chavo', 'Ramón']} setSelectedOption={setSelectedOption} />
+            <SelectOption selectedOption={selectedOption} options={['Esteban Augusto', 'Roberto Martinez', 'Ramón Gutierrez', 'Roberto Carlos', 'Pedro Vasquez']} setSelectedOption={setSelectedOption} />
           </View>
           <TrafficLight
-            topValue={1}  // Valor para el cuadro verde
+            topValue={5}  // Valor para el cuadro verde
             middleValue={2}  // Valor para el cuadro naranja
             bottomValue={3}  // Valor para el cuadro rojo
           />

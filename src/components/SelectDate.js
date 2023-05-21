@@ -21,7 +21,7 @@ const SelectDate = ({ number, onPress, selectedDate }) => {
 
 const styles = StyleSheet.create({
   container: {
-    width: '85%',
+    width: '88%',
     padding: 10,
     borderRadius: 10,
     backgroundColor: '#FFFFFF',
