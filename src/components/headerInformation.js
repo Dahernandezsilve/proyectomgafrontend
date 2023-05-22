@@ -61,7 +61,7 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    marginLeft: -28, // para compensar el espacio del botón
+    marginLeft: -28, 
   },
   title: {
     fontSize: 30,
@@ -82,7 +82,7 @@ const styles = StyleSheet.create({
     color: '#2B4985',
   },
   placeholder: {
-    width: 0, // espacio para el botón de retroceso
+    width: 0, 
   },
   line: {
     backgroundColor: '#EAEAEA',
