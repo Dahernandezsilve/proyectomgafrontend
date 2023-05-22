@@ -79,9 +79,6 @@ const ReportScreenAdmin = ({ navigation }) => {
                 key={galer.idGalera}
                 galera={`Galera ${galer.numeroGalera}`}
                 ca='red' navigateToGaleras={navigateToGaleras}
-                numberCA={galer.ca}
-                existence={galer.existence}
-                typeChicken={galer.typeChicken}
               />
             }
             if (parseFloat(galer.ca) < 2.6) {
@@ -90,9 +87,6 @@ const ReportScreenAdmin = ({ navigation }) => {
               galera={`Galera ${galer.numeroGalera}`}
               ca='green'
               navigateToGaleras={navigateToGaleras}
-              numberCA={galer.ca}
-              existence={galer.existence}
-              typeChicken={galer.typeChicken}
               />
             }
             if (parseFloat(galer.ca) > 2.6 && galer.ca < 4.9) {
@@ -101,9 +95,6 @@ const ReportScreenAdmin = ({ navigation }) => {
               galera={`Galera ${galer.numeroGalera}`}
               ca='orange'
               navigateToGaleras={navigateToGaleras}
-              numberCA={galer.ca}
-              existence={galer.existence}
-              typeChicken={galer.typeChicken}
               />
             }
           })
