@@ -1,0 +1,136 @@
+import React, { useState } from "react";
+import {
+  View,
+  Text,
+  TextInput,
+  TouchableOpacity,
+  StyleSheet,
+  Image,
+  Button,
+} from "react-native";
+
+const ChoiceScreen = ({ navigation }) => {
+  return (
+    <View style={styles.container}>
+      <View style={styles.formContainer}>
+        <Image source={require("../img/ElCeibillal.png")} style={styles.logo} />
+      </View>
+
+      <Image
+        source={require("../img/ElCeibillalV2.png")}
+        style={styles.logoEsquina}
+      />
+
+      <View style={styles.containerBoton}>
+        <TouchableOpacity
+          style={styles.botonTrabajador}
+          onPress={() => navigation.navigate("Home")}
+        >
+          <Text style={styles.buttonTextTrabajador}>Trabajador</Text>
+        </TouchableOpacity>
+      </View>
+      <View style={styles.containerBoton}>
+        <TouchableOpacity
+          style={styles.botonAdministrador}
+          onPress={() => navigation.navigate("Administador")}
+        >
+          <Text style={styles.buttonText}>Administador</Text>
+        </TouchableOpacity>
+      </View>
+    </View>
+  );
+};
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: "#2B4985",
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  backgroundImage: {
+    position: "absolute",
+    top: -110,
+    left: 200,
+    width: "50%",
+    height: "50%",
+  },
+  formContainer: {
+    width: "80%",
+    alignItems: "center",
+  },
+  logo: {
+    position: "absolute",
+    width: 500,
+    height: 500,
+    marginBottom: 20,
+    top: -200,
+    zIndex: 1,
+  },
+  logoEsquina: {
+    position: "absolute",
+    width: 300,
+    height: 300,
+    marginBottom: 20,
+    top: -100,
+    right: -50,
+    zIndex: 1,
+  },
+  input: {
+    width: "100%",
+    backgroundColor: "white",
+    padding: 10,
+    marginBottom: 10,
+    borderRadius: 5,
+    top: 60,
+  },
+  button: {
+    width: "100%",
+    backgroundColor: "#35599F",
+    paddingVertical: 10,
+    borderRadius: 5,
+    top: 70,
+    borderColor: "white",
+  },
+  buttonText: {
+    color: "white",
+    fontSize: 16,
+    fontWeight: "bold",
+    textAlign: "center",
+  },
+  buttonTextTrabajador: {
+    color: "#2B4985",
+    fontSize: 16,
+    fontWeight: "bold",
+    textAlign: "center",
+  },
+  containerBoton: {
+    width: "50%",
+    padding: 5,
+    margin: 5,
+    top: 200,
+  },
+  botonTrabajador: {
+    width: "100%",
+    backgroundColor: "white",
+    paddingVertical: 10,
+    borderRadius: 10,
+    borderWidth: 1,
+    borderColor: "#fff",
+    top: 70,
+  },
+  botonAdministrador: {
+    width: "100%",
+    backgroundColor: "#2B4985",
+    paddingVertical: 10,
+    borderRadius: 10,
+    borderWidth: 1,
+    borderColor: "#fff",
+    top: 70,
+  },
+  imagenArbol: {
+    rotation: 180,
+  },
+});
+
+export default ChoiceScreen;
