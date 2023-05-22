@@ -36,7 +36,7 @@ const CardGaleraAdmin = ({ galera = 'Default', ca = 'red', navigateToGaleras, nu
             <View style={styles.column}>
               <Text style={styles.title}>Identificador:</Text>
               <Text style={styles.title}>Alimento:</Text>
-              <Text style={styles.title}>Pesado:</Text>
+              <Text style={styles.title}>Peso medido:</Text>
               <Text style={styles.title}>Decesos:</Text>
               {observaciones !== 'n.a.' && <Text style={styles.title}>Observaciones:</Text>}
             </View>
