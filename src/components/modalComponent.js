@@ -30,10 +30,7 @@ export class ModalComponent extends Component {
           <View style={styles.centeredView}>
             <View style={styles.modalView}>
               <Text style={styles.modalText}>¡Información de Galeras!</Text>
-              <Image
-                style={styles.tinyLogo}
-                source={require("../components/iconInfo.png")}
-              />
+
               <Text style={[styles.tituloGalera]}>Galera</Text>
               <Text style={[styles.textoGaleraInfo]}>Cantidad de pollos :</Text>
               <Text style={[styles.textoGaleraInfo]}>Tipo de población :</Text>
@@ -51,7 +48,7 @@ export class ModalComponent extends Component {
           style={styles.floatingButton}
           onPress={() => this.setState({ modalVisible: true })}
         >
-          <Text style={[styles.textStyle, {color: '#2e4a85'}]}>+</Text>
+          <Text style={[styles.textStyle, { color: "#2e4a85" }]}>+</Text>
         </Pressable>
       </View>
     );
@@ -111,18 +108,18 @@ const styles = StyleSheet.create({
     flex: 2,
   },
   floatingButton: {
-    position: 'absolute',
+    position: "absolute",
     bottom: 20,
     left: 140,
     borderRadius: 20,
     width: 50,
     height: 50,
-    justifyContent: 'center',
-    alignItems: 'center',
+    justifyContent: "center",
+    alignItems: "center",
     border: 10,
-    borderColor: '#2e4a85',
-    backgroundColor: '#FFF',
+    borderColor: "#2e4a85",
+    backgroundColor: "#FFF",
     elevation: 3,
-    color: '#2e4a85',
+    color: "#2e4a85",
   },
 });
