@@ -28,8 +28,6 @@ const ChoiceScreen = ({ navigation }) => {
         >
           <Text style={styles.buttonTextTrabajador}>Trabajador</Text>
         </TouchableOpacity>
-      </View>
-      <View style={styles.containerBoton}>
         <TouchableOpacity
           style={styles.botonAdministrador}
           onPress={() => navigation.navigate("Administador")}
@@ -106,8 +104,8 @@ const styles = StyleSheet.create({
   },
   containerBoton: {
     width: "50%",
-    padding: 5,
-    margin: 5,
+    padding: 20,
+    margin: 15,
     top: 200,
   },
   botonTrabajador: {
@@ -118,6 +116,7 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderColor: "#fff",
     top: 70,
+    margin: 10,
   },
   botonAdministrador: {
     width: "100%",
@@ -127,6 +126,7 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderColor: "#fff",
     top: 70,
+    margin: 10,
   },
   imagenArbol: {
     rotation: 180,
