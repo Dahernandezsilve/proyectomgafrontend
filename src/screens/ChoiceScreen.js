@@ -24,13 +24,13 @@ const ChoiceScreen = ({ navigation }) => {
       <View style={styles.containerBoton}>
         <TouchableOpacity
           style={styles.botonTrabajador}
-          onPress={() => navigation.navigate("Home")}
+          onPress={() => navigation.navigate("Trabajador")}
         >
           <Text style={styles.buttonTextTrabajador}>Trabajador</Text>
         </TouchableOpacity>
         <TouchableOpacity
           style={styles.botonAdministrador}
-          onPress={() => navigation.navigate("Administador")}
+          onPress={() => navigation.navigate("Administrador")}
         >
           <Text style={styles.buttonText}>Administador</Text>
         </TouchableOpacity>

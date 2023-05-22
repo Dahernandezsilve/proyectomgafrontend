@@ -9,6 +9,7 @@ import CreationScreen from "./src/screens/CreationScreen";
 import DetailsScreen from "./src/screens/DetailsScreen";
 import ReportScreenAdmin from "./src/screens/ReportScreenAdmin";
 import ChoiceScreen from "./src/screens/ChoiceScreen";
+import LoginWorker from "./src/screens/LoginWorker";
 
 const Stack = createNativeStackNavigator();
 
@@ -28,11 +29,17 @@ const App = () => {
     <NavigationContainer>
       <Stack.Navigator initialRouteName="Administrador">
         <Stack.Screen name="Opción de Login" component={ChoiceScreen} />
-        <Stack.Screen name="Administador" component={LoginAdministrator} />
+        <Stack.Screen name="Administrador" component={LoginAdministrator} />
+        <Stack.Screen name="Trabajador" component={LoginWorker}/>
         <Stack.Screen
           name="Home"
           component={ReportScreenAdmin}
           options={{ header: renderHeaderInform }}
+        />
+        <Stack.Screen
+          name="HomeWorker"
+          component={HomeWorkerScreen}
+          options={{header: renderHeaderGalley}}
         />
         <Stack.Screen name="Galeras" component={DetailsScreen} />
         <Stack.Screen
