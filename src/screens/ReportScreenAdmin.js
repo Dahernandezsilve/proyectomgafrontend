@@ -79,6 +79,7 @@ const ReportScreenAdmin = ({ navigation }) => {
         setInfoWorkers(response.data)
       }
       if (registersActive && response.data.length === 0){
+        setRegisters()
         setRegisters(response.data)
         setRegistersActive(false)
       }
@@ -154,6 +155,20 @@ const ReportScreenAdmin = ({ navigation }) => {
               />
             }
             if (parseFloat(inform.ca) > 2.6 && inform.ca < 4.9) {
+              return <CardGaleraAdmin
+                key={inform.idRegistro}
+                galera={`Galera ${inform.idGalera}`}
+                ca='orange'
+                cantidadAlimento={inform.cantidadAlimento}
+                pesado={inform.pesoMedido}
+                decesos={inform.decesos}
+                numberCA={inform.ca}
+                observaciones={inform.observaciones}
+                navigateToGaleras={navigateToGaleras}
+              />
+            }
+
+            if (inform.ca === null) {
               return <CardGaleraAdmin
                 key={inform.idRegistro}
                 galera={`Galera ${inform.idGalera}`}

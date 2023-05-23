@@ -25,13 +25,18 @@ const CardGaleraAdmin = ({ galera = 'Default', ca = 'red', navigateToGaleras, nu
     }).start();
   };
 
-  const filteredNumberCA = numberCA.toFixed(2);
-
+  const filteredNumberCA = (numberCA) => {
+    if (numberCA !== null) {
+      return numberCA.toFixed(2)
+    } else {
+      return numberCA = 'N.A.'
+    }
+  }
   return (
     <TouchableWithoutFeedback onPress={() => navigateToGaleras()} onPressIn={onPressIn} onPressOut={onPressOut}>
       <Animated.View style={[styles.container, { width: windowWidth - 30, opacity: opacityValue }]}>
         <View style={styles.caContainer}>
-          <Text style={styles.smallText}>C.A: {filteredNumberCA}</Text>
+          <Text style={styles.smallText}>C.A: {filteredNumberCA(numberCA)}</Text>
           <View style={[styles.square, { backgroundColor: ca }]}></View>
         </View>
         <View style={styles.galeraContainer}>
