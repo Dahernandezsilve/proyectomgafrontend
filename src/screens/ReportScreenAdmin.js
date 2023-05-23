@@ -11,11 +11,9 @@ import NoInfo from "../components/NoInfo"
 
 const formatDate = (dateString) => {
   const date = new Date(dateString);
-
   const year = date.getFullYear();
   const month = String(date.getMonth() + 1).padStart(2, "0");
   const day = String(date.getDate()).padStart(2, "0");
-
   const formattedDate = `${year}-${month}-${day}`;
 
   return formattedDate;
@@ -28,6 +26,7 @@ const ReportScreenAdmin = ({ navigation }) => {
   const [showDatePicker, setShowDatePicker] = useState(false)
   const [selectedOption, setSelectedOption] = useState(null)
   const [workers, setWorkers] = useState([])
+  const [inforWorkers, setInfoWorkers] = useState()
   const [registers, setRegisters] = useState();
   const [registersActive, setRegistersActive] = useState(false)
 
@@ -49,10 +48,19 @@ const ReportScreenAdmin = ({ navigation }) => {
     handleRequest('GET', '/obtainTrabajadores')
   }
 
-  const handleObtainRegistersDate = (dateElected) => {
-    const answer = formatDate(dateElected)
-    handleRequest('POST', '/obtainRegistersDate', { date: answer })
-    setRegistersActive(true)
+  const handleObtainRegistersDate = (dateElected, selectedOption) => {
+    if (dateElected.length !== 0){
+      const answer = formatDate(dateElected)
+      if (selectedOption !== null && selectedOption !== undefined) {
+        if(selectedOption.nombre !== 'No seleccionar') {
+          handleRequest('POST', '/obtainRegistersDate', { date: answer, idTrabajador: selectedOption.idTrabajador})
+          setRegistersActive(true)
+        }
+      } else { 
+        handleRequest('POST', '/obtainRegistersDate', { date: answer })
+        setRegistersActive(true)  
+      }
+    }
   }
 
   const navigateToGaleras =  async () => {
@@ -66,7 +74,9 @@ const ReportScreenAdmin = ({ navigation }) => {
         setGaleras(response.data)
       } 
       if (Array.isArray(response.data) && response.data.length > 0 && 'nombre' in response.data[0]) {
-        setWorkers(response.data.map(aWorker => aWorker.nombre))
+
+        setWorkers(response.data)
+        setInfoWorkers(response.data)
       }
       if (registersActive && response.data.length === 0){
         setRegisters(response.data)
@@ -81,11 +91,12 @@ const ReportScreenAdmin = ({ navigation }) => {
   useEffect(() => {
     handleObtainGaleras()
     handleObtainWorkers()
+    console.log('registers',registers)
   }, [])
 
   useEffect(() => {
-    handleObtainRegistersDate(selectedDate)
-  }, [selectedDate])
+    handleObtainRegistersDate(selectedDate, selectedOption)
+  }, [selectedDate, selectedOption])
 
   return (
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center', backgroundColor:'#ECECEC' }}>
@@ -112,7 +123,6 @@ const ReportScreenAdmin = ({ navigation }) => {
             bottomValue={3}  // Valor para el cuadro rojo
           />
         </View>
-        <TextCard number={10000} ></TextCard>
         {
           registers === undefined || registers.length === 0 ? (
             <NoInfo info='No hay información disponible' />
