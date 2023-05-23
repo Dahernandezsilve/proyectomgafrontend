@@ -44,7 +44,7 @@ const SliderContainer = ({title, minimumValue, maximumValue, step, medida, fixed
     container: {
       backgroundColor: 'white',
       padding: 10,
-      borderRadius: 10,
+      borderRadius: 5,
       width: '90%',
       marginTop: 10,
       alignSelf: 'center', // Alinea horizontalmente el componente

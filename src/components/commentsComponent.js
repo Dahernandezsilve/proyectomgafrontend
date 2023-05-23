@@ -27,7 +27,7 @@ const CommentsComponent = ({handleRegistrar}) => {
         />
       </View>
       <View style={styles.buttonContainer}>
-        <Button title="Completar" color='#2e4a85' onPress={() => {
+        <Button title="Completar" style={{borderRadius: 5}} color='#2e4a85' onPress={() => {
           handleRegistrar()
           navigation.goBack()
           }} />
@@ -41,7 +41,7 @@ const styles = StyleSheet.create({
     backgroundColor: 'white',
     padding: 10,
     marginTop: 15,
-    borderRadius: 10,
+    borderRadius: 5,
     width: '90%', 
     height: 150, 
     alignSelf: 'center',
@@ -50,6 +50,7 @@ const styles = StyleSheet.create({
   comentariosContainer: {
     marginBottom: 10,
     flex: 1,
+    borderRadius: 5,
   },
   input: {
     backgroundColor: '#F5F5F5',
@@ -59,6 +60,7 @@ const styles = StyleSheet.create({
   },
   buttonContainer: {
     flex: 0,
+    borderRadius: 5,
   },
 });
 
