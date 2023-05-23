@@ -27,8 +27,8 @@ const App = () => {
 
   return (
     <NavigationContainer>
-      <Stack.Navigator initialRouteName="Administrador">
-        <Stack.Screen name="Opción de Login" component={ChoiceScreen} />
+      <Stack.Navigator initialRouteName="SelectUser">
+        <Stack.Screen name="SelectUser" component={ChoiceScreen} />
         <Stack.Screen name="Administrador" component={LoginAdministrator} />
         <Stack.Screen name="Trabajador" component={LoginWorker}/>
         <Stack.Screen

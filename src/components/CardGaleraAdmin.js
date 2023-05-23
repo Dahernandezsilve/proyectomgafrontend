@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import { View, Text, StyleSheet, Dimensions, TouchableWithoutFeedback, Animated } from 'react-native';
+import { View, Text, StyleSheet, Dimensions, TouchableWithoutFeedback, Animated } from 'react-native'
+import SamsungOne from '../fonts/SamsungOne-400.ttf'
 
 const windowWidth = Dimensions.get('window').width;
 
@@ -94,7 +95,7 @@ const styles = StyleSheet.create({
     fontSize: 20,
     fontWeight: 'bold',
     marginBottom: 5,
-    fontFamily: 'Roboto',
+    fontFamily: 'SamsungOne',
   },
   row: {
     flexDirection: 'row',
@@ -107,11 +108,11 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 18,
     fontWeight: '900',
-    fontFamily: 'Roboto',
+    fontFamily: 'SamsungOne',
   },
   info: {
     fontSize: 18,
-    fontFamily: 'Roboto',
+    fontFamily: 'SamsungOne',
   },
   rightAlignedText: {
     textAlign: 'right',
