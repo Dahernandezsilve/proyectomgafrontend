@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState,useEffect} from 'react';
 import { View, Text, StyleSheet, Dimensions, TouchableWithoutFeedback, Animated } from 'react-native'
 import SamsungOne from '../fonts/SamsungOne-400.ttf'
+import * as Font from 'expo-font';
 
 const windowWidth = Dimensions.get('window').width;
 
@@ -14,6 +15,7 @@ const CardGaleraAdmin = ({ galera = 'Default', ca = 'red', navigateToGaleras, nu
       useNativeDriver: true
     }).start();
   };
+
 
   const onPressOut = () => {
     Animated.timing(opacityValue, {
@@ -93,7 +95,6 @@ const styles = StyleSheet.create({
   },
   smallText: {
     fontSize: 20,
-    fontWeight: 'bold',
     marginBottom: 5,
     fontFamily: 'SamsungOne',
   },
@@ -107,7 +108,6 @@ const styles = StyleSheet.create({
   },
   title: {
     fontSize: 18,
-    fontWeight: '900',
     fontFamily: 'SamsungOne',
   },
   info: {

@@ -1,4 +1,4 @@
-import * as React from "react";
+import React,{useEffect} from "react";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import HeaderGalley from "./src/components/headerGalley";
@@ -10,6 +10,9 @@ import DetailsScreen from "./src/screens/DetailsScreen";
 import ReportScreenAdmin from "./src/screens/ReportScreenAdmin";
 import ChoiceScreen from "./src/screens/ChoiceScreen";
 import LoginWorker from "./src/screens/LoginWorker";
+import SamsungOne from './src/fonts/SamsungOne-400.ttf';
+import * as Font from 'expo-font';
+
 
 const Stack = createNativeStackNavigator();
 
@@ -24,6 +27,14 @@ const App = () => {
     <HeaderGalley title="Informe" lotes={["Lote 1", "Lote 2", "Lote 3"]} />
   );
   const renderInformation = () => <HeaderInformation />;
+
+  useEffect(() => {
+    // Cargar la fuente asincrónicamente
+    Font.loadAsync({
+      'SamsungOne': require('./src/fonts/SamsungOne-400.ttf'),
+    });
+  }, []);
+
 
   return (
     <NavigationContainer>

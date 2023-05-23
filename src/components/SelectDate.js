@@ -1,5 +1,6 @@
 import React from 'react';
 import { Text, TouchableOpacity, StyleSheet, View } from 'react-native';
+import SamsungOne from '../fonts/SamsungOne-400.ttf'
 
 const formatDate = (date) => {
     const day = date.getDate().toString().padStart(2, '0');
@@ -38,14 +39,13 @@ const styles = StyleSheet.create({
   },
   text: {
     fontSize: 18,
-    fontWeight: 'bold',
     color: '#000',
-    fontFamily: 'Roboto'
+    fontFamily: 'SamsungOne'
   },
   selectedDate: {
     fontSize: 16,
     color: '#000',
-    fontFamily: 'Roboto',
+    fontFamily: 'SamsungOne',
     marginTop: 10
   }
 });
