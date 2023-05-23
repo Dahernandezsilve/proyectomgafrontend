@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import { View, Text, StyleSheet, TouchableOpacity } from 'react-native'
-import SamsungOne from '../fonts/SamsungOne-400.ttf'
+import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
+import SamsungOne from '../fonts/SamsungOne-400.ttf';
 import * as Font from 'expo-font';
 
 const SelectOption = ({ selectedOption, options, setSelectedOption }) => {
@@ -17,28 +17,33 @@ const SelectOption = ({ selectedOption, options, setSelectedOption }) => {
 
   return (
     <TouchableOpacity onPress={handleToggleOptions}>
-    <View style={styles.container}>
-      {
-        selectedOption ? (
+      <View style={styles.container}>
+        {selectedOption ? (
           <Text style={styles.text}>{selectedOption}</Text>
         ) : (
           <Text style={styles.text}>Seleccionar trabajador</Text>
-      )}
+        )}
 
-      {showOptions && (
-        <View style={styles.optionsContainer}>
-          {options.map((option) => (
+        {showOptions && (
+          <View style={styles.optionsContainer}>
             <TouchableOpacity
-              key={option}
               style={styles.optionButton}
-              onPress={() => handleOptionSelect(option)}
+              onPress={() => handleOptionSelect('No seleccionar')} // Option "No seleccionar"
             >
-              <Text style={styles.selectedOptionText}>{option}</Text>
+              <Text style={styles.selectedOptionText}>No seleccionar</Text>
             </TouchableOpacity>
-          ))}
-        </View>
-      )}
-    </View>
+            {options.map((option) => (
+              <TouchableOpacity
+                key={option}
+                style={styles.optionButton}
+                onPress={() => handleOptionSelect(option)}
+              >
+                <Text style={styles.selectedOptionText}>{option}</Text>
+              </TouchableOpacity>
+            ))}
+          </View>
+        )}
+      </View>
     </TouchableOpacity>
   );
 };
@@ -57,7 +62,7 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.5,
     shadowRadius: 2,
     elevation: 2,
-    zIndex: 1 // Ajuste de zIndex para asegurar que el contenedor esté por encima de otros componentes
+    zIndex: 1, // Ajuste de zIndex para asegurar que el contenedor esté por encima de otros componentes
   },
   text: {
     fontSize: 18,
@@ -78,7 +83,7 @@ const styles = StyleSheet.create({
     marginTop: 20,
     paddingHorizontal: 10,
     zIndex: 2,
-    backgroundColor: '#c4c5c6',
+    backgroundColor: '#ECECEC',
     shadowColor: '#000',
     shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.5,
@@ -88,7 +93,7 @@ const styles = StyleSheet.create({
   optionButton: {
     padding: 10,
     marginTop: 5,
-    marginBottom: 5
+    marginBottom: 5,
   },
 });
 

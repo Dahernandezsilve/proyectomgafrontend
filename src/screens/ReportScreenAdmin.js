@@ -1,19 +1,36 @@
 import TextCard from "../components/TextCard"
 import React, { useState, useEffect } from 'react'
-import { View, ScrollView, StatusBar, Button } from 'react-native'
+import { View, ScrollView, StatusBar, Button, Text } from 'react-native'
 import useApi from "../hooks/useApi/useApi"
 import DateTimePicker from '@react-native-community/datetimepicker'
 import SelectDate from "../components/SelectDate"
 import SelectOption from "../components/SelectOption"
 import TrafficLight from "../components/TrafficLight"
 import CardGaleraAdmin from "../components/CardGaleraAdmin"
+import NoInfo from "../components/NoInfo"
+
+const formatDate = (dateString) => {
+  const date = new Date(dateString);
+
+  const year = date.getFullYear();
+  const month = String(date.getMonth() + 1).padStart(2, "0");
+  const day = String(date.getDate()).padStart(2, "0");
+
+  const formattedDate = `${year}-${month}-${day}`;
+
+  return formattedDate;
+}
 
 const ReportScreenAdmin = ({ navigation }) => {
   const [response, loading, handleRequest] = useApi()
   const [galeras, setGaleras] = useState([])
   const [selectedDate, setSelectedDate] = useState(new Date())
   const [showDatePicker, setShowDatePicker] = useState(false)
-  const [selectedOption, setSelectedOption] = useState(null);
+  const [selectedOption, setSelectedOption] = useState(null)
+  const [workers, setWorkers] = useState([])
+  const [registers, setRegisters] = useState();
+  const [registersActive, setRegistersActive] = useState(false)
+
 
   const handleDateChange = (event, date) => {
     setSelectedDate(date);
@@ -26,7 +43,16 @@ const ReportScreenAdmin = ({ navigation }) => {
 
   const handleObtainGaleras = () => {
     handleRequest('POST', '/galeras', { numLote: 20 })
-    console.log('Respuesta', response.data)
+  }
+
+  const handleObtainWorkers = () => {
+    handleRequest('GET', '/obtainTrabajadores')
+  }
+
+  const handleObtainRegistersDate = (dateElected) => {
+    const answer = formatDate(dateElected)
+    handleRequest('POST', '/obtainRegistersDate', { date: answer })
+    setRegistersActive(true)
   }
 
   const navigateToGaleras =  async () => {
@@ -35,15 +61,31 @@ const ReportScreenAdmin = ({ navigation }) => {
 
   useEffect(() => {
     if(response.data === undefined || response.data === null) {
-      console.log('No ha pasado')
     } else {
-      setGaleras(response.data)
+      if (typeof response.data.ca !== undefined) {
+        setGaleras(response.data)
+      } 
+      if (Array.isArray(response.data) && response.data.length > 0 && 'nombre' in response.data[0]) {
+        setWorkers(response.data.map(aWorker => aWorker.nombre))
+      }
+      if (registersActive && response.data.length === 0){
+        setRegisters(response.data)
+        setRegistersActive(false)
+      }
+      if (Array.isArray(response.data) && response.data.length > 0 && 'cantidadAlimento' in response.data[0]) {
+        setRegisters(response.data)
+      }
     }
   }, [response])
 
   useEffect(() => {
-    handleObtainGaleras()    
+    handleObtainGaleras()
+    handleObtainWorkers()
   }, [])
+
+  useEffect(() => {
+    handleObtainRegistersDate(selectedDate)
+  }, [selectedDate])
 
   return (
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center', backgroundColor:'#ECECEC' }}>
@@ -62,7 +104,7 @@ const ReportScreenAdmin = ({ navigation }) => {
                 onChange={handleDateChange}
               />
             )}
-            <SelectOption selectedOption={selectedOption} options={['Esteban Augusto', 'Roberto Martinez', 'Ramón Gutierrez', 'Roberto Carlos', 'Pedro Vasquez']} setSelectedOption={setSelectedOption} />
+            <SelectOption selectedOption={selectedOption} options={workers} setSelectedOption={setSelectedOption} />
           </View>
           <TrafficLight
             topValue={5}  // Valor para el cuadro verde
@@ -72,32 +114,49 @@ const ReportScreenAdmin = ({ navigation }) => {
         </View>
         <TextCard number={10000} ></TextCard>
         {
-          galeras.map(galer => {
-            console.log(galer)
-            if (parseFloat(galer.ca) > 4.9) {
+          registers === undefined || registers.length === 0 ? (
+            <NoInfo info='No hay información disponible' />
+          )
+          : (registers.map(inform => {
+            if (parseFloat(inform.ca) > 4.9) {
               return <CardGaleraAdmin
-                key={galer.idGalera}
-                galera={`Galera ${galer.numeroGalera}`}
+                key={inform.idRegistro}
+                galera={`Galera ${inform.idGalera}`}
+                cantidadAlimento={inform.cantidadAlimento}
+                pesado={inform.pesoMedido}
+                decesos={inform.decesos}
+                numberCA={inform.ca}
+                observaciones={inform.observaciones}
                 ca='red' navigateToGaleras={navigateToGaleras}
               />
             }
-            if (parseFloat(galer.ca) < 2.6) {
+            if (parseFloat(inform.ca) < 2.6) {
               return <CardGaleraAdmin
-              key={galer.idGalera}
-              galera={`Galera ${galer.numeroGalera}`}
-              ca='green'
-              navigateToGaleras={navigateToGaleras}
+                key={inform.idRegistro}
+                galera={`Galera ${inform.idGalera}`}
+                ca='green'
+                cantidadAlimento={inform.cantidadAlimento}
+                pesado={inform.pesoMedido}
+                decesos={inform.decesos}
+                numberCA={inform.ca}
+                observaciones={inform.observaciones}              
+                navigateToGaleras={navigateToGaleras}
               />
             }
-            if (parseFloat(galer.ca) > 2.6 && galer.ca < 4.9) {
+            if (parseFloat(inform.ca) > 2.6 && inform.ca < 4.9) {
               return <CardGaleraAdmin
-              key={galer.idGalera}
-              galera={`Galera ${galer.numeroGalera}`}
-              ca='orange'
-              navigateToGaleras={navigateToGaleras}
+                key={inform.idRegistro}
+                galera={`Galera ${inform.idGalera}`}
+                ca='orange'
+                cantidadAlimento={inform.cantidadAlimento}
+                pesado={inform.pesoMedido}
+                decesos={inform.decesos}
+                numberCA={inform.ca}
+                observaciones={inform.observaciones}
+                navigateToGaleras={navigateToGaleras}
               />
             }
-          })
+          }))
         }
       </ScrollView>
     </View>
