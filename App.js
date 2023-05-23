@@ -46,9 +46,9 @@ const App = () => {
   return (
     <NavigationContainer>
       <Stack.Navigator initialRouteName="SelectUser">
-        <Stack.Screen name="SelectUser" component={ChoiceScreen} />
-        <Stack.Screen name="Administrador" component={LoginAdministrator} />
-        <Stack.Screen name="Trabajador" component={LoginWorker}/>
+        <Stack.Screen name="SelectUser" component={ChoiceScreen} options={{headerShown: false}}/>
+        <Stack.Screen name="Administrador" component={LoginAdministrator} options={{header: () =>null}}/>
+        <Stack.Screen name="Trabajador" component={LoginWorker} options={{header: () => null}}/>
         <Stack.Screen
           name="Home"
           component={ReportScreenAdmin}
