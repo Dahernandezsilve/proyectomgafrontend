@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import { View, Text, StyleSheet, Dimensions, TouchableWithoutFeedback, Animated } from 'react-native';
+import SamsungOne from '../fonts/SamsungOne-400.ttf'
+import * as Font from 'expo-font';
 
 const windowWidth = Dimensions.get('window').width;
 
@@ -77,15 +79,13 @@ const styles = StyleSheet.create({
   },
   smallText: {
     fontSize: 20,
-    fontWeight: 'bold',
     marginBottom: 5,
-    fontFamily: 'Roboto'
+    fontFamily: 'SamsungOne'
   },
   text: {
     fontSize: 50,
-    fontWeight: 'bold',
     textAlign: 'center',
-    fontFamily: 'Roboto'
+    fontFamily: 'SamsungOne'
   },
 });
 

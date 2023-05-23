@@ -1,5 +1,7 @@
 import React,{useState} from 'react';
-import { View, Text, TextInput, TouchableOpacity, StyleSheet,Image } from 'react-native';
+import { View, Text, TextInput, TouchableOpacity, StyleSheet,Image } from 'react-native'
+import SamsungOne from '../fonts/SamsungOne-400.ttf'
+import * as Font from 'expo-font';
 
 
 const LoginWorker = ({navigation}) => {
@@ -76,7 +78,7 @@ const styles = StyleSheet.create({
   buttonText: {
     color: 'white',
     fontSize: 16,
-    fontWeight: 'bold',
+    fontFamily: 'SamsungOne',
     textAlign: 'center',
   },
 });

@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
+import SamsungOne from '../fonts/SamsungOne-400.ttf'
+import * as Font from 'expo-font';
 
 const HeaderGalley = ({lotes, title}) => {
   const [activeTab, setActiveTab] = useState('lote1');
@@ -65,10 +67,9 @@ const styles = StyleSheet.create({
   },
   headerText: {
     fontSize: 30,
-    fontWeight: 'bold',
     marginBottom: 8,
     textAlign: 'center',
-    fontFamily: 'Roboto'
+    fontFamily: 'SamsungOne'
   },
   buttonContainer: {
     paddingTop: 1,
@@ -97,8 +98,7 @@ const styles = StyleSheet.create({
   tabButtonText: {
     fontSize: 30,
     color: '#000000',
-    fontFamily: 'Roboto',
-    fontWeight: 'bold',
+    fontFamily: 'SamsungOne',
     textAlign: 'center',
   },
   activeTabButtonText: {

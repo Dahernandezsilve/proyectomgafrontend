@@ -1,5 +1,7 @@
 import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
+import SamsungOne from '../fonts/SamsungOne-400.ttf'
+import * as Font from 'expo-font';
 
 const TextCard = ({ number }) => {
   return (
@@ -27,9 +29,8 @@ const styles = StyleSheet.create({
   },
   text: {
     fontSize: 18,
-    fontWeight: 'bold',
     color: '#000',
-    fontFamily: 'Roboto'
+    fontFamily: 'SamsungOne'
   },
 });
 

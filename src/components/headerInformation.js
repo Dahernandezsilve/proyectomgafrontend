@@ -2,7 +2,8 @@ import React from 'react';
 import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { useNavigation } from '@react-navigation/native';
-import { ModalComponent } from './modalComponent';
+import SamsungOne from '../fonts/SamsungOne-400.ttf'
+import * as Font from 'expo-font';
 
 const HeaderInformation = () => {
   const navigation = useNavigation()
@@ -65,9 +66,8 @@ const styles = StyleSheet.create({
   },
   title: {
     fontSize: 30,
-    fontWeight: 'normal',
     textAlign: 'center',
-    fontFamily: 'Roboto',
+    fontFamily: 'SamsungOne',
   },
   infoContainer: {
     flexDirection: 'row',
@@ -77,8 +77,7 @@ const styles = StyleSheet.create({
   },
   info: {
     fontSize: 25,
-    fontWeight: 'bold',
-    fontFamily: 'Roboto',
+    fontFamily: 'SamsungOne',
     color: '#2B4985',
   },
   placeholder: {

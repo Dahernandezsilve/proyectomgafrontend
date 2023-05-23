@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
-import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
+import { View, Text, StyleSheet, TouchableOpacity } from 'react-native'
+import SamsungOne from '../fonts/SamsungOne-400.ttf'
+import * as Font from 'expo-font';
 
 const SelectOption = ({ selectedOption, options, setSelectedOption }) => {
   const [showOptions, setShowOptions] = useState(false);
@@ -59,11 +61,10 @@ const styles = StyleSheet.create({
   },
   text: {
     fontSize: 18,
-    fontWeight: 'bold',
     color: '#000',
     width: '100%',
     textAlign: 'center',
-    fontFamily: 'Roboto',
+    fontFamily: 'SamsungOne',
   },
   selectedOptionText: {
     fontSize: 18,

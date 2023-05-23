@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { View, Text, StyleSheet, Dimensions, TextInput, ToastAndroid } from 'react-native';
 import Slider from '@react-native-community/slider';
+import SamsungOne from '../fonts/SamsungOne-400.ttf'
+import * as Font from 'expo-font';
 
 const windowWidth = Dimensions.get('window').width;
 
@@ -74,15 +76,13 @@ const SliderContainer = ({title, minimumValue, maximumValue, step, medida, fixed
     },
     valueText: {
       fontSize: 20,
-      fontWeight: 'bold',
     },
     title: {
       marginTop: 10,
       marginBottom: 10,
       marginLeft: 10,
       fontSize: 20,
-      fontWeight: 'bold',
-      textAlign: 'left', // Alinea el texto a la izquierda
+      textAlign: 'left',
     },
     sliderTextContainer: {
         flexDirection: 'row',
@@ -94,7 +94,6 @@ const SliderContainer = ({title, minimumValue, maximumValue, step, medida, fixed
       },
       sliderText: {
         fontSize: 16,
-        fontWeight: 'bold',
         color: '#444444',
       },
   });

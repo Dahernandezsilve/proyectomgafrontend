@@ -1,5 +1,7 @@
 import React from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import { View, Text, StyleSheet } from 'react-native'
+import SamsungOne from '../fonts/SamsungOne-400.ttf'
+import * as Font from 'expo-font';
 
 const TrafficLight = ({ topValue, middleValue, bottomValue }) => {
   return (
@@ -53,12 +55,12 @@ const styles = StyleSheet.create({
   },
   boxText: {
     fontSize: 18,
-    fontWeight: 'bold',
+    fontFamily: 'SamsungOne',
     color: 'white',
   },
   boxHeaderText: {
     fontSize: 14,
-    fontWeight: 'bold',
+    fontFamily: 'SamsungOne',
     color: 'black',
     marginBottom: 5,
   },

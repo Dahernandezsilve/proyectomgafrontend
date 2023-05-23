@@ -7,7 +7,9 @@ import {
   StyleSheet,
   Image,
   Button,
-} from "react-native";
+} from "react-native"
+import SamsungOne from '../fonts/SamsungOne-400.ttf'
+import * as Font from 'expo-font';
 
 const ChoiceScreen = ({ navigation }) => {
   return (
@@ -93,13 +95,13 @@ const styles = StyleSheet.create({
   buttonText: {
     color: "white",
     fontSize: 16,
-    fontWeight: "bold",
+    fontFamily: 'SamsungOne',
     textAlign: "center",
   },
   buttonTextTrabajador: {
     color: "#2B4985",
     fontSize: 16,
-    fontWeight: "bold",
+    fontFamily: 'SamsungOne',
     textAlign: "center",
   },
   containerBoton: {

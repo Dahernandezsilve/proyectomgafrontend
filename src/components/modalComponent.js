@@ -7,7 +7,9 @@ import {
   Pressable,
   View,
   Image,
-} from "react-native";
+} from "react-native"
+import SamsungOne from '../fonts/SamsungOne-400.ttf'
+import * as Font from 'expo-font'
 
 export class ModalComponent extends Component {
   state = {
@@ -92,7 +94,6 @@ const styles = StyleSheet.create({
   },
   textStyle: {
     color: "white",
-    fontWeight: "bold",
     textAlign: "center",
   },
   modalText: {
@@ -101,7 +102,6 @@ const styles = StyleSheet.create({
   },
   tituloGalera: {
     fontSize: 24,
-    fontWeight: "bold",
     flex: 1,
   },
   textoGaleraInfo: {

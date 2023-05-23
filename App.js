@@ -1,4 +1,4 @@
-import React,{useEffect} from "react";
+import React, { useEffect } from "react";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import HeaderGalley from "./src/components/headerGalley";
@@ -10,9 +10,7 @@ import DetailsScreen from "./src/screens/DetailsScreen";
 import ReportScreenAdmin from "./src/screens/ReportScreenAdmin";
 import ChoiceScreen from "./src/screens/ChoiceScreen";
 import LoginWorker from "./src/screens/LoginWorker";
-import SamsungOne from './src/fonts/SamsungOne-400.ttf';
-import * as Font from 'expo-font';
-
+import { useFonts } from 'expo-font';
 
 const Stack = createNativeStackNavigator();
 
@@ -28,13 +26,22 @@ const App = () => {
   );
   const renderInformation = () => <HeaderInformation />;
 
-  useEffect(() => {
-    // Cargar la fuente asincrónicamente
-    Font.loadAsync({
-      'SamsungOne': require('./src/fonts/SamsungOne-400.ttf'),
-    });
-  }, []);
+  const [fontsLoaded] = useFonts({
+    SamsungOne: require('./src/fonts/SamsungOne-400.ttf'),
+  });
 
+  useEffect(() => {
+    // Verificar si las fuentes se han cargado correctamente
+    if (!fontsLoaded) {
+      console.log('Las fuentes no se han cargado correctamente');
+    } else {
+      console.log('se cargaron correctamente')
+    }
+  }, [fontsLoaded]);
+
+  if (!fontsLoaded) {
+    return null; // Otra pantalla de carga o null si no deseas mostrar nada
+  }
 
   return (
     <NavigationContainer>
