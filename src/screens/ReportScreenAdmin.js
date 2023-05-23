@@ -46,12 +46,12 @@ const ReportScreenAdmin = ({ navigation }) => {
   }, [])
 
   return (
-    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center', backgroundColor:'#D3D3D3' }}>
+    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center', backgroundColor:'#ECECEC' }}>
       <StatusBar barStyle="light-content" backgroundColor="#fff" />
       <StatusBar barStyle="dark-content" backgroundColor="#fff" />
       <ScrollView contentContainerStyle={{ alignItems: 'center', marginBottom: 15 }}>
-        <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'flex-start', zIndex: 2 }}>
-          <View style={{ flexDirection: 'column', alignItems: 'center', flexGrow: 1, justifyContent: 'flex-start'}}>
+        <View style={{ flexDirection: 'row', alignItems: 'center', zIndex: 2 }}>
+          <View style={{ flexDirection: 'column'}}>
             <SelectDate onPress={handleSelectDatePress} selectedDate={selectedDate} />
             {showDatePicker && (
               <DateTimePicker

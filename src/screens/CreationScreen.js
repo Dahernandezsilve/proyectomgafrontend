@@ -25,7 +25,7 @@ const CreationScreen = ({ navigation }) => {
       console.log(response);
     }
     return (
-      <View style={{backgroundColor: '#d3d3d3'}}>
+      <View style={{backgroundColor: '#ECECEC'}}>
         <StatusBar barStyle="light-content" backgroundColor="#fff" />
         <StatusBar barStyle="dark-content" backgroundColor="#fff" /> 
         <View style={{ height: 2, width: '100%', backgroundColor: '#2B4985'}} />          

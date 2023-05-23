@@ -38,12 +38,12 @@ const styles = StyleSheet.create({
   contentContainer: {
   },
   text: {
-    fontSize: 18,
+    fontSize: 17,
     color: '#000',
     fontFamily: 'SamsungOne'
   },
   selectedDate: {
-    fontSize: 16,
+    fontSize: 17,
     color: '#000',
     fontFamily: 'SamsungOne',
     marginTop: 10

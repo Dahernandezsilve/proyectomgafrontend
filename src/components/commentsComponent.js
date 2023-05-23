@@ -46,11 +46,21 @@ const styles = StyleSheet.create({
     height: 150, 
     alignSelf: 'center',
     marginBottom: 20,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.5,
+    shadowRadius: 2,
+    elevation: 2,   
   },
   comentariosContainer: {
     marginBottom: 10,
     flex: 1,
     borderRadius: 5,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.5,
+    shadowRadius: 2,
+    elevation: 2,   
   },
   input: {
     backgroundColor: '#F5F5F5',
@@ -61,6 +71,11 @@ const styles = StyleSheet.create({
   buttonContainer: {
     flex: 0,
     borderRadius: 5,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.5,
+    shadowRadius: 2,
+    elevation: 2,   
   },
 });
 

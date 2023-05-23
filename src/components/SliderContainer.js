@@ -48,6 +48,11 @@ const SliderContainer = ({title, minimumValue, maximumValue, step, medida, fixed
       width: '90%',
       marginTop: 10,
       alignSelf: 'center', // Alinea horizontalmente el componente
+      shadowColor: '#000',
+      shadowOffset: { width: 0, height: 2 },
+      shadowOpacity: 0.5,
+      shadowRadius: 2,
+      elevation: 2,   
     },
     slider: {
       width: '100%',
@@ -73,6 +78,11 @@ const SliderContainer = ({title, minimumValue, maximumValue, step, medida, fixed
       width: '95%',
       alignItems: 'center',
       alignSelf: 'center',
+      shadowColor: '#000',
+      shadowOffset: { width: 0, height: 2 },
+      shadowOpacity: 0.5,
+      shadowRadius: 2,
+      elevation: 2,   
     },
     valueText: {
       fontSize: 20,
