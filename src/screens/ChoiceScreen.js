@@ -7,6 +7,7 @@ import {
   StyleSheet,
   Image,
   Button,
+  StatusBar
 } from "react-native"
 import SamsungOne from '../fonts/SamsungOne-400.ttf'
 import * as Font from 'expo-font';
@@ -14,6 +15,8 @@ import * as Font from 'expo-font';
 const ChoiceScreen = ({ navigation }) => {
   return (
     <View style={styles.container}>
+      <StatusBar barStyle="light-content" backgroundColor="#2B4985" />
+      <StatusBar barStyle="dark-content" backgroundColor="#2B4985" />
       <View style={styles.formContainer}>
         <Image source={require("../img/ElCeibillal.png")} style={styles.logo} />
       </View>

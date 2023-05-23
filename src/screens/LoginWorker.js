@@ -1,5 +1,5 @@
 import React,{useState} from 'react';
-import { View, Text, TextInput, TouchableOpacity, StyleSheet,Image } from 'react-native'
+import { View, Text, TextInput, TouchableOpacity, StyleSheet,Image, StatusBar } from 'react-native'
 import SamsungOne from '../fonts/SamsungOne-400.ttf'
 import * as Font from 'expo-font';
 
@@ -16,6 +16,8 @@ const LoginWorker = ({navigation}) => {
 
   return (
     <View style={styles.container}>
+      <StatusBar barStyle="light-content" backgroundColor="#2B4985" />
+      <StatusBar barStyle="dark-content" backgroundColor="#2B4985" />
       <Image source={require('../img/ElCeibillalV2.png')} style={styles.backgroundImage}/>
       <View style={styles.formContainer}>
       <Image source={require('../img/ElCeibillal.png')} style={styles.logo} />
