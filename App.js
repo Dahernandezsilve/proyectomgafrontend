@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import HeaderGalley from "./src/components/headerGalley";
@@ -15,15 +15,27 @@ import { useFonts } from 'expo-font';
 const Stack = createNativeStackNavigator();
 
 const App = () => {
+  const lotes = ['20','1','2']
+  const [activeTab, setActiveTab] = useState(lotes[0]);
+
   const renderHeaderGalley = () => (
     <HeaderGalley
       title="Galeras y tareas pendientes"
-      lotes={["Lote 1", "Lote 2"]}
+      lotes={lotes}
+      activeTab={activeTab}
+      setActiveTab={setActiveTab}
     />
   );
+
   const renderHeaderInform = () => (
-    <HeaderGalley title="Informe" lotes={["Lote 1", "Lote 2", "Lote 3"]} />
+    <HeaderInformation
+      title="Informe"
+      lotes={lotes}
+      activeTab={activeTab}
+      setActiveTab={setActiveTab}
+    />
   );
+
   const renderInformation = () => <HeaderInformation />;
 
   const [fontsLoaded] = useFonts({
@@ -51,9 +63,15 @@ const App = () => {
         <Stack.Screen name="Trabajador" component={LoginWorker} options={{header: () => null}}/>
         <Stack.Screen
           name="Home"
-          component={ReportScreenAdmin}
-          options={{ header: renderHeaderInform }}
-        />
+          options={{
+            header: () => renderHeaderInform({ activeTab, setActiveTab })
+          }}
+        >
+          {(props) => (
+            <ReportScreenAdmin {...props} setActiveTab={setActiveTab} activeTab={activeTab} />
+          )}
+        </Stack.Screen>
+
         <Stack.Screen
           name="HomeWorker"
           component={HomeWorkerScreen}

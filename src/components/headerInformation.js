@@ -1,91 +1,94 @@
-import React from 'react';
-import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
-import { Ionicons } from '@expo/vector-icons';
-import { useNavigation } from '@react-navigation/native';
-import SamsungOne from '../fonts/SamsungOne-400.ttf'
-import * as Font from 'expo-font';
+import React, { useState } from 'react';
+import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 
-const HeaderInformation = () => {
-  const navigation = useNavigation()
+const HeaderInformation = ({ lotes, title, activeTab, setActiveTab }) => {
+
+
+  const handleTabPress = (tabName) => {
+    setActiveTab(tabName);
+    console.log('loteactivoiNFO', activeTab)
+  };
 
   return (
-    <View style={styles.container}>
-      <View style={styles.header}>
-        <TouchableOpacity onPress={() => {navigation.goBack()}} hitSlop={{ top: 30, bottom: 30, left: 30, right: 30 }}>
-          <View style={styles.iconContainer}>
-            <Ionicons name="arrow-back" size={28} color="#2B4985" />
-          </View>
-        </TouchableOpacity>
-        <View style={styles.titleContainer}>
-          <Text style={styles.title}>Información requerida</Text>
-        </View>
-        <View style={styles.placeholder}></View>
+    <View style={styles.headerContainer}>
+      <Text style={styles.headerText}>{title}</Text>
+      <View style={styles.buttonContainer}>
+        {lotes.map((lote, index) => (
+          <TouchableOpacity
+            key={index}
+            style={[
+              styles.tabButton,
+              activeTab === lote ? styles.activeTabButton : null,
+            ]}
+            activeOpacity={0.7}
+            onPress={() => handleTabPress(lote)}
+          >
+            <Text
+              style={[
+                styles.tabButtonText,
+                activeTab === lote ? styles.activeTabButtonText : null,
+              ]}
+            >
+              Lote: {lote}
+            </Text>
+          </TouchableOpacity>
+        ))}
       </View>
-      <View style={styles.infoContainer}>
-        <Text style={styles.info}>Lote #1</Text>
-        <Text style={styles.info}>Galera #1</Text>
-      </View>
-      <View style={styles.line}></View>
     </View>
-  );
-};
+  )
+}
 
 const styles = StyleSheet.create({
-  container: {
+  headerContainer: {
     backgroundColor: '#FFFFFF',
-    borderBottomWidth: 1,
-    paddingHorizontal: 16,
-    paddingVertical: 8,
     paddingTop: 20,
+    borderBottomWidth: 1,
+    borderBottomColor: '#CCCCCC',
     shadowColor: '#000',
     shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.5,
     shadowRadius: 2,
     elevation: 2,   
   },
-  iconContainer: {
-    width: 40,
-    height: 40,
-    justifyContent: 'center',
-    alignItems: 'center',
-    marginRight: 5,
-    backgroundColor: 'transparent',
-    pointerEvents: 'auto'
-  },
-  header: {
-    flexDirection: 'row',
-    justifyContent: 'flex-start',
-    alignItems: 'center',
-    marginBottom: 10,
-  },
-  titleContainer: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    marginLeft: -28, 
-  },
-  title: {
+  headerText: {
     fontSize: 30,
+    marginBottom: 8,
     textAlign: 'center',
-    fontFamily: 'SamsungOne',
+    fontFamily: 'SamsungOne'
   },
-  infoContainer: {
+  buttonContainer: {
+    paddingTop: 1,
     flexDirection: 'row',
     justifyContent: 'space-around',
-    alignItems: 'center',
-    marginHorizontal: 20,
+    alignItems: 'center'
   },
-  info: {
-    fontSize: 25,
+  tabButton: {
+    width: '33.33%',
+    backgroundColor: 'transparent',
+    paddingVertical: 8,
+    paddingHorizontal: 16,
+    borderRadius: 0,
+    marginHorizontal: 4,
+    borderBottomWidth: 3,
+    color: '#FFC107',
+    borderBottomColor: '#CCCCCC',
+  },
+  activeTabButton: {
+    width: '33.33%',
+    color: '#FFC107',
+    backgroundColor: '#FFFFFF',
+    borderBottomWidth: 3,
+    borderBottomColor: '#FFC107',
+  },
+  tabButtonText: {
+    fontSize: 30,
+    color: '#000000',
     fontFamily: 'SamsungOne',
-    color: '#2B4985',
+    textAlign: 'center',
   },
-  placeholder: {
-    width: 0, 
-  },
-  line: {
-    backgroundColor: '#EAEAEA',
-    marginTop: 10,
+  activeTabButtonText: {
+    color: '#FFC107',
+    textAlign: 'center',
   },
 });
 
