@@ -53,8 +53,9 @@ const ReportScreenAdmin = ({ navigation }) => {
       const answer = formatDate(dateElected)
       if (selectedOption !== null && selectedOption !== undefined) {
         if(selectedOption.nombre !== 'No seleccionar') {
-          handleRequest('POST', '/obtainRegistersDate', { date: answer, idTrabajador: selectedOption.idTrabajador})
+          handleRequest('POST', '/obtainRegistersDate', { date: answer, idTrabajador: selectedOption.idTrabajador })
           setRegistersActive(true)
+          console.log(response)
         }
       } else { 
         handleRequest('POST', '/obtainRegistersDate', { date: answer })
