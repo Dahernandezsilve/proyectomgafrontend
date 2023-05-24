@@ -22,7 +22,7 @@ const CreationScreen = ({ navigation }) => {
         observaciones: registro.observaciones,
         idGalera: registro.idGalera,
         pesado: registro.pesado })
-      console.log(response);
+       console.log("Resposinve: ",response);
     }
     return (
       <View style={{backgroundColor: '#ECECEC'}}>

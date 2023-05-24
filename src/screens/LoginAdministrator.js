@@ -18,6 +18,7 @@ const LoginAdministrator = ({navigation}) => {
     handleLogin(correo, contrasena);
   }
   
+  
   useEffect(() => {
     if (response.message !== null || response.message !== undefined) {
       console.log(response)
@@ -74,24 +75,22 @@ const styles = StyleSheet.create({
   },
   backgroundImage: {
     position: "absolute",
-    width: 300,
-    height: 300,
+    width: 260,
+    height: 260,
     marginBottom: 20,
     top: -100,
-    right: -50,
+    right: 0,
     zIndex: 1,
   },
   formContainer: {
     width: '80%',
     alignItems: 'center',
+    marginTop: 20,
   },
   logo: {
-    position: 'absolute',
     width: 300,
     height: 300,
-    marginBottom: 20,
-    top: -150,
-    zIndex: 1,
+    marginBottom: 1,
   },
   input: {
     width: '100%',
@@ -99,15 +98,14 @@ const styles = StyleSheet.create({
     padding: 10,
     marginBottom: 10,
     borderRadius: 5,
-    top: 130,
   },
   button: {
     width: '100%',
     backgroundColor: '#35599F',
     paddingVertical: 10,
     borderRadius: 5,
-    top: 140,
-  },
+    marginTop: 20,
+  },  
   buttonText: {
     color: 'white',
     fontSize: 16,
