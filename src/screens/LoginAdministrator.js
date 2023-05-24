@@ -16,9 +16,9 @@ const LoginAdministrator = ({navigation}) => {
 
     const navigateToWorkerScreen = async (correo, contrasena) => {
       await handleLogin(correo, contrasena)
-      console.log(response)
-      console.log('Correo:', correo);
-      console.log('Contraseña:', contrasena);
+      //console.log(response)
+      //console.log('Correo:', correo);
+      //console.log('Contraseña:', contrasena);
       if (haveAccess) {
         setHaveAccess(false)
         navigation.navigate('Home');
@@ -28,7 +28,7 @@ const LoginAdministrator = ({navigation}) => {
     // {"data": [{"direccion": "11av zona10", "idTrabajador": "1", "nombre": "Diego Hernandez", "puesto": "Servicio de limpieza", "rol": "trabajador", "telefono": "123213123"}], "error": 202, "message": "Good Job"}
 
     useEffect(() => {
-      console.log(response)
+      //console.log(response)
       if (response.message !== null || response.message !== undefined) {
         if (response.message === 'Good Job'){
           setHaveAccess(true)
