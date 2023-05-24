@@ -21,11 +21,15 @@ const LoginAdministrator = ({navigation}) => {
   useEffect(() => {
     if (response.message !== null || response.message !== undefined) {
       console.log(response)
-      if (response.message === 'Good Job') {
-        setHaveAccess(true);
-        navigation.navigate('Home');
-      } else {
-        setHaveAccess(false);
+      if (response.data !== null || response.data !== undefined){
+        if (response.data && response.data.length > 0) {
+          if (response.message === 'Good Job' && response.data[0].rol === 'admin') {
+            setHaveAccess(true);
+            navigation.navigate('Home');
+          } else {
+            setHaveAccess(false);
+          }
+        }
       }
       
     }
