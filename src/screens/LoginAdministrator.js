@@ -14,9 +14,9 @@ const LoginAdministrator = ({navigation}) => {
     handleRequest('POST', '/login', { user: correo, password: contrasena })
   }
 
-  const navigateToWorkerScreen = (correo, contrasena) => {
+  const navigateToAdminScreen = (correo, contrasena) => {
     handleLogin(correo, contrasena);
-  };
+  }
   
   useEffect(() => {
     if (response.message !== null || response.message !== undefined) {
@@ -33,7 +33,7 @@ const LoginAdministrator = ({navigation}) => {
       }
       
     }
-  }, [response]);
+  }, [response])
       
     // {"data": [{"direccion": "11av zona10", "idTrabajador": "1", "nombre": "Diego Hernandez", "puesto": "Servicio de limpieza", "rol": "trabajador", "telefono": "123213123"}], "error": 202, "message": "Good Job"}
 
@@ -57,7 +57,7 @@ const LoginAdministrator = ({navigation}) => {
           secureTextEntry
           onChangeText={(text) => setContrasena(text)}
         />
-        <TouchableOpacity style={styles.button} onPress={() => navigateToWorkerScreen(correo, contrasena)}>
+        <TouchableOpacity style={styles.button} onPress={() => navigateToAdminScreen(correo, contrasena)}>
           <Text style={styles.buttonText}>Acceder</Text>
         </TouchableOpacity>
       </View>

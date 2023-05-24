@@ -1,18 +1,38 @@
-import React,{useState} from 'react';
+import React, { useState, useEffect } from 'react';
 import { View, Text, TextInput, TouchableOpacity, StyleSheet,Image, StatusBar } from 'react-native'
 import SamsungOne from '../fonts/SamsungOne-400.ttf'
 import * as Font from 'expo-font';
-
+import useApi from "../hooks/useApi/useApi"
 
 const LoginWorker = ({navigation}) => {
-    
-    const [codigo, setCodigo] = useState('');
+  const [response, loading, handleRequest] = useApi()
+  const [codigo, setCodigo] = useState('')
+  const [haveAccess, setHaveAccess] = useState(false)
 
+  const handleLogin = (correo, contrasena) => {
+    handleRequest('POST', '/login', { user: correo, password: codigo })
+  }
 
-    const navigateToWorkerScreen = () => {
-        console.log('codigo:', codigo);
-        navigation.navigate('HomeWorker');
-    };
+  const navigateToWorkerScreen = (correo, contrasena) => {
+    handleLogin(correo, contrasena)
+  }
+
+  useEffect(() => {
+    if (response.message !== null || response.message !== undefined) {
+      console.log(response)
+      if (response.data !== null || response.data !== undefined){
+        if (response.data && response.data.length > 0) {
+          if (response.message === 'Good Job' && response.data[0].rol === 'trabajador') {
+            setHaveAccess(true);
+            navigation.navigate('HomeWorker');
+          } else {
+            setHaveAccess(false);
+          }
+        }
+      }
+      
+    }
+  }, [response]);
 
   return (
     <View style={styles.container}>
@@ -28,7 +48,7 @@ const LoginWorker = ({navigation}) => {
           secureTextEntry
           onChangeText={(text) => setCodigo(text)}
         />
-        <TouchableOpacity style={styles.button} onPress={navigateToWorkerScreen}>
+        <TouchableOpacity style={styles.button} onPress={() => navigateToWorkerScreen('diher',codigo)}>
           <Text style={styles.buttonText}>Acceder</Text>
         </TouchableOpacity>
       </View>
