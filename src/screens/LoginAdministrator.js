@@ -5,38 +5,33 @@ import * as Font from 'expo-font';
 import useApi from "../hooks/useApi/useApi"
 
 const LoginAdministrator = ({navigation}) => {
-    const [response, loading, handleRequest] = useApi()
-    const [correo, setCorreo] = useState('');
-    const [contrasena, setContrasena] = useState('')
-    const [haveAccess, setHaveAccess] = useState(false)
+  const [response, loading, handleRequest] = useApi()
+  const [correo, setCorreo] = useState('');
+  const [contrasena, setContrasena] = useState('')
+  const [haveAccess, setHaveAccess] = useState(false)
 
-    const handleLogin = (correo, contrasena) => {
-      handleRequest('POST', '/login', { user: correo, password: contrasena })
-    }
+  const handleLogin = (correo, contrasena) => {
+    handleRequest('POST', '/login', { user: correo, password: contrasena })
+  }
 
-    const navigateToWorkerScreen = async (correo, contrasena) => {
-      await handleLogin(correo, contrasena)
-      //console.log(response)
-      //console.log('Correo:', correo);
-      //console.log('Contraseña:', contrasena);
-      if (haveAccess) {
-        setHaveAccess(false)
+  const navigateToWorkerScreen = (correo, contrasena) => {
+    handleLogin(correo, contrasena);
+  };
+  
+  useEffect(() => {
+    if (response.message !== null || response.message !== undefined) {
+      console.log(response)
+      if (response.message === 'Good Job') {
+        setHaveAccess(true);
         navigation.navigate('Home');
+      } else {
+        setHaveAccess(false);
       }
+      
     }
-    
+  }, [response]);
+      
     // {"data": [{"direccion": "11av zona10", "idTrabajador": "1", "nombre": "Diego Hernandez", "puesto": "Servicio de limpieza", "rol": "trabajador", "telefono": "123213123"}], "error": 202, "message": "Good Job"}
-
-    useEffect(() => {
-      //console.log(response)
-      if (response.message !== null || response.message !== undefined) {
-        if (response.message === 'Good Job'){
-          setHaveAccess(true)
-        } else {
-          setHaveAccess(false)
-        }
-      }
-    }, [response, haveAccess])
 
   return (
     <View style={styles.container}>
@@ -58,7 +53,7 @@ const LoginAdministrator = ({navigation}) => {
           secureTextEntry
           onChangeText={(text) => setContrasena(text)}
         />
-        <TouchableOpacity style={styles.button} onPress={navigateToWorkerScreen(correo, contrasena)}>
+        <TouchableOpacity style={styles.button} onPress={() => navigateToWorkerScreen(correo, contrasena)}>
           <Text style={styles.buttonText}>Acceder</Text>
         </TouchableOpacity>
       </View>
