@@ -1,57 +1,42 @@
 import React, { useState } from 'react';
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
-import SamsungOne from '../fonts/SamsungOne-400.ttf'
-import * as Font from 'expo-font';
 
-const HeaderGalley = ({lotes, title}) => {
-  const [activeTab, setActiveTab] = useState('lote1');
+const HeaderGalley = ({ lotes, title, activeTab, setActiveTab }) => {
+
 
   const handleTabPress = (tabName) => {
     setActiveTab(tabName);
+    console.log('loteactivo', activeTab)
   };
 
   return (
     <View style={styles.headerContainer}>
-      <Text style={styles.headerText}>{ title }</Text>
+      <Text style={styles.headerText}>{title}</Text>
       <View style={styles.buttonContainer}>
-        <TouchableOpacity
-          style={[
-            styles.tabButton,
-            activeTab === 'lote1' ? styles.activeTabButton : null,
-          ]}
-          activeOpacity={0.7}
-          onPress={() => handleTabPress('lote1')}
-        >
-          <Text
+        {lotes.map((lote, index) => (
+          <TouchableOpacity
+            key={index}
             style={[
-              styles.tabButtonText,
-              activeTab === 'lote1' ? styles.activeTabButtonText : null,
+              styles.tabButton,
+              activeTab === lote ? styles.activeTabButton : null,
             ]}
+            activeOpacity={0.7}
+            onPress={() => handleTabPress(lote)}
           >
-            {lotes[0]}
-          </Text>
-        </TouchableOpacity>
-        <TouchableOpacity
-          style={[
-            styles.tabButton,
-            activeTab === 'lote2' ? styles.activeTabButton : null,
-          ]}
-          activeOpacity={0.7}
-          onPress={() => handleTabPress('lote2')}
-        >
-          <Text
-            style={[
-              styles.tabButtonText,
-              activeTab === 'lote2' ? styles.activeTabButtonText : null,
-            ]}
-          >
-            {lotes[1]}
-          </Text>
-        </TouchableOpacity>
+            <Text
+              style={[
+                styles.tabButtonText,
+                activeTab === lote ? styles.activeTabButtonText : null,
+              ]}
+            >
+              Lote: {lote}
+            </Text>
+          </TouchableOpacity>
+        ))}
       </View>
     </View>
-  );
-};
+  )
+}
 
 const styles = StyleSheet.create({
   headerContainer: {
@@ -78,7 +63,7 @@ const styles = StyleSheet.create({
     alignItems: 'center'
   },
   tabButton: {
-    width: '50%',
+    width: '33.33%',
     backgroundColor: 'transparent',
     paddingVertical: 8,
     paddingHorizontal: 16,
@@ -89,7 +74,7 @@ const styles = StyleSheet.create({
     borderBottomColor: '#CCCCCC',
   },
   activeTabButton: {
-    width: '50%',
+    width: '33.33%',
     color: '#FFC107',
     backgroundColor: '#FFFFFF',
     borderBottomWidth: 3,
