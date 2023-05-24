@@ -33,7 +33,7 @@ const CardGaleraAdmin = ({ galera = 'Default', ca = 'red', navigateToGaleras, nu
     }
   }
   return (
-    <TouchableWithoutFeedback onPress={() => navigateToGaleras()} onPressIn={onPressIn} onPressOut={onPressOut}>
+    <TouchableWithoutFeedback onPressIn={onPressIn} onPressOut={onPressOut}>
       <Animated.View style={[styles.container, { width: windowWidth - 30, opacity: opacityValue }]}>
         <View style={styles.caContainer}>
           <Text style={styles.smallText}>C.A: {filteredNumberCA(numberCA)}</Text>

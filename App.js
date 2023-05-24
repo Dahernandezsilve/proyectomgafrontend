@@ -11,6 +11,7 @@ import ReportScreenAdmin from "./src/screens/ReportScreenAdmin";
 import ChoiceScreen from "./src/screens/ChoiceScreen";
 import LoginWorker from "./src/screens/LoginWorker";
 import { useFonts } from 'expo-font';
+import HeaderCreation from "./src/components/headerCreation";
 
 const Stack = createNativeStackNavigator();
 
@@ -36,7 +37,9 @@ const App = () => {
     />
   );
 
-  const renderInformation = () => <HeaderInformation />;
+  const renderInformation = () => (
+    <HeaderCreation />
+  );
 
   const [fontsLoaded] = useFonts({
     SamsungOne: require('./src/fonts/SamsungOne-400.ttf'),
