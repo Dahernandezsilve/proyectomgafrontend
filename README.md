@@ -7,10 +7,10 @@ MGA - Modernización de una granja avícola
 
 **Descripción**
 
-MGA es una aplicación móvil desarollada en React Native que se conecta a un servidor y base de datos relacional.  
-Su objetivo es satisfacer las necesidades de organización de productos avícolas como pollo y concentrado para  
-mejorar la rentabilidad y permitiendo la clasificación de clientes. La plataforma está diseñada para ser accesible  
-las 24 horas del día, fácil de usar, optimizada y siempre actualizada, con tiempos de carga rápidos.
+MGA es una aplicación móvil desarrollada en React Native que se conecta a un servidor y base de datos relacional.  
+Su objetivo es satisfacer las necesidades de una organización que administra productos avícolas, principalmente pollos  
+y su propio concentrado, para mejorar la rentabilidad y permitiendo la clasificación de clientes. La plataforma está diseñada  
+para ser accesible las 24 horas del día, fácil de usar, optimizada y siempre actualizada, con tiempos de carga rápidos.
 
 **Instalación**
 
