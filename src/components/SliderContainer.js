@@ -9,10 +9,18 @@ const windowWidth = Dimensions.get('window').width;
 const SliderContainer = ({title, minimumValue, maximumValue, step, medida, fixed, registro, setRegistro, info}) => {
     const [value, setValue] = useState(0.0);
 
+    const handleTextInputChange = (text) => {
+      const numericValue = parseFloat(text.replace(/\s/g, '')); 
+      if (!isNaN(numericValue)) {
+        setValue(numericValue);
+      }
+    };
+  
+
     return (
       <View style={styles.container}>
         <View style={styles.valueContainer}>
-          <TextInput style={styles.valueText} >{value.toFixed(fixed)}</TextInput>
+          <TextInput style={styles.valueText} onChangeText={handleTextInputChange} keyboardType="numeric" >{value.toFixed(fixed)} </TextInput>
         </View>
         <Text style={[styles.title, {textAlign: 'left'}]}>{title}</Text>
         <Slider
