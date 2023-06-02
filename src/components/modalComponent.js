@@ -7,9 +7,13 @@ import {
   Pressable,
   View,
   Image,
+  Dimensions
 } from "react-native"
 import SamsungOne from '../fonts/SamsungOne-400.ttf'
 import * as Font from 'expo-font'
+
+const windowWidth = Dimensions.get('window').width;
+const windowHeight = Dimensions.get('window').height;
 
 export class ModalComponent extends Component {
   state = {
@@ -19,7 +23,7 @@ export class ModalComponent extends Component {
   render() {
     const { modalVisible } = this.state;
     return (
-      <View style={styles.centeredView}>
+      <View style={styles.container}>
         <Modal
           animationType="fade"
           transparent={true}
@@ -29,18 +33,22 @@ export class ModalComponent extends Component {
             this.setState({ modalVisible: !modalVisible });
           }}
         >
-          <View style={styles.centeredView}>
+          <View style={styles.modalContainer}>
             <View style={styles.modalView}>
-              <Text style={styles.modalText}>¡Información de Galeras!</Text>
-              <Text style={[styles.tituloGalera]}>Galera</Text>
-              <Text style={[styles.textoGaleraInfo]}>Cantidad de pollos : {cantidad}</Text>
-              <Text style={[styles.textoGaleraInfo]}>Tipo de población :</Text>
-              <Text style={[styles.textoGaleraInfo]}>Edad de los pollos :</Text>
+              <Text style={styles.modalText}>Información de la galera</Text>
+              <Text style={[styles.textoGaleraInfo]}>Galera</Text>
+              <Text style={[styles.info]}>10</Text>
+              <Text style={[styles.textoGaleraInfo]}>Cantidad de pollos: </Text>
+              <Text style={[styles.info]}>200</Text>
+              <Text style={[styles.textoGaleraInfo]}>Sexo del ave:</Text>
+              <Text style={[styles.info]}>Macho</Text>
+              <Text style={[styles.textoGaleraInfo]}>Edad de los pollos (días):</Text>
+              <Text style={[styles.info]}>15</Text>
               <Pressable
                 style={[styles.button, styles.buttonClose]}
                 onPress={() => this.setState({ modalVisible: !modalVisible })}
               >
-                <Text style={styles.textStyle}>Esconder Info</Text>
+                <Text style={styles.textStyle}>Cerrar</Text>
               </Pressable>
             </View>
           </View>
@@ -57,15 +65,20 @@ export class ModalComponent extends Component {
 }
 
 const styles = StyleSheet.create({
-  centeredView: {
+  container: {
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
     marginTop: 22,
   },
-  modalView: {
+  modalContainer: {
     flex: 1,
-    margin: 20,
+    justifyContent: "center",
+    alignItems: "center",
+    backgroundColor: "rgba(0, 0, 0, 0.5)",
+  },
+  modalView: {
+    width: windowWidth - 30,
     backgroundColor: "white",
     borderRadius: 20,
     padding: 35,
@@ -80,16 +93,18 @@ const styles = StyleSheet.create({
     elevation: 5,
   },
   button: {
-    borderRadius: 20,
-    padding: 5,
+    borderRadius: 4,
     elevation: 2,
+    paddingTop: 5,
+    paddingLeft: 10,
+    paddingBottom: 5,
+    paddingRight: 10,
   },
   buttonOpen: {
     backgroundColor: "#F194FF",
-    width: "20%",
   },
   buttonClose: {
-    backgroundColor: "#2196F3",
+    backgroundColor: "#2e4a85",
   },
   textStyle: {
     color: "white",
@@ -97,14 +112,27 @@ const styles = StyleSheet.create({
   },
   modalText: {
     marginBottom: 15,
+    borderBottomWidth: 2,
+    borderColor: '#2e4a85',
+    fontSize:  22,
+    fontFamily: 'SamsungOne',
     textAlign: "center",
   },
   tituloGalera: {
     fontSize: 24,
-    flex: 1,
+    fontFamily: 'SamsungOne'
   },
   textoGaleraInfo: {
-    flex: 2,
+    marginBottom: 5,
+    fontSize:  22,
+    fontFamily: 'SamsungOne',
+    textAlign: "center",
+  },
+  info: {
+    marginBottom: 15,
+    fontSize:  22,
+    fontFamily: 'SamsungOne',
+    textAlign: "center",
   },
   floatingButton: {
     position: "absolute",
