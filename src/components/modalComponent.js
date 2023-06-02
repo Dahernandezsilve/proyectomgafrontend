@@ -32,9 +32,8 @@ export class ModalComponent extends Component {
           <View style={styles.centeredView}>
             <View style={styles.modalView}>
               <Text style={styles.modalText}>¡Información de Galeras!</Text>
-
               <Text style={[styles.tituloGalera]}>Galera</Text>
-              <Text style={[styles.textoGaleraInfo]}>Cantidad de pollos :</Text>
+              <Text style={[styles.textoGaleraInfo]}>Cantidad de pollos : {cantidad}</Text>
               <Text style={[styles.textoGaleraInfo]}>Tipo de población :</Text>
               <Text style={[styles.textoGaleraInfo]}>Edad de los pollos :</Text>
               <Pressable

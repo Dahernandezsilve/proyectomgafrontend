@@ -5,7 +5,7 @@ import * as Font from 'expo-font';
 
 const windowWidth = Dimensions.get('window').width;
 
-const CardGaleraAdmin = ({ galera = 'Default', ca = 'red', navigateToGaleras, numberCA = 1.01, cantidadAlimento = 0, pesado = 0, decesos = 0, observaciones = 'n.a.' }) => {
+const CardGaleraAdmin = ({ galera = 'Default', ca = 'red', navigateToGaleras, numberCA = 1.01, cantidadAlimento = 0, pesado = 0, decesos = 0, observaciones = 'n.a.', edad= 0 }) => {
   const [opacityValue, setOpacityValue] = useState(new Animated.Value(1));
 
   const onPressIn = () => {
@@ -46,6 +46,7 @@ const CardGaleraAdmin = ({ galera = 'Default', ca = 'red', navigateToGaleras, nu
               <Text style={styles.title}>Alimento:</Text>
               <Text style={styles.title}>Peso medido:</Text>
               <Text style={styles.title}>Decesos:</Text>
+              <Text style={styles.title}>Edad:</Text>
               {observaciones !== 'n.a.' && <Text style={styles.title}>Observaciones:</Text>}
             </View>
             <View style={styles.column}>
@@ -53,6 +54,7 @@ const CardGaleraAdmin = ({ galera = 'Default', ca = 'red', navigateToGaleras, nu
               <Text style={[styles.info, styles.rightAlignedText]}>{cantidadAlimento}</Text>
               <Text style={[styles.info, styles.rightAlignedText]}>{pesado}</Text>
               <Text style={[styles.info, styles.rightAlignedText]}>{decesos}</Text>
+              <Text style={[styles.info, styles.rightAlignedText]}>{edad}</Text>
               {observaciones !== 'n.a.' && <Text style={[styles.info, styles.rightAlignedText]}>{observaciones}</Text>}
             </View>
           </View>

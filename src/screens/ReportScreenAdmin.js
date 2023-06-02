@@ -72,6 +72,222 @@ const ReportScreenAdmin = ({ navigation, activeTab , setActiveTab}) => {
     navigation.navigate('Creacion');
   };
 
+  
+  const verifyCA = ({p, ca, tipo}) => {
+    if (p<=7 && p>0){
+      if (tipo==='hembra'){
+        if (ca>0.98){
+          return 'green'
+        } else if (ca>0.94 && ca<=0.98){
+          return 'orange'
+        } else if (ca<=0.94 || ca===null){
+          return 'red'
+        }
+      } else if (tipo==='macho'){
+        if (ca>1.00){
+          return 'green'
+        } else if (ca>0.95 && ca<=1.00){
+          return 'orange'
+        } else if (ca<=0.95 || ca===null){
+          return 'red'
+        }
+      } else if (tipo==='mixto'){
+        if (ca>0.99){
+          return 'green'
+        } else if (ca>0.95 && ca<=0.99){
+          return 'orange'
+        } else if (ca<=0.95 || ca===null){
+          return 'red'
+        }
+      }
+    } else if (p>7 && p<=14) {
+      if (tipo==='hembra'){
+        if (ca>1.35){
+          return 'green'
+        } else if (ca>1.22 && ca<=1.35){
+          return 'orange'
+        } else if (ca<=1.22 || ca===null){
+          return 'red'
+        }
+      } else if (tipo==='macho'){
+        if (ca>1.24){
+          return 'green'
+        } else if (ca>1.20 && ca<=1.24){
+          return 'orange'
+        } else if (ca<=1.20 || ca===null){
+          return 'red'
+        }
+      } else if (tipo==='mixto'){
+        if (ca>1.30){
+          return 'green'
+        } else if (ca>1.21 && ca<=1.30){
+          return 'orange'
+        } else if (ca<=1.21 || ca===null){
+          return 'red'
+        }
+      }
+    } else if (p>14 && p<=21) {
+      if (tipo==='hembra'){
+        if (ca>1.54){
+          return 'green'
+        } else if (ca>1.48 && ca<=1.54){
+          return 'orange'
+        } else if (ca<=1.48 || ca===null){
+          return 'red'
+        }
+      } else if (tipo==='macho'){
+        if (ca>1.39){
+          return 'green'
+        } else if (ca>1.34 && ca<=1.39){
+          return 'orange'
+        } else if (ca<=1.34 || ca===null){
+          return 'red'
+        }
+      } else if (tipo==='mixto'){
+        if (ca>1.47){
+          return 'green'
+        } else if (ca>1.41 && ca<=1.47){
+          return 'orange'
+        } else if (ca<=1.41 || ca===null){
+          return 'red'
+        }
+      }
+    } else if (p>21 && p<=28){
+      if (tipo==='hembra'){
+        if (ca>1.59){
+          return 'green'
+        } else if (ca>1.57 && ca<=1.59){
+          return 'orange'
+        } else if (ca<=1.57 || ca===null){
+          return 'red'
+        }
+      } else if (tipo==='macho'){
+        if (ca>1.47){
+          return 'green'
+        } else if (ca>1.44 && ca<=1.47){
+          return 'orange'
+        } else if (ca<=1.44 || ca===null){
+          return 'red'
+        }
+      } else if (tipo==='mixto'){
+        if (ca>1.54){
+          return 'green'
+        } else if (ca>1.51 && ca<=1.54){
+          return 'orange'
+        } else if (ca<=1.51 || ca===null){
+          return 'red'
+        }
+      }
+    } else if (p>28 && p<=35) {
+      if (tipo==='hembra'){
+        if (ca>1.69){
+          return 'green'
+        } else if (ca>1.64 && ca<=1.69){
+          return 'orange'
+        } else if (ca<=1.64 || ca===null){
+          return 'red'
+        }
+      } else if (tipo==='macho'){
+        if (ca>1.57){
+          return 'green'
+        } else if (ca>1.54 && ca<=1.57){
+          return 'orange'
+        } else if (ca<=1.54 || ca===null){
+          return 'red'
+        }
+      } else if (tipo==='mixto'){
+        if (ca>1.64){
+          return 'green'
+        } else if (ca>1.59 && ca<=1.64){
+          return 'orange'
+        } else if (ca<=1.59 || ca===null){
+          return 'red'
+        }
+      }
+    } else if (p>35 && p<=42) {
+      if (tipo==='hembra'){
+        if (ca>1.84){
+          return 'green'
+        } else if (ca>1.78 && ca<=1.84){
+          return 'orange'
+        } else if (ca<=1.78 || ca===null){
+          return 'red'
+        }
+      } else if (tipo==='macho'){
+        if (ca>1.70){
+          return 'green'
+        } else if (ca>1.65 && ca<=1.70){
+          return 'orange'
+        } else if (ca<=1.65 || ca===null){
+          return 'red'
+        }
+      } else if (tipo==='mixto'){
+        if (ca>1.77){
+          return 'green'
+        } else if (ca>1.71 && ca<=1.77){
+          return 'orange'
+        } else if (ca<=1.71 || ca===null){
+          return 'red'
+        }
+      }
+    } else if (p>42 && p<=49) {
+      if (tipo==='hembra'){
+        if (ca>1.98){
+          return 'green'
+        } else if (ca>1.92 && ca<=1.98){
+          return 'orange'
+        } else if (ca<=1.92 || ca===null){
+          return 'red'
+        }
+      } else if (tipo==='macho'){
+        if (ca>1.82){
+          return 'green'
+        } else if (ca>1.77 && ca<=1.82){
+          return 'orange'
+        } else if (ca<=1.77 || ca===null){
+          return 'red'
+        }
+      } else if (tipo==='mixto'){
+        if (ca>1.90){
+          return 'green'
+        } else if (ca>1.85 && ca<=1.90){
+          return 'orange'
+        } else if (ca<=1.85 || ca===null){
+          return 'red'
+        }
+      }
+    } else if (p>49 && p<=56) {
+      if (tipo==='hembra'){
+        if (ca>2.13){
+          return 'green'
+        } else if (ca>2.05 && ca<=2.13){
+          return 'orange'
+        } else if (ca<=2.05 || ca===null){
+          return 'red'
+        }
+      } else if (tipo==='macho'){
+        if (ca>1.95){
+          return 'green'
+        } else if (ca>1.89 && ca<=1.95){
+          return 'orange'
+        } else if (ca<=1.89 || ca===null){
+          return 'red'
+        }
+      } else if (tipo==='mixto'){
+        if (ca>2.04){
+          return 'green'
+        } else if (ca>1.98 && ca<=2.04){
+          return 'orange'
+        } else if (ca<=1.98 || ca===null){
+          return 'red'
+        }
+      }
+    } else {
+      return 'red'
+    }
+  }
+
+
   useEffect(() => {
     console.log('lote', activeTab)
     if(response.data === undefined || response.data === null) {
@@ -112,20 +328,22 @@ const ReportScreenAdmin = ({ navigation, activeTab , setActiveTab}) => {
     } else {
       if (Array.isArray(response.data) && response.data.length > 0 && 'cantidadAlimento' in response.data[0]) {
       console.log('inform', registers)
+      console.log(registers) 
+
       registers.map((inform) => {
-        if (parseFloat(inform.ca) > 4.9) {
+        if (verifyCA({ p: inform.edadGalera, ca: inform.ca, tipo: inform.tipoPollo }) === 'red') {
           setBottomValue((prevBottomValue) => prevBottomValue + 1);
-        } else if (parseFloat(inform.ca) < 2.6) {
+        } else if (verifyCA({ p: inform.edadGalera, ca: inform.ca, tipo: inform.tipoPollo }) === 'green') {
           setTopValue((prevTopValue) => prevTopValue + 1);
-        } else if (parseFloat(inform.ca) > 2.6 && inform.ca < 4.9) {
+        } else if (verifyCA({ p: inform.edadGalera, ca: inform.ca, tipo: inform.tipoPollo }) === 'orange') {
           setMiddleValue((prevMiddleValue) => prevMiddleValue + 1);
-        } else if (inform.ca === null) {
-          setBottomValue((prevBottomValue) => prevBottomValue + 1);
-        }
+        } 
       });    
     }
   }
+
   }, [registers])
+
 
   return (
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center', backgroundColor:'#ECECEC' }}>
@@ -156,71 +374,25 @@ const ReportScreenAdmin = ({ navigation, activeTab , setActiveTab}) => {
           registers === undefined || registers.length === 0 ? (
             <NoInfo info='No hay información disponible' />
           ) : (
-            registers.map((inform) => {; // Variable temporal para almacenar los valores actualizados
-
-              if (parseFloat(inform.ca) > 4.9) {
-                return (
-                  <CardGaleraAdmin
-                    key={inform.idRegistro}
-                    galera={`Galera ${inform.idGalera}`}
-                    cantidadAlimento={inform.cantidadAlimento}
-                    pesado={inform.pesoMedido}
-                    decesos={inform.decesos}
-                    numberCA={inform.ca}
-                    observaciones={inform.observaciones}
-                    ca='red'
-                    navigateToGaleras={navigateToGaleras}
-                  />
-                );
-              }
-
-              if (parseFloat(inform.ca) < 2.6) {
-                return (
-                  <CardGaleraAdmin
-                    key={inform.idRegistro}
-                    galera={`Galera ${inform.idGalera}`}
-                    ca='green'
-                    cantidadAlimento={inform.cantidadAlimento}
-                    pesado={inform.pesoMedido}
-                    decesos={inform.decesos}
-                    numberCA={inform.ca}
-                    observaciones={inform.observaciones}
-                    navigateToGaleras={navigateToGaleras}
-                  />
-                );
-              }
-
-              if (parseFloat(inform.ca) > 2.6 && inform.ca < 4.9) {
-                return (
-                  <CardGaleraAdmin
-                    key={inform.idRegistro}
-                    galera={`Galera ${inform.idGalera}`}
-                    ca='orange'
-                    cantidadAlimento={inform.cantidadAlimento}
-                    pesado={inform.pesoMedido}
-                    decesos={inform.decesos}
-                    numberCA={inform.ca}
-                    observaciones={inform.observaciones}
-                    navigateToGaleras={navigateToGaleras}
-                  />
-                );
-              }
-
-              if (inform.ca === null) {
-                return (
-                  <CardGaleraAdmin
-                    key={inform.idRegistro}
-                    galera={`Galera ${inform.idGalera}`}
-                    ca='red'
-                    cantidadAlimento={inform.cantidadAlimento}
-                    pesado={inform.pesoMedido}
-                    decesos={inform.decesos}
-                    numberCA={inform.ca}
-                    observaciones={inform.observaciones}
-                    navigateToGaleras={navigateToGaleras}
-                  />
-                );
-              }
+            registers.map((inform) => {; // Variable temporal para almacenar los valores actualizados)
+            const resultP = verifyCA({ p: inform.edadGalera, ca: inform.ca, tipo: inform.tipoPollo });
+            if (resultP !== undefined){
+              return (
+                <CardGaleraAdmin
+                key={inform.idRegistro}
+                galera={`Galera ${inform.idGalera}`}
+                cantidadAlimento={inform.cantidadAlimento}
+                pesado={inform.pesoMedido}
+                decesos={inform.decesos}
+                numberCA={inform.ca}
+                observaciones={inform.observaciones}
+                ca={resultP}
+                edad={inform.edadGalera}
+                navigateToGaleras={navigateToGaleras}
+              />              
+              )
+            }
+            
             })
           )
         }
