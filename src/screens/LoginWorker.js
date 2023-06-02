@@ -10,7 +10,7 @@ const LoginWorker = ({navigation}) => {
   const [haveAccess, setHaveAccess] = useState(false)
 
   const handleLogin = (correo, contrasena) => {
-    handleRequest('POST', '/login', { user: correo, password: codigo })
+    handleRequest('POST', '/login', { password: codigo })
   }
 
   const navigateToWorkerScreen = (correo, contrasena) => {
@@ -48,7 +48,7 @@ const LoginWorker = ({navigation}) => {
           secureTextEntry
           onChangeText={(text) => setCodigo(text)}
         />
-        <TouchableOpacity style={styles.button} onPress={() => navigateToWorkerScreen('diher',codigo)}>
+        <TouchableOpacity style={styles.button} onPress={() => navigateToWorkerScreen(codigo)}>
           <Text style={styles.buttonText}>Acceder</Text>
         </TouchableOpacity>
       </View>
