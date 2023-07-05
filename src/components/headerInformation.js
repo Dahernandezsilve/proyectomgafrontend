@@ -1,13 +1,15 @@
-import React, { useState } from 'react';
-import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
+import React, { useState } from 'react'
+import {
+  View, Text, StyleSheet, TouchableOpacity,
+} from 'react-native'
 
-const HeaderInformation = ({ lotes, title, activeTab, setActiveTab }) => {
-
-
-  const handleTabPress = (tabName) => {
-    setActiveTab(tabName);
+const HeaderInformation = ({
+  lotes, title, activeTab, setActiveTab,
+}) => {
+  const handleTabPress = tabName => {
+    setActiveTab(tabName)
     console.log('loteactivoiNFO', activeTab)
-  };
+  }
 
   return (
     <View style={styles.headerContainer}>
@@ -29,7 +31,9 @@ const HeaderInformation = ({ lotes, title, activeTab, setActiveTab }) => {
                 activeTab === lote ? styles.activeTabButtonText : null,
               ]}
             >
-              Lote: {lote}
+              Lote:
+              {' '}
+              {lote}
             </Text>
           </TouchableOpacity>
         ))}
@@ -39,57 +43,57 @@ const HeaderInformation = ({ lotes, title, activeTab, setActiveTab }) => {
 }
 
 const styles = StyleSheet.create({
-  headerContainer: {
-    backgroundColor: '#FFFFFF',
-    paddingTop: 20,
-    borderBottomWidth: 1,
-    borderBottomColor: '#CCCCCC',
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.5,
-    shadowRadius: 2,
-    elevation: 2,   
-  },
-  headerText: {
-    fontSize: 30,
-    marginBottom: 8,
-    textAlign: 'center',
-    fontFamily: 'SamsungOne'
-  },
-  buttonContainer: {
-    paddingTop: 1,
-    flexDirection: 'row',
-    justifyContent: 'space-around',
-    alignItems: 'center'
-  },
-  tabButton: {
-    width: '33.33%',
-    backgroundColor: 'transparent',
-    paddingVertical: 8,
-    paddingHorizontal: 16,
-    borderRadius: 0,
-    marginHorizontal: 4,
-    borderBottomWidth: 3,
-    color: '#FFC107',
-    borderBottomColor: '#CCCCCC',
-  },
   activeTabButton: {
-    width: '33.33%',
-    color: '#FFC107',
     backgroundColor: '#FFFFFF',
-    borderBottomWidth: 3,
     borderBottomColor: '#FFC107',
-  },
-  tabButtonText: {
-    fontSize: 30,
-    color: '#000000',
-    fontFamily: 'SamsungOne',
-    textAlign: 'center',
+    borderBottomWidth: 3,
+    color: '#FFC107',
+    width: '33.33%',
   },
   activeTabButtonText: {
     color: '#FFC107',
     textAlign: 'center',
   },
-});
+  buttonContainer: {
+    alignItems: 'center',
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+    paddingTop: 1,
+  },
+  headerContainer: {
+    backgroundColor: '#FFFFFF',
+    borderBottomColor: '#CCCCCC',
+    borderBottomWidth: 1,
+    elevation: 2,
+    paddingTop: 20,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.5,
+    shadowRadius: 2,
+  },
+  headerText: {
+    fontFamily: 'SamsungOne',
+    fontSize: 30,
+    marginBottom: 8,
+    textAlign: 'center',
+  },
+  tabButton: {
+    backgroundColor: 'transparent',
+    borderBottomColor: '#CCCCCC',
+    borderBottomWidth: 3,
+    borderRadius: 0,
+    color: '#FFC107',
+    marginHorizontal: 4,
+    paddingHorizontal: 16,
+    paddingVertical: 8,
+    width: '33.33%',
+  },
+  tabButtonText: {
+    color: '#000000',
+    fontFamily: 'SamsungOne',
+    fontSize: 30,
+    textAlign: 'center',
+  },
+})
 
-export default HeaderInformation;
+export default HeaderInformation

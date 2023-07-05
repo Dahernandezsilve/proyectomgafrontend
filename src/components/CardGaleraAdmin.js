@@ -1,43 +1,111 @@
-import React, { useState,useEffect} from 'react';
-import { View, Text, StyleSheet, Dimensions, TouchableWithoutFeedback, Animated } from 'react-native'
+import React, { useState, useEffect } from 'react'
+import {
+  View, Text, StyleSheet, Dimensions, TouchableWithoutFeedback, Animated,
+} from 'react-native'
+import PropTypes from 'prop-types'
+import * as Font from 'expo-font'
 import SamsungOne from '../fonts/SamsungOne-400.ttf'
-import * as Font from 'expo-font';
 
-const windowWidth = Dimensions.get('window').width;
+const windowWidth = Dimensions.get('window').width
 
-const CardGaleraAdmin = ({ galera = 'Default', ca = 'red', navigateToGaleras, numberCA = 1.01, cantidadAlimento = 0, pesado = 0, decesos = 0, observaciones = 'n.a.', edad= 0 }) => {
-  const [opacityValue, setOpacityValue] = useState(new Animated.Value(1));
+const styles = StyleSheet.create({
+  caContainer: {
+    alignItems: 'center',
+    flexDirection: 'column',
+  },
+  column: {
+    flex: 1,
+  },
+  container: {
+    alignItems: 'center',
+    backgroundColor: '#FFFFFF',
+    borderRadius: 5,
+    elevation: 2,
+    flexDirection: 'row',
+    marginBottom: 5,
+    marginHorizontal: 15,
+    marginTop: 15,
+    padding: 20,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.5,
+    shadowRadius: 2,
+  },
+  galeraContainer: {
+    flex: 1,
+    marginLeft: 20,
+  },
+  info: {
+    fontFamily: 'SamsungOne',
+    fontSize: 18,
+  },
+  rightAlignedText: {
+    textAlign: 'right',
+  },
+  row: {
+    alignItems: 'center',
+    flexDirection: 'row',
+    marginBottom: 5,
+  },
+  smallText: {
+    fontFamily: 'SamsungOne',
+    fontSize: 20,
+    marginBottom: 5,
+  },
+  square: {
+    backgroundColor: 'red',
+    borderRadius: 5,
+    elevation: 2,
+    height: 50,
+    marginBottom: 5,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.5,
+    shadowRadius: 2,
+    width: 80,
+  },
+  title: {
+    fontFamily: 'SamsungOne',
+    fontSize: 18,
+  },
+})
+
+const CardGaleraAdmin = ({
+  galera, ca, numberCA, cantidadAlimento, pesado, decesos, observaciones, edad,
+}) => {
+  const [opacityValue] = useState(new Animated.Value(1))
 
   const onPressIn = () => {
     Animated.timing(opacityValue, {
       toValue: 0.5,
       duration: 100,
-      useNativeDriver: true
-    }).start();
-  };
-
+      useNativeDriver: true,
+    }).start()
+  }
 
   const onPressOut = () => {
     Animated.timing(opacityValue, {
       toValue: 1,
       duration: 100,
-      useNativeDriver: true
-    }).start();
-  };
+      useNativeDriver: true,
+    }).start()
+  }
 
-  const filteredNumberCA = (numberCA) => {
+  const filteredNumberCA = numberCA => {
     if (numberCA !== null) {
       return numberCA.toFixed(2)
-    } else {
-      return numberCA = 'N.A.'
     }
+    return numberCA = 'N.A.'
   }
   return (
     <TouchableWithoutFeedback onPressIn={onPressIn} onPressOut={onPressOut}>
       <Animated.View style={[styles.container, { width: windowWidth - 30, opacity: opacityValue }]}>
         <View style={styles.caContainer}>
-          <Text style={styles.smallText}>C.A: {filteredNumberCA(numberCA)}</Text>
-          <View style={[styles.square, { backgroundColor: ca }]}></View>
+          <Text style={styles.smallText}>
+            C.A:
+            {filteredNumberCA(numberCA)}
+          </Text>
+          <View style={[styles.square, { backgroundColor: ca }]} />
         </View>
         <View style={styles.galeraContainer}>
           <View style={styles.row}>
@@ -61,69 +129,29 @@ const CardGaleraAdmin = ({ galera = 'Default', ca = 'red', navigateToGaleras, nu
         </View>
       </Animated.View>
     </TouchableWithoutFeedback>
-  );
-};
+  )
+}
 
-const styles = StyleSheet.create({
-  container: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    padding: 20,
-    borderRadius: 5,
-    backgroundColor: '#FFFFFF',
-    marginHorizontal: 15,
-    marginTop: 15,
-    marginBottom: 5,
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.5,
-    shadowRadius: 2,
-    elevation: 2,
-  },
-  galeraContainer: {
-    flex: 1,
-    marginLeft: 20,
-  },
-  caContainer: {
-    flexDirection: 'column',
-    alignItems: 'center',
-  },
-  square: {
-    width: 80,
-    height: 50,
-    backgroundColor: 'red',
-    borderRadius: 5,
-    marginBottom: 5,
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.5,
-    shadowRadius: 2,
-    elevation: 2,
-  },
-  smallText: {
-    fontSize: 20,
-    marginBottom: 5,
-    fontFamily: 'SamsungOne',
-  },
-  row: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    marginBottom: 5,
-  },
-  column: {
-    flex: 1,
-  },
-  title: {
-    fontSize: 18,
-    fontFamily: 'SamsungOne',
-  },
-  info: {
-    fontSize: 18,
-    fontFamily: 'SamsungOne',
-  },
-  rightAlignedText: {
-    textAlign: 'right',
-  },
-});
+CardGaleraAdmin.propTypes = {
+  galera: PropTypes.string,
+  ca: PropTypes.string,
+  numberCA: PropTypes.number,
+  cantidadAlimento: PropTypes.number,
+  pesado: PropTypes.number,
+  decesos: PropTypes.number,
+  observaciones: PropTypes.string,
+  edad: PropTypes.number,
+}
 
-export default CardGaleraAdmin;
+CardGaleraAdmin.defaultProps = {
+  galera: 'Default',
+  ca: 'red',
+  numberCA: 1.01,
+  cantidadAlimento: 0,
+  pesado: 0,
+  decesos: 0,
+  observaciones: 'n.a.',
+  edad: 0,
+}
+
+export default CardGaleraAdmin
