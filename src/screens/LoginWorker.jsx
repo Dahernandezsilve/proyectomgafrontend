@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from 'react'
 import {
-  View, Text, TextInput, TouchableOpacity, StyleSheet, Image, StatusBar,
+  View, Text, TextInput, TouchableOpacity, StyleSheet, StatusBar,
 } from 'react-native'
 import * as Font from 'expo-font'
 import PropTypes from 'prop-types'
 import SamsungOne from '../fonts/SamsungOne-400.ttf'
 import useApi from '../hooks/useApi/useApi'
-import ElCeibillalImg from '../img/ElCeibillal.png'
-import ElCeibillalImgV2 from '../img/ElCeibillalV2.png'
+import ElCeibillalImg from '../img/ElCeibillalSvg'
+import ElCeibillalImgV2 from '../img/ElCeibillalV2Svg'
 
 const loadFonts = async () => {
   await Font.loadAsync({
@@ -17,12 +17,14 @@ const loadFonts = async () => {
 
 const styles = StyleSheet.create({
   backgroundImage: {
-    height: 260,
+    height: 270,
     marginBottom: 20,
+    opacity: 0.6,
     position: 'absolute',
-    right: 0,
+    right: -80,
     top: -100,
-    width: 260,
+    transform: [{ rotate: '270deg' }],
+    width: 270,
     zIndex: 1,
   },
   button: {
@@ -98,9 +100,9 @@ const LoginWorker = ({ navigation }) => {
     <View style={styles.container}>
       <StatusBar barStyle="light-content" backgroundColor="#2B4985" />
       <StatusBar barStyle="dark-content" backgroundColor="#2B4985" />
-      <Image source={ElCeibillalImgV2} style={styles.backgroundImage} />
+      <ElCeibillalImgV2 style={styles.backgroundImage} />
       <View style={styles.formContainer}>
-        <Image source={ElCeibillalImg} style={styles.logo} />
+        <ElCeibillalImg style={styles.logo} />
         <TextInput
           style={styles.input}
           placeholder="Código"

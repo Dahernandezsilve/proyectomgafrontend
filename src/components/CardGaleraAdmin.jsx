@@ -1,10 +1,8 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import {
   View, Text, StyleSheet, Dimensions, TouchableWithoutFeedback, Animated,
 } from 'react-native'
 import PropTypes from 'prop-types'
-import * as Font from 'expo-font'
-import SamsungOne from '../fonts/SamsungOne-400.ttf'
 
 const windowWidth = Dimensions.get('window').width
 
@@ -74,14 +72,6 @@ const CardGaleraAdmin = ({
   galera, ca, numberCA, cantidadAlimento, pesado, decesos, observaciones, edad,
 }) => {
   const [opacityValue] = useState(new Animated.Value(1))
-  const loadFonts = async () => {
-    await Font.loadAsync({
-      SamsungOne,
-    })
-  }
-  useEffect(() => {
-    loadFonts()
-  }, [])
 
   const onPressIn = () => {
     Animated.timing(opacityValue, {

@@ -1,11 +1,9 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import PropTypes from 'prop-types'
 import {
   View, Text, StyleSheet, TextInput,
 } from 'react-native'
 import Slider from '@react-native-community/slider'
-import * as Font from 'expo-font'
-import SamsungOne from '../fonts/SamsungOne-400.ttf'
 
 const styles = StyleSheet.create({
   container: {
@@ -79,15 +77,6 @@ const SliderContainer = ({
   title, minimumValue, maximumValue, step, medida, fixed,
 }) => {
   const [value, setValue] = useState(0.0)
-
-  const loadFonts = async () => {
-    await Font.loadAsync({
-      SamsungOne,
-    })
-  }
-  useEffect(() => {
-    loadFonts()
-  }, [])
 
   const handleTextInputChange = text => {
     const numericValue = parseFloat(text.replace(/\s/g, ''))

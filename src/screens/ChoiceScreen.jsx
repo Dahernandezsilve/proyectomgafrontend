@@ -5,11 +5,10 @@ import {
   Text,
   TouchableOpacity,
   StyleSheet,
-  Image,
   StatusBar,
 } from 'react-native'
-import ElCeibillalImg from '../img/ElCeibillal.png'
-import ElCeibillalImgV2 from '../img/ElCeibillalV2.png'
+import ElCeibillalImg from '../img/ElCeibillalSvg'
+import ElCeibillalImgV2 from '../img/ElCeibillalV2Svg'
 
 const styles = StyleSheet.create({
   backgroundImage: {
@@ -87,20 +86,22 @@ const styles = StyleSheet.create({
     width: '100%',
   },
   logo: {
-    height: 500,
+    height: 350,
     marginBottom: 20,
     position: 'absolute',
-    top: -200,
-    width: 500,
+    top: -75,
+    width: 350,
     zIndex: 1,
   },
   logoEsquina: {
-    height: 300,
+    height: 330,
     marginBottom: 20,
+    opacity: 0.6,
     position: 'absolute',
-    right: 0,
+    right: -80,
     top: -100,
-    width: 300,
+    transform: [{ rotate: '270deg' }],
+    width: 330,
     zIndex: 1,
   },
 })
@@ -110,13 +111,10 @@ const ChoiceScreen = ({ navigation }) => (
     <StatusBar barStyle="light-content" backgroundColor="#2B4985" />
     <StatusBar barStyle="dark-content" backgroundColor="#2B4985" />
     <View style={styles.formContainer}>
-      <Image source={ElCeibillalImg} style={styles.logo} />
+      <ElCeibillalImg style={styles.logo} />
     </View>
 
-    <Image
-      source={ElCeibillalImgV2}
-      style={styles.logoEsquina}
-    />
+    <ElCeibillalImgV2 style={styles.logoEsquina} />
 
     <View style={styles.containerBoton}>
       <TouchableOpacity

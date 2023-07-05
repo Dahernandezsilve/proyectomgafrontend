@@ -4,7 +4,14 @@ import {
   View, Text, StyleSheet, Dimensions, TouchableWithoutFeedback, Animated,
 } from 'react-native'
 import * as Font from 'expo-font'
-import SamsungOne from '../fonts/SamsungOne-400.ttf'
+
+const loadCustomFonts = async () => {
+  await Font.loadAsync({
+    // eslint-disable-next-line global-require
+    SamsungOne: require('../fonts/SamsungOne-400.ttf'),
+    // Agrega más fuentes personalizadas si es necesario
+  })
+}
 
 const windowWidth = Dimensions.get('window').width
 
@@ -60,13 +67,9 @@ const styles = StyleSheet.create({
 
 const CardGalera = ({ galera, ca, navigateToGaleras }) => {
   const [opacityValue] = useState(new Animated.Value(1))
-  const loadFonts = async () => {
-    await Font.loadAsync({
-      SamsungOne,
-    })
-  }
+
   useEffect(() => {
-    loadFonts()
+    loadCustomFonts()
   }, [])
 
   const onPressIn = () => {

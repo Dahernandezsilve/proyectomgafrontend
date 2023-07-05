@@ -13,13 +13,23 @@ import ChoiceScreen from './src/screens/ChoiceScreen'
 import LoginWorker from './src/screens/LoginWorker'
 import HeaderCreation from './src/components/headerCreation'
 
-import SamsungOne from './src/fonts/SamsungOne-400.ttf'
-
 const Stack = createNativeStackNavigator()
+
+const loadCustomFonts = async () => {
+  await Font.loadAsync({
+    // eslint-disable-next-line global-require
+    SamsungOne: require('./src/fonts/SamsungOne-400.ttf'),
+    // Agrega más fuentes personalizadas si es necesario
+  })
+}
 
 const App = () => {
   const lotes = ['20', '1', '2']
   const [activeTab, setActiveTab] = useState(lotes[0])
+
+  useEffect(() => {
+    loadCustomFonts()
+  }, [])
 
   const renderHeaderGalley = () => (
     <HeaderGalley
@@ -42,15 +52,6 @@ const App = () => {
   const renderInformation = () => (
     <HeaderCreation />
   )
-  const loadFonts = async () => {
-    await Font.loadAsync({
-      SamsungOne,
-    })
-  }
-  useEffect(() => {
-    loadFonts()
-  }, [])
-
   return (
     <NavigationContainer>
       <Stack.Navigator initialRouteName="SelectUser">
