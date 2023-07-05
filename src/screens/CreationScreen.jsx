@@ -1,9 +1,7 @@
 import React, { useState } from 'react'
 import { View, ScrollView, StatusBar } from 'react-native'
 import useApi from '../hooks/useApi/useApi'
-import SliderContainer from '../components/SliderContainer'
-import CommentsComponent from '../components/commentsComponent'
-import ModalComponent from '../components/modalComponent'
+import { SliderContainer, CommentsComponent, ModalComponent } from '../components'
 
 const CreationScreen = () => {
   const [response,, handleRequest] = useApi()
