@@ -9,6 +9,12 @@ import useApi from '../hooks/useApi/useApi'
 import ElCeibillalImg from '../img/ElCeibillal.png'
 import ElCeibillalImgV2 from '../img/ElCeibillalV2.png'
 
+const loadFonts = async () => {
+  await Font.loadAsync({
+    SamsungOne,
+  })
+}
+
 const styles = StyleSheet.create({
   backgroundImage: {
     height: 260,
@@ -60,11 +66,6 @@ const LoginWorker = ({ navigation }) => {
   const [response,, handleRequest] = useApi()
   const [codigo, setCodigo] = useState('')
   const [, setHaveAccess] = useState(false)
-  const loadFonts = async () => {
-    await Font.loadAsync({
-      SamsungOne,
-    })
-  }
   useEffect(() => {
     loadFonts()
   }, [])

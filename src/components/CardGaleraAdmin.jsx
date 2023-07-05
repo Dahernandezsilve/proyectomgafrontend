@@ -74,6 +74,14 @@ const CardGaleraAdmin = ({
   galera, ca, numberCA, cantidadAlimento, pesado, decesos, observaciones, edad,
 }) => {
   const [opacityValue] = useState(new Animated.Value(1))
+  const loadFonts = async () => {
+    await Font.loadAsync({
+      SamsungOne,
+    })
+  }
+  useEffect(() => {
+    loadFonts()
+  }, [])
 
   const onPressIn = () => {
     Animated.timing(opacityValue, {
@@ -91,11 +99,11 @@ const CardGaleraAdmin = ({
     }).start()
   }
 
-  const filteredNumberCA = numberCA => {
-    if (numberCA !== null) {
-      return numberCA.toFixed(2)
+  const filteredNumberCA = numCA => {
+    if (numCA !== null) {
+      return numCA.toFixed(2)
     }
-    return numberCA = 'N.A.'
+    return 'N.A.'
   }
   return (
     <TouchableWithoutFeedback onPressIn={onPressIn} onPressOut={onPressOut}>
