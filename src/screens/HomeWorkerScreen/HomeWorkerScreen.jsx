@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react'
 import { View, ScrollView, StatusBar } from 'react-native'
 import PropTypes from 'prop-types'
+import { CardGalera } from '../../components'
 import TextCard from '../../components/TextCard'
-import CardGalera from '../../components/CardGalera'
 import useApi from '../../hooks/useApi/useApi'
 
 const HomeWorkerScreen = ({ navigation }) => {

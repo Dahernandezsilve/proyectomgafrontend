@@ -5,12 +5,13 @@ import * as Font from 'expo-font'
 import {
   ChoiceScreen, DetailsScreen, CreationScreen, HomeWorkerScreen,
 } from './src/screens'
-import HeaderGalley from './src/components/headerGalley'
+import {
+  HeaderGalley, HeaderCreation,
+} from './src/components'
 import HeaderInformation from './src/components/headerInformation'
 import LoginAdministrator from './src/screens/LoginAdministrator'
 import ReportScreenAdmin from './src/screens/ReportScreenAdmin'
 import LoginWorker from './src/screens/LoginWorker'
-import HeaderCreation from './src/components/headerCreation'
 
 const Stack = createNativeStackNavigator()
 
