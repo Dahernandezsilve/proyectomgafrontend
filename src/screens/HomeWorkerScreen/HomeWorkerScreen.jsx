@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react'
 import { View, ScrollView, StatusBar } from 'react-native'
 import PropTypes from 'prop-types'
-import TextCard from '../components/TextCard'
-import CardGalera from '../components/CardGalera'
-import useApi from '../hooks/useApi/useApi'
+import TextCard from '../../components/TextCard'
+import CardGalera from '../../components/CardGalera'
+import useApi from '../../hooks/useApi/useApi'
 
 const HomeWorkerScreen = ({ navigation }) => {
   const [response,, handleRequest] = useApi()
@@ -11,7 +11,6 @@ const HomeWorkerScreen = ({ navigation }) => {
 
   const handleObtainGaleras = () => {
     handleRequest('POST', '/galeras', { numLote: 20 })
-    console.log('Respuesta', response.data)
   }
 
   const navigateToGaleras = async () => {
@@ -19,9 +18,7 @@ const HomeWorkerScreen = ({ navigation }) => {
   }
 
   useEffect(() => {
-    if (response.data === undefined || response.data === null) {
-      console.log('No ha pasado')
-    } else {
+    if (response.data === undefined || response.data === null) { /* empty */ } else {
       setGaleras(response.data)
     }
   }, [response])

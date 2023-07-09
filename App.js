@@ -2,14 +2,13 @@ import React, { useEffect, useState } from 'react'
 import { NavigationContainer } from '@react-navigation/native'
 import { createNativeStackNavigator } from '@react-navigation/native-stack'
 import * as Font from 'expo-font'
+import {
+  ChoiceScreen, DetailsScreen, CreationScreen, HomeWorkerScreen,
+} from './src/screens'
 import HeaderGalley from './src/components/headerGalley'
 import HeaderInformation from './src/components/headerInformation'
 import LoginAdministrator from './src/screens/LoginAdministrator'
-import HomeWorkerScreen from './src/screens/HomeWorkerScreen'
-import CreationScreen from './src/screens/CreationScreen'
-import DetailsScreen from './src/screens/DetailsScreen'
 import ReportScreenAdmin from './src/screens/ReportScreenAdmin'
-import ChoiceScreen from './src/screens/ChoiceScreen'
 import LoginWorker from './src/screens/LoginWorker'
 import HeaderCreation from './src/components/headerCreation'
 
