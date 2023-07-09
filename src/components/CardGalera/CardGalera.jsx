@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import Proptypes from 'prop-types'
 import {
-  View, Text, Dimensions, TouchableWithoutFeedback, Animated,
+  View, Text, TouchableWithoutFeedback, Animated, useWindowDimensions,
 } from 'react-native'
 import * as Font from 'expo-font'
 import styles from './styles'
@@ -14,10 +14,9 @@ const loadCustomFonts = async () => {
   })
 }
 
-const windowWidth = Dimensions.get('window').width
-
 const CardGalera = ({ galera, ca, navigateToGaleras }) => {
   const [opacityValue] = useState(new Animated.Value(1))
+  const windowWidth = useWindowDimensions().width
 
   useEffect(() => {
     loadCustomFonts()
@@ -45,7 +44,10 @@ const CardGalera = ({ galera, ca, navigateToGaleras }) => {
       onPressIn={onPressIn}
       onPressOut={onPressOut}
     >
-      <Animated.View style={[styles.container, { width: windowWidth - 30, opacity: opacityValue }]}>
+      <Animated.View style={
+        [styles.container, { width: windowWidth - windowWidth * 0.1, opacity: opacityValue }]
+      }
+      >
         <View style={styles.caContainer}>
           <Text style={styles.smallText}>C.A</Text>
           <View style={[styles.square, { backgroundColor: ca }]} />

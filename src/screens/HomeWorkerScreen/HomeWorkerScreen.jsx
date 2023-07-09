@@ -29,12 +29,12 @@ const HomeWorkerScreen = ({ navigation }) => {
 
   return (
     <View style={{
-      flex: 1, alignItems: 'center', justifyContent: 'center', backgroundColor: '#ECECEC',
+      margin: 0, padding: 0, alignItems: 'center', justifyContent: 'center', backgroundColor: '#ECECEC',
     }}
     >
       <StatusBar barStyle="light-content" backgroundColor="#fff" />
       <StatusBar barStyle="dark-content" backgroundColor="#fff" />
-      <ScrollView contentContainerStyle={{ alignItems: 'center', marginBottom: 15 }}>
+      <ScrollView contentContainerStyle={{ alignItems: 'center' }} style={{ margin: 0, padding: 0 }}>
         <TextCard number="10000" />
         {
           galeras.map(galer => {

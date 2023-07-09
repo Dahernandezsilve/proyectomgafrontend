@@ -1,11 +1,14 @@
-import { StyleSheet } from 'react-native'
+import { StyleSheet, Dimensions } from 'react-native'
 import { SamsungOne } from '../../fonts/SamsungOne-400.ttf'
+
+const windowWidth = Dimensions.get('window').width
 
 const styles = StyleSheet.create({
   caContainer: {
     alignItems: 'center',
     flex: -1,
     flexDirection: 'column',
+    marginBottom: windowWidth * 0.01,
   },
   container: {
     alignItems: 'center',
@@ -13,9 +16,9 @@ const styles = StyleSheet.create({
     borderRadius: 5,
     elevation: 2,
     flexDirection: 'row',
-    marginBottom: 10,
-    marginHorizontal: 15,
-    marginTop: 10,
+    marginBottom: windowWidth * 0.01,
+    marginHorizontal: windowWidth * 0.05,
+    marginTop: windowWidth * 0.028,
     padding: 20,
     shadowColor: '#000',
     shadowOffset: { width: 0, height: 2 },
@@ -29,24 +32,24 @@ const styles = StyleSheet.create({
   },
   smallText: {
     fontFamily: SamsungOne,
-    fontSize: 20,
-    marginBottom: 5,
+    fontSize: windowWidth * 0.04,
+    marginBottom: windowWidth * 0.02,
   },
   square: {
     backgroundColor: 'red',
-    borderRadius: 5,
+    borderRadius: windowWidth * 0.01,
     elevation: 2,
-    height: 50,
-    marginBottom: 5,
+    height: windowWidth * 0.11,
+    marginBottom: windowWidth * 0.01,
     shadowColor: '#000',
     shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.5,
     shadowRadius: 2,
-    width: 80,
+    width: windowWidth * 0.2,
   },
   text: {
     fontFamily: SamsungOne,
-    fontSize: 50,
+    fontSize: windowWidth * 0.08,
     textAlign: 'center',
   },
 })
