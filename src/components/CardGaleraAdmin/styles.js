@@ -1,5 +1,7 @@
-import { StyleSheet } from 'react-native'
+import { StyleSheet, Dimensions } from 'react-native'
 import { SamsungOne } from '../../fonts/SamsungOne-400.ttf'
+
+const windowWidth = Dimensions.get('window').width
 
 const styles = StyleSheet.create({
   caContainer: {
@@ -15,10 +17,10 @@ const styles = StyleSheet.create({
     borderRadius: 5,
     elevation: 2,
     flexDirection: 'row',
-    marginBottom: 5,
-    marginHorizontal: 15,
-    marginTop: 15,
-    padding: 20,
+    marginBottom: windowWidth * 0.005,
+    marginHorizontal: windowWidth * 0.05,
+    marginTop: windowWidth * 0.025,
+    padding: 21,
     shadowColor: '#000',
     shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.5,
@@ -26,11 +28,11 @@ const styles = StyleSheet.create({
   },
   galeraContainer: {
     flex: 1,
-    marginLeft: 20,
+    marginLeft: windowWidth * 0.04,
   },
   info: {
     fontFamily: SamsungOne,
-    fontSize: 18,
+    fontSize: windowWidth * 0.04,
   },
   rightAlignedText: {
     textAlign: 'right',
@@ -38,28 +40,28 @@ const styles = StyleSheet.create({
   row: {
     alignItems: 'center',
     flexDirection: 'row',
-    marginBottom: 5,
+    marginBottom: windowWidth * 0.01,
   },
   smallText: {
     fontFamily: SamsungOne,
-    fontSize: 20,
-    marginBottom: 5,
+    fontSize: windowWidth * 0.04,
+    marginBottom: windowWidth * 0.01,
   },
   square: {
     backgroundColor: 'red',
-    borderRadius: 5,
+    borderRadius: windowWidth * 0.01,
     elevation: 2,
-    height: 50,
-    marginBottom: 5,
+    height: windowWidth * 0.15,
+    marginBottom: windowWidth * 0.02,
     shadowColor: '#000',
     shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.5,
     shadowRadius: 2,
-    width: 80,
+    width: windowWidth * 0.2,
   },
   title: {
     fontFamily: SamsungOne,
-    fontSize: 18,
+    fontSize: windowWidth * 0.04,
   },
 })
 

@@ -1,16 +1,15 @@
 import React, { useState } from 'react'
 import {
-  View, Text, Dimensions, TouchableWithoutFeedback, Animated,
+  View, Text, TouchableWithoutFeedback, Animated, useWindowDimensions,
 } from 'react-native'
 import PropTypes from 'prop-types'
 import styles from './styles'
-
-const windowWidth = Dimensions.get('window').width
 
 const CardGaleraAdmin = ({
   galera, ca, numberCA, cantidadAlimento, pesado, decesos, observaciones, edad,
 }) => {
   const [opacityValue] = useState(new Animated.Value(1))
+  const windowWidth = useWindowDimensions().width
 
   const onPressIn = () => {
     Animated.timing(opacityValue, {
@@ -34,9 +33,13 @@ const CardGaleraAdmin = ({
     }
     return 'N.A.'
   }
+
   return (
     <TouchableWithoutFeedback onPressIn={onPressIn} onPressOut={onPressOut}>
-      <Animated.View style={[styles.container, { width: windowWidth - 30, opacity: opacityValue }]}>
+      <Animated.View style={
+        [styles.container, { width: windowWidth - windowWidth * 0.1, opacity: opacityValue }]
+        }
+      >
         <View style={styles.caContainer}>
           <Text style={styles.smallText}>
             C.A:
