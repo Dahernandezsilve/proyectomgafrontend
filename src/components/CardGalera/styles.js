@@ -49,7 +49,7 @@ const styles = StyleSheet.create({
   },
   text: {
     fontFamily: SamsungOne,
-    fontSize: windowWidth * 0.08,
+    fontSize: windowWidth * 0.075,
     textAlign: 'center',
   },
 })

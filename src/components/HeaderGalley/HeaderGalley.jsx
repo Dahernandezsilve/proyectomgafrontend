@@ -1,7 +1,11 @@
 import React from 'react'
-import { View, Text, TouchableOpacity } from 'react-native'
+import {
+  View, Text, TouchableOpacity, Dimensions,
+} from 'react-native'
 import PropTypes from 'prop-types'
 import styles from './styles'
+
+const windowWidth = Dimensions.get('window').width
 
 const HeaderGalley = ({
   lotes, title, activeTab, setActiveTab,
@@ -10,7 +14,12 @@ const HeaderGalley = ({
     setActiveTab(tabName)
   }
 
-  const generateUniqueKey = (lote, index) => `${lote}-${index}` // Genera una clave única combinando el valor del elemento y el índice
+  const generateUniqueKey = (lote, index) => `${lote}-${index}`
+
+  const getButtonWidth = () => {
+    const buttonWidth = windowWidth / lotes.length
+    return buttonWidth
+  }
 
   return (
     <View style={styles.headerContainer}>
@@ -22,6 +31,7 @@ const HeaderGalley = ({
             style={[
               styles.tabButton,
               activeTab === lote ? styles.activeTabButton : null,
+              { width: getButtonWidth() },
             ]}
             activeOpacity={0.7}
             onPress={() => handleTabPress(lote)}
@@ -34,7 +44,7 @@ const HeaderGalley = ({
             >
               Lote:
               {' '}
-              {lote}
+              { lote }
             </Text>
           </TouchableOpacity>
         ))}
