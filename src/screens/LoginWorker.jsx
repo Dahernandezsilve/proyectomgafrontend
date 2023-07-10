@@ -1,18 +1,17 @@
-import React, { useEffect, useState } from 'react'
-import PropTypes from 'prop-types'
+import React, { useState, useEffect } from 'react'
 import {
   View, Text, TextInput, TouchableOpacity, StyleSheet, StatusBar,
 } from 'react-native'
 import * as Font from 'expo-font'
+import PropTypes from 'prop-types'
+import SamsungOne from '../fonts/SamsungOne-400.ttf'
 import useApi from '../hooks/useApi/useApi'
 import ElCeibillalImg from '../img/ElCeibillalSvg'
 import ElCeibillalImgV2 from '../img/ElCeibillalV2Svg'
 
-const loadCustomFonts = async () => {
+const loadFonts = async () => {
   await Font.loadAsync({
-    // eslint-disable-next-line global-require
-    SamsungOne: require('../fonts/SamsungOne-400.ttf'),
-    // Agrega más fuentes personalizadas si es necesario
+    SamsungOne,
   })
 }
 
@@ -49,13 +48,12 @@ const styles = StyleSheet.create({
   },
   formContainer: {
     alignItems: 'center',
-    marginTop: 20,
     width: '80%',
   },
   input: {
     backgroundColor: 'white',
     borderRadius: 5,
-    marginBottom: 10,
+    marginBottom: 1,
     padding: 10,
     width: '100%',
   },
@@ -66,21 +64,19 @@ const styles = StyleSheet.create({
   },
 })
 
-const LoginAdministrator = ({ navigation }) => {
+const LoginWorker = ({ navigation }) => {
   const [response,, handleRequest] = useApi()
-  const [correo, setCorreo] = useState('')
-  const [contrasena, setContrasena] = useState('')
+  const [codigo, setCodigo] = useState('')
   const [, setHaveAccess] = useState(false)
-
   useEffect(() => {
-    loadCustomFonts()
+    loadFonts()
   }, [])
 
   const handleLogin = () => {
-    handleRequest('POST', '/login', { user: correo, password: contrasena })
+    handleRequest('POST', '/login', { password: codigo })
   }
 
-  const navigateToAdminScreen = () => {
+  const navigateToWorkerScreen = (correo, contrasena) => {
     handleLogin(correo, contrasena)
   }
 
@@ -89,9 +85,9 @@ const LoginAdministrator = ({ navigation }) => {
       console.log(response)
       if (response.data !== null || response.data !== undefined) {
         if (response.data && response.data.length > 0) {
-          if (response.message === 'Good Job' && response.data[0].rol === 'admin') {
+          if (response.message === 'Good Job' && response.data[0].rol === 'trabajador') {
             setHaveAccess(true)
-            navigation.navigate('Home')
+            navigation.navigate('HomeWorker')
           } else {
             setHaveAccess(false)
           }
@@ -99,10 +95,6 @@ const LoginAdministrator = ({ navigation }) => {
       }
     }
   }, [response])
-
-  /* {"data": [{"direccion": "11av zona10", "idTrabajador": "1", "nombre": "Diego Hernandez",
-   "puesto": "Servicio de limpieza", "rol": "trabajador", "telefono": "123213123"}], "error": 202,
-    "message": "Good Job"} */
 
   return (
     <View style={styles.container}>
@@ -113,18 +105,12 @@ const LoginAdministrator = ({ navigation }) => {
         <ElCeibillalImg style={styles.logo} />
         <TextInput
           style={styles.input}
-          placeholder="Correo"
+          placeholder="Código"
           autoCapitalize="none"
-          keyboardType="email-address"
-          onChangeText={text => setCorreo(text)}
-        />
-        <TextInput
-          style={styles.input}
-          placeholder="Contraseña"
           secureTextEntry
-          onChangeText={text => setContrasena(text)}
+          onChangeText={text => setCodigo(text)}
         />
-        <TouchableOpacity style={styles.button} onPress={navigateToAdminScreen}>
+        <TouchableOpacity style={styles.button} onPress={() => navigateToWorkerScreen(codigo)}>
           <Text style={styles.buttonText}>Acceder</Text>
         </TouchableOpacity>
       </View>
@@ -132,10 +118,10 @@ const LoginAdministrator = ({ navigation }) => {
   )
 }
 
-LoginAdministrator.propTypes = {
+LoginWorker.propTypes = {
   navigation: PropTypes.shape({
     navigate: PropTypes.func.isRequired,
   }).isRequired,
 }
 
-export default LoginAdministrator
+export default LoginWorker

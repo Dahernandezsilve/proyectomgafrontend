@@ -1,33 +1,37 @@
-import React from 'react';
-import {Slider} from '@miblanchard/react-native-slider';
-import {AppRegistry, StyleSheet, View, Text} from 'react-native';
+import React from 'react'
+import { Slider } from '@miblanchard/react-native-slider'
+import {
+  AppRegistry, StyleSheet, View, Text,
+} from 'react-native'
 
 export class SliderComponent extends React.Component {
-    state = {
-        value: 0.2,
-    };
+  state = {
+    value: 20,
+  }
 
-    render() {
-        return (
-            <View style={styles.container}>
-                <Slider
-                    value={this.state.value}
-                    onValueChange={value => this.setState({value})}
-                />
-                <Text>Value: {this.state.value}</Text>
-            </View>
-        );
-    }
+  render() {
+    return (
+      <View style={styles.container}>
+        <Slider
+          value={this.state.value}
+          onValueChange={value => this.setState({ value })}
+        />
+        <Text>
+          Value:
+          {this.state.value}
+        </Text>
+      </View>
+    )
+  }
 }
 
 const styles = StyleSheet.create({
-    container: {
-        flex: 4,
-        marginLeft: 10,
-        marginRight: 10,
-        alignItems: 'stretch',
-        justifyContent: 'center',
-    },
-});
+  container: {
+    alignItems: 'stretch',
+    justifyContent: 'center',
+    marginLeft: 10,
+    marginRight: 10,
+  },
+})
 
-AppRegistry.registerComponent('SliderComponent', () => SliderComponent);
+AppRegistry.registerComponent('SliderComponent', () => SliderComponent)

@@ -1,24 +1,23 @@
-import {useState} from 'react'
+import { useState } from 'react'
 
 const useApi = () => {
   const [response, setResponse] = useState({})
   const [loading, setLoading] = useState(false)
-  const handleRequest = async (method, path, body = '', token = '') => {
+  const handleRequest = async (method, path, body = '') => {
     setLoading(true)
-    //fetch
+    // fetch
     const options = {
-      method: method,
+      method,
       headers: {
         'Content-Type': 'application/json',
-        'Authorization': `Bearer ${token}`,
       },
     }
-    if (method!== 'GET'){
+    if (method !== 'GET') {
       options.body = JSON.stringify(body)
     }
 
     console.log('method', method)
-    const fetchResponse = await fetch(`https://hexateam.lat/api${path}`, options)
+    const fetchResponse = await fetch(`http://3.22.42.192/api${path}`, options)
     const JSONresponse = await fetchResponse.json()
 
     setResponse(JSONresponse)
