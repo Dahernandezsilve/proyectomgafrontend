@@ -1,77 +1,15 @@
 import React, { useState } from 'react'
 import {
-  View, Text, StyleSheet, Dimensions, TouchableWithoutFeedback, Animated,
+  View, Text, TouchableWithoutFeedback, Animated, useWindowDimensions,
 } from 'react-native'
 import PropTypes from 'prop-types'
-
-const windowWidth = Dimensions.get('window').width
-
-const styles = StyleSheet.create({
-  caContainer: {
-    alignItems: 'center',
-    flexDirection: 'column',
-  },
-  column: {
-    flex: 1,
-  },
-  container: {
-    alignItems: 'center',
-    backgroundColor: '#FFFFFF',
-    borderRadius: 5,
-    elevation: 2,
-    flexDirection: 'row',
-    marginBottom: 5,
-    marginHorizontal: 15,
-    marginTop: 15,
-    padding: 20,
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.5,
-    shadowRadius: 2,
-  },
-  galeraContainer: {
-    flex: 1,
-    marginLeft: 20,
-  },
-  info: {
-    fontFamily: 'SamsungOne',
-    fontSize: 18,
-  },
-  rightAlignedText: {
-    textAlign: 'right',
-  },
-  row: {
-    alignItems: 'center',
-    flexDirection: 'row',
-    marginBottom: 5,
-  },
-  smallText: {
-    fontFamily: 'SamsungOne',
-    fontSize: 20,
-    marginBottom: 5,
-  },
-  square: {
-    backgroundColor: 'red',
-    borderRadius: 5,
-    elevation: 2,
-    height: 50,
-    marginBottom: 5,
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.5,
-    shadowRadius: 2,
-    width: 80,
-  },
-  title: {
-    fontFamily: 'SamsungOne',
-    fontSize: 18,
-  },
-})
+import styles from './styles'
 
 const CardGaleraAdmin = ({
   galera, ca, numberCA, cantidadAlimento, pesado, decesos, observaciones, edad,
 }) => {
   const [opacityValue] = useState(new Animated.Value(1))
+  const windowWidth = useWindowDimensions().width
 
   const onPressIn = () => {
     Animated.timing(opacityValue, {
@@ -95,9 +33,13 @@ const CardGaleraAdmin = ({
     }
     return 'N.A.'
   }
+
   return (
     <TouchableWithoutFeedback onPressIn={onPressIn} onPressOut={onPressOut}>
-      <Animated.View style={[styles.container, { width: windowWidth - 30, opacity: opacityValue }]}>
+      <Animated.View style={
+        [styles.container, { width: windowWidth - windowWidth * 0.1, opacity: opacityValue }]
+        }
+      >
         <View style={styles.caContainer}>
           <Text style={styles.smallText}>
             C.A:

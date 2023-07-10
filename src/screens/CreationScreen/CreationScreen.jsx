@@ -1,10 +1,10 @@
 import React, { useState } from 'react'
 import { View, ScrollView, StatusBar } from 'react-native'
-import useApi from '../hooks/useApi/useApi'
-import { SliderContainer, CommentsComponent, ModalComponent } from '../components'
+import useApi from '../../hooks/useApi/useApi'
+import { SliderContainer, CommentsComponent, ModalComponent } from '../../components'
 
 const CreationScreen = () => {
-  const [response,, handleRequest] = useApi()
+  const [,, handleRequest] = useApi()
   const [registro, setRegistro] = useState({
     cantidadAlimento: 200,
     decesos: 2,
@@ -21,7 +21,6 @@ const CreationScreen = () => {
       idGalera: registro.idGalera,
       pesado: registro.pesado,
     })
-    console.log('Resposinve: ', response)
   }
   return (
     <View style={{ backgroundColor: '#ECECEC' }}>

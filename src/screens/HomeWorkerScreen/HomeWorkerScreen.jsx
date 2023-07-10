@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react'
 import { View, ScrollView, StatusBar } from 'react-native'
 import PropTypes from 'prop-types'
-import TextCard from '../components/TextCard'
-import CardGalera from '../components/CardGalera'
-import useApi from '../hooks/useApi/useApi'
+import { CardGalera } from '../../components'
+import TextCard from '../../components/TextCard'
+import useApi from '../../hooks/useApi/useApi'
 
 const HomeWorkerScreen = ({ navigation }) => {
   const [response,, handleRequest] = useApi()
@@ -11,7 +11,6 @@ const HomeWorkerScreen = ({ navigation }) => {
 
   const handleObtainGaleras = () => {
     handleRequest('POST', '/galeras', { numLote: 20 })
-    console.log('Respuesta', response.data)
   }
 
   const navigateToGaleras = async () => {
@@ -19,9 +18,7 @@ const HomeWorkerScreen = ({ navigation }) => {
   }
 
   useEffect(() => {
-    if (response.data === undefined || response.data === null) {
-      console.log('No ha pasado')
-    } else {
+    if (response.data !== undefined && response.data !== null) {
       setGaleras(response.data)
     }
   }, [response])
@@ -32,12 +29,12 @@ const HomeWorkerScreen = ({ navigation }) => {
 
   return (
     <View style={{
-      flex: 1, alignItems: 'center', justifyContent: 'center', backgroundColor: '#ECECEC',
+      margin: 0, padding: 0, alignItems: 'center', justifyContent: 'center', backgroundColor: '#ECECEC',
     }}
     >
       <StatusBar barStyle="light-content" backgroundColor="#fff" />
       <StatusBar barStyle="dark-content" backgroundColor="#fff" />
-      <ScrollView contentContainerStyle={{ alignItems: 'center', marginBottom: 15 }}>
+      <ScrollView contentContainerStyle={{ alignItems: 'center' }} style={{ margin: 0, padding: 0 }}>
         <TextCard number="10000" />
         {
           galeras.map(galer => {

@@ -1,4 +1,5 @@
 import { StyleSheet } from 'react-native'
+import { SamsungOne } from '../../fonts/SamsungOne-400.ttf'
 
 const styles = StyleSheet.create({
   backgroundImage: {
@@ -38,13 +39,13 @@ const styles = StyleSheet.create({
   },
   buttonText: {
     color: 'white',
-    fontFamily: 'SamsungOne',
+    fontFamily: SamsungOne,
     fontSize: 16,
     textAlign: 'center',
   },
   buttonTextTrabajador: {
     color: '#2B4985',
-    fontFamily: 'SamsungOne',
+    fontFamily: SamsungOne,
     fontSize: 16,
     textAlign: 'center',
   },

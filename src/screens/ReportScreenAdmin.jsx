@@ -8,7 +8,7 @@ import useApi from '../hooks/useApi/useApi'
 import SelectDate from '../components/SelectDate'
 import SelectOption from '../components/SelectOption'
 import TrafficLight from '../components/TrafficLight'
-import CardGaleraAdmin from '../components/CardGaleraAdmin'
+import CardGaleraAdmin from '../components/CardGaleraAdmin/CardGaleraAdmin'
 import NoInfo from '../components/NoInfo'
 
 const formatDate = dateString => {
