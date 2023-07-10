@@ -1,70 +1,21 @@
 import React, { useEffect, useState } from 'react'
 import PropTypes from 'prop-types'
 import {
-  View, Text, TextInput, TouchableOpacity, StyleSheet, StatusBar,
+  View, Text, TextInput, TouchableOpacity, StatusBar,
 } from 'react-native'
 import * as Font from 'expo-font'
-import useApi from '../hooks/useApi/useApi'
-import ElCeibillalImg from '../img/ElCeibillalSvg'
-import ElCeibillalImgV2 from '../img/ElCeibillalV2Svg'
+import useApi from '../../hooks/useApi/useApi'
+import ElCeibillalImg from '../../img/ElCeibillalSvg'
+import ElCeibillalImgV2 from '../../img/ElCeibillalV2Svg'
+import styles from './styles'
 
 const loadCustomFonts = async () => {
   await Font.loadAsync({
-    // eslint-disable-next-line global-require
+    // eslint-disable-next-line global-require, import/no-unresolved
     SamsungOne: require('../fonts/SamsungOne-400.ttf'),
     // Agrega más fuentes personalizadas si es necesario
   })
 }
-
-const styles = StyleSheet.create({
-  backgroundImage: {
-    height: 270,
-    marginBottom: 20,
-    opacity: 0.6,
-    position: 'absolute',
-    right: -80,
-    top: -100,
-    transform: [{ rotate: '270deg' }],
-    width: 270,
-    zIndex: 1,
-  },
-  button: {
-    backgroundColor: '#35599F',
-    borderRadius: 5,
-    marginTop: 20,
-    paddingVertical: 10,
-    width: '100%',
-  },
-  buttonText: {
-    color: 'white',
-    fontFamily: 'SamsungOne',
-    fontSize: 16,
-    textAlign: 'center',
-  },
-  container: {
-    alignItems: 'center',
-    backgroundColor: '#2B4985',
-    flex: 1,
-    justifyContent: 'center',
-  },
-  formContainer: {
-    alignItems: 'center',
-    marginTop: 20,
-    width: '80%',
-  },
-  input: {
-    backgroundColor: 'white',
-    borderRadius: 5,
-    marginBottom: 10,
-    padding: 10,
-    width: '100%',
-  },
-  logo: {
-    height: 300,
-    marginBottom: 1,
-    width: 300,
-  },
-})
 
 const LoginAdministrator = ({ navigation }) => {
   const [response,, handleRequest] = useApi()
