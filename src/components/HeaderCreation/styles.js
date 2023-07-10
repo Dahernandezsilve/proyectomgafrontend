@@ -1,14 +1,16 @@
-import { StyleSheet } from 'react-native'
+import { StyleSheet, Dimensions } from 'react-native'
 import { SamsungOne } from '../../fonts/SamsungOne-400.ttf'
+
+const windowWidth = Dimensions.get('window').width
 
 const styles = StyleSheet.create({
   container: {
     backgroundColor: '#FFFFFF',
     borderBottomWidth: 1,
     elevation: 2,
-    paddingHorizontal: 16,
-    paddingTop: 20,
-    paddingVertical: 8,
+    paddingHorizontal: windowWidth * 0.04,
+    paddingTop: windowWidth * 0.015,
+    paddingVertical: windowWidth * 0.04,
     shadowColor: '#000',
     shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.5,
@@ -18,45 +20,44 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     flexDirection: 'row',
     justifyContent: 'flex-start',
-    marginBottom: 10,
+    marginBottom: windowWidth * 0.002,
   },
   iconContainer: {
     alignItems: 'center',
     backgroundColor: 'transparent',
-    height: 40,
+    height: windowWidth * 0.12,
     justifyContent: 'center',
-    marginRight: 5,
+    marginRight: windowWidth * 0.025,
     pointerEvents: 'auto',
-    width: 40,
+    width: windowWidth * 0.12,
   },
   info: {
     color: '#2B4985',
     fontFamily: SamsungOne,
-    fontSize: 25,
   },
   infoContainer: {
     alignItems: 'center',
     flexDirection: 'row',
     justifyContent: 'space-around',
-    marginHorizontal: 20,
+    marginHorizontal: windowWidth * 0.05,
   },
   line: {
     backgroundColor: '#EAEAEA',
-    marginTop: 10,
+    marginTop: windowWidth * 0.002,
   },
   placeholder: {
     width: 0,
   },
   title: {
     fontFamily: SamsungOne,
-    fontSize: 30,
+    fontSize: windowWidth * 0.06,
     textAlign: 'center',
   },
   titleContainer: {
     alignItems: 'center',
     flex: 1,
     justifyContent: 'center',
-    marginLeft: -28,
+    marginLeft: -windowWidth * 0.09,
   },
 })
 

@@ -1,13 +1,16 @@
 import React from 'react'
 import {
-  Text, View, TouchableOpacity,
+  Text, View, TouchableOpacity, Dimensions,
 } from 'react-native'
 import { Ionicons } from '@expo/vector-icons'
 import { useNavigation } from '@react-navigation/native'
 import styles from './styles'
 
+const windowWidth = Dimensions.get('window').width
+
 const HeaderCreation = () => {
   const navigation = useNavigation()
+
   return (
     <View style={styles.container}>
       <View style={styles.header}>
@@ -18,7 +21,7 @@ const HeaderCreation = () => {
           }}
         >
           <View style={styles.iconContainer}>
-            <Ionicons name="arrow-back" size={28} color="#2B4985" />
+            <Ionicons name="arrow-back" size={windowWidth * 0.07} color="#2B4985" />
           </View>
         </TouchableOpacity>
         <View style={styles.titleContainer}>
@@ -27,8 +30,8 @@ const HeaderCreation = () => {
         <View style={styles.placeholder} />
       </View>
       <View style={styles.infoContainer}>
-        <Text style={styles.info}>Lote #1</Text>
-        <Text style={styles.info}>Galera #1</Text>
+        <Text style={[styles.info, { fontSize: windowWidth * 0.055 }]}>Lote #1</Text>
+        <Text style={[styles.info, { fontSize: windowWidth * 0.055 }]}>Galera #1</Text>
       </View>
       <View style={styles.line} />
     </View>

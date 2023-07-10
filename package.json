@@ -11,6 +11,7 @@
     "lint": "eslint src"
   },
   "dependencies": {
+    "@expo/vector-icons": "^13.0.0",
     "@expo/webpack-config": "^18.0.1",
     "@miblanchard/react-native-slider": "^2.3.1",
     "@react-native-community/datetimepicker": "^6.7.3",

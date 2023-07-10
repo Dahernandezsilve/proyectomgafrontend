@@ -1,7 +1,10 @@
-import { StyleSheet } from 'react-native'
+import { StyleSheet, Dimensions } from 'react-native'
+
+const windowWidth = Dimensions.get('window').width
 
 const styles = StyleSheet.create({
   buttonContainer: {
+    alignSelf: 'center',
     borderRadius: 5,
     elevation: 2,
     flex: 0,
@@ -9,6 +12,7 @@ const styles = StyleSheet.create({
     shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.5,
     shadowRadius: 2,
+    width: windowWidth * 0.85, // Utiliza un porcentaje del ancho de la pantalla
   },
   comentariosContainer: {
     borderRadius: 5,
@@ -26,14 +30,13 @@ const styles = StyleSheet.create({
     borderRadius: 5,
     elevation: 2,
     height: 150,
-    marginBottom: 20,
     marginTop: 15,
     padding: 10,
     shadowColor: '#000',
     shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.5,
     shadowRadius: 2,
-    width: '90%',
+    width: windowWidth * 0.9, // Utiliza un porcentaje del ancho de la pantalla
   },
   input: {
     backgroundColor: '#F5F5F5',

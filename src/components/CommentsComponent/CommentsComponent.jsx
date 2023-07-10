@@ -1,8 +1,6 @@
 import React, { useState } from 'react'
 import PropTypes from 'prop-types'
-import {
-  View, TextInput, Button,
-} from 'react-native'
+import { View, TextInput, Button } from 'react-native'
 import { useNavigation } from '@react-navigation/native'
 import styles from './styles'
 
@@ -13,10 +11,6 @@ const CommentsComponent = ({ handleRegistrar }) => {
   const handleComentarioChange = text => {
     setComentario(text)
   }
-
-  // const handleCompletar = () => {
-  // Aquí puedes realizar alguna acción con el comentario ingresado
-  // }
 
   return (
     <View style={styles.container}>
