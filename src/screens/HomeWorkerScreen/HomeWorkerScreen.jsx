@@ -18,7 +18,7 @@ const HomeWorkerScreen = ({ navigation }) => {
   }
 
   useEffect(() => {
-    if (response.data === undefined || response.data === null) { /* empty */ } else {
+    if (response.data !== undefined && response.data !== null) {
       setGaleras(response.data)
     }
   }, [response])
