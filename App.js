@@ -8,10 +8,10 @@ import {
 import {
   HeaderGalley, HeaderCreation,
 } from './src/components'
-import HeaderInformation from './src/components/headerInformation'
+import HeaderInformation from './src/components/HeaderInformation/HeaderInformation'
 import LoginAdministrator from './src/screens/LoginAdministrator'
-import ReportScreenAdmin from './src/screens/ReportScreenAdmin'
-import LoginWorker from './src/screens/LoginWorker'
+import ReportScreenAdmin from './src/screens/ReportScreenAdmin/ReportScreenAdmin'
+import LoginWorker from './src/screens/LoginWorker/LoginWorker'
 
 const Stack = createNativeStackNavigator()
 

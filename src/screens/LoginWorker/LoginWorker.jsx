@@ -1,68 +1,21 @@
 import React, { useState, useEffect } from 'react'
 import {
-  View, Text, TextInput, TouchableOpacity, StyleSheet, StatusBar,
+  View, Text, TextInput, TouchableOpacity, StatusBar,
 } from 'react-native'
 import * as Font from 'expo-font'
 import PropTypes from 'prop-types'
-import SamsungOne from '../fonts/SamsungOne-400.ttf'
-import useApi from '../hooks/useApi/useApi'
-import ElCeibillalImg from '../img/ElCeibillalSvg'
-import ElCeibillalImgV2 from '../img/ElCeibillalV2Svg'
+import styles from './styles'
+import useApi from '../../hooks/useApi/useApi'
+import ElCeibillalImg from '../../img/ElCeibillalSvg'
+import ElCeibillalImgV2 from '../../img/ElCeibillalV2Svg'
+
+import SamsungOne from '../../fonts/SamsungOne-400.ttf'
 
 const loadFonts = async () => {
   await Font.loadAsync({
     SamsungOne,
   })
 }
-
-const styles = StyleSheet.create({
-  backgroundImage: {
-    height: 270,
-    marginBottom: 20,
-    opacity: 0.6,
-    position: 'absolute',
-    right: -80,
-    top: -100,
-    transform: [{ rotate: '270deg' }],
-    width: 270,
-    zIndex: 1,
-  },
-  button: {
-    backgroundColor: '#35599F',
-    borderRadius: 5,
-    marginTop: 20,
-    paddingVertical: 10,
-    width: '100%',
-  },
-  buttonText: {
-    color: 'white',
-    fontFamily: 'SamsungOne',
-    fontSize: 16,
-    textAlign: 'center',
-  },
-  container: {
-    alignItems: 'center',
-    backgroundColor: '#2B4985',
-    flex: 1,
-    justifyContent: 'center',
-  },
-  formContainer: {
-    alignItems: 'center',
-    width: '80%',
-  },
-  input: {
-    backgroundColor: 'white',
-    borderRadius: 5,
-    marginBottom: 1,
-    padding: 10,
-    width: '100%',
-  },
-  logo: {
-    height: 300,
-    marginBottom: 1,
-    width: 300,
-  },
-})
 
 const LoginWorker = ({ navigation }) => {
   const [response,, handleRequest] = useApi()
@@ -82,7 +35,7 @@ const LoginWorker = ({ navigation }) => {
 
   useEffect(() => {
     if (response.message !== null || response.message !== undefined) {
-      console.log(response)
+      // console.log(response)
       if (response.data !== null || response.data !== undefined) {
         if (response.data && response.data.length > 0) {
           if (response.message === 'Good Job' && response.data[0].rol === 'trabajador') {
@@ -94,7 +47,7 @@ const LoginWorker = ({ navigation }) => {
         }
       }
     }
-  }, [response])
+  }, [response, navigation])
 
   return (
     <View style={styles.container}>
