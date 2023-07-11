@@ -5,7 +5,7 @@ import {
 import DateTimePicker from '@react-native-community/datetimepicker'
 import PropTypes from 'prop-types'
 import useApi from '../../hooks/useApi/useApi'
-import SelectDate from '../../components/SelectDate'
+import SelectDate from '../../components/SelectDate/SelectDate'
 import SelectOption from '../../components/SelectOption/SelectOption'
 import TrafficLight from '../../components/TrafficLight'
 import CardGaleraAdmin from '../../components/CardGaleraAdmin/CardGaleraAdmin'
