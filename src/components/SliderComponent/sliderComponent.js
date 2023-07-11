@@ -1,9 +1,12 @@
+/* eslint-disable react/destructuring-assignment */
 import React from 'react'
 import { Slider } from '@miblanchard/react-native-slider'
 import {
-  AppRegistry, StyleSheet, View, Text,
+  AppRegistry, View, Text,
 } from 'react-native'
+import styles from './styles'
 
+// eslint-disable-next-line import/prefer-default-export
 export class SliderComponent extends React.Component {
   state = {
     value: 20,
@@ -24,14 +27,5 @@ export class SliderComponent extends React.Component {
     )
   }
 }
-
-const styles = StyleSheet.create({
-  container: {
-    alignItems: 'stretch',
-    justifyContent: 'center',
-    marginLeft: 10,
-    marginRight: 10,
-  },
-})
 
 AppRegistry.registerComponent('SliderComponent', () => SliderComponent)
