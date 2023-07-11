@@ -49,7 +49,7 @@ const LoginAdministrator = ({ navigation }) => {
         }
       }
     }
-  }, [response])
+  }, [navigation, response])
 
   /* {"data": [{"direccion": "11av zona10", "idTrabajador": "1", "nombre": "Diego Hernandez",
    "puesto": "Servicio de limpieza", "rol": "trabajador", "telefono": "123213123"}], "error": 202,
