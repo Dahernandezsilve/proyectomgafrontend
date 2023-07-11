@@ -5,6 +5,7 @@ import CardGalera from './CardGalera'
 import CardGaleraAdmin from './CardGaleraAdmin'
 import HeaderCreation from './HeaderCreation'
 import HeaderGalley from './HeaderGalley'
+import TabNavigator from './TabNavigator'
 
 export {
   SliderContainer,
@@ -14,4 +15,5 @@ export {
   CardGaleraAdmin,
   HeaderCreation,
   HeaderGalley,
+  TabNavigator,
 }
