@@ -1,9 +1,13 @@
+import { StyleSheet, Dimensions } from 'react-native'
+
+const { width } = Dimensions.get('window')
+
 const styles = StyleSheet.create({
   container: {
     alignItems: 'stretch',
     justifyContent: 'center',
-    marginLeft: 10,
-    marginRight: 10,
+    marginLeft: width * 0.027,
+    marginRight: width * 0.027,
   },
 })
 

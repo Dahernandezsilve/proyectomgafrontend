@@ -1,37 +1,41 @@
+import { StyleSheet, Dimensions } from 'react-native'
+
+const { width } = Dimensions.get('window')
+
 const styles = StyleSheet.create({
   box: {
     alignItems: 'center',
     borderRadius: 5,
     elevation: 2,
-    height: 30,
+    height: width * 0.06,
     justifyContent: 'center',
-    marginBottom: 3,
+    marginBottom: width * 0.007,
     shadowColor: '#000',
     shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.5,
     shadowRadius: 2,
-    width: 125,
+    width: width * 0.35,
   },
   boxHeaderText: {
     color: 'black',
     fontFamily: 'SamsungOne',
-    fontSize: 14,
-    marginBottom: 5,
+    fontSize: width * 0.036,
+    marginBottom: width * 0.007,
   },
   boxText: {
     color: 'white',
     fontFamily: 'SamsungOne',
-    fontSize: 18,
+    fontSize: width * 0.045,
   },
   container: {
     alignItems: 'center',
     backgroundColor: '#FFFFFF',
     borderRadius: 5,
     elevation: 4,
-    marginRight: 15,
-    marginTop: 15,
-    padding: 5,
-    paddingBottom: 2,
+    marginRight: width * 0.0375,
+    marginTop: width * 0.0375,
+    padding: width * 0.009,
+    paddingBottom: width * 0.003,
     shadowColor: '#000',
     shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.5,
@@ -47,4 +51,5 @@ const styles = StyleSheet.create({
     backgroundColor: 'red',
   },
 })
+
 export default styles

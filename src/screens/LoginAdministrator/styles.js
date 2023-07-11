@@ -1,28 +1,30 @@
-import { StyleSheet } from 'react-native'
+import { StyleSheet, Dimensions } from 'react-native'
+
+const { width } = Dimensions.get('window')
 
 const styles = StyleSheet.create({
   backgroundImage: {
-    height: 270,
-    marginBottom: 20,
+    height: width * 0.75,
+    marginBottom: width * 0.05,
     opacity: 0.6,
     position: 'absolute',
-    right: -80,
-    top: -100,
+    right: -width * 0.3,
+    top: -width * 0.4,
     transform: [{ rotate: '270deg' }],
-    width: 270,
+    width: width * 0.75,
     zIndex: 1,
   },
   button: {
     backgroundColor: '#35599F',
     borderRadius: 5,
-    marginTop: 20,
-    paddingVertical: 10,
+    marginTop: width * 0.05,
+    paddingVertical: width * 0.03,
     width: '100%',
   },
   buttonText: {
     color: 'white',
     fontFamily: 'SamsungOne',
-    fontSize: 16,
+    fontSize: width * 0.04,
     textAlign: 'center',
   },
   container: {
@@ -33,20 +35,20 @@ const styles = StyleSheet.create({
   },
   formContainer: {
     alignItems: 'center',
-    marginTop: 20,
+    marginTop: width * 0.05,
     width: '80%',
   },
   input: {
     backgroundColor: 'white',
     borderRadius: 5,
-    marginBottom: 10,
-    padding: 10,
+    marginBottom: width * 0.02,
+    padding: width * 0.025,
     width: '100%',
   },
   logo: {
-    height: 300,
-    marginBottom: 1,
-    width: 300,
+    height: width * 0.9,
+    marginBottom: width * 0.001,
+    width: width * 0.9,
   },
 })
 

@@ -3,29 +3,17 @@ import PropTypes from 'prop-types'
 import {
   View, Text, TextInput, TouchableOpacity, StatusBar,
 } from 'react-native'
-import * as Font from 'expo-font'
+
 import useApi from '../../hooks/useApi/useApi'
 import ElCeibillalImg from '../../img/ElCeibillalSvg'
 import ElCeibillalImgV2 from '../../img/ElCeibillalV2Svg'
 import styles from './styles'
-
-const loadCustomFonts = async () => {
-  await Font.loadAsync({
-    // eslint-disable-next-line global-require, import/no-unresolved
-    SamsungOne: require('../fonts/SamsungOne-400.ttf'),
-    // Agrega más fuentes personalizadas si es necesario
-  })
-}
 
 const LoginAdministrator = ({ navigation }) => {
   const [response,, handleRequest] = useApi()
   const [correo, setCorreo] = useState('')
   const [contrasena, setContrasena] = useState('')
   const [, setHaveAccess] = useState(false)
-
-  useEffect(() => {
-    loadCustomFonts()
-  }, [])
 
   const handleLogin = () => {
     handleRequest('POST', '/login', { user: correo, password: contrasena })
@@ -37,6 +25,7 @@ const LoginAdministrator = ({ navigation }) => {
 
   useEffect(() => {
     if (response.message !== null || response.message !== undefined) {
+      // eslint-disable-next-line no-console
       console.log(response)
       if (response.data !== null || response.data !== undefined) {
         if (response.data && response.data.length > 0) {
