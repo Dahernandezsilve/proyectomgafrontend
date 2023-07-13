@@ -1,6 +1,6 @@
 import SliderContainer from './SliderContainer'
 import CommentsComponent from './CommentsComponent'
-import ModalComponent from './modalComponent'
+import ModalComponent from './ModalComponent/ModalComponent'
 import CardGalera from './CardGalera'
 import CardGaleraAdmin from './CardGaleraAdmin'
 import HeaderCreation from './HeaderCreation'

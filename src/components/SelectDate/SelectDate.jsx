@@ -1,8 +1,8 @@
 import React from 'react'
 import {
-  Text, TouchableOpacity, StyleSheet, View,
+  Text, TouchableOpacity, View,
 } from 'react-native'
-import SamsungOne from '../fonts/SamsungOne-400.ttf'
+import styles from './styles'
 
 const formatDate = date => {
   const day = date.getDate().toString().padStart(2, '0')
@@ -24,35 +24,5 @@ const SelectDate = ({ number, onPress, selectedDate }) => {
     </TouchableOpacity>
   )
 }
-
-const styles = StyleSheet.create({
-  container: {
-    alignItems: 'center',
-    backgroundColor: '#FFFFFF',
-    borderRadius: 5,
-    elevation: 2,
-    marginHorizontal: 15,
-    marginTop: 20,
-    padding: 10,
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.5,
-    shadowRadius: 2,
-    width: '88%',
-  },
-  contentContainer: {
-  },
-  selectedDate: {
-    color: '#000',
-    fontFamily: 'SamsungOne',
-    fontSize: 17,
-    marginTop: 10,
-  },
-  text: {
-    color: '#000',
-    fontFamily: 'SamsungOne',
-    fontSize: 17,
-  },
-})
 
 export default SelectDate
