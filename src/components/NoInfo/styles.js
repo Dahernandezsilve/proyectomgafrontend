@@ -1,13 +1,5 @@
-import React from 'react'
-import { View, Text, StyleSheet } from 'react-native'
-import * as Font from 'expo-font'
-import SamsungOne from '../fonts/SamsungOne-400.ttf'
-
-const NoInfo = ({ info }) => (
-  <View style={styles.container}>
-    <Text style={styles.text}>{info}</Text>
-  </View>
-)
+import { StyleSheet } from 'react-native-web'
+import SamsungOne from '../../fonts/SamsungOne-400.ttf'
 
 const styles = StyleSheet.create({
   container: {
@@ -34,4 +26,4 @@ const styles = StyleSheet.create({
   },
 })
 
-export default NoInfo
+export default styles
