@@ -3,15 +3,14 @@ import { NavigationContainer } from '@react-navigation/native'
 import { createNativeStackNavigator } from '@react-navigation/native-stack'
 import * as Font from 'expo-font'
 import {
-  ChoiceScreen, DetailsScreen, CreationScreen, HomeWorkerScreen,
+  ChoiceScreen, DetailsScreen, CreationScreen, HomeWorkerScreen, LoginAdministrator,
 } from './src/screens'
 import {
   HeaderGalley, HeaderCreation,
 } from './src/components'
-import HeaderInformation from './src/components/headerInformation'
-import LoginAdministrator from './src/screens/LoginAdministrator'
+import HeaderInformation from './src/components/HeaderInformation/HeaderInformation'
 import ReportScreenAdmin from './src/screens/ReportScreenAdmin'
-import LoginWorker from './src/screens/LoginWorker'
+import LoginWorker from './src/screens/LoginWorker/LoginWorker'
 
 const Stack = createNativeStackNavigator()
 
