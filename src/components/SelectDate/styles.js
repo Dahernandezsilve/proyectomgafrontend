@@ -1,5 +1,5 @@
 import { StyleSheet } from 'react-native'
-import SamsungOne from '../../fonts/SamsungOne-400.ttf'
+import { SamsungOne } from '../../fonts/SamsungOne-400.ttf'
 
 const styles = StyleSheet.create({
   container: {
@@ -20,13 +20,13 @@ const styles = StyleSheet.create({
   },
   selectedDate: {
     color: '#000',
-    fontFamily: 'SamsungOne',
+    fontFamily: SamsungOne,
     fontSize: 15,
     marginTop: 10,
   },
   text: {
     color: '#000',
-    fontFamily: 'SamsungOne',
+    fontFamily: SamsungOne,
     fontSize: 15,
   },
 })

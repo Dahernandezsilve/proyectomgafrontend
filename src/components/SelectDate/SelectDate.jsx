@@ -1,8 +1,7 @@
 import React from 'react'
 import {
-  Text, TouchableOpacity, StyleSheet, View,
+  Text, TouchableOpacity, View,
 } from 'react-native'
-import SamsungOne from '../../fonts/SamsungOne-400.ttf'
 import styles from './styles'
 
 const formatDate = date => {

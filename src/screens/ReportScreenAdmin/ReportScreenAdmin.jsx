@@ -8,6 +8,7 @@ import {
   SelectDate, SelectOption, TrafficLight, CardGaleraAdmin, NoInfo,
 } from '../../components'
 import useApi from '../../hooks/useApi/useApi'
+import styles from './styles'
 
 const formatDate = dateString => {
   const date = new Date(dateString)
@@ -214,14 +215,11 @@ const ReportScreenAdmin = ({ navigation, activeTab }) => {
   }
 
   return (
-    <View style={{
-      flex: 1, alignItems: 'center', justifyContent: 'center', backgroundColor: '#ECECEC', marginLeft: showNoInfo ? -10 : -12,
-    }}
-    >
+    <View>
       <StatusBar barStyle="light-content" backgroundColor="#fff" />
       <StatusBar barStyle="dark-content" backgroundColor="#fff" />
-      <ScrollView contentContainerStyle={{ alignItems: 'center', marginBottom: 15 }}>
-        <View style={{ flexDirection: 'row', alignItems: 'center', zIndex: 2 }}>
+      <ScrollView>
+        <View style={{ flexDirection: 'row', alignItems: 'center', zIndex: 1 }}>
           <View style={{ flexDirection: 'column' }}>
             <SelectDate onPress={handleSelectDatePress} selectedDate={selectedDate} />
             {showDatePicker && (
