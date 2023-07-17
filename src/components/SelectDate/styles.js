@@ -21,13 +21,13 @@ const styles = StyleSheet.create({
   selectedDate: {
     color: '#000',
     fontFamily: 'SamsungOne',
-    fontSize: 17,
+    fontSize: 15,
     marginTop: 10,
   },
   text: {
     color: '#000',
     fontFamily: 'SamsungOne',
-    fontSize: 17,
+    fontSize: 15,
   },
 })
 

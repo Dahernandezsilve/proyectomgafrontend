@@ -32,7 +32,7 @@ const styles = StyleSheet.create({
   },
   info: {
     fontFamily: SamsungOne,
-    fontSize: windowWidth * 0.04,
+    fontSize: windowWidth * 0.037,
   },
   rightAlignedText: {
     textAlign: 'right',
@@ -41,6 +41,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     flexDirection: 'row',
     marginBottom: windowWidth * 0.01,
+    alignItems: 'flex-start',
   },
   smallText: {
     fontFamily: SamsungOne,
@@ -61,7 +62,7 @@ const styles = StyleSheet.create({
   },
   title: {
     fontFamily: SamsungOne,
-    fontSize: windowWidth * 0.04,
+    fontSize: windowWidth * 0.037,
   },
 })
 
