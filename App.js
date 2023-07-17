@@ -6,9 +6,8 @@ import {
   ChoiceScreen, DetailsScreen, CreationScreen, HomeWorkerScreen, LoginAdministrator,
 } from './src/screens'
 import {
-  HeaderGalley, HeaderCreation,
+  HeaderGalley, HeaderCreation, HeaderInformation,
 } from './src/components'
-import HeaderInformation from './src/components/HeaderInformation/HeaderInformation'
 import ReportScreenAdmin from './src/screens/ReportScreenAdmin'
 import LoginWorker from './src/screens/LoginWorker/LoginWorker'
 
