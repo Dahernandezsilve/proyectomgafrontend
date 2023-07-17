@@ -39,12 +39,12 @@ const styles = StyleSheet.create({
     zIndex: 2,
   },
   selectedOptionText: {
-    fontSize: 18,
+    fontSize: 15,
   },
   text: {
     color: '#000',
     fontFamily: 'SamsungOne',
-    fontSize: 18,
+    fontSize: 15,
     textAlign: 'center',
     width: '100%',
   },
