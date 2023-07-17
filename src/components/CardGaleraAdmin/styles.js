@@ -38,10 +38,9 @@ const styles = StyleSheet.create({
     textAlign: 'right',
   },
   row: {
-    alignItems: 'center',
+    alignItems: 'flex-start',
     flexDirection: 'row',
     marginBottom: windowWidth * 0.01,
-    alignItems: 'flex-start',
   },
   smallText: {
     fontFamily: SamsungOne,

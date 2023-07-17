@@ -219,7 +219,7 @@ const ReportScreenAdmin = ({ navigation, activeTab }) => {
       <StatusBar barStyle="light-content" backgroundColor="#fff" />
       <StatusBar barStyle="dark-content" backgroundColor="#fff" />
       <ScrollView>
-        <View style={{ flexDirection: 'row', alignItems: 'center', zIndex: 1 }}>
+        <View style={styles.rowContainer}>
           <View style={{ flexDirection: 'column' }}>
             <SelectDate onPress={handleSelectDatePress} selectedDate={selectedDate} />
             {showDatePicker && (
