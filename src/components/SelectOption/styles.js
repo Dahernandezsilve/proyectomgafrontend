@@ -17,7 +17,7 @@ const styles = StyleSheet.create({
     shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.5,
     shadowRadius: 2,
-    width: windowWidth * 0.52, // Ajustar el ancho según el ancho de la pantalla
+    width: windowWidth * 0.51, // Ajustar el ancho según el ancho de la pantalla
     zIndex: 1,
     // Ajuste de zIndex para asegurar que el contenedor esté por encima de otros componentes
   },
