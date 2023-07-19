@@ -8,6 +8,7 @@ import {
   SelectDate, SelectOption, TrafficLight, CardGaleraAdmin, NoInfo,
 } from '../../components'
 import useApi from '../../hooks/useApi/useApi'
+import styles from './styles'
 
 const formatDate = dateString => {
   const date = new Date(dateString)
@@ -32,9 +33,7 @@ const ReportScreenAdmin = ({ navigation, activeTab }) => {
   const [topValue, setTopValue] = useState(0)
   const [middleValue, setMiddleValue] = useState(0)
   const [bottomValue, setBottomValue] = useState(0)
-  const [showNoInfo, setShowNoInfo] = useState(false) 
-
-  
+  const [showNoInfo, setShowNoInfo] = useState(false)
 
   const handleDateChange = (event, date) => {
     setSelectedDate(date)
@@ -176,17 +175,51 @@ const ReportScreenAdmin = ({ navigation, activeTab }) => {
   }, [registers])
 
   useEffect(() => {
-    setShowNoInfo(registers === undefined || registers.length === 0);
-  }, [registers]);
+    setShowNoInfo(registers === undefined || registers.length === 0)
+  }, [registers])
+
+  const RenderContentRegisters = () => {
+    if (showNoInfo) {
+      return <NoInfo info="No hay información disponible" />
+    }
+
+    if (Array.isArray(registers) && registers.length > 0) {
+      return registers.map(inform => {
+        const params = { p: inform.edadGalera, ca: inform.ca, tipo: inform.tipoPollo }
+        const resultP = verifyCA(params)
+
+        if (resultP !== undefined) {
+          return (
+            <CardGaleraAdmin
+              ca={resultP}
+              numberCA={inform.ca}
+              customValues={{
+                galera: `Galera ${inform.idGalera}`,
+                cantidadAlimento: inform.cantidadAlimento,
+                pesado: inform.pesoMedido,
+                decesos: inform.decesos,
+                edad: inform.edadGalera,
+                observaciones: inform.observaciones,
+                navigateToGaleras,
+              }}
+              customTitles={['Identificador:', 'Alimento:', 'Peso (Pollos):', 'Muertes:', 'Edad:', 'Observaciones:']}
+            />
+          )
+        }
+
+        return null
+      })
+    }
+
+    return null
+  }
 
   return (
-    <View style={{
-      flex: 1, alignItems: 'center', justifyContent: 'center', backgroundColor: '#ECECEC', marginLeft: showNoInfo ? -10 : -12,
-    }}>
+    <View>
       <StatusBar barStyle="light-content" backgroundColor="#fff" />
       <StatusBar barStyle="dark-content" backgroundColor="#fff" />
-      <ScrollView contentContainerStyle={{ alignItems: 'center', marginBottom: 15 }}>
-        <View style={{ flexDirection: 'row', alignItems: 'center', zIndex: 2 }}>
+      <ScrollView>
+        <View style={styles.rowContainer}>
           <View style={{ flexDirection: 'column' }}>
             <SelectDate onPress={handleSelectDatePress} selectedDate={selectedDate} />
             {showDatePicker && (
@@ -210,40 +243,10 @@ const ReportScreenAdmin = ({ navigation, activeTab }) => {
             bottomValue={bottomValue} // Valor para el cuadro rojo
           />
         </View>
-        {showNoInfo ? (
-  <NoInfo info="No hay información disponible" />
-) : (
-  Array.isArray(registers) && registers.length > 0 ? (
-          registers.map(inform => { // Variable temporal para almacenar los valores actualizados)
-            const params = { p: inform.edadGalera, ca: inform.ca, tipo: inform.tipoPollo }
-            const resultP = verifyCA(params)
-            if (resultP !== undefined) {
-              return (
-                <CardGaleraAdmin
-                  ca= {resultP}
-                numberCA= {inform.ca}
-                  customValues={{
-                    galera: `Galera ${inform.idGalera}`,
-                    cantidadAlimento: inform.cantidadAlimento,
-                    pesado: inform.pesoMedido,
-                    decesos: inform.decesos,
-                    edad: inform.edadGalera,
-                    observaciones: inform.observaciones,
-                    navigateToGaleras: navigateToGaleras
-                  }}
-                  customTitles={['Identificador:', 'Alimento:', 'Peso (Pollos):', 'Muertes:', 'Edad:', 'Observaciones:']}
-                />
-              )
-            }
-            return null
-          })
-  ): null
-        )}
+        <RenderContentRegisters />
       </ScrollView>
     </View>
-  );
-  
-  
+  )
 }
 
 ReportScreenAdmin.propTypes = {

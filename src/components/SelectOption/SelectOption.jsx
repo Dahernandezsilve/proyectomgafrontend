@@ -1,7 +1,6 @@
 import React, { useState } from 'react'
-import {
-  View, Text, TouchableOpacity,
-} from 'react-native'
+import { View, Text, TouchableOpacity } from 'react-native'
+import PropTypes from 'prop-types'
 import styles from './styles'
 
 const SelectOption = ({ selectedOption, options, setSelectedOption }) => {
@@ -51,6 +50,23 @@ const SelectOption = ({ selectedOption, options, setSelectedOption }) => {
       </View>
     </TouchableOpacity>
   )
+}
+
+SelectOption.propTypes = {
+  selectedOption: PropTypes.shape({
+    nombre: PropTypes.string.isRequired,
+  }),
+  options: PropTypes.arrayOf(
+    PropTypes.shape({
+      idTrabajador: PropTypes.number.isRequired,
+      nombre: PropTypes.string.isRequired,
+    }),
+  ).isRequired,
+  setSelectedOption: PropTypes.func.isRequired,
+}
+
+SelectOption.defaultProps = {
+  selectedOption: null,
 }
 
 export default SelectOption

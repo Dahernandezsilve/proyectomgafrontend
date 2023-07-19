@@ -1,5 +1,8 @@
-import { StyleSheet } from 'react-native'
-import SamsungOne from '../../fonts/SamsungOne-400.ttf'
+import { StyleSheet, Dimensions } from 'react-native'
+import { SamsungOne } from '../../fonts/SamsungOne-400.ttf'
+
+const windowWidth = Dimensions.get('window').width
+const windowHeight = Dimensions.get('window').height
 
 const styles = StyleSheet.create({
   container: {
@@ -7,44 +10,43 @@ const styles = StyleSheet.create({
     backgroundColor: '#FFFFFF',
     borderRadius: 5,
     elevation: 2,
-    marginHorizontal: 15,
-    marginTop: 20,
-    padding: 10,
+    marginHorizontal: windowWidth * 0.04,
+    marginTop: windowHeight * 0.02, // Ajustar el margen superior según la altura de la pantalla
+    padding: windowWidth * 0.03, // Ajustar el padding según el ancho de la pantalla
     shadowColor: '#000',
     shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.5,
     shadowRadius: 2,
-    width: 230,
+    width: windowWidth * 0.51, // Ajustar el ancho según el ancho de la pantalla
     zIndex: 1,
     // Ajuste de zIndex para asegurar que el contenedor esté por encima de otros componentes
   },
   optionButton: {
-    marginBottom: 5,
-    marginTop: 5,
-    padding: 10,
+    marginBottom: windowHeight * 0.01, // Ajustar el margen inferior según la altura de la pantalla
+    marginTop: windowHeight * 0.01, // Ajustar el margen superior según la altura de la pantalla
+    padding: windowWidth * 0.03, // Ajustar el padding según el ancho de la pantalla
   },
   optionsContainer: {
     backgroundColor: '#FFFFFF',
     borderRadius: 5,
     elevation: 2,
-    marginTop: 20,
-    paddingHorizontal: 10,
+    marginTop: windowHeight * 0.03, // Ajustar el margen superior según la altura de la pantalla
+    paddingHorizontal: windowWidth * 0.04,
     position: 'absolute', // Añadido para superponer las opciones
     shadowColor: '#000',
     shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.5,
     shadowRadius: 2,
-    top: '100%',
     width: '100%',
     zIndex: 2,
   },
   selectedOptionText: {
-    fontSize: 15,
+    fontSize: windowWidth * 0.04, // Ajustar el tamaño de fuente según el ancho de la pantalla
   },
   text: {
     color: '#000',
-    fontFamily: 'SamsungOne',
-    fontSize: 15,
+    fontFamily: SamsungOne,
+    fontSize: windowWidth * 0.04, // Ajustar el tamaño de fuente según el ancho de la pantalla
     textAlign: 'center',
     width: '100%',
   },

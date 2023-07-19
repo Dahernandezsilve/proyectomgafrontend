@@ -1,8 +1,6 @@
 import React from 'react'
-import {
-  Text, TouchableOpacity, StyleSheet, View,
-} from 'react-native'
-import SamsungOne from '../../fonts/SamsungOne-400.ttf'
+import { Text, TouchableOpacity, View } from 'react-native'
+import PropTypes from 'prop-types'
 import styles from './styles'
 
 const formatDate = date => {
@@ -12,7 +10,7 @@ const formatDate = date => {
   return `${day}-${month}-${year}`
 }
 
-const SelectDate = ({ number, onPress, selectedDate }) => {
+const SelectDate = ({ onPress, selectedDate }) => {
   const formattedDate = selectedDate ? formatDate(selectedDate) : null
   return (
     <TouchableOpacity style={styles.container} onPress={onPress}>
@@ -24,6 +22,15 @@ const SelectDate = ({ number, onPress, selectedDate }) => {
       </View>
     </TouchableOpacity>
   )
+}
+
+SelectDate.propTypes = {
+  onPress: PropTypes.func.isRequired,
+  selectedDate: PropTypes.instanceOf(Date),
+}
+
+SelectDate.defaultProps = {
+  selectedDate: null,
 }
 
 export default SelectDate
