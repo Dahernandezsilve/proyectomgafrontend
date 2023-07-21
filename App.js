@@ -7,6 +7,7 @@ import {
 } from './src/screens'
 import ReportScreenAdmin from './src/screens/ReportScreenAdmin'
 import LoginWorker from './src/screens/LoginWorker/LoginWorker'
+import NewGalleyScreen from './src/screens/NewGalleyScreen/NewGalleyScreen'
 
 const Stack = createNativeStackNavigator()
 
@@ -22,12 +23,14 @@ const App = () => {
     loadCustomFonts()
   }, [])
 
+
   return (
     <NavigationContainer>
       <Stack.Navigator initialRouteName="SelectUser">
         <Stack.Screen name="SelectUser" component={ChoiceScreen} options={{ headerShown: false }} />
         <Stack.Screen name="Administrador" component={LoginAdministrator} options={{ header: () => null }} />
         <Stack.Screen name="Trabajador" component={LoginWorker} options={{ header: () => null }} />
+        <Stack.Screen name="NGalley" component={NewGalleyScreen} options={{ header: () => renderHeaderAdmin({ activeTab, setActiveTab })}} />
         <Stack.Screen
           name="HomeWorker"
           component={HomeWorkerScreen}

@@ -6,7 +6,7 @@ import PropTypes from 'prop-types'
 import styles from './styles'
 
 const CardGaleraAdmin = ({
-  ca, numberCA, customValues, customTitles, navigateToGaleras,
+  ca, msgCA, numberCA, customValues, customTitles, navigateToGaleras,
 }) => {
   const [opacityValue] = useState(new Animated.Value(1))
   const windowWidth = useWindowDimensions().width
@@ -43,7 +43,7 @@ const CardGaleraAdmin = ({
       >
         <View style={styles.caContainer}>
           <Text style={styles.smallText}>
-            C.A:
+            {msgCA}
             {filteredNumberCA(numberCA)}
           </Text>
           <View style={[styles.square, { backgroundColor: ca }]} />

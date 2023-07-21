@@ -33,7 +33,7 @@ const styles = StyleSheet.create({
   },
   headerText: {
     fontFamily: SamsungOne,
-    fontSize: 30,
+    fontSize: 24,
     marginBottom: 8,
     textAlign: 'center',
   },
@@ -51,7 +51,7 @@ const styles = StyleSheet.create({
   tabButtonText: {
     color: '#000000',
     fontFamily: SamsungOne,
-    fontSize: 26,
+    fontSize: 20,
     textAlign: 'center',
   },
 })
