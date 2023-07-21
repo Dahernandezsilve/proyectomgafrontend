@@ -275,6 +275,7 @@ const ReportScreenAdmin = (
               middleValue={middleValue} // Valor para el cuadro naranja
               bottomValue={bottomValue}
             />
+
           </View>
           <RenderContentRegisters />
         </ScrollView>

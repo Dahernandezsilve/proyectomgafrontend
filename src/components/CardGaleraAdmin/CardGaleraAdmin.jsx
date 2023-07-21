@@ -1,3 +1,6 @@
+/* eslint-disable react/no-array-index-key */
+/* eslint-disable react/prop-types */
+/* eslint-disable no-unused-vars */
 import React, { useState } from 'react'
 import {
   View, Text, TouchableWithoutFeedback, Animated, useWindowDimensions,
@@ -72,6 +75,7 @@ const CardGaleraAdmin = ({
 CardGaleraAdmin.propTypes = {
   customValues: PropTypes.objectOf(PropTypes.any),
   customTitles: PropTypes.arrayOf(PropTypes.string),
+  // eslint-disable-next-line react/require-default-props
   navigateToGaleras: PropTypes.func,
 }
 
