@@ -13,6 +13,7 @@ import SliderContainer from './SliderContainer'
 import TabNavigator from './TabNavigator'
 import TextCard from './TextCard'
 import TrafficLight from './TrafficLight'
+import BottomTabNavigation from './BottomTabNavigation'
 
 export {
   CardGalera,
@@ -30,4 +31,5 @@ export {
   TabNavigator,
   TextCard,
   TrafficLight,
+  BottomTabNavigation,
 }

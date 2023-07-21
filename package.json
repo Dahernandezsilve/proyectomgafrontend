@@ -22,6 +22,7 @@
     "@react-navigation/stack": "^6.3.17",
     "babel-plugin-react-native-classname-to-style": "^1.2.2",
     "babel-plugin-react-native-platform-specific-extensions": "^1.1.1",
+    "eas": "^0.1.0",
     "eslint-plugin-react-native": "^4.0.0",
     "expo": "^48.0.0",
     "expo-font": "^11.1.1",

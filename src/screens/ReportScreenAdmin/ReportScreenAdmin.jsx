@@ -5,7 +5,8 @@ import {
 import DateTimePicker from '@react-native-community/datetimepicker'
 import PropTypes from 'prop-types'
 import {
-  SelectDate, SelectOption, TrafficLight, CardGaleraAdmin, NoInfo,
+  SelectDate,
+  SelectOption, TrafficLight, CardGaleraAdmin, NoInfo, BottomTabNavigation, HeaderInformation,
 } from '../../components'
 import useApi from '../../hooks/useApi/useApi'
 import styles from './styles'
@@ -20,7 +21,13 @@ const formatDate = dateString => {
   return formattedDate
 }
 
-const ReportScreenAdmin = ({ navigation, activeTab }) => {
+const ReportScreenAdmin = (
+  {
+    navigation,
+  },
+) => {
+  const lotes = ['20', '1', '2']
+  const [activeTab, setActiveTab] = useState(lotes[0])
   const [response,, handleRequest] = useApi()
   const [, setGaleras] = useState([])
   const [selectedDate, setSelectedDate] = useState(new Date())
@@ -192,6 +199,7 @@ const ReportScreenAdmin = ({ navigation, activeTab }) => {
           return (
             <CardGaleraAdmin
               ca={resultP}
+              msgCA="C.A: "
               numberCA={inform.ca}
               customValues={{
                 galera: `Galera ${inform.idGalera}`,
@@ -214,15 +222,29 @@ const ReportScreenAdmin = ({ navigation, activeTab }) => {
     return null
   }
 
+  const tabs = [
+    { label: 'Inicio', route: 'Creacion' },
+    { label: 'Creacion', route: 'Administrador' },
+  ]
+
+  const [activeTabb, setActiveTabb] = useState(0)
+
   return (
-    <View>
+    <View style={{ flex: 1 }}>
       <StatusBar barStyle="light-content" backgroundColor="#fff" />
       <StatusBar barStyle="dark-content" backgroundColor="#fff" />
-      <ScrollView>
-        <View style={styles.rowContainer}>
-          <View style={{ flexDirection: 'column' }}>
-            <SelectDate onPress={handleSelectDatePress} selectedDate={selectedDate} />
-            {showDatePicker && (
+      <HeaderInformation
+        title="Informe"
+        lotes={lotes}
+        activeTab={activeTab}
+        setActiveTab={setActiveTab}
+      />
+      <View style={{ flex: 1 }}>
+        <ScrollView>
+          <View style={styles.rowContainer}>
+            <View style={{ flexDirection: 'column' }}>
+              <SelectDate onPress={handleSelectDatePress} selectedDate={selectedDate} />
+              {showDatePicker && (
               <DateTimePicker
                 value={selectedDate}
                 mode="date"
@@ -230,22 +252,31 @@ const ReportScreenAdmin = ({ navigation, activeTab }) => {
                 format="DD-MM-YYYY"
                 onChange={handleDateChange}
               />
-            )}
-            <SelectOption
-              selectedOption={selectedOption}
-              options={workers}
-              setSelectedOption={setSelectedOption}
+              )}
+              <SelectOption
+                selectedOption={selectedOption}
+                options={workers}
+                setSelectedOption={setSelectedOption}
+              />
+            </View>
+            <TrafficLight
+              topValue={topValue} // Valor para el cuadro verde
+              middleValue={middleValue} // Valor para el cuadro naranja
+              bottomValue={bottomValue}
             />
-          </View>
-          <TrafficLight
-            topValue={topValue} // Valor para el cuadro verde
-            middleValue={middleValue} // Valor para el cuadro naranja
-            bottomValue={bottomValue} // Valor para el cuadro rojo
-          />
 
-        </View>
-        <RenderContentRegisters />
-      </ScrollView>
+          </View>
+          <RenderContentRegisters />
+        </ScrollView>
+      </View>
+      <View style={styles.bottomTabNavigator}>
+        <BottomTabNavigation
+          activeTab={activeTabb}
+          setActiveTab={setActiveTabb}
+          tabs={tabs}
+          navigation={navigation}
+        />
+      </View>
     </View>
   )
 }
@@ -253,8 +284,8 @@ const ReportScreenAdmin = ({ navigation, activeTab }) => {
 ReportScreenAdmin.propTypes = {
   navigation: PropTypes.shape({
     navigate: PropTypes.func.isRequired,
+    goBack: PropTypes.func.isRequired,
   }).isRequired,
-  activeTab: PropTypes.string.isRequired,
 }
 
 export default ReportScreenAdmin

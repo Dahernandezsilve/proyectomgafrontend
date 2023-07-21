@@ -4374,6 +4374,11 @@ dot-case@^3.0.4:
     no-case "^3.0.4"
     tslib "^2.0.3"
 
+eas@^0.1.0:
+  version "0.1.0"
+  resolved "https://registry.yarnpkg.com/eas/-/eas-0.1.0.tgz#cc3c1d8f1aa9439a873670440cf946af1c5707b4"
+  integrity sha512-w88fTTTkfDLHwcaVW8wiYjOtnBBToguzc6AyIldD1vOrCRTKxhQEDS8oIE7nWeSJ+kCoIeoHd79Mhwvntydixg==
+
 ee-first@1.1.1:
   version "1.1.1"
   resolved "https://registry.npmjs.org/ee-first/-/ee-first-1.1.1.tgz"
