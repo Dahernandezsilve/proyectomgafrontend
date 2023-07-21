@@ -1,7 +1,9 @@
 import React, { useState } from 'react'
 import { View, ScrollView, StatusBar } from 'react-native'
 import useApi from '../../hooks/useApi/useApi'
-import { SliderContainer, CommentsComponent, ModalComponent } from '../../components'
+import {
+  SliderContainer, CommentsComponent, ModalComponent, HeaderCreation,
+} from '../../components'
 
 const CreationScreen = () => {
   const [,, handleRequest] = useApi()
@@ -26,6 +28,7 @@ const CreationScreen = () => {
     <View style={{ backgroundColor: '#ECECEC' }}>
       <StatusBar barStyle="light-content" backgroundColor="#fff" />
       <StatusBar barStyle="dark-content" backgroundColor="#fff" />
+      <HeaderCreation />
       <View style={{ height: 2, width: '100%', backgroundColor: '#2B4985' }} />
       <ScrollView contentContainerStyle={{ alignItems: 'center', marginBottom: 10 }}>
         <SliderContainer title="Cantidad de pollos pesados: " minimumValue={20} maximumValue={100} step={1} medida="pollos" fixed="0" />

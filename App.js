@@ -1,13 +1,10 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect } from 'react'
 import { NavigationContainer } from '@react-navigation/native'
 import { createNativeStackNavigator } from '@react-navigation/native-stack'
 import * as Font from 'expo-font'
 import {
   ChoiceScreen, DetailsScreen, CreationScreen, HomeWorkerScreen, LoginAdministrator,
 } from './src/screens'
-import {
-  HeaderGalley, HeaderCreation, HeaderInformation,
-} from './src/components'
 import ReportScreenAdmin from './src/screens/ReportScreenAdmin'
 import LoginWorker from './src/screens/LoginWorker/LoginWorker'
 import NewGalleyScreen from './src/screens/NewGalleyScreen/NewGalleyScreen'
@@ -18,52 +15,15 @@ const loadCustomFonts = async () => {
   await Font.loadAsync({
     // eslint-disable-next-line global-require
     SamsungOne: require('./src/fonts/SamsungOne-400.ttf'),
-    // Agrega más fuentes personalizadas si es necesario
   })
 }
 
 const App = () => {
-  const lotes = ['20', '1', '2']
-  const [activeTab, setActiveTab] = useState(lotes[0])
-
   useEffect(() => {
     loadCustomFonts()
   }, [])
 
-  const renderHeaderGalley = () => (
-    <HeaderGalley
-      title="Galeras y tareas pendientes"
-      lotes={lotes}
-      activeTab={activeTab}
-      setActiveTab={setActiveTab}
-    />
-  )
 
-  const renderHeaderInform = () => (
-    <HeaderInformation
-      title="Informe"
-      customTitles={['Lote:','Lote:','Lote:']}
-      lotes={lotes}
-      activeTab={activeTab}
-      setActiveTab={setActiveTab}
-      showLote={true}
-    />
-  )
-
-  const renderHeaderAdmin = () => (
-    <HeaderInformation
-      title="Granja"
-      customTitles={['Mi granja','Asignacion','Crear galera']}
-      lotes={lotes}
-      activeTab={activeTab}
-      setActiveTab={setActiveTab}
-      showLote={false}
-    />
-  )
-
-  const renderInformation = () => (
-    <HeaderCreation />
-  )
   return (
     <NavigationContainer>
       <Stack.Navigator initialRouteName="SelectUser">
@@ -72,32 +32,27 @@ const App = () => {
         <Stack.Screen name="Trabajador" component={LoginWorker} options={{ header: () => null }} />
         <Stack.Screen name="NGalley" component={NewGalleyScreen} options={{ header: () => renderHeaderAdmin({ activeTab, setActiveTab })}} />
         <Stack.Screen
-          name="Home"
-          options={{
-            header: () => renderHeaderInform({ activeTab, setActiveTab }),
-          }}
-        >
-          {(route, navigation) => (
-            <ReportScreenAdmin
-              route={route}
-              navigation={navigation}
-              setActiveTab={setActiveTab}
-              activeTab={activeTab}
-            />
-          )}
-        </Stack.Screen>
-
-        <Stack.Screen
           name="HomeWorker"
           component={HomeWorkerScreen}
-          options={{ header: renderHeaderGalley }}
+          options={{ header: () => null }}
         />
         <Stack.Screen name="Galeras" component={DetailsScreen} />
         <Stack.Screen
           name="Creacion"
           component={CreationScreen}
-          options={{ header: renderInformation }}
+          options={{ header: () => null }}
         />
+        <Stack.Screen
+          name="Home"
+          options={{ header: () => null }}
+        >
+          {({ route, navigation }) => (
+            <ReportScreenAdmin
+              route={route}
+              navigation={navigation}
+            />
+          )}
+        </Stack.Screen>
       </Stack.Navigator>
     </NavigationContainer>
   )
