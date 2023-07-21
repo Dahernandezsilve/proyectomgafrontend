@@ -199,6 +199,7 @@ const ReportScreenAdmin = (
           return (
             <CardGaleraAdmin
               ca={resultP}
+              msgCA='C.A: '
               numberCA={inform.ca}
               customValues={{
                 galera: `Galera ${inform.idGalera}`,

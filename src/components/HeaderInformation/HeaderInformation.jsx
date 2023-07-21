@@ -1,16 +1,14 @@
-import React, { useState } from 'react'
-import {
-  View, Text, StyleSheet, TouchableOpacity,
-} from 'react-native'
-import styles from './styles'
+import React, { useState } from 'react';
+import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
+import styles from './styles';
 
 const HeaderInformation = ({
-  lotes, title, activeTab, setActiveTab,
+  lotes, title, customTitles, activeTab, setActiveTab, showLote
 }) => {
   const handleTabPress = tabName => {
-    setActiveTab(tabName)
-    console.log('loteactivoiNFO', activeTab)
-  }
+    setActiveTab(tabName);
+    console.log('loteactivoiNFO', activeTab);
+  };
 
   return (
     <View style={styles.headerContainer}>
@@ -32,15 +30,15 @@ const HeaderInformation = ({
                 activeTab === lote ? styles.activeTabButtonText : null,
               ]}
             >
-              Lote:
+              {customTitles[index]}
               {' '}
-              {lote}
+              {showLote ? lote : null}
             </Text>
           </TouchableOpacity>
         ))}
       </View>
     </View>
-  )
-}
+  );
+};
 
-export default HeaderInformation
+export default HeaderInformation;
