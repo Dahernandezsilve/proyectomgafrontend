@@ -24,13 +24,13 @@ const NewGalleyScreen = ({ navigation }) => {
       label: 'Informe', route: 'Home', icon: 'home', method: 'AntDesign',
     },
     {
-      label: 'Medición', route: 'Administrador', icon: 'wallet-outline', method: 'Ionicons',
+      label: 'Medición', route: 'Administrador', icon: 'bird', method: 'MaterialCommunityIcons',
     },
     {
-      label: 'Granja', route: 'NGalley', icon: 'dollar', method: 'FontAwesome',
+      label: 'Granja', route: 'NGalley', icon: 'line-graph', method: 'Entypo',
     },
     {
-      label: 'Personal', route: 'Administrador', icon: 'person', method: 'Octicons',
+      label: 'Personal', route: 'Administrador', icon: 'people', method: 'Octicons',
     },
   ]
 

@@ -1,7 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import {
-  Ionicons, AntDesign, FontAwesome, Octicons,
+  Ionicons, AntDesign, FontAwesome, Octicons, Entypo, MaterialCommunityIcons,
 } from '@expo/vector-icons'
 import {
   View, TouchableOpacity, Text,
@@ -21,6 +21,10 @@ const BottomTabNavigation = ({
         return <FontAwesome name={tab.icon} size={24} color="black" />
       case 'Octicons':
         return <Octicons name={tab.icon} size={24} color="black" />
+      case 'Entypo':
+        return <Entypo name={tab.icon} size={24} color="black" />
+      case 'MaterialCommunityIcons':
+        return <MaterialCommunityIcons name={tab.icon} size={24} color="black" />
       default:
         return null
     }
