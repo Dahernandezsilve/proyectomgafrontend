@@ -222,8 +222,18 @@ const ReportScreenAdmin = (
   }
 
   const tabs = [
-    { label: 'Inicio', route: 'Creacion' },
-    { label: 'Creacion', route: 'Administrador' },
+    {
+      label: 'Informe', route: 'Creacion', icon: 'home', method: 'AntDesign',
+    },
+    {
+      label: 'Medición', route: 'Administrador', icon: 'wallet-outline', method: 'Ionicons',
+    },
+    {
+      label: 'Granja', route: 'Administrador', icon: 'dollar', method: 'FontAwesome',
+    },
+    {
+      label: 'Personal', route: 'Administrador', icon: 'person', method: 'Octicons',
+    },
   ]
 
   const [activeTabb, setActiveTabb] = useState(0)
