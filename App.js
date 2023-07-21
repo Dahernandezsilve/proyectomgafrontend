@@ -10,6 +10,7 @@ import {
 } from './src/components'
 import ReportScreenAdmin from './src/screens/ReportScreenAdmin'
 import LoginWorker from './src/screens/LoginWorker/LoginWorker'
+import NewGalleyScreen from './src/screens/NewGalleyScreen/NewGalleyScreen'
 
 const Stack = createNativeStackNavigator()
 
@@ -41,9 +42,22 @@ const App = () => {
   const renderHeaderInform = () => (
     <HeaderInformation
       title="Informe"
+      customTitles={['Lote:','Lote:','Lote:']}
       lotes={lotes}
       activeTab={activeTab}
       setActiveTab={setActiveTab}
+      showLote={true}
+    />
+  )
+
+  const renderHeaderAdmin = () => (
+    <HeaderInformation
+      title="Granja"
+      customTitles={['Mi granja','Asignacion','Crear galera']}
+      lotes={lotes}
+      activeTab={activeTab}
+      setActiveTab={setActiveTab}
+      showLote={false}
     />
   )
 
@@ -56,6 +70,7 @@ const App = () => {
         <Stack.Screen name="SelectUser" component={ChoiceScreen} options={{ headerShown: false }} />
         <Stack.Screen name="Administrador" component={LoginAdministrator} options={{ header: () => null }} />
         <Stack.Screen name="Trabajador" component={LoginWorker} options={{ header: () => null }} />
+        <Stack.Screen name="NGalley" component={NewGalleyScreen} options={{ header: () => renderHeaderAdmin({ activeTab, setActiveTab })}} />
         <Stack.Screen
           name="Home"
           options={{

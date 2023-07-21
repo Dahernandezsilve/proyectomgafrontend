@@ -192,6 +192,7 @@ const ReportScreenAdmin = ({ navigation, activeTab }) => {
           return (
             <CardGaleraAdmin
               ca={resultP}
+              msgCA='C.A: '
               numberCA={inform.ca}
               customValues={{
                 galera: `Galera ${inform.idGalera}`,
