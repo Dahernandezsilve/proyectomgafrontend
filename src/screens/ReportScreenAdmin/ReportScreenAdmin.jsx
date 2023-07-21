@@ -199,7 +199,7 @@ const ReportScreenAdmin = (
           return (
             <CardGaleraAdmin
               ca={resultP}
-              msgCA='C.A: '
+              msgCA="C.A: "
               numberCA={inform.ca}
               customValues={{
                 galera: `Galera ${inform.idGalera}`,
@@ -224,13 +224,13 @@ const ReportScreenAdmin = (
 
   const tabs = [
     {
-      label: 'Informe', route: 'Creacion', icon: 'home', method: 'AntDesign',
+      label: 'Informe', route: 'Home', icon: 'home', method: 'AntDesign',
     },
     {
       label: 'Medición', route: 'Administrador', icon: 'wallet-outline', method: 'Ionicons',
     },
     {
-      label: 'Granja', route: 'Administrador', icon: 'dollar', method: 'FontAwesome',
+      label: 'Granja', route: 'NGalley', icon: 'dollar', method: 'FontAwesome',
     },
     {
       label: 'Personal', route: 'Administrador', icon: 'person', method: 'Octicons',
@@ -248,6 +248,7 @@ const ReportScreenAdmin = (
         lotes={lotes}
         activeTab={activeTab}
         setActiveTab={setActiveTab}
+        showLote
       />
       <View style={{ flex: 1 }}>
         <ScrollView>
