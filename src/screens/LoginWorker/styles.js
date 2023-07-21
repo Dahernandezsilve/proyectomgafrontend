@@ -1,5 +1,4 @@
 import { StyleSheet } from 'react-native'
-import SamsungOne from '../../fonts/SamsungOne-400.ttf'
 
 const styles = StyleSheet.create({
   backgroundImage: {
@@ -29,12 +28,17 @@ const styles = StyleSheet.create({
   container: {
     alignItems: 'center',
     backgroundColor: '#2B4985',
+    display: 'flex',
     flex: 1,
+    flexWrap: 'wrap',
     justifyContent: 'center',
   },
   formContainer: {
     alignItems: 'center',
-    width: '80%',
+    display: 'flex',
+    flexWrap: 'wrap',
+    width: '100%',
+
   },
   input: {
     backgroundColor: 'white',

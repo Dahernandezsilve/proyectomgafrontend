@@ -242,6 +242,7 @@ const ReportScreenAdmin = ({ navigation, activeTab }) => {
             middleValue={middleValue} // Valor para el cuadro naranja
             bottomValue={bottomValue} // Valor para el cuadro rojo
           />
+
         </View>
         <RenderContentRegisters />
       </ScrollView>

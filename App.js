@@ -3,7 +3,7 @@ import { NavigationContainer } from '@react-navigation/native'
 import { createNativeStackNavigator } from '@react-navigation/native-stack'
 import * as Font from 'expo-font'
 import {
-  ChoiceScreen, DetailsScreen, CreationScreen, HomeWorkerScreen, LoginAdministrator,
+  ChoiceScreen, DetailsScreen, CreationScreen, HomeWorkerScreen, LoginAdministrator, CrearGalera,
 } from './src/screens'
 import {
   HeaderGalley, HeaderCreation, HeaderInformation,
@@ -56,6 +56,7 @@ const App = () => {
         <Stack.Screen name="SelectUser" component={ChoiceScreen} options={{ headerShown: false }} />
         <Stack.Screen name="Administrador" component={LoginAdministrator} options={{ header: () => null }} />
         <Stack.Screen name="Trabajador" component={LoginWorker} options={{ header: () => null }} />
+        <Stack.Screen name="CrearGalera" component={CrearGalera} options={{ header: () => null }} />
         <Stack.Screen
           name="Home"
           options={{
