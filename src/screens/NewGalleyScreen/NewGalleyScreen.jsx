@@ -5,7 +5,7 @@ import {
 import { CardGaleraAdmin } from '../../components'
 import styles from './styles'
 
-const navigateToGaleras = async () => {
+const navigateToGaleras = async ({ navigation }) => {
   navigation.navigate('Creacion')
 }
 
