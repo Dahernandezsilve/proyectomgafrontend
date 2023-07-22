@@ -10,7 +10,6 @@ import SelectDate from './SelectDate'
 import SelectOption from './SelectOption'
 import SliderComponent from './SliderComponent'
 import SliderContainer from './SliderContainer'
-import TabNavigator from './TabNavigator'
 import TextCard from './TextCard'
 import TrafficLight from './TrafficLight'
 import BottomTabNavigation from './BottomTabNavigation'
@@ -28,7 +27,6 @@ export {
   SelectOption,
   SliderComponent,
   SliderContainer,
-  TabNavigator,
   TextCard,
   TrafficLight,
   BottomTabNavigation,

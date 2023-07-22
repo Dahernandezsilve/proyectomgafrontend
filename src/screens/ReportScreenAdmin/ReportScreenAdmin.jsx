@@ -223,8 +223,18 @@ const ReportScreenAdmin = (
   }
 
   const tabs = [
-    { label: 'Inicio', route: 'Creacion' },
-    { label: 'Creacion', route: 'Administrador' },
+    {
+      label: 'Informe', route: 'Home', icon: 'home', method: 'AntDesign',
+    },
+    {
+      label: 'Medición', route: 'Administrador', icon: 'bird', method: 'MaterialCommunityIcons',
+    },
+    {
+      label: 'Granja', route: 'NGalley', icon: 'line-graph', method: 'Entypo',
+    },
+    {
+      label: 'Personal', route: 'Administrador', icon: 'people', method: 'Octicons',
+    },
   ]
 
   const [activeTabb, setActiveTabb] = useState(0)
@@ -238,6 +248,7 @@ const ReportScreenAdmin = (
         lotes={lotes}
         activeTab={activeTab}
         setActiveTab={setActiveTab}
+        showLote
       />
       <View style={{ flex: 1 }}>
         <ScrollView>

@@ -1,10 +1,16 @@
 import { StyleSheet } from 'react-native'
 
 const styles = StyleSheet.create({
+  bottomTabNavigator: {
+    backgroundColor: '#fff',
+    bottom: 0,
+    left: 0,
+    position: 'absolute',
+    right: 0, // Ajusta el color de fondo según tus necesidades
+  },
   container: {
     backgroundColor: '#fff',
     flex: 1,
-    padding: 16,
   },
   formGroup: {
     marginBottom: 20,
@@ -31,6 +37,9 @@ const styles = StyleSheet.create({
     marginTop: 20,
     paddingHorizontal: 20,
     paddingVertical: 10,
+  },
+  scrollContainer: {
+    flex: 1,
   },
   workerTitle: {
     color: '#2B4985',

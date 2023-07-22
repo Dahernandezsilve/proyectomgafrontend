@@ -1,14 +1,15 @@
-import React, { useState } from 'react';
-import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
-import styles from './styles';
+import React from 'react'
+import { View, Text, TouchableOpacity } from 'react-native'
+import PropTypes from 'prop-types'
+import styles from './styles'
 
 const HeaderInformation = ({
-  lotes, title, customTitles, activeTab, setActiveTab, showLote
+  lotes, title, customTitles, activeTab, setActiveTab, showLote,
 }) => {
   const handleTabPress = tabName => {
-    setActiveTab(tabName);
-    console.log('loteactivoiNFO', activeTab);
-  };
+    setActiveTab(tabName)
+    console.log('loteactivoiNFO', activeTab)
+  }
 
   return (
     <View style={styles.headerContainer}>
@@ -16,6 +17,7 @@ const HeaderInformation = ({
       <View style={styles.buttonContainer}>
         {lotes.map((lote, index) => (
           <TouchableOpacity
+            // eslint-disable-next-line react/no-array-index-key
             key={index}
             style={[
               styles.tabButton,
@@ -30,15 +32,29 @@ const HeaderInformation = ({
                 activeTab === lote ? styles.activeTabButtonText : null,
               ]}
             >
-              {customTitles[index]}
+              {customTitles ? customTitles[index] : null}
               {' '}
-              {showLote ? lote : null}
+              {showLote ? `Lote: ${lote}` : null}
             </Text>
           </TouchableOpacity>
         ))}
       </View>
     </View>
-  );
-};
+  )
+}
 
-export default HeaderInformation;
+HeaderInformation.propTypes = {
+  lotes: PropTypes.arrayOf(PropTypes.string).isRequired,
+  title: PropTypes.string.isRequired,
+  customTitles: PropTypes.arrayOf(PropTypes.string),
+  activeTab: PropTypes.string.isRequired,
+  setActiveTab: PropTypes.func.isRequired,
+  showLote: PropTypes.bool,
+}
+
+HeaderInformation.defaultProps = {
+  customTitles: null,
+  showLote: false,
+}
+
+export default HeaderInformation
