@@ -23,6 +23,7 @@ module.exports = {
     'import',
     'jsx-a11y',
     'react-hooks',
+    'jest', // Agregar 'jest' a la lista de plugins
   ],
   rules: {
     'react/jsx-filename-extension': [
