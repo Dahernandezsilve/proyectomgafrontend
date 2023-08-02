@@ -1,7 +1,11 @@
 {
+  
     "preset": "jest-expo",
     "transformIgnorePatterns": [
       "node_modules/(?!(jest-)?react-native|@react-native-community|@react-navigation)"
-    ]
+    ],
+    "testTimeout": 120000,
+    "testEnvironment": "node"
+    
 }
   

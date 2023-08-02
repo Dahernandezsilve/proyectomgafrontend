@@ -21,8 +21,6 @@ module.exports = {
     android: {
       device: "emulator",
       app: "MGA.android",
-      binaryPath: "android/app/build/outputs/apk/debug/app-debug.apk",
-      build: "cd android && ./gradlew assembleDebug assembleAndroidTest -DtestBuildType=debug && cd ..",
     },
   },
 };
