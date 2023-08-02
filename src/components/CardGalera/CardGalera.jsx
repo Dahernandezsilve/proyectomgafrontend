@@ -1,29 +1,28 @@
-import React, { useState } from 'react'
-import Proptypes from 'prop-types'
-import {
-  View, Text, TouchableWithoutFeedback, Animated, useWindowDimensions,
-} from 'react-native'
-import styles from './styles'
+import React, { useState } from 'react'; // Import useState from 'react'
+import { View, Text, TouchableWithoutFeedback, Animated, useWindowDimensions } from 'react-native';
+import PropTypes from 'prop-types'; // Import PropTypes here
+import styles from './styles';
 
 const CardGalera = ({ galera, ca, navigateToGaleras }) => {
-  const [opacityValue] = useState(new Animated.Value(1))
-  const windowWidth = useWindowDimensions().width
+  const [opacityValue] = useState(new Animated.Value(1)); // Use useState from 'react'
+  const windowWidth = useWindowDimensions().width;
+
 
   const onPressIn = () => {
     Animated.timing(opacityValue, {
       toValue: 0.5,
       duration: 100,
       useNativeDriver: true,
-    }).start()
-  }
+    }).start();
+  };
 
   const onPressOut = () => {
     Animated.timing(opacityValue, {
       toValue: 1,
       duration: 100,
       useNativeDriver: true,
-    }).start()
-  }
+    }).start();
+  };
 
   return (
     <TouchableWithoutFeedback
@@ -31,9 +30,9 @@ const CardGalera = ({ galera, ca, navigateToGaleras }) => {
       onPressIn={onPressIn}
       onPressOut={onPressOut}
     >
-      <Animated.View style={
-        [styles.container, { width: windowWidth - windowWidth * 0.1, opacity: opacityValue }]
-      }
+      <Animated.View
+        testID="animated-view" // Add testID prop here
+        style={[styles.container, { width: windowWidth - windowWidth * 0.1, opacity: opacityValue }]}
       >
         <View style={styles.caContainer}>
           <Text style={styles.smallText}>C.A</Text>
@@ -44,18 +43,18 @@ const CardGalera = ({ galera, ca, navigateToGaleras }) => {
         </View>
       </Animated.View>
     </TouchableWithoutFeedback>
-  )
-}
+  );
+};
 
 CardGalera.propTypes = {
-  galera: Proptypes.string,
-  ca: Proptypes.string,
-  navigateToGaleras: Proptypes.func.isRequired,
-}
+  galera: PropTypes.string,
+  ca: PropTypes.string,
+  navigateToGaleras: PropTypes.func.isRequired,
+};
 
 CardGalera.defaultProps = {
   galera: 'Default',
   ca: 'red',
-}
+};
 
-export default CardGalera
+export default CardGalera;

@@ -9,15 +9,31 @@ import ElCeibillalImg from '../../img/ElCeibillalSvg'
 import ElCeibillalImgV2 from '../../img/ElCeibillalV2Svg'
 import styles from './styles'
 
+export const handleLogin = async (correo, contrasena) => {
+  try {
+    const response = await fetch('/login', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ user: correo, password: contrasena }),
+    });
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    console.error('Error occurred during login:', error);
+    return null;
+  }
+};
+
+
 const LoginAdministrator = ({ navigation }) => {
   const [response,, handleRequest] = useApi()
   const [correo, setCorreo] = useState('')
   const [contrasena, setContrasena] = useState('')
   const [, setHaveAccess] = useState(false)
 
-  const handleLogin = () => {
-    handleRequest('POST', '/login', { user: correo, password: contrasena })
-  }
+  
 
   const navigateToAdminScreen = () => {
     handleLogin(correo, contrasena)
