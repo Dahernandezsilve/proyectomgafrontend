@@ -1,4 +1,5 @@
 module.exports = {
+
     // ... Otras configuraciones de Jest ...
   
     transform: {
@@ -11,4 +12,5 @@ module.exports = {
     extensionsToTreatAsEsm: ['.js'],
     testEnvironment: 'node',
   };
+
   
