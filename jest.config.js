@@ -1,16 +1,6 @@
 module.exports = {
-
-    // ... Otras configuraciones de Jest ...
-  
+    preset: 'jest-expo',
     transform: {
-      '^.+\\.js$': require.resolve('babel-jest'),
+      '^.+\\.(js|jsx|ts|tsx)$': 'babel-jest',
     },
-    transformIgnorePatterns: [
-      'node_modules/(?!(jest-)?react-native|@react-native-community|@react-navigation)',
-    ],
-
-    extensionsToTreatAsEsm: ['.js'],
-    testEnvironment: 'node',
-  };
-
-  
+};
