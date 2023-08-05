@@ -4,10 +4,10 @@ import React, { createContext, useState } from 'react'
 export const GlobalContext = createContext()
 
 export const GlobalProvider = ({ children }) => {
-  const [globalVariable, setGlobalVariable] = useState('')
+  const [token, setToken] = useState('')
 
   return (
-    <GlobalContext.Provider value={{ globalVariable, setGlobalVariable }}>
+    <GlobalContext.Provider value={{ token, setToken }}>
       {children}
     </GlobalContext.Provider>
   )

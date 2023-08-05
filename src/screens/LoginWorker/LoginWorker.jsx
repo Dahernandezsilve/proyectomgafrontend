@@ -18,20 +18,13 @@ const loadFonts = async () => {
 }
 
 const LoginWorker = ({ navigation }) => {
-  const { globalVariable, setGlobalVariable } = useContext(GlobalContext)
-  const [newVariableValue, setNewVariableValue] = useState('')
-
-  const handleChangeValue = () => {
-    setGlobalVariable(newVariableValue);
-  }
+  const { token, setToken } = useContext(GlobalContext)
   const [response,, handleRequest] = useApi()
   const [codigo, setCodigo] = useState('')
   const [, setHaveAccess] = useState(false)
   useEffect(() => {
     loadFonts()
   }, [])
-
-  useEffect(handleChangeValue, [newVariableValue])
 
   const handleLogin = () => {
     handleRequest('POST', '/login', { password: codigo })
@@ -47,7 +40,7 @@ const LoginWorker = ({ navigation }) => {
       if (response.data !== null || response.data !== undefined) {
         if(response.session_token !== null){
           console.log("Token: ",response.session_token)
-          setGlobalVariable(response.session_token)
+          setToken(response.session_token)
         }
         if (response.data && response.data.length > 0) {
           if (response.message === 'Good Job' && response.data[0].rol === 'trabajador') {
