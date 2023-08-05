@@ -1,14 +1,22 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useContext } from 'react'
 import { View, ScrollView, StatusBar } from 'react-native'
 import PropTypes from 'prop-types'
+import { GlobalContext } from '../../GlobalContext/GlobalContext.js'
 import { CardGalera, TextCard, HeaderGalley } from '../../components'
 import useApi from '../../hooks/useApi/useApi'
 
 const HomeWorkerScreen = ({ navigation }) => {
+  const { globalVariable, setGlobalVariable } = useContext(GlobalContext)
   const lotes = ['20', '1', '2']
   const [activeTab, setActiveTab] = useState(lotes[0])
   const [response,, handleRequest] = useApi()
   const [galeras, setGaleras] = useState([])
+
+  const printToken= () => {
+    console.log("Global Variable",globalVariable)
+  }
+
+  useEffect(printToken, [])
 
   const handleObtainGaleras = () => {
     handleRequest('POST', '/galeras', { numLote: 20 })

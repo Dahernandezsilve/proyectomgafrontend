@@ -1,9 +1,10 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useContext } from 'react'
 import {
   View, Text, TextInput, TouchableOpacity, StatusBar,
 } from 'react-native'
 import * as Font from 'expo-font'
 import PropTypes from 'prop-types'
+import { GlobalContext } from '../../GlobalContext/GlobalContext.js'
 import SamsungOne from '../../fonts/SamsungOne-400.ttf'
 import useApi from '../../hooks/useApi/useApi'
 import ElCeibillalImg from '../../img/ElCeibillalSvg'
@@ -17,12 +18,20 @@ const loadFonts = async () => {
 }
 
 const LoginWorker = ({ navigation }) => {
+  const { globalVariable, setGlobalVariable } = useContext(GlobalContext)
+  const [newVariableValue, setNewVariableValue] = useState('')
+
+  const handleChangeValue = () => {
+    setGlobalVariable(newVariableValue);
+  }
   const [response,, handleRequest] = useApi()
   const [codigo, setCodigo] = useState('')
   const [, setHaveAccess] = useState(false)
   useEffect(() => {
     loadFonts()
   }, [])
+
+  useEffect(handleChangeValue, [newVariableValue])
 
   const handleLogin = () => {
     handleRequest('POST', '/login', { password: codigo })
@@ -36,6 +45,10 @@ const LoginWorker = ({ navigation }) => {
     if (response.message !== null || response.message !== undefined) {
       console.log(response)
       if (response.data !== null || response.data !== undefined) {
+        if(response.session_token !== null){
+          console.log("Token: ",response.session_token)
+          setGlobalVariable(response.session_token)
+        }
         if (response.data && response.data.length > 0) {
           if (response.message === 'Good Job' && response.data[0].rol === 'trabajador') {
             setHaveAccess(true)
