@@ -1,7 +1,7 @@
+import 'text-encoding-polyfill'; // Add this line before importing @testing-library/react-native
 import React from 'react';
-import { render, fireEvent, waitFor } from '@testing-library/react-native';
-import LoginAdministrator from './LoginAdministrator';
-import { act } from 'react-test-renderer'; // Import act from react-test-renderer
+import { render, fireEvent, act } from '@testing-library/react-native';
+import LoginAdministrator, { handleLogin } from './LoginAdministrator';
 
 // Mock the useApi hook with a resolved promise for handleLogin
 jest.mock('../../hooks/useApi/useApi', () => ({
@@ -31,7 +31,22 @@ describe('LoginAdministrator component', () => {
     });
 
     // Wait for handleLogin to resolve
-    await waitFor(() => expect(mockNavigate).toHaveBeenCalledWith('Home'));
+    await act(async () => {
+      await handleLogin();
+    });
+
+    // Perform the same button press again to navigate
+    await act(async () => {
+      fireEvent.press(loginButton);
+    });
+
+    // Wait for handleLogin to resolve with mocked response
+    await act(async () => {
+      await handleLogin();
+    });
+
+    // Check if navigation.navigate('Home') was called
+    expect(mockNavigate).toHaveBeenCalledWith('Home');
   });
 
   // Add more test cases as needed
