@@ -81,6 +81,10 @@ const ReportScreenAdmin = (
   }
 
   const verifyCA = ({ p, ca, tipo }) => {
+    if (ca === 0 || ca === null || ca < 0) {
+      return 'gray';
+    }
+
     const thresholds = {
       hembra: [
         [0.98, 0.94],
@@ -111,21 +115,21 @@ const ReportScreenAdmin = (
       ],
     }
 
-    const index = Math.floor((p - 1) / 7)
+    const index = Math.floor((p - 1) / 7);
 
     if (index < 0 || index >= thresholds[tipo].length) {
-      return 'red'
+      return 'red';
     }
 
-    const [greenThreshold, orangeThreshold] = thresholds[tipo][index]
+    const [greenThreshold, orangeThreshold] = thresholds[tipo][index];
 
     if (ca > greenThreshold) {
-      return 'green'
+      return 'green';
     } if (ca > orangeThreshold) {
-      return 'orange'
+      return 'orange';
     }
-    return 'red'
-  }
+    return 'red';
+  };
 
   useEffect(() => {
     console.log('lote', activeTab)
@@ -194,11 +198,13 @@ const ReportScreenAdmin = (
       return registers.map(inform => {
         const params = { p: inform.edadGalera, ca: inform.ca, tipo: inform.tipoPollo }
         const resultP = verifyCA(params)
+        const caValue = inform.ca === null || inform.ca === 0 ? 'gray' : resultP;
+
 
         if (resultP !== undefined) {
           return (
             <CardGaleraAdmin
-              ca={resultP}
+              ca={caValue}
               msgCA="C.A: "
               numberCA={inform.ca}
               customValues={{

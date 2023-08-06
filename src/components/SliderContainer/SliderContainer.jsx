@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react'
+import React, { useState, useRef, useEffect } from 'react'
 import PropTypes from 'prop-types'
 import {
   View, Text, TextInput, Keyboard, TouchableOpacity,
@@ -6,8 +6,8 @@ import {
 import Slider from '@react-native-community/slider'
 import styles from './styles'
 
-const SliderContainer = ({
-  title, minimumValue, maximumValue, step, medida, fixed,
+const SliderContainer = ({ code,
+  title, minimumValue, maximumValue, step, medida, fixed, registro, setRegistro
 }) => {
   const [value, setValue] = useState(0.0)
   const [formattedValue, setFormattedValue] = useState('0')
@@ -19,6 +19,10 @@ const SliderContainer = ({
       setValue(0);
     }
   }
+
+  useEffect(() => {
+    console.log("registro", registro)
+  }, [registro])
   
   const handleDoneEditing = () => {
     const numericValue = parseFloat(formattedValue.replace(/\s/g, ''));
@@ -26,12 +30,36 @@ const SliderContainer = ({
       const roundedValue = parseFloat(numericValue.toFixed(fixed));
       setValue(roundedValue);
       setFormattedValue(roundedValue.toFixed(fixed));
+        switch (code) {
+          case "decesos":
+            setRegistro(prevRegistro => ({ ...prevRegistro, decesos: roundedValue }));
+            break
+          case "cantidadAlimento":
+            setRegistro(prevRegistro => ({ ...prevRegistro, cantidadAlimento: roundedValue }));
+            break
+          case "pesado":
+            setRegistro(prevRegistro => ({ ...prevRegistro, pesado: roundedValue }));
+            break
+        }
     } else {
       setValue(0);
       setFormattedValue('0');
+      console.log("Not fixed", code)
+      switch (code) {
+        case "decesos":
+          setRegistro(prevRegistro => ({ ...prevRegistro, decesos: 0 }));
+          break
+        case "cantidadAlimento":
+          setRegistro(prevRegistro => ({ ...prevRegistro, cantidadAlimento: 0 }));
+          break
+        case "pesado":
+          setRegistro(prevRegistro => ({ ...prevRegistro, pesado: 0 }));
+          break
+      }
     }
     Keyboard.dismiss();
   }
+  
 
   return (
     <View style={styles.container}>
@@ -82,7 +110,7 @@ SliderContainer.propTypes = {
   maximumValue: PropTypes.number.isRequired,
   step: PropTypes.number.isRequired,
   medida: PropTypes.string.isRequired,
-  fixed: PropTypes.number.isRequired,
+  fixed: PropTypes.string.isRequired,
 }
 
 export default SliderContainer

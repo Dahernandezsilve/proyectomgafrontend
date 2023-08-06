@@ -4,12 +4,16 @@ import { View, TextInput, Button } from 'react-native'
 import { useNavigation } from '@react-navigation/native'
 import styles from './styles'
 
-const CommentsComponent = ({ handleRegistrar }) => {
+const CommentsComponent = ({ handleRegistrar, registro, setRegistro, code }) => {
   const [comentario, setComentario] = useState('')
   const navigation = useNavigation()
 
   const handleComentarioChange = text => {
     setComentario(text)
+    setRegistro(prevRegistro => ({
+      ...prevRegistro,
+      [code]: text,
+    }));
   }
 
   return (

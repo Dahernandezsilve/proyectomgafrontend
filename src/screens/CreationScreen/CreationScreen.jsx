@@ -10,19 +10,14 @@ const CreationScreen = () => {
   const route = useRoute()
   const idGalera = route.params?.idGalera || null
   const galera = route.params?.galera || null
-  const [,, handleRequest] = useApi()
+  const [response,, handleRequest] = useApi()
   const [registro, setRegistro] = useState({
-    cantidadAlimento: 200,
-    decesos: 2,
-    observaciones: 'Some observations',
+    cantidadAlimento: 0,
+    decesos: 0,
+    observaciones: 'Nada',
     idGalera: idGalera,
-    pesado: 20.00,
+    pesado: 0,
   })
-
-  useEffect(() => {
-    console.log("valor", route.params)
-
-  }, [idGalera])
 
   const handleRegistrar = () => {
     handleRequest('POST', '/makeRegister', {
@@ -32,7 +27,14 @@ const CreationScreen = () => {
       idGalera: idGalera,
       pesado: registro.pesado,
     })
+    console.log(response)
   }
+
+
+  useEffect(() => {
+    console.log("respuesta", response)
+    console.log("registro", registro)
+  }, [])
 
   const dayOfWeek = new Date().getDay()
 
@@ -43,15 +45,24 @@ const CreationScreen = () => {
       <HeaderCreation galera={galera} />
       <View style={{ height: 2, width: '100%', backgroundColor: '#2B4985' }} />
       <ScrollView>
-        {dayOfWeek === 6 && (
+        {dayOfWeek === 1 && (
             <>
-              <SliderContainer title="Cantidad de pollos pesados: " minimumValue={20} maximumValue={100} step={1} medida="pollos" fixed="0" />
-              <SliderContainer title="Peso total de pollos: " minimumValue={0} maximumValue={200} step={1} medida="lbs" fixed="2" />
+              <SliderContainer title="Cantidad de pollos pesados: " minimumValue={20} maximumValue={100} step={1} medida="pollos" fixed="0" registro={registro} setRegistro={setRegistro} />
+              <SliderContainer title="Peso total de pollos: " minimumValue={0} maximumValue={200} step={1} medida="lbs" fixed="2" registro={registro} setRegistro={setRegistro} code="pesado"/>
             </>
         )}
-        <SliderContainer title="Consumo de alimento: " minimumValue={0} maximumValue={100} step={1} medida="qq" fixed="2" registro={registro} setRegistro={setRegistro} info="cantidadAlimento" />
-        <SliderContainer title="Cantidad de pollos muertos: " minimumValue={0} maximumValue={10000} step={1} medida="pollos" fixed="0" registro={registro} setRegistro={setRegistro} info="decesos" />
-        <CommentsComponent handleRegistrar={handleRegistrar} />
+        <SliderContainer code="cantidadAlimento" title="Consumo de alimento: " minimumValue={0} maximumValue={100} step={1} medida="qq" fixed="2" registro={registro} setRegistro={setRegistro} />
+        <SliderContainer code="decesos"
+          title="Cantidad de pollos muertos: "
+          minimumValue={0}
+          maximumValue={10000}
+          step={1}
+          medida="pollos"
+          fixed="0"
+          registro={registro}
+          setRegistro={setRegistro}
+        />
+        <CommentsComponent code="observaciones" registro={registro} setRegistro={setRegistro} handleRegistrar={handleRegistrar} />
       </ScrollView>
     </View>
   )
