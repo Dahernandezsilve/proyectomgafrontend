@@ -46,10 +46,10 @@ const CreationScreen = () => {
         {dayOfWeek === 6 && (
             <>
               <SliderContainer title="Cantidad de pollos pesados: " minimumValue={20} maximumValue={100} step={1} medida="pollos" fixed="0" />
-              <SliderContainer title="Peso total de pollos: " minimumValue={0} maximumValue={200} step={1} medida="lbs" fixed="0" />
+              <SliderContainer title="Peso total de pollos: " minimumValue={0} maximumValue={200} step={1} medida="lbs" fixed="2" />
             </>
         )}
-        <SliderContainer title="Consumo de alimento: " minimumValue={0} maximumValue={100} step={1} medida="qq" fixed="0" registro={registro} setRegistro={setRegistro} info="cantidadAlimento" />
+        <SliderContainer title="Consumo de alimento: " minimumValue={0} maximumValue={100} step={1} medida="qq" fixed="2" registro={registro} setRegistro={setRegistro} info="cantidadAlimento" />
         <SliderContainer title="Cantidad de pollos muertos: " minimumValue={0} maximumValue={10000} step={1} medida="pollos" fixed="0" registro={registro} setRegistro={setRegistro} info="decesos" />
         <CommentsComponent handleRegistrar={handleRegistrar} />
       </ScrollView>
