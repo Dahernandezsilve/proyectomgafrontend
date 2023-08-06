@@ -24,6 +24,9 @@ const CreationScreen = () => {
       pesado: registro.pesado,
     })
   }
+
+  const dayOfWeek = new Date().getDay()
+
   return (
     <View style={{ flex: 1, backgroundColor: '#ECECEC' }}>
       <StatusBar barStyle="light-content" backgroundColor="#fff" />
@@ -31,9 +34,13 @@ const CreationScreen = () => {
       <HeaderCreation />
       <View style={{ height: 2, width: '100%', backgroundColor: '#2B4985' }} />
       <ScrollView>
-        <SliderContainer title="Cantidad de pollos pesados: " minimumValue={20} maximumValue={100} step={1} medida="pollos" fixed="0" />
+        {dayOfWeek === 6 && (
+            <>
+              <SliderContainer title="Cantidad de pollos pesados: " minimumValue={20} maximumValue={100} step={1} medida="pollos" fixed="0" />
+              <SliderContainer title="Peso medido de aves: " minimumValue={0} maximumValue={200} step={1} medida="lbs" fixed="0" />
+            </>
+          )}
         <SliderContainer title="Consumo de alimento: " minimumValue={0} maximumValue={100} step={1} medida="qq" fixed="0" registro={registro} setRegistro={setRegistro} info="cantidadAlimento" />
-        <SliderContainer title="Peso medido de aves: " minimumValue={0} maximumValue={200} step={1} medida="lbs" fixed="0" />
         <SliderContainer title="Cantidad de pollos muertos: " minimumValue={0} maximumValue={10000} step={1} medida="pollos" fixed="0" registro={registro} setRegistro={setRegistro} info="decesos" />
         <CommentsComponent handleRegistrar={handleRegistrar} />
       </ScrollView>
