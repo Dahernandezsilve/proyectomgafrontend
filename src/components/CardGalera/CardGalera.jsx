@@ -1,11 +1,11 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import Proptypes from 'prop-types'
 import {
   View, Text, TouchableWithoutFeedback, Animated, useWindowDimensions,
 } from 'react-native'
 import styles from './styles'
 
-const CardGalera = ({ galera, ca, navigateToGaleras }) => {
+const CardGalera = ({ idGalera, galera, ca, navigateToGaleras }) => {
   const [opacityValue] = useState(new Animated.Value(1))
   const windowWidth = useWindowDimensions().width
 
@@ -27,7 +27,7 @@ const CardGalera = ({ galera, ca, navigateToGaleras }) => {
 
   return (
     <TouchableWithoutFeedback
-      onPress={() => navigateToGaleras()}
+      onPress={() => navigateToGaleras(idGalera, galera)}
       onPressIn={onPressIn}
       onPressOut={onPressOut}
     >
@@ -48,6 +48,7 @@ const CardGalera = ({ galera, ca, navigateToGaleras }) => {
 }
 
 CardGalera.propTypes = {
+  idGalera: Proptypes.string,
   galera: Proptypes.string,
   ca: Proptypes.string,
   navigateToGaleras: Proptypes.func.isRequired,
@@ -56,6 +57,7 @@ CardGalera.propTypes = {
 CardGalera.defaultProps = {
   galera: 'Default',
   ca: 'red',
+  idGalera: null,
 }
 
 export default CardGalera

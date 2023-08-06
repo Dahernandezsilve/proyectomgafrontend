@@ -14,8 +14,8 @@ const lotes = []
     handleRequest('POST', '/galeras', { numLote: 20 })
   }
 
-  const navigateToGaleras = async () => {
-    navigation.navigate('Creacion')
+  const navigateToGaleras = (idGalera, galera) => {
+    navigation.navigate('Creacion', { idGalera: idGalera, galera: galera })
   }
 
   useEffect(() => {
@@ -46,15 +46,15 @@ const lotes = []
         {
           galeras.map(galer => {
             if (parseFloat(galer.ca) > 4.9) {
-              return <CardGalera key={galer.idGalera} galera={`Galera ${galer.numeroGalera}`} ca="red" navigateToGaleras={navigateToGaleras} />
+              return <CardGalera idGalera={galer.idGalera} key={galer.idGalera} galera={`Galera ${galer.numeroGalera}`} ca="red" navigateToGaleras={navigateToGaleras} />
             }
 
             if (parseFloat(galer.ca) < 2.6) {
-              return <CardGalera key={galer.idGalera} galera={`Galera ${galer.numeroGalera}`} ca="green" navigateToGaleras={navigateToGaleras} />
+              return <CardGalera idGalera={galer.idGalera} key={galer.idGalera} galera={`Galera ${galer.numeroGalera}`} ca="green" navigateToGaleras={navigateToGaleras} />
             }
 
             if (parseFloat(galer.ca) > 2.6 && galer.ca < 4.9) {
-              return <CardGalera key={galer.idGalera} galera={`Galera ${galer.numeroGalera}`} ca="orange" navigateToGaleras={navigateToGaleras} />
+              return <CardGalera idGalera={galer.idGalera} key={galer.idGalera} galera={`Galera ${galer.numeroGalera}`} ca="orange" navigateToGaleras={navigateToGaleras} />
             }
             return null
           })
