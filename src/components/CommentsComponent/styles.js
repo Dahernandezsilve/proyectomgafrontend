@@ -12,7 +12,7 @@ const styles = StyleSheet.create({
     shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.5,
     shadowRadius: 2,
-    width: windowWidth * 0.85, // Utiliza un porcentaje del ancho de la pantalla
+    width: windowWidth * 0.85,
   },
   comentariosContainer: {
     borderRadius: 5,
@@ -32,11 +32,12 @@ const styles = StyleSheet.create({
     height: 150,
     marginTop: 15,
     padding: 10,
+    marginBottom: windowWidth * 0.05,
     shadowColor: '#000',
     shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.5,
     shadowRadius: 2,
-    width: windowWidth * 0.9, // Utiliza un porcentaje del ancho de la pantalla
+    width: windowWidth * 0.9,
   },
   input: {
     backgroundColor: '#F5F5F5',
