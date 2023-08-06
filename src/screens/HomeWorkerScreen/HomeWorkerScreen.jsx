@@ -5,7 +5,7 @@ import { CardGalera, TextCard, HeaderGalley } from '../../components'
 import useApi from '../../hooks/useApi/useApi'
 
 const HomeWorkerScreen = ({ navigation }) => {
-  const lotes = ['20', '1', '2']
+const lotes = []
   const [activeTab, setActiveTab] = useState(lotes[0])
   const [response,, handleRequest] = useApi()
   const [galeras, setGaleras] = useState([])

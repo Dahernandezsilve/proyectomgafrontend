@@ -4,14 +4,14 @@ const windowWidth = Dimensions.get('window').width
 
 const styles = StyleSheet.create({
   backgroundImage: {
-    height: windowWidth * 0.9, 
+    height: windowWidth * 0.9,
     marginBottom: 20,
     opacity: 0.6,
     position: 'absolute',
     right: -windowWidth * 0.3,
-    top: -windowWidth * 0.37, 
+    top: -windowWidth * 0.37,
     transform: [{ rotate: '270deg' }],
-    width: windowWidth * 1.2, 
+    width: windowWidth * 1.2,
     zIndex: 1,
   },
   button: {
@@ -49,9 +49,9 @@ const styles = StyleSheet.create({
     width: windowWidth * 0.8,
   },
   logo: {
-    height: windowWidth * 0.8, 
+    height: windowWidth * 0.8,
     marginBottom: 1,
-    width: windowWidth * 1.0, 
+    width: windowWidth * 1.0,
   },
 })
 
