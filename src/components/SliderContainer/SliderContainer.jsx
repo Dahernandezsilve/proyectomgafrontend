@@ -58,7 +58,7 @@ SliderContainer.propTypes = {
   maximumValue: PropTypes.number.isRequired,
   step: PropTypes.number.isRequired,
   medida: PropTypes.string.isRequired,
-  fixed: PropTypes.number.isRequired,
+  fixed: PropTypes.string.isRequired,
 }
 
 export default SliderContainer
