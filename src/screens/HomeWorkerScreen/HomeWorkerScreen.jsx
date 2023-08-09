@@ -24,6 +24,7 @@ const HomeWorkerScreen = ({ navigation }) => {
   }
 
   useEffect(() => {
+    console.log('response', response)
     if (response !== undefined && response.data !== undefined && response.data.length > 0) {
       const firstData = response.data[0]
 
@@ -33,6 +34,7 @@ const HomeWorkerScreen = ({ navigation }) => {
 
       if (firstData.idGalera !== undefined && firstData.idGalera !== null) {
         setGaleras(response.data)
+        console.log('galeras', response)
       }
     }
   }, [response])
@@ -65,7 +67,7 @@ const HomeWorkerScreen = ({ navigation }) => {
 
   return (
     <View style={{
-      margin: 0, padding: 0, alignItems: 'center', justifyContent: 'center', backgroundColor: '#ECECEC',
+      flex: 1, margin: 0, padding: 0, alignItems: 'center', justifyContent: 'center', backgroundColor: '#ECECEC',
     }}
     >
 
@@ -81,6 +83,9 @@ const HomeWorkerScreen = ({ navigation }) => {
         <TextCard number="10000" />
         {
           galeras.map(galer => {
+            if (galer.ca === null) {
+              return <CardGalera idGalera={galer.idGalera} key={galer.idGalera} galera={`Galera ${galer.numeroGalera}`} ca="gray" navigateToGaleras={navigateToGaleras} />
+            }
             if (parseFloat(galer.ca) > 4.9) {
               return <CardGalera idGalera={galer.idGalera} key={galer.idGalera} galera={`Galera ${galer.numeroGalera}`} ca="red" navigateToGaleras={navigateToGaleras} />
             }
@@ -92,7 +97,6 @@ const HomeWorkerScreen = ({ navigation }) => {
             if (parseFloat(galer.ca) > 2.6 && galer.ca < 4.9) {
               return <CardGalera idGalera={galer.idGalera} key={galer.idGalera} galera={`Galera ${galer.numeroGalera}`} ca="orange" navigateToGaleras={navigateToGaleras} />
             }
-            return null
           })
         }
       </ScrollView>
