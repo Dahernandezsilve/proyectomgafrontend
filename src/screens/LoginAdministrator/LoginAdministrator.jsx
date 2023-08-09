@@ -1,9 +1,9 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useContext } from 'react'
 import PropTypes from 'prop-types'
 import {
   View, Text, TextInput, TouchableOpacity, StatusBar,
 } from 'react-native'
-
+import { GlobalContext } from '../../GlobalContext/GlobalContext.js'
 import useApi from '../../hooks/useApi/useApi'
 import ElCeibillalImg from '../../img/ElCeibillalSvg'
 import ElCeibillalImgV2 from '../../img/ElCeibillalV2Svg'
@@ -28,6 +28,7 @@ export const handleLogin = async (correo, contrasena) => {
 
 
 const LoginAdministrator = ({ navigation }) => {
+  const { token, setToken } = useContext(GlobalContext)
   const [response,, handleRequest] = useApi()
   const [correo, setCorreo] = useState('')
   const [contrasena, setContrasena] = useState('')
@@ -44,6 +45,10 @@ const LoginAdministrator = ({ navigation }) => {
       // eslint-disable-next-line no-console
       console.log(response)
       if (response.data !== null || response.data !== undefined) {
+        if(response.session_token !== null){
+          console.log("Token: ",response.session_token)
+          setToken(response.session_token)
+        }
         if (response.data && response.data.length > 0) {
           if (response.message === 'Good Job' && response.data[0].rol === 'admin') {
             setHaveAccess(true)

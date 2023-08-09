@@ -1,7 +1,6 @@
 import { StyleSheet } from 'react-native'
 import { SamsungOne } from '../../fonts/SamsungOne-400.ttf'
 
-
 const styles = StyleSheet.create({
   activeTabButton: {
     backgroundColor: '#FFFFFF',
