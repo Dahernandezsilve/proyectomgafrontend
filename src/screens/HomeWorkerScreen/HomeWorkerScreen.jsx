@@ -1,38 +1,74 @@
-import React, { useState, useEffect, useContext } from 'react'
+import React, { useState, useEffect } from 'react'
 import { View, ScrollView, StatusBar } from 'react-native'
 import PropTypes from 'prop-types'
 import { CardGalera, TextCard, HeaderGalley } from '../../components'
 import useApi from '../../hooks/useApi/useApi'
 
 const HomeWorkerScreen = ({ navigation }) => {
-const lotes = []
+  const lotes = []
   const [activeTab, setActiveTab] = useState(lotes[0])
-  const [response,, handleRequest] = useApi()
+  const [response, , handleRequest] = useApi()
   const [galeras, setGaleras] = useState([])
+  const [lote, setLote] = useState('')
+
+  const handleObtainLote = () => {
+    handleRequest('GET', '/loteObtain')
+  }
 
   const handleObtainGaleras = () => {
-    handleRequest('POST', '/galeras', { numLote: 20 })
+    handleRequest('POST', '/galeras', { numLote: lote })
   }
 
   const navigateToGaleras = (idGalera, galera) => {
-    navigation.navigate('Creacion', { idGalera: idGalera, galera: galera })
+    navigation.navigate('Creacion', { idGalera, galera })
   }
 
   useEffect(() => {
-    if (response.data !== undefined && response.data !== null) {
-      setGaleras(response.data)
+    if (response !== undefined && response.data !== undefined && response.data.length > 0) {
+      const firstData = response.data[0]
+
+      if (firstData.idLote !== undefined && firstData.idLote !== null) {
+        setLote(firstData.idLote)
+      }
+
+      if (firstData.idGalera !== undefined && firstData.idGalera !== null) {
+        setGaleras(response.data)
+      }
     }
   }, [response])
 
   useEffect(() => {
-    handleObtainGaleras()
+    const obtainData = async () => {
+      try {
+        await handleObtainLote()
+      } catch (error) {
+        console.error('Error obteniendo lote:', error)
+      }
+    }
+
+    obtainData()
   }, [])
+
+  useEffect(() => {
+    if (lote !== '' && lote !== undefined && lote !== null) {
+      const handleObtainGaleras2 = async () => {
+        try {
+          await handleObtainGaleras()
+        } catch (error) {
+          console.error('Error obteniendo galeras:', error)
+        }
+      }
+
+      handleObtainGaleras2()
+    }
+  }, [lote])
 
   return (
     <View style={{
       margin: 0, padding: 0, alignItems: 'center', justifyContent: 'center', backgroundColor: '#ECECEC',
     }}
     >
+
       <StatusBar barStyle="light-content" backgroundColor="#fff" />
       <StatusBar barStyle="dark-content" backgroundColor="#fff" />
       <HeaderGalley
