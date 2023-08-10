@@ -8,7 +8,7 @@ import styles from './styles'
 
 const windowWidth = Dimensions.get('window').width
 
-const HeaderCreation = () => {
+const HeaderCreation = ({galera}) => {
   const navigation = useNavigation()
 
   return (
@@ -31,7 +31,7 @@ const HeaderCreation = () => {
       </View>
       <View style={styles.infoContainer}>
         <Text style={[styles.info, { fontSize: windowWidth * 0.055 }]}>Lote #1</Text>
-        <Text style={[styles.info, { fontSize: windowWidth * 0.055 }]}>Galera #1</Text>
+        <Text style={[styles.info, { fontSize: windowWidth * 0.055 }]}>{galera}</Text>
       </View>
       <View style={styles.line} />
     </View>

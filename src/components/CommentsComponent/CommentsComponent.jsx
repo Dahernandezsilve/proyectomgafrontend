@@ -4,22 +4,18 @@ import { View, TextInput, Button } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import styles from './styles';
 
-const CommentsComponent = ({ handleRegistrar }) => {
-  const [comentario, setComentario] = useState('');
-  const navigation = useNavigation();
+
+const CommentsComponent = ({ handleRegistrar, registro, setRegistro, code }) => {
+  const [comentario, setComentario] = useState('')
+  const navigation = useNavigation()
 
   const handleComentarioChange = text => {
-    setComentario(text);
-  };
-
-  const handleComplete = async () => {
-    handleRegistrar();
-    await navigateBack();
-  };
-
-  const navigateBack = async () => {
-    navigation.goBack();
-  };
+    setComentario(text)
+    setRegistro(prevRegistro => ({
+      ...prevRegistro,
+      [code]: text,
+    }));
+  }
 
   return (
     <View style={styles.container}>
