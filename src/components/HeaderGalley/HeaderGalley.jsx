@@ -24,31 +24,33 @@ const HeaderGalley = ({
   return (
     <View style={styles.headerContainer}>
       <Text style={styles.headerText}>{title}</Text>
-      <View style={styles.buttonContainer}>
-        {lotes.map((lote, index) => (
-          <TouchableOpacity
-            key={generateUniqueKey(lote, index)}
-            style={[
-              styles.tabButton,
-              activeTab === lote ? styles.activeTabButton : null,
-              { width: getButtonWidth() },
-            ]}
-            activeOpacity={0.7}
-            onPress={() => handleTabPress(lote)}
-          >
-            <Text
+      {lotes.length > 0 && (
+        <View style={styles.buttonContainer}>
+          {lotes.map((lote, index) => (
+            <TouchableOpacity
+              key={generateUniqueKey(lote, index)}
               style={[
-                styles.tabButtonText,
-                activeTab === lote ? styles.activeTabButtonText : null,
+                styles.tabButton,
+                activeTab === lote ? styles.activeTabButton : null,
+                { width: getButtonWidth() },
               ]}
+              activeOpacity={0.7}
+              onPress={() => handleTabPress(lote)}
             >
-              Lote:
-              {' '}
-              { lote }
-            </Text>
-          </TouchableOpacity>
-        ))}
-      </View>
+              <Text
+                style={[
+                  styles.tabButtonText,
+                  activeTab === lote ? styles.activeTabButtonText : null,
+                ]}
+              >
+                Lote:
+                {' '}
+                { lote }
+              </Text>
+            </TouchableOpacity>
+          ))}
+        </View>
+      )}
     </View>
   )
 }
@@ -56,8 +58,8 @@ const HeaderGalley = ({
 HeaderGalley.propTypes = {
   lotes: PropTypes.arrayOf(PropTypes.string).isRequired,
   title: PropTypes.string.isRequired,
-  activeTab: PropTypes.string.isRequired,
-  setActiveTab: PropTypes.func.isRequired,
+  activeTab: PropTypes.string,
+  setActiveTab: PropTypes.func,
 }
 
 export default HeaderGalley

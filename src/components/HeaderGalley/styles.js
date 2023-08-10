@@ -36,6 +36,7 @@ const styles = StyleSheet.create({
     fontSize: windowWidth * 0.06,
     marginBottom: windowWidth * 0.02,
     textAlign: 'center',
+    width: windowWidth,
   },
   tabButton: {
     backgroundColor: 'transparent',

@@ -1,15 +1,19 @@
-import { useState } from 'react'
+import { useState, useContext } from 'react'
+import { GlobalContext } from '../../GlobalContext/GlobalContext'
 
 const useApi = () => {
+  const { token } = useContext(GlobalContext)
   const [response, setResponse] = useState({})
   const [loading, setLoading] = useState(false)
   const handleRequest = async (method, path, body = '') => {
     setLoading(true)
+    console.log('Tokened', token)
     // fetch
     const options = {
       method,
       headers: {
         'Content-Type': 'application/json',
+        Authorization: `Bearer ${token}`,
       },
     }
     if (method !== 'GET') {

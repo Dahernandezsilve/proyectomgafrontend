@@ -26,7 +26,7 @@ const ReportScreenAdmin = (
     navigation,
   },
 ) => {
-  const lotes = ['20', '1', '2']
+  const lotes = ['1', '2', '3', '4']
   const [activeTab, setActiveTab] = useState(lotes[0])
   const [response,, handleRequest] = useApi()
   const [, setGaleras] = useState([])
@@ -52,7 +52,7 @@ const ReportScreenAdmin = (
   }
 
   const handleObtainGaleras = () => {
-    handleRequest('POST', '/galeras', { numLote: 20 })
+    handleRequest('POST', '/galeras')
   }
 
   const handleObtainWorkers = () => {
@@ -81,6 +81,10 @@ const ReportScreenAdmin = (
   }
 
   const verifyCA = ({ p, ca, tipo }) => {
+    if (ca === 0 || ca === null || ca < 0) {
+      return 'gray'
+    }
+
     const thresholds = {
       hembra: [
         [0.98, 0.94],
@@ -111,13 +115,13 @@ const ReportScreenAdmin = (
       ],
     }
 
-    const index = Math.floor((p - 1) / 7)
+    const index = Math.floor((p - 1) / 7);
 
     if (index < 0 || index >= thresholds[tipo].length) {
       return 'red'
     }
 
-    const [greenThreshold, orangeThreshold] = thresholds[tipo][index]
+    const [greenThreshold, orangeThreshold] = thresholds[tipo][index];
 
     if (ca > greenThreshold) {
       return 'green'
@@ -194,19 +198,20 @@ const ReportScreenAdmin = (
       return registers.map(inform => {
         const params = { p: inform.edadGalera, ca: inform.ca, tipo: inform.tipoPollo }
         const resultP = verifyCA(params)
+        const caValue = inform.ca === null || inform.ca === 0 ? 'gray' : resultP;
 
         if (resultP !== undefined) {
           return (
             <CardGaleraAdmin
-              ca={resultP}
+              ca={caValue}
               msgCA="C.A: "
               numberCA={inform.ca}
               customValues={{
                 galera: `Galera ${inform.idGalera}`,
-                cantidadAlimento: inform.cantidadAlimento,
-                pesado: inform.pesoMedido,
+                cantidadAlimento: `${inform.cantidadAlimento} qq`,
+                pesado: `${inform.pesoMedido} lbs`,
                 decesos: inform.decesos,
-                edad: inform.edadGalera,
+                edad: `${inform.edadGalera} días`,
                 observaciones: inform.observaciones,
                 navigateToGaleras,
               }}
@@ -280,14 +285,14 @@ const ReportScreenAdmin = (
           <RenderContentRegisters />
         </ScrollView>
       </View>
-      <View style={styles.bottomTabNavigator}>
+      {/* <View style={styles.bottomTabNavigator}>
         <BottomTabNavigation
           activeTab={activeTabb}
           setActiveTab={setActiveTabb}
           tabs={tabs}
           navigation={navigation}
         />
-      </View>
+      </View> */}
     </View>
   )
 }

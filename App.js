@@ -3,6 +3,7 @@ import React, { useEffect } from 'react'
 import { NavigationContainer } from '@react-navigation/native'
 import { createNativeStackNavigator } from '@react-navigation/native-stack'
 import * as Font from 'expo-font'
+import { GlobalProvider } from './src/GlobalContext/GlobalContext.js'
 import {
   ChoiceScreen, DetailsScreen, CreationScreen, HomeWorkerScreen, LoginAdministrator,
 } from './src/screens'
@@ -25,36 +26,38 @@ const App = () => {
   }, [])
 
   return (
-    <NavigationContainer>
-      <Stack.Navigator initialRouteName="SelectUser">
-        <Stack.Screen name="SelectUser" component={ChoiceScreen} options={{ headerShown: false }} />
-        <Stack.Screen name="Administrador" component={LoginAdministrator} options={{ header: () => null }} />
-        <Stack.Screen name="Trabajador" component={LoginWorker} options={{ header: () => null }} />
-        <Stack.Screen name="NGalley" component={NewGalleyScreen} options={{ header: () => null }} />
-        <Stack.Screen
-          name="HomeWorker"
-          component={HomeWorkerScreen}
-          options={{ header: () => null }}
-        />
-        <Stack.Screen name="Galeras" component={DetailsScreen} />
-        <Stack.Screen
-          name="Creacion"
-          component={CreationScreen}
-          options={{ header: () => null }}
-        />
-        <Stack.Screen
-          name="Home"
-          options={{ header: () => null }}
-        >
-          {({ route, navigation }) => (
-            <ReportScreenAdmin
-              route={route}
-              navigation={navigation}
-            />
-          )}
-        </Stack.Screen>
-      </Stack.Navigator>
-    </NavigationContainer>
+    <GlobalProvider>
+      <NavigationContainer>
+        <Stack.Navigator initialRouteName="SelectUser">
+          <Stack.Screen name="SelectUser" component={ChoiceScreen} options={{ headerShown: false }} />
+          <Stack.Screen name="Administrador" component={LoginAdministrator} options={{ header: () => null }} />
+          <Stack.Screen name="Trabajador" component={LoginWorker} options={{ header: () => null }} />
+          <Stack.Screen name="NGalley" component={NewGalleyScreen} options={{ header: () => null }} />
+          <Stack.Screen
+            name="HomeWorker"
+            component={HomeWorkerScreen}
+            options={{ header: () => null }}
+          />
+          <Stack.Screen name="Galeras" component={DetailsScreen} />
+          <Stack.Screen
+            name="Creacion"
+            component={CreationScreen}
+            options={{ header: () => null }}
+          />
+          <Stack.Screen
+            name="Home"
+            options={{ header: () => null }}
+          >
+            {({ route, navigation }) => (
+              <ReportScreenAdmin
+                route={route}
+                navigation={navigation}
+              />
+            )}
+          </Stack.Screen>
+        </Stack.Navigator>
+      </NavigationContainer>
+    </GlobalProvider>
   )
 }
 
