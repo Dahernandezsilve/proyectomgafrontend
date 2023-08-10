@@ -1,5 +1,5 @@
 import { useState, useContext } from 'react'
-import { GlobalContext } from '../../GlobalContext/GlobalContext.js'
+import { GlobalContext } from '../../GlobalContext/GlobalContext'
 
 const useApi = () => {
   const { token } = useContext(GlobalContext)
