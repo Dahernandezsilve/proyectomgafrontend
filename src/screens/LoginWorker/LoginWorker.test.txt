@@ -1,0 +1,33 @@
+import React from 'react';
+import { render, fireEvent } from '@testing-library/react-native';
+import LoginWorker from './LoginWorker';
+
+// Mock the navigation prop
+const mockNavigate = jest.fn();
+jest.mock('@react-navigation/native', () => {
+  return {
+    useNavigation: () => ({
+      navigate: mockNavigate,
+    }),
+  };
+});
+
+// Test the LoginWorker component
+describe('LoginWorker component', () => {
+  it('should render correctly and call navigation.navigate with "HomeWorker" on button press', () => {
+    const { getByPlaceholderText, getByText } = render(<LoginWorker />);
+
+    // Find the input field and button
+    const codeInput = getByPlaceholderText('Código');
+    const loginButton = getByText('Acceder');
+
+    // Mock the text entered in the input field
+    fireEvent.changeText(codeInput, '123456');
+
+    // Press the login button
+    fireEvent.press(loginButton);
+
+    // Check if navigation.navigate was called with the correct argument
+    expect(mockNavigate).toHaveBeenCalledWith('trabajador');
+  });
+});

@@ -1,8 +1,9 @@
-import React, { useState } from 'react'
-import PropTypes from 'prop-types'
-import { View, TextInput, Button } from 'react-native'
-import { useNavigation } from '@react-navigation/native'
-import styles from './styles'
+import React, { useState } from 'react';
+import PropTypes from 'prop-types';
+import { View, TextInput, Button } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
+import styles from './styles';
+
 
 const CommentsComponent = ({ handleRegistrar, registro, setRegistro, code }) => {
   const [comentario, setComentario] = useState('')
@@ -32,18 +33,15 @@ const CommentsComponent = ({ handleRegistrar, registro, setRegistro, code }) => 
           title="Completar"
           style={{ borderRadius: 5 }}
           color="#2e4a85"
-          onPress={() => {
-            handleRegistrar()
-            navigation.goBack()
-          }}
+          onPress={handleComplete}
         />
       </View>
     </View>
-  )
-}
+  );
+};
 
 CommentsComponent.propTypes = {
   handleRegistrar: PropTypes.func.isRequired,
-}
+};
 
-export default CommentsComponent
+export default CommentsComponent;
