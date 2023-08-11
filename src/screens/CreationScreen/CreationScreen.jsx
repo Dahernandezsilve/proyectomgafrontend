@@ -81,7 +81,7 @@ const CreationScreen = () => {
           code="decesos"
           title="Cantidad de pollos muertos: "
           minimumValue={0}
-          maximumValue={10000}
+          maximumValue={5000}
           step={1}
           medida="pollos"
           fixed="0"
