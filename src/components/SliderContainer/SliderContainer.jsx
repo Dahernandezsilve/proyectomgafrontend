@@ -6,60 +6,62 @@ import {
 import Slider from '@react-native-community/slider'
 import styles from './styles'
 
-const SliderContainer = ({ code,
-  title, minimumValue, maximumValue, step, medida, fixed, registro, setRegistro
+const SliderContainer = ({
+  code,
+  title, minimumValue, maximumValue, step, medida, fixed, registro, setRegistro,
 }) => {
   const [value, setValue] = useState(0.0)
   const [formattedValue, setFormattedValue] = useState('0')
   const textInputRef = useRef(null)
 
   const handleTextInputChange = text => {
-    setFormattedValue(text);
+    setFormattedValue(text)
     if (text === '') {
-      setValue(0);
+      setValue(0)
     }
   }
 
   useEffect(() => {
-    console.log("registro", registro)
   }, [registro])
-  
+
   const handleDoneEditing = () => {
-    const numericValue = parseFloat(formattedValue.replace(/\s/g, ''));
+    const numericValue = parseFloat(formattedValue.replace(/\s/g, ''))
     if (!Number.isNaN(numericValue)) {
-      const roundedValue = parseFloat(numericValue.toFixed(fixed));
-      setValue(roundedValue);
-      setFormattedValue(roundedValue.toFixed(fixed));
-        switch (code) {
-          case "decesos":
-            setRegistro(prevRegistro => ({ ...prevRegistro, decesos: roundedValue }));
-            break
-          case "cantidadAlimento":
-            setRegistro(prevRegistro => ({ ...prevRegistro, cantidadAlimento: roundedValue }));
-            break
-          case "pesado":
-            setRegistro(prevRegistro => ({ ...prevRegistro, pesado: roundedValue }));
-            break
-        }
-    } else {
-      setValue(0);
-      setFormattedValue('0');
-      console.log("Not fixed", code)
+      const roundedValue = parseFloat(numericValue.toFixed(fixed))
+      setValue(roundedValue)
+      setFormattedValue(roundedValue.toFixed(fixed))
       switch (code) {
-        case "decesos":
-          setRegistro(prevRegistro => ({ ...prevRegistro, decesos: 0 }));
+        case 'decesos':
+          setRegistro(prevRegistro => ({ ...prevRegistro, decesos: roundedValue }))
           break
-        case "cantidadAlimento":
-          setRegistro(prevRegistro => ({ ...prevRegistro, cantidadAlimento: 0 }));
+        case 'cantidadAlimento':
+          setRegistro(prevRegistro => ({ ...prevRegistro, cantidadAlimento: roundedValue }))
           break
-        case "pesado":
-          setRegistro(prevRegistro => ({ ...prevRegistro, pesado: 0 }));
+        case 'pesado':
+          setRegistro(prevRegistro => ({ ...prevRegistro, pesado: roundedValue }))
+          break
+        default:
+          break
+      }
+    } else {
+      setValue(0)
+      setFormattedValue('0')
+      switch (code) {
+        case 'decesos':
+          setRegistro(prevRegistro => ({ ...prevRegistro, decesos: 0 }))
+          break
+        case 'cantidadAlimento':
+          setRegistro(prevRegistro => ({ ...prevRegistro, cantidadAlimento: 0 }))
+          break
+        case 'pesado':
+          setRegistro(prevRegistro => ({ ...prevRegistro, pesado: 0 }))
+          break
+        default:
           break
       }
     }
-    Keyboard.dismiss();
+    Keyboard.dismiss()
   }
-  
 
   return (
     <View style={styles.container}>

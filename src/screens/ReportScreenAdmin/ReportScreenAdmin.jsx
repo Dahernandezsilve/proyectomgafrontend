@@ -6,7 +6,7 @@ import DateTimePicker from '@react-native-community/datetimepicker'
 import PropTypes from 'prop-types'
 import {
   SelectDate,
-  SelectOption, TrafficLight, CardGaleraAdmin, NoInfo, BottomTabNavigation, HeaderInformation,
+  SelectOption, TrafficLight, CardGaleraAdmin, NoInfo, HeaderInformation,
 } from '../../components'
 import useApi from '../../hooks/useApi/useApi'
 import styles from './styles'
@@ -66,10 +66,8 @@ const ReportScreenAdmin = (
         if (optionSelected.nombre !== 'No seleccionar') {
           handleRequest('POST', '/obtainRegistersDate', { date: answer, idTrabajador: optionSelected.idTrabajador, idLote: tabActive })
           setRegistersActive(true)
-          console.log(response)
         }
       } else {
-        console.log('lote activo', tabActive)
         handleRequest('POST', '/obtainRegistersDate', { date: answer, idLote: tabActive })
         setRegistersActive(true)
       }
@@ -115,13 +113,13 @@ const ReportScreenAdmin = (
       ],
     }
 
-    const index = Math.floor((p - 1) / 7);
+    const index = Math.floor((p - 1) / 7)
 
     if (index < 0 || index >= thresholds[tipo].length) {
       return 'red'
     }
 
-    const [greenThreshold, orangeThreshold] = thresholds[tipo][index];
+    const [greenThreshold, orangeThreshold] = thresholds[tipo][index]
 
     if (ca > greenThreshold) {
       return 'green'
@@ -132,7 +130,6 @@ const ReportScreenAdmin = (
   }
 
   useEffect(() => {
-    console.log('lote', activeTab)
     if (response.data !== undefined && response.data !== null) {
       if (typeof response.data.ca !== 'undefined') {
         setGaleras(response.data)
@@ -155,7 +152,6 @@ const ReportScreenAdmin = (
   useEffect(() => {
     handleObtainGaleras()
     handleObtainWorkers()
-    console.log('registers', registers)
   }, [])
 
   useEffect(() => {
@@ -168,9 +164,6 @@ const ReportScreenAdmin = (
   useEffect(() => {
     if (response.data !== undefined && response.data !== null) {
       if (Array.isArray(response.data) && response.data.length > 0 && 'cantidadAlimento' in response.data[0]) {
-        console.log('inform', registers)
-        console.log(registers)
-
         registers.map(inform => {
           if (verifyCA({ p: inform.edadGalera, ca: inform.ca, tipo: inform.tipoPollo }) === 'red') {
             setBottomValue(prevBottomValue => prevBottomValue + 1)
@@ -195,38 +188,43 @@ const ReportScreenAdmin = (
     }
 
     if (Array.isArray(registers) && registers.length > 0) {
-      return registers.map(inform => {
-        const params = { p: inform.edadGalera, ca: inform.ca, tipo: inform.tipoPollo }
-        const resultP = verifyCA(params)
-        const caValue = inform.ca === null || inform.ca === 0 ? 'gray' : resultP;
+      return (
+        <>
+          {registers.map(inform => {
+            const params = { p: inform.edadGalera, ca: inform.ca, tipo: inform.tipoPollo }
+            const resultP = verifyCA(params)
+            const caValue = inform.ca === null || inform.ca === 0 ? 'gray' : resultP
 
-        if (resultP !== undefined) {
-          return (
-            <CardGaleraAdmin
-              ca={caValue}
-              msgCA="C.A: "
-              numberCA={inform.ca}
-              customValues={{
-                galera: `Galera ${inform.idGalera}`,
-                cantidadAlimento: `${inform.cantidadAlimento} qq`,
-                pesado: `${inform.pesoMedido} lbs`,
-                decesos: inform.decesos,
-                edad: `${inform.edadGalera} días`,
-                observaciones: inform.observaciones,
-                navigateToGaleras,
-              }}
-              customTitles={['Identificador:', 'Alimento:', 'Peso (Pollos):', 'Muertes:', 'Edad:', 'Observaciones:']}
-            />
-          )
-        }
+            if (resultP !== undefined) {
+              return (
+                <CardGaleraAdmin
+                  key={`${inform.idGalera} ${inform.edad}`}
+                  ca={caValue}
+                  msgCA="C.A: "
+                  numberCA={inform.ca}
+                  customValues={{
+                    galera: `Galera ${inform.idGalera}`,
+                    cantidadAlimento: `${inform.cantidadAlimento} qq`,
+                    pesado: `${inform.pesoMedido} lbs`,
+                    decesos: inform.decesos,
+                    edad: `${inform.edadGalera} días`,
+                    observaciones: inform.observaciones,
+                    navigateToGaleras,
+                  }}
+                  customTitles={['Identificador:', 'Alimento:', 'Peso (Pollos):', 'Muertes:', 'Edad:', 'Observaciones:']}
+                />
+              )
+            }
 
-        return null
-      })
+            return null
+          })}
+        </>
+      )
     }
 
     return null
   }
-
+  /*
   const tabs = [
     {
       label: 'Informe', route: 'Home', icon: 'home', method: 'AntDesign',
@@ -240,9 +238,9 @@ const ReportScreenAdmin = (
     {
       label: 'Personal', route: 'Administrador', icon: 'people', method: 'Octicons',
     },
-  ]
+  ] */
 
-  const [activeTabb, setActiveTabb] = useState(0)
+  // const [activeTabb, setActiveTabb] = useState(0)
 
   return (
     <View style={{ flex: 1 }}>
@@ -280,7 +278,6 @@ const ReportScreenAdmin = (
               middleValue={middleValue} // Valor para el cuadro naranja
               bottomValue={bottomValue}
             />
-
           </View>
           <RenderContentRegisters />
         </ScrollView>

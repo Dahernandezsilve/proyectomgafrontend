@@ -8,7 +8,7 @@ import styles from './styles'
 
 const windowWidth = Dimensions.get('window').width
 
-const HeaderCreation = ({galera}) => {
+const HeaderCreation = ({ galera }) => {
   const navigation = useNavigation()
 
   return (

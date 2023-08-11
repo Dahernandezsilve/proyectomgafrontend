@@ -8,7 +8,7 @@
     "ios": "expo start --ios",
     "web": "expo start --web",
     "build": "eas build",
-    "lint": "eslint src",
+    "lint": "eslint \"src/**/*.js\" \"src/**/*.jsx\"",
     "test": "jest",
     "e2e:android": "detox test --configuration android",
     "e2e:ios": "detox test --configuration ios"

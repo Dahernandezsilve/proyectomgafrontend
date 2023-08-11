@@ -58,7 +58,7 @@ SelectOption.propTypes = {
   }),
   options: PropTypes.arrayOf(
     PropTypes.shape({
-      idTrabajador: PropTypes.number.isRequired,
+      idTrabajador: PropTypes.string.isRequired,
       nombre: PropTypes.string.isRequired,
     }),
   ).isRequired,

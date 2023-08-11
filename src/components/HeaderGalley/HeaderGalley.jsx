@@ -58,7 +58,7 @@ const HeaderGalley = ({
 HeaderGalley.propTypes = {
   lotes: PropTypes.arrayOf(PropTypes.string).isRequired,
   title: PropTypes.string.isRequired,
-  activeTab: PropTypes.string,
+  activeTab: PropTypes.number,
   setActiveTab: PropTypes.func,
 }
 
