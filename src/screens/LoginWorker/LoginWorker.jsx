@@ -62,7 +62,7 @@ const LoginWorker = ({ navigation }) => {
           secureTextEntry
           onChangeText={text => setCodigo(text)}
         />
-        <TouchableOpacity style={styles.button} onPress={() => navigateToWorkerScreen(codigo)}>
+        <TouchableOpacity style={styles.button} onPress={() => navigateToWorkerScreen(codigo)} accessibilityLabel="login-button">
           <Text style={styles.buttonText}>Acceder</Text>
         </TouchableOpacity>
       </View>
