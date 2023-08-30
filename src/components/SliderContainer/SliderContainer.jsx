@@ -1,31 +1,82 @@
-import React, { useState } from 'react'
+import React, { useState, useRef, useEffect } from 'react'
 import PropTypes from 'prop-types'
 import {
-  View, Text, TextInput,
+  View, Text, TextInput, Keyboard, TouchableOpacity,
 } from 'react-native'
 import Slider from '@react-native-community/slider'
 import styles from './styles'
 
-const SliderContainer = ({
-  title, minimumValue, maximumValue, step, medida, fixed,
+const SliderContainer = ({ code,
+  title, minimumValue, maximumValue, step, medida, fixed, registro, setRegistro
 }) => {
   const [value, setValue] = useState(0.0)
+  const [formattedValue, setFormattedValue] = useState('0')
+  const textInputRef = useRef(null)
 
   const handleTextInputChange = text => {
-    const numericValue = parseFloat(text.replace(/\s/g, ''))
-    if (!Number.isNaN(numericValue)) {
-      setValue(numericValue)
+    setFormattedValue(text);
+    if (text === '') {
+      setValue(0);
     }
   }
 
+  useEffect(() => {
+    console.log("registro", registro)
+  }, [registro])
+  
+  const handleDoneEditing = () => {
+    const numericValue = parseFloat(formattedValue.replace(/\s/g, ''));
+    if (!Number.isNaN(numericValue)) {
+      const roundedValue = parseFloat(numericValue.toFixed(fixed));
+      setValue(roundedValue);
+      setFormattedValue(roundedValue.toFixed(fixed));
+        switch (code) {
+          case "decesos":
+            setRegistro(prevRegistro => ({ ...prevRegistro, decesos: roundedValue }));
+            break
+          case "cantidadAlimento":
+            setRegistro(prevRegistro => ({ ...prevRegistro, cantidadAlimento: roundedValue }));
+            break
+          case "pesado":
+            setRegistro(prevRegistro => ({ ...prevRegistro, pesado: roundedValue }));
+            break
+        }
+    } else {
+      setValue(0);
+      setFormattedValue('0');
+      console.log("Not fixed", code)
+      switch (code) {
+        case "decesos":
+          setRegistro(prevRegistro => ({ ...prevRegistro, decesos: 0 }));
+          break
+        case "cantidadAlimento":
+          setRegistro(prevRegistro => ({ ...prevRegistro, cantidadAlimento: 0 }));
+          break
+        case "pesado":
+          setRegistro(prevRegistro => ({ ...prevRegistro, pesado: 0 }));
+          break
+      }
+    }
+    Keyboard.dismiss();
+  }
+  
+
   return (
     <View style={styles.container}>
-      <View style={styles.valueContainer}>
-        <TextInput style={styles.valueText} onChangeText={handleTextInputChange} keyboardType="numeric">
-          {value.toFixed(fixed)}
-          {' '}
-        </TextInput>
-      </View>
+      <TouchableOpacity
+        style={styles.valueContainer}
+        onPress={() => textInputRef.current.focus()}
+      >
+        <TextInput
+          ref={textInputRef}
+          style={styles.valueText}
+          onChangeText={handleTextInputChange}
+          keyboardType="numeric"
+          value={formattedValue}
+          onBlur={handleDoneEditing}
+          onSubmitEditing={handleDoneEditing}
+        />
+      </TouchableOpacity>
       <Text style={[styles.title, { textAlign: 'left' }]}>{title}</Text>
       <Slider
         style={styles.slider}
@@ -39,8 +90,9 @@ const SliderContainer = ({
         thumbStyle={styles.sliderThumb}
         trackStyle={[styles.sliderTrack, { width: 10 }]}
         onValueChange={newValue => {
-          if (newValue !== undefined) {
+          if (!textInputRef.current.isFocused()) {
             setValue(newValue)
+            setFormattedValue(newValue.toFixed(fixed))
           }
         }}
       />
@@ -58,7 +110,7 @@ SliderContainer.propTypes = {
   maximumValue: PropTypes.number.isRequired,
   step: PropTypes.number.isRequired,
   medida: PropTypes.string.isRequired,
-  fixed: PropTypes.number.isRequired,
+  fixed: PropTypes.string.isRequired,
 }
 
 export default SliderContainer

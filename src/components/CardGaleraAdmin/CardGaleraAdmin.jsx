@@ -8,6 +8,7 @@ import {
 import PropTypes from 'prop-types'
 import styles from './styles'
 
+
 const CardGaleraAdmin = ({
   ca, msgCA, numberCA, customValues, customTitles, navigateToGaleras,
 }) => {
@@ -38,7 +39,7 @@ const CardGaleraAdmin = ({
   }
 
   return (
-    <TouchableWithoutFeedback onPressIn={onPressIn} onPressOut={onPressOut}>
+    <TouchableWithoutFeedback onPressIn={onPressIn} onPressOut={onPressOut} testID='card-galera'>
       <Animated.View
         style={
           [styles.container, { width: windowWidth - windowWidth * 0.1, opacity: opacityValue }]
