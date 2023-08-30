@@ -1,11 +1,14 @@
-import React, { useState } from 'react';
-import PropTypes from 'prop-types';
-import { View, TextInput, Button } from 'react-native';
-import { useNavigation } from '@react-navigation/native';
-import styles from './styles';
+import React, { useState, useContext } from 'react'
+import PropTypes from 'prop-types'
+import { View, TextInput, Button } from 'react-native'
+import { useNavigation } from '@react-navigation/native'
+import styles from './styles'
+import { GlobalContext } from '../../GlobalContext/GlobalContext'
 
-
-const CommentsComponent = ({ handleRegistrar, registro, setRegistro, code }) => {
+const CommentsComponent = ({
+  handleRegistrar, registro, setRegistro, code,
+}) => {
+  const { setRefresh } = useContext(GlobalContext)
   const [comentario, setComentario] = useState('')
   const navigation = useNavigation()
 
@@ -14,7 +17,7 @@ const CommentsComponent = ({ handleRegistrar, registro, setRegistro, code }) => 
     setRegistro(prevRegistro => ({
       ...prevRegistro,
       [code]: text,
-    }));
+    }))
   }
 
   return (
@@ -33,7 +36,12 @@ const CommentsComponent = ({ handleRegistrar, registro, setRegistro, code }) => 
           title="Completar"
           style={{ borderRadius: 5 }}
           color="#2e4a85"
-          onPress={handleComplete}
+          onPress={() => {
+            handleRegistrar()
+            navigation.navigate('HomeWorker')
+            setRefresh(true)
+          }}
+
         />
       </View>
     </View>

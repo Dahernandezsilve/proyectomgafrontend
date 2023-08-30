@@ -28,7 +28,7 @@ export const handleLogin = async (correo, contrasena) => {
 
 
 const LoginAdministrator = ({ navigation }) => {
-  const { token , setToken } = useContext(GlobalContext)
+  const { setToken } = useContext(GlobalContext)
   const [response,, handleRequest] = useApi()
   const [correo, setCorreo] = useState('')
   const [contrasena, setContrasena] = useState('')
@@ -43,10 +43,8 @@ const LoginAdministrator = ({ navigation }) => {
   useEffect(() => {
     if (response.message !== null || response.message !== undefined) {
       // eslint-disable-next-line no-console
-      console.log(response)
       if (response.data !== null || response.data !== undefined) {
         if (response.session_token !== null) {
-          console.log('Token: ', response.session_token)
           setToken(response.session_token)
         }
         if (response.data && response.data.length > 0) {

@@ -8,7 +8,6 @@ const HeaderInformation = ({
 }) => {
   const handleTabPress = tabName => {
     setActiveTab(tabName)
-    console.log('loteactivoiNFO', activeTab)
   }
 
   return (

@@ -1,22 +1,25 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useContext } from 'react'
 import { View, ScrollView, StatusBar } from 'react-native'
 import PropTypes from 'prop-types'
 import { CardGalera, TextCard, HeaderGalley } from '../../components'
+import { GlobalContext } from '../../GlobalContext/GlobalContext'
+
 import useApi from '../../hooks/useApi/useApi'
 
 const HomeWorkerScreen = ({ navigation }) => {
   const lotes = []
-  const [activeTab, setActiveTab] = useState(lotes[0])
+  const { refresh, setRefresh } = useContext(GlobalContext)
+  const [activeTab, setActiveTab] = useState(0)
   const [response, , handleRequest] = useApi()
   const [galeras, setGaleras] = useState([])
   const [lote, setLote] = useState('')
 
-  const handleObtainLote = () => {
-    handleRequest('GET', '/loteObtain')
+  const handleObtainLote = async () => {
+    await handleRequest('GET', '/loteObtain')
   }
 
-  const handleObtainGaleras = () => {
-    handleRequest('POST', '/galeras', { numLote: lote })
+  const handleObtainGaleras = async () => {
+    await handleRequest('POST', '/galeras', { numLote: lote })
   }
 
   const navigateToGaleras = (idGalera, galera) => {
@@ -24,8 +27,7 @@ const HomeWorkerScreen = ({ navigation }) => {
   }
 
   useEffect(() => {
-    console.log('response', response)
-    if (response !== undefined && response.data !== undefined && response.data.length > 0) {
+    if (response?.data?.length > 0) {
       const firstData = response.data[0]
 
       if (firstData.idLote !== undefined && firstData.idLote !== null) {
@@ -34,36 +36,29 @@ const HomeWorkerScreen = ({ navigation }) => {
 
       if (firstData.idGalera !== undefined && firstData.idGalera !== null) {
         setGaleras(response.data)
-        console.log('galeras', response)
       }
     }
   }, [response])
 
   useEffect(() => {
-    const obtainData = async () => {
-      try {
-        await handleObtainLote()
-      } catch (error) {
-        console.error('Error obteniendo lote:', error)
-      }
-    }
+  }, [galeras])
 
-    obtainData()
+  useEffect(() => {
+    handleObtainLote()
   }, [])
 
   useEffect(() => {
-    if (lote !== '' && lote !== undefined && lote !== null) {
-      const handleObtainGaleras2 = async () => {
-        try {
-          await handleObtainGaleras()
-        } catch (error) {
-          console.error('Error obteniendo galeras:', error)
-        }
-      }
-
-      handleObtainGaleras2()
+    if (lote) {
+      handleObtainGaleras()
     }
   }, [lote])
+
+  useEffect(() => {
+    if (refresh) {
+      handleObtainLote()
+      setRefresh(false)
+    }
+  }, [refresh])
 
   return (
     <View style={{
@@ -97,6 +92,7 @@ const HomeWorkerScreen = ({ navigation }) => {
             if (parseFloat(galer.ca) > 2.6 && galer.ca < 4.9) {
               return <CardGalera idGalera={galer.idGalera} key={galer.idGalera} galera={`Galera ${galer.numeroGalera}`} ca="orange" navigateToGaleras={navigateToGaleras} />
             }
+            return null
           })
         }
       </ScrollView>

@@ -1,12 +1,14 @@
+import React, { useState } from 'react'
 
-import React, { useEffect, useState } from 'react'
 import Proptypes from 'prop-types'
 import {
   View, Text, TouchableWithoutFeedback, Animated, useWindowDimensions,
 } from 'react-native'
 import styles from './styles'
 
-const CardGalera = ({ idGalera, galera, ca, navigateToGaleras }) => {
+const CardGalera = ({
+  idGalera, galera, ca, navigateToGaleras,
+}) => {
   const [opacityValue] = useState(new Animated.Value(1))
   const windowWidth = useWindowDimensions().width
 

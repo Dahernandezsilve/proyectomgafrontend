@@ -18,6 +18,7 @@ const SvgComponent = props => (
     xmlSpace="preserve"
     id="svg1011"
     fill="none"
+    // eslint-disable-next-line react/jsx-props-no-spreading
     {...props}
   >
     <Defs id="defs1009">
