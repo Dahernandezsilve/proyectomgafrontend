@@ -1,15 +1,23 @@
-import React, { useState } from 'react'
+import React, { useState, useContext } from 'react'
 import PropTypes from 'prop-types'
 import { View, TextInput, Button } from 'react-native'
 import { useNavigation } from '@react-navigation/native'
 import styles from './styles'
+import { GlobalContext } from '../../GlobalContext/GlobalContext'
 
-const CommentsComponent = ({ handleRegistrar }) => {
+const CommentsComponent = ({
+  handleRegistrar, registro, setRegistro, code,
+}) => {
+  const { setRefresh } = useContext(GlobalContext)
   const [comentario, setComentario] = useState('')
   const navigation = useNavigation()
 
   const handleComentarioChange = text => {
     setComentario(text)
+    setRegistro(prevRegistro => ({
+      ...prevRegistro,
+      [code]: text,
+    }))
   }
 
   return (
@@ -30,7 +38,8 @@ const CommentsComponent = ({ handleRegistrar }) => {
           color="#2e4a85"
           onPress={() => {
             handleRegistrar()
-            navigation.goBack()
+            navigation.navigate('HomeWorker')
+            setRefresh(true)
           }}
         />
       </View>

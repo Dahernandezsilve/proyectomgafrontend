@@ -2,15 +2,11 @@ import React, { useState } from 'react'
 import {
   Alert,
   Modal,
-  StyleSheet,
   Text,
   Pressable,
   View,
-  Dimensions,
 } from 'react-native'
 import styles from './styles'
-
-const windowWidth = Dimensions.get('window').width
 
 const ModalComponent = () => {
   const [modalVisible, setModalVisible] = useState(false)

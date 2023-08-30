@@ -1,38 +1,71 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useContext } from 'react'
 import { View, ScrollView, StatusBar } from 'react-native'
 import PropTypes from 'prop-types'
 import { CardGalera, TextCard, HeaderGalley } from '../../components'
+import { GlobalContext } from '../../GlobalContext/GlobalContext'
+
 import useApi from '../../hooks/useApi/useApi'
 
 const HomeWorkerScreen = ({ navigation }) => {
-  const lotes = ['20', '1', '2']
-  const [activeTab, setActiveTab] = useState(lotes[0])
-  const [response,, handleRequest] = useApi()
+  const lotes = []
+  const { refresh, setRefresh } = useContext(GlobalContext)
+  const [activeTab, setActiveTab] = useState(0)
+  const [response, , handleRequest] = useApi()
   const [galeras, setGaleras] = useState([])
+  const [lote, setLote] = useState('')
 
-  const handleObtainGaleras = () => {
-    handleRequest('POST', '/galeras', { numLote: 20 })
+  const handleObtainLote = async () => {
+    await handleRequest('GET', '/loteObtain')
   }
 
-  const navigateToGaleras = async () => {
-    navigation.navigate('Creacion')
+  const handleObtainGaleras = async () => {
+    await handleRequest('POST', '/galeras', { numLote: lote })
+  }
+
+  const navigateToGaleras = (idGalera, galera) => {
+    navigation.navigate('Creacion', { idGalera, galera })
   }
 
   useEffect(() => {
-    if (response.data !== undefined && response.data !== null) {
-      setGaleras(response.data)
+    if (response?.data?.length > 0) {
+      const firstData = response.data[0]
+
+      if (firstData.idLote !== undefined && firstData.idLote !== null) {
+        setLote(firstData.idLote)
+      }
+
+      if (firstData.idGalera !== undefined && firstData.idGalera !== null) {
+        setGaleras(response.data)
+      }
     }
   }, [response])
 
   useEffect(() => {
-    handleObtainGaleras()
+  }, [galeras])
+
+  useEffect(() => {
+    handleObtainLote()
   }, [])
+
+  useEffect(() => {
+    if (lote) {
+      handleObtainGaleras()
+    }
+  }, [lote])
+
+  useEffect(() => {
+    if (refresh) {
+      handleObtainLote()
+      setRefresh(false)
+    }
+  }, [refresh])
 
   return (
     <View style={{
-      margin: 0, padding: 0, alignItems: 'center', justifyContent: 'center', backgroundColor: '#ECECEC',
+      flex: 1, margin: 0, padding: 0, alignItems: 'center', justifyContent: 'center', backgroundColor: '#ECECEC',
     }}
     >
+
       <StatusBar barStyle="light-content" backgroundColor="#fff" />
       <StatusBar barStyle="dark-content" backgroundColor="#fff" />
       <HeaderGalley
@@ -45,16 +78,19 @@ const HomeWorkerScreen = ({ navigation }) => {
         <TextCard number="10000" />
         {
           galeras.map(galer => {
+            if (galer.ca === null) {
+              return <CardGalera idGalera={galer.idGalera} key={galer.idGalera} galera={`Galera ${galer.numeroGalera}`} ca="gray" navigateToGaleras={navigateToGaleras} />
+            }
             if (parseFloat(galer.ca) > 4.9) {
-              return <CardGalera key={galer.idGalera} galera={`Galera ${galer.numeroGalera}`} ca="red" navigateToGaleras={navigateToGaleras} />
+              return <CardGalera idGalera={galer.idGalera} key={galer.idGalera} galera={`Galera ${galer.numeroGalera}`} ca="red" navigateToGaleras={navigateToGaleras} />
             }
 
             if (parseFloat(galer.ca) < 2.6) {
-              return <CardGalera key={galer.idGalera} galera={`Galera ${galer.numeroGalera}`} ca="green" navigateToGaleras={navigateToGaleras} />
+              return <CardGalera idGalera={galer.idGalera} key={galer.idGalera} galera={`Galera ${galer.numeroGalera}`} ca="green" navigateToGaleras={navigateToGaleras} />
             }
 
             if (parseFloat(galer.ca) > 2.6 && galer.ca < 4.9) {
-              return <CardGalera key={galer.idGalera} galera={`Galera ${galer.numeroGalera}`} ca="orange" navigateToGaleras={navigateToGaleras} />
+              return <CardGalera idGalera={galer.idGalera} key={galer.idGalera} galera={`Galera ${galer.numeroGalera}`} ca="orange" navigateToGaleras={navigateToGaleras} />
             }
             return null
           })
