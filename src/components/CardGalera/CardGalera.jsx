@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+
 import Proptypes from 'prop-types'
 import {
   View, Text, TouchableWithoutFeedback, Animated, useWindowDimensions,
@@ -16,16 +17,16 @@ const CardGalera = ({
       toValue: 0.5,
       duration: 100,
       useNativeDriver: true,
-    }).start()
-  }
+    }).start();
+  };
 
   const onPressOut = () => {
     Animated.timing(opacityValue, {
       toValue: 1,
       duration: 100,
       useNativeDriver: true,
-    }).start()
-  }
+    }).start();
+  };
 
   return (
     <TouchableWithoutFeedback
@@ -33,9 +34,9 @@ const CardGalera = ({
       onPressIn={onPressIn}
       onPressOut={onPressOut}
     >
-      <Animated.View style={
-        [styles.container, { width: windowWidth - windowWidth * 0.1, opacity: opacityValue }]
-      }
+      <Animated.View
+        testID="animated-view" // Add testID prop here
+        style={[styles.container, { width: windowWidth - windowWidth * 0.1, opacity: opacityValue }]}
       >
         <View style={styles.caContainer}>
           <Text style={styles.smallText}>C.A</Text>
@@ -46,8 +47,8 @@ const CardGalera = ({
         </View>
       </Animated.View>
     </TouchableWithoutFeedback>
-  )
-}
+  );
+};
 
 CardGalera.propTypes = {
   idGalera: Proptypes.string,
@@ -62,4 +63,4 @@ CardGalera.defaultProps = {
   idGalera: null,
 }
 
-export default CardGalera
+export default CardGalera;
