@@ -3,22 +3,38 @@ import PropTypes from 'prop-types'
 import {
   View, Text, TextInput, TouchableOpacity, StatusBar,
 } from 'react-native'
-import { GlobalContext } from '../../GlobalContext/GlobalContext.js'
+import { GlobalContext } from '../../GlobalContext/GlobalContext'
 import useApi from '../../hooks/useApi/useApi'
 import ElCeibillalImg from '../../img/ElCeibillalSvg'
 import ElCeibillalImgV2 from '../../img/ElCeibillalV2Svg'
 import styles from './styles'
 
+export const handleLogin = async (correo, contrasena) => {
+  try {
+    const response = await fetch('/login', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ user: correo, password: contrasena }),
+    });
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    console.error('Error occurred during login:', error);
+    return null;
+  }
+};
+
+
 const LoginAdministrator = ({ navigation }) => {
-  const { token, setToken } = useContext(GlobalContext)
+  const { setToken } = useContext(GlobalContext)
   const [response,, handleRequest] = useApi()
   const [correo, setCorreo] = useState('')
   const [contrasena, setContrasena] = useState('')
   const [, setHaveAccess] = useState(false)
 
-  const handleLogin = () => {
-    handleRequest('POST', '/login', { user: correo, password: contrasena })
-  }
+  
 
   const navigateToAdminScreen = () => {
     handleLogin(correo, contrasena)
@@ -27,10 +43,8 @@ const LoginAdministrator = ({ navigation }) => {
   useEffect(() => {
     if (response.message !== null || response.message !== undefined) {
       // eslint-disable-next-line no-console
-      console.log(response)
       if (response.data !== null || response.data !== undefined) {
-        if(response.session_token !== null){
-          console.log("Token: ",response.session_token)
+        if (response.session_token !== null) {
           setToken(response.session_token)
         }
         if (response.data && response.data.length > 0) {

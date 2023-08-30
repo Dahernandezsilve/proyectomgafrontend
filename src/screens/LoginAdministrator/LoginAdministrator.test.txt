@@ -1,0 +1,53 @@
+import 'text-encoding-polyfill'; // Add this line before importing @testing-library/react-native
+import React from 'react';
+import { render, fireEvent, act } from '@testing-library/react-native';
+import LoginAdministrator, { handleLogin } from './LoginAdministrator';
+
+// Mock the useApi hook with a resolved promise for handleLogin
+jest.mock('../../hooks/useApi/useApi', () => ({
+  __esModule: true,
+  default: () => [null, null, jest.fn(() => Promise.resolve({ message: 'Good Job', data: [{ rol: 'admin' }] }))],
+}));
+
+// Test the LoginAdministrator component
+describe('LoginAdministrator component', () => {
+  it('should render correctly and call handleLogin on button press', async () => {
+    const mockNavigate = jest.fn();
+    const { getByPlaceholderText, getByText } = render(
+      <LoginAdministrator navigation={{ navigate: mockNavigate }} />
+    );
+
+    const emailInput = getByPlaceholderText('Correo');
+    const passwordInput = getByPlaceholderText('Contraseña');
+    expect(emailInput).toBeTruthy();
+    expect(passwordInput).toBeTruthy();
+
+    const loginButton = getByText('Acceder');
+    expect(loginButton).toBeTruthy();
+
+    // Use act from react-test-renderer to perform the button press and handle asynchronous updates
+    await act(async () => {
+      fireEvent.press(loginButton);
+    });
+
+    // Wait for handleLogin to resolve
+    await act(async () => {
+      await handleLogin();
+    });
+
+    // Perform the same button press again to navigate
+    await act(async () => {
+      fireEvent.press(loginButton);
+    });
+
+    // Wait for handleLogin to resolve with mocked response
+    await act(async () => {
+      await handleLogin();
+    });
+
+    // Check if navigation.navigate('Home') was called
+    expect(mockNavigate).toHaveBeenCalledWith('Home');
+  });
+
+  // Add more test cases as needed
+});
