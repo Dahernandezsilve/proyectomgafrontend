@@ -17,15 +17,14 @@ export const handleLogin = async (correo, contrasena) => {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({ user: correo, password: contrasena }),
-    });
-    const data = await response.json();
-    return data;
+    })
+    const data = await response.json()
+    return data
   } catch (error) {
-    console.error('Error occurred during login:', error);
-    return null;
+    console.error('Error occurred during login:', error)
+    return null
   }
-};
-
+}
 
 const LoginAdministrator = ({ navigation }) => {
   const { setToken } = useContext(GlobalContext)
@@ -33,8 +32,6 @@ const LoginAdministrator = ({ navigation }) => {
   const [correo, setCorreo] = useState('')
   const [contrasena, setContrasena] = useState('')
   const [, setHaveAccess] = useState(false)
-
-  
 
   const navigateToAdminScreen = () => {
     handleLogin(correo, contrasena)
