@@ -1,16 +1,17 @@
-import { StyleSheet } from 'react-native'
-import SamsungOne from '../../fonts/SamsungOne-400.ttf'
+import { StyleSheet, Dimensions } from 'react-native'
+
+const windowWidth = Dimensions.get('window').width
 
 const styles = StyleSheet.create({
   backgroundImage: {
-    height: 270,
+    height: windowWidth * 0.9,
     marginBottom: 20,
     opacity: 0.6,
     position: 'absolute',
-    right: -80,
-    top: -100,
+    right: -windowWidth * 0.3,
+    top: -windowWidth * 0.37,
     transform: [{ rotate: '270deg' }],
-    width: 270,
+    width: windowWidth * 1.2,
     zIndex: 1,
   },
   button: {
@@ -18,35 +19,39 @@ const styles = StyleSheet.create({
     borderRadius: 5,
     marginTop: 20,
     paddingVertical: 10,
-    width: '100%',
+    width: windowWidth * 0.8,
   },
   buttonText: {
     color: 'white',
-    fontFamily: SamsungOne,
+    fontFamily: 'SamsungOne',
     fontSize: 16,
     textAlign: 'center',
   },
   container: {
     alignItems: 'center',
     backgroundColor: '#2B4985',
+    display: 'flex',
     flex: 1,
+    flexWrap: 'wrap',
     justifyContent: 'center',
   },
   formContainer: {
     alignItems: 'center',
-    width: '80%',
+    display: 'flex',
+    flexWrap: 'wrap',
+    width: windowWidth * 1,
   },
   input: {
     backgroundColor: 'white',
     borderRadius: 5,
     marginBottom: 1,
     padding: 10,
-    width: '100%',
+    width: windowWidth * 0.8,
   },
   logo: {
-    height: 300,
+    height: windowWidth * 0.8,
     marginBottom: 1,
-    width: 300,
+    width: windowWidth * 1.0,
   },
 })
 

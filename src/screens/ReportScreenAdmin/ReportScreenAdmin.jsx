@@ -4,12 +4,12 @@ import {
 } from 'react-native'
 import DateTimePicker from '@react-native-community/datetimepicker'
 import PropTypes from 'prop-types'
+import {
+  SelectDate,
+  SelectOption, TrafficLight, CardGaleraAdmin, NoInfo, HeaderInformation,
+} from '../../components'
 import useApi from '../../hooks/useApi/useApi'
-import SelectDate from '../../components/SelectDate/SelectDate'
-import SelectOption from '../../components/SelectOption/SelectOption'
-import TrafficLight from '../../components/TrafficLight'
-import CardGaleraAdmin from '../../components/CardGaleraAdmin/CardGaleraAdmin'
-import NoInfo from '../../components/NoInfo/NoInfo'
+import styles from './styles'
 
 const formatDate = dateString => {
   const date = new Date(dateString)
@@ -21,7 +21,13 @@ const formatDate = dateString => {
   return formattedDate
 }
 
-const ReportScreenAdmin = ({ navigation, activeTab }) => {
+const ReportScreenAdmin = (
+  {
+    navigation,
+  },
+) => {
+  const lotes = ['1', '2', '3', '4']
+  const [activeTab, setActiveTab] = useState(lotes[0])
   const [response,, handleRequest] = useApi()
   const [, setGaleras] = useState([])
   const [selectedDate, setSelectedDate] = useState(new Date())
@@ -34,6 +40,7 @@ const ReportScreenAdmin = ({ navigation, activeTab }) => {
   const [topValue, setTopValue] = useState(0)
   const [middleValue, setMiddleValue] = useState(0)
   const [bottomValue, setBottomValue] = useState(0)
+  const [showNoInfo, setShowNoInfo] = useState(false)
 
   const handleDateChange = (event, date) => {
     setSelectedDate(date)
@@ -45,7 +52,7 @@ const ReportScreenAdmin = ({ navigation, activeTab }) => {
   }
 
   const handleObtainGaleras = () => {
-    handleRequest('POST', '/galeras', { numLote: 20 })
+    handleRequest('POST', '/galeras')
   }
 
   const handleObtainWorkers = () => {
@@ -59,10 +66,8 @@ const ReportScreenAdmin = ({ navigation, activeTab }) => {
         if (optionSelected.nombre !== 'No seleccionar') {
           handleRequest('POST', '/obtainRegistersDate', { date: answer, idTrabajador: optionSelected.idTrabajador, idLote: tabActive })
           setRegistersActive(true)
-          console.log(response)
         }
       } else {
-        console.log('lote activo', tabActive)
         handleRequest('POST', '/obtainRegistersDate', { date: answer, idLote: tabActive })
         setRegistersActive(true)
       }
@@ -74,6 +79,10 @@ const ReportScreenAdmin = ({ navigation, activeTab }) => {
   }
 
   const verifyCA = ({ p, ca, tipo }) => {
+    if (ca === 0 || ca === null || ca < 0) {
+      return 'gray'
+    }
+
     const thresholds = {
       hembra: [
         [0.98, 0.94],
@@ -121,7 +130,6 @@ const ReportScreenAdmin = ({ navigation, activeTab }) => {
   }
 
   useEffect(() => {
-    console.log('lote', activeTab)
     if (response.data !== undefined && response.data !== null) {
       if (typeof response.data.ca !== 'undefined') {
         setGaleras(response.data)
@@ -144,7 +152,6 @@ const ReportScreenAdmin = ({ navigation, activeTab }) => {
   useEffect(() => {
     handleObtainGaleras()
     handleObtainWorkers()
-    console.log('registers', registers)
   }, [])
 
   useEffect(() => {
@@ -157,9 +164,6 @@ const ReportScreenAdmin = ({ navigation, activeTab }) => {
   useEffect(() => {
     if (response.data !== undefined && response.data !== null) {
       if (Array.isArray(response.data) && response.data.length > 0 && 'cantidadAlimento' in response.data[0]) {
-        console.log('inform', registers)
-        console.log(registers)
-
         registers.map(inform => {
           if (verifyCA({ p: inform.edadGalera, ca: inform.ca, tipo: inform.tipoPollo }) === 'red') {
             setBottomValue(prevBottomValue => prevBottomValue + 1)
@@ -174,18 +178,87 @@ const ReportScreenAdmin = ({ navigation, activeTab }) => {
     }
   }, [registers])
 
+  useEffect(() => {
+    setShowNoInfo(registers === undefined || registers.length === 0)
+  }, [registers])
+
+  const RenderContentRegisters = () => {
+    if (showNoInfo) {
+      return <NoInfo info="No hay información disponible" />
+    }
+
+    if (Array.isArray(registers) && registers.length > 0) {
+      return (
+        <>
+          {registers.map(inform => {
+            const params = { p: inform.edadGalera, ca: inform.ca, tipo: inform.tipoPollo }
+            const resultP = verifyCA(params)
+            const caValue = inform.ca === null || inform.ca === 0 ? 'gray' : resultP
+
+            if (resultP !== undefined) {
+              return (
+                <CardGaleraAdmin
+                  key={`${inform.idGalera} ${inform.edad}`}
+                  ca={caValue}
+                  msgCA="C.A: "
+                  numberCA={inform.ca}
+                  customValues={{
+                    galera: `Galera ${inform.idGalera}`,
+                    cantidadAlimento: `${inform.cantidadAlimento} qq`,
+                    pesado: `${inform.pesoMedido} lbs`,
+                    decesos: inform.decesos,
+                    edad: `${inform.edadGalera} días`,
+                    observaciones: inform.observaciones,
+                    navigateToGaleras,
+                  }}
+                  customTitles={['Identificador:', 'Alimento:', 'Peso (Pollos):', 'Muertes:', 'Edad:', 'Observaciones:']}
+                />
+              )
+            }
+
+            return null
+          })}
+        </>
+      )
+    }
+
+    return null
+  }
+  /*
+  const tabs = [
+    {
+      label: 'Informe', route: 'Home', icon: 'home', method: 'AntDesign',
+    },
+    {
+      label: 'Medición', route: 'Administrador', icon: 'bird', method: 'MaterialCommunityIcons',
+    },
+    {
+      label: 'Granja', route: 'NGalley', icon: 'line-graph', method: 'Entypo',
+    },
+    {
+      label: 'Personal', route: 'Administrador', icon: 'people', method: 'Octicons',
+    },
+  ] */
+
+  // const [activeTabb, setActiveTabb] = useState(0)
+
   return (
-    <View style={{
-      flex: 1, alignItems: 'center', justifyContent: 'center', backgroundColor: '#ECECEC',
-    }}
-    >
+    <View style={{ flex: 1 }}>
       <StatusBar barStyle="light-content" backgroundColor="#fff" />
       <StatusBar barStyle="dark-content" backgroundColor="#fff" />
-      <ScrollView contentContainerStyle={{ alignItems: 'center', marginBottom: 15 }}>
-        <View style={{ flexDirection: 'row', alignItems: 'center', zIndex: 2 }}>
-          <View style={{ flexDirection: 'column' }}>
-            <SelectDate onPress={handleSelectDatePress} selectedDate={selectedDate} />
-            {showDatePicker && (
+      <HeaderInformation
+        title="Informe"
+        lotes={lotes}
+        activeTab={activeTab}
+        setActiveTab={setActiveTab}
+        showLote
+      />
+      <View style={{ flex: 1 }}>
+        <ScrollView>
+          <View style={styles.rowContainer}>
+            <View style={{ flexDirection: 'column' }}>
+              <SelectDate onPress={handleSelectDatePress} selectedDate={selectedDate} />
+              {showDatePicker && (
               <DateTimePicker
                 value={selectedDate}
                 mode="date"
@@ -193,47 +266,30 @@ const ReportScreenAdmin = ({ navigation, activeTab }) => {
                 format="DD-MM-YYYY"
                 onChange={handleDateChange}
               />
-            )}
-            <SelectOption
-              selectedOption={selectedOption}
-              options={workers}
-              setSelectedOption={setSelectedOption}
+              )}
+              <SelectOption
+                selectedOption={selectedOption}
+                options={workers}
+                setSelectedOption={setSelectedOption}
+              />
+            </View>
+            <TrafficLight
+              topValue={topValue} // Valor para el cuadro verde
+              middleValue={middleValue} // Valor para el cuadro naranja
+              bottomValue={bottomValue}
             />
           </View>
-          <TrafficLight
-            topValue={topValue} // Valor para el cuadro verde
-            middleValue={middleValue} // Valor para el cuadro naranja
-            bottomValue={bottomValue} // Valor para el cuadro rojo
-          />
-        </View>
-        {
-          registers === undefined || registers.length === 0 ? (
-            <NoInfo info="No hay información disponible" />
-          ) : (
-            registers.map(inform => { // Variable temporal para almacenar los valores actualizados)
-              const params = { p: inform.edadGalera, ca: inform.ca, tipo: inform.tipoPollo }
-              const resultP = verifyCA(params)
-              if (resultP !== undefined) {
-                return (
-                  <CardGaleraAdmin
-                    key={inform.idRegistro}
-                    galera={`Galera ${inform.idGalera}`}
-                    cantidadAlimento={inform.cantidadAlimento}
-                    pesado={inform.pesoMedido}
-                    decesos={inform.decesos}
-                    numberCA={inform.ca}
-                    observaciones={inform.observaciones}
-                    ca={resultP}
-                    edad={inform.edadGalera}
-                    navigateToGaleras={navigateToGaleras}
-                  />
-                )
-              }
-              return null
-            })
-          )
-        }
-      </ScrollView>
+          <RenderContentRegisters />
+        </ScrollView>
+      </View>
+      {/* <View style={styles.bottomTabNavigator}>
+        <BottomTabNavigation
+          activeTab={activeTabb}
+          setActiveTab={setActiveTabb}
+          tabs={tabs}
+          navigation={navigation}
+        />
+      </View> */}
     </View>
   )
 }
@@ -241,8 +297,8 @@ const ReportScreenAdmin = ({ navigation, activeTab }) => {
 ReportScreenAdmin.propTypes = {
   navigation: PropTypes.shape({
     navigate: PropTypes.func.isRequired,
+    goBack: PropTypes.func.isRequired,
   }).isRequired,
-  activeTab: PropTypes.string.isRequired,
 }
 
 export default ReportScreenAdmin

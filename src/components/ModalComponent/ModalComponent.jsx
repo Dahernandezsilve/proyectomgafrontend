@@ -5,11 +5,8 @@ import {
   Text,
   Pressable,
   View,
-  Dimensions,
 } from 'react-native'
 import styles from './styles'
-
-const windowWidth = Dimensions.get('window').width
 
 const ModalComponent = () => {
   const [modalVisible, setModalVisible] = useState(false)
@@ -46,7 +43,7 @@ const ModalComponent = () => {
         </View>
       </Modal>
       <Pressable
-        style={[styles.floatingButton, { width: windowWidth * 0.1 }]}
+        style={styles.floatingButton}
         onPress={() => setModalVisible(true)}
       >
         <Text style={[styles.textStyle, { color: '#2e4a85' }]}>+</Text>

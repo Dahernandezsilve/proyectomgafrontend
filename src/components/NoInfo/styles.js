@@ -1,4 +1,5 @@
 import { StyleSheet } from 'react-native-web'
+// eslint-disable-next-line no-unused-vars
 import SamsungOne from '../../fonts/SamsungOne-400.ttf'
 
 const styles = StyleSheet.create({

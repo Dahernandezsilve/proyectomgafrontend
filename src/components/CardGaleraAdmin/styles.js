@@ -1,6 +1,7 @@
 import { StyleSheet, Dimensions } from 'react-native'
 import { SamsungOne } from '../../fonts/SamsungOne-400.ttf'
 
+
 const windowWidth = Dimensions.get('window').width
 
 const styles = StyleSheet.create({
@@ -32,13 +33,13 @@ const styles = StyleSheet.create({
   },
   info: {
     fontFamily: SamsungOne,
-    fontSize: windowWidth * 0.04,
+    fontSize: windowWidth * 0.037,
   },
   rightAlignedText: {
     textAlign: 'right',
   },
   row: {
-    alignItems: 'center',
+    alignItems: 'flex-start',
     flexDirection: 'row',
     marginBottom: windowWidth * 0.01,
   },
@@ -61,7 +62,7 @@ const styles = StyleSheet.create({
   },
   title: {
     fontFamily: SamsungOne,
-    fontSize: windowWidth * 0.04,
+    fontSize: windowWidth * 0.037,
   },
 })
 
