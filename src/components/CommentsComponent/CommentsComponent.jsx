@@ -41,14 +41,15 @@ const CommentsComponent = ({
             navigation.navigate('HomeWorker')
             setRefresh(true)
           }}
+
         />
       </View>
     </View>
-  )
-}
+  );
+};
 
 CommentsComponent.propTypes = {
   handleRegistrar: PropTypes.func.isRequired,
-}
+};
 
-export default CommentsComponent
+export default CommentsComponent;
