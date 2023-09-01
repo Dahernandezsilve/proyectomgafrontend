@@ -8,6 +8,7 @@ import styles from './styles'
 
 const windowWidth = Dimensions.get('window').width
 
+// eslint-disable-next-line react/prop-types
 const HeaderCreation = ({ galera }) => {
   const navigation = useNavigation()
 
