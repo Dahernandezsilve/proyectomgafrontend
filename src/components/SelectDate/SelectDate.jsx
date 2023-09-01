@@ -16,9 +16,11 @@ const SelectDate = ({ onPress, selectedDate }) => {
     <TouchableOpacity style={styles.container} onPress={onPress}>
       <View style={styles.contentContainer}>
         <Text style={styles.text}>
-          Seleccionar fecha:
-          {formattedDate}
+          Seleccionar fecha: {' '}
         </Text>
+          <Text style={styles.date}>
+            {formattedDate}
+          </Text>
       </View>
     </TouchableOpacity>
   )
