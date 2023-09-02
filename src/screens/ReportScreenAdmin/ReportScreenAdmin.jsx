@@ -271,6 +271,7 @@ const ReportScreenAdmin = (
                 selectedOption={selectedOption}
                 options={workers}
                 setSelectedOption={setSelectedOption}
+                activeTab={activeTab}
               />
             </View>
             <TrafficLight

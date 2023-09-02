@@ -3,13 +3,14 @@ import { View, Text, TouchableOpacity } from 'react-native'
 import PropTypes from 'prop-types'
 import styles from './styles'
 
-const SelectOption = ({ selectedOption, options, setSelectedOption }) => {
+const SelectOption = ({ selectedOption, options, setSelectedOption, activeTab }) => {
   const [showOptions, setShowOptions] = useState(false)
 
   const handleOptionSelect = option => {
     setSelectedOption(option)
     setShowOptions(false)
   }
+  console.log("Lote: ", activeTab);
 
   const handleToggleOptions = () => {
     setShowOptions(!showOptions)
