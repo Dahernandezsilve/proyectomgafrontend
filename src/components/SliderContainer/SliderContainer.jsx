@@ -7,8 +7,7 @@ import Slider from '@react-native-community/slider'
 import styles from './styles'
 
 const SliderContainer = ({
-  code,
-  title, minimumValue, maximumValue, step, medida, fixed, registro, setRegistro,
+  code, title, minimumValue, maximumValue, step, medida, fixed, registro, setRegistro,
 }) => {
   const [value, setValue] = useState(0.0)
   const [formattedValue, setFormattedValue] = useState('0')
@@ -106,13 +105,23 @@ const SliderContainer = ({
   )
 }
 
+const registroPropType = PropTypes.shape({
+  decesos: PropTypes.number.isRequired,
+  cantidadAlimento: PropTypes.number.isRequired,
+  pesado: PropTypes.number.isRequired,
+  // Agrega más propiedades si es necesario
+})
+
 SliderContainer.propTypes = {
+  code: PropTypes.string.isRequired,
   title: PropTypes.string.isRequired,
   minimumValue: PropTypes.number.isRequired,
   maximumValue: PropTypes.number.isRequired,
   step: PropTypes.number.isRequired,
   medida: PropTypes.string.isRequired,
   fixed: PropTypes.string.isRequired,
+  registro: registroPropType.isRequired,
+  setRegistro: PropTypes.func.isRequired, // Agregada la validación para la prop 'setRegistro'
 }
 
 export default SliderContainer

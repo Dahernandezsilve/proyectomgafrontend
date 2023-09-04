@@ -17,7 +17,6 @@ const ChoiceScreen = ({ navigation }) => (
     <View style={styles.formContainer}>
       <ElCeibillalImg style={styles.logo} />
     </View>
-
     <ElCeibillalImgV2 style={styles.logoEsquina} />
 
     <View style={styles.containerBoton}>
