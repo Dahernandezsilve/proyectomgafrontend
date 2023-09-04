@@ -10,7 +10,7 @@ const SelectOption = ({ selectedOption, options, setSelectedOption, activeTab })
     setSelectedOption(option)
     setShowOptions(false)
   }
-  console.log("Lote: ", activeTab);
+  console.log("Trabajador en SelectOption: ", options);
 
   const handleToggleOptions = () => {
     setShowOptions(!showOptions)
@@ -19,6 +19,12 @@ const SelectOption = ({ selectedOption, options, setSelectedOption, activeTab })
   const noSeleccionar = {
     nombre: 'No seleccionar',
   }
+
+   // Mapea el array de nombres en el formato esperado
+   const trabajadores = options.map((nombre, index) => ({
+      idTrabajador: `id_${index}`, // Puedes utilizar un índice como identificador único
+      nombre,
+    }));
 
   return (
     <TouchableOpacity onPress={handleToggleOptions}>
@@ -37,7 +43,7 @@ const SelectOption = ({ selectedOption, options, setSelectedOption, activeTab })
             >
               <Text style={styles.selectedOptionText}>No seleccionar</Text>
             </TouchableOpacity>
-            {options.map(option => (
+            {trabajadores.map(option => (
               <TouchableOpacity
                 key={option.idTrabajador}
                 style={styles.optionButton}
