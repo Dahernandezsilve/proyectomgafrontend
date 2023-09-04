@@ -17,20 +17,31 @@ const SliderContainer = ({
   const [inputError, setInputError] = useState(null)
 
   const handleTextInputChange = text => {
-    // Remove any non-numeric characters
-    const numericText = text.replace(/[^0-9.]/g, '')
-
-    // Set the formatted value
-    setFormattedValue(numericText)
+    // Remove any commas from the input
+    const numericText = text.replace(/,/g, '')
 
     // Parse the numeric value
     const numericValue = parseFloat(numericText)
 
     // Check if the number of digits exceeds your desired maximum
     if (!Number.isNaN(numericValue) && numericValue.toString().length <= maxLength) {
+      // Set the formatted value without commas
+      setFormattedValue(numericText)
       setValue(numericValue)
+    } else if (text === '' || text === '-') {
+      // Handle empty input or "-" sign to set the value to zero
+      setFormattedValue('0')
+      setValue(0)
     }
   }
+
+  // Add a function to clear the value when the input is focused
+  const handleInputFocus = () => {
+    setFormattedValue('')
+    setValue(0)
+  }
+
+  // ...
 
   useEffect(() => {
   }, [registro])
@@ -80,13 +91,14 @@ const SliderContainer = ({
           onChangeText={handleTextInputChange}
           keyboardType="numeric"
           value={formattedValue}
+          onFocus={handleInputFocus} // Add this line to clear the value when focused
           onBlur={handleDoneEditing}
           onSubmitEditing={handleDoneEditing}
           maxLength={maxLength}
         />
       </TouchableOpacity>
       {inputError && (
-      <Text style={{ color: 'red' }}>{inputError}</Text>
+        <Text style={{ color: 'red' }}>{inputError}</Text>
       )}
 
       <Text style={[styles.title, { textAlign: 'left' }]}>{title}</Text>
