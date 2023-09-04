@@ -1,6 +1,8 @@
 import React, { useState, useContext } from 'react'
 import PropTypes from 'prop-types'
-import { View, TextInput, Button } from 'react-native'
+import {
+  View, TextInput, Button, Alert,
+} from 'react-native'
 import { useNavigation } from '@react-navigation/native'
 import styles from './styles'
 import { GlobalContext } from '../../GlobalContext/GlobalContext'
@@ -38,10 +40,7 @@ const CommentsComponent = ({
           color="#2e4a85"
           onPress={() => {
             handleRegistrar()
-            navigation.navigate('HomeWorker')
-            setRefresh(true)
           }}
-
         />
       </View>
     </View>
@@ -50,6 +49,6 @@ const CommentsComponent = ({
 
 CommentsComponent.propTypes = {
   handleRegistrar: PropTypes.func.isRequired,
-};
+}
 
-export default CommentsComponent;
+export default CommentsComponent

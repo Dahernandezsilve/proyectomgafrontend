@@ -3,7 +3,7 @@ import React, { useEffect } from 'react'
 import { NavigationContainer } from '@react-navigation/native'
 import { createNativeStackNavigator } from '@react-navigation/native-stack'
 import * as Font from 'expo-font'
-import { GlobalProvider } from './src/GlobalContext/GlobalContext.js'
+import { GlobalProvider } from './src/GlobalContext/GlobalContext'
 import {
   ChoiceScreen, DetailsScreen, CreationScreen, HomeWorkerScreen, LoginAdministrator,
 } from './src/screens'
