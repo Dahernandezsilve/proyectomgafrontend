@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import React, { useState, useRef, useEffect } from 'react'
 import PropTypes from 'prop-types'
 import {
@@ -13,6 +14,7 @@ const SliderContainer = ({
   const [value, setValue] = useState(0.0)
   const [formattedValue, setFormattedValue] = useState('0')
   const textInputRef = useRef(null)
+  const [inputError, setInputError] = useState(null)
 
   const handleTextInputChange = text => {
     setFormattedValue(text)
@@ -28,24 +30,30 @@ const SliderContainer = ({
     const numericValue = parseFloat(formattedValue.replace(/\s/g, ''))
     if (!Number.isNaN(numericValue)) {
       const roundedValue = parseFloat(numericValue.toFixed(fixed))
-      setValue(roundedValue)
-      setFormattedValue(roundedValue.toFixed(fixed))
-      switch (code) {
-        case 'decesos':
-          setRegistro(prevRegistro => ({ ...prevRegistro, decesos: roundedValue }))
-          break
-        case 'cantidadAlimento':
-          setRegistro(prevRegistro => ({ ...prevRegistro, cantidadAlimento: roundedValue }))
-          break
-        case 'pesado':
-          setRegistro(prevRegistro => ({ ...prevRegistro, pesado: roundedValue }))
-          break
-        default:
-          break
+      if (roundedValue <= maximumValue && roundedValue >= minimumValue) {
+        setValue(roundedValue)
+        setFormattedValue(roundedValue.toFixed(fixed))
+        setInputError(null) // Clear the error message
+        switch (code) {
+          case 'decesos':
+            setRegistro(prevRegistro => ({ ...prevRegistro, decesos: roundedValue }))
+            break
+          case 'cantidadAlimento':
+            setRegistro(prevRegistro => ({ ...prevRegistro, cantidadAlimento: roundedValue }))
+            break
+          case 'pesado':
+            setRegistro(prevRegistro => ({ ...prevRegistro, pesado: roundedValue }))
+            break
+          default:
+            break
+        }
+      } else {
+        setInputError(`El valor debe estar entre ${minimumValue} y ${maximumValue}`)
       }
     } else {
       setValue(0)
       setFormattedValue('0')
+      setInputError('Ingrese un número válido')
       switch (code) {
         case 'decesos':
           setRegistro(prevRegistro => ({ ...prevRegistro, decesos: 0 }))
@@ -71,14 +79,22 @@ const SliderContainer = ({
       >
         <TextInput
           ref={textInputRef}
+          placeholder="0"
+          minimumValue={minimumValue}
+          maximumValue={maximumValue}
           style={styles.valueText}
           onChangeText={handleTextInputChange}
           keyboardType="numeric"
           value={formattedValue}
           onBlur={handleDoneEditing}
           onSubmitEditing={handleDoneEditing}
+          maxLength={3}
         />
       </TouchableOpacity>
+      {inputError && (
+      <Text style={{ color: 'red' }}>{inputError}</Text>
+      )}
+
       <Text style={[styles.title, { textAlign: 'left' }]}>{title}</Text>
       <Slider
         style={styles.slider}
