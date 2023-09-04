@@ -67,6 +67,10 @@ const ReportScreenAdmin = (
           handleRequest('POST', '/obtainRegistersDate', { date: answer, idTrabajador: optionSelected.idTrabajador, idLote: tabActive })
           setRegistersActive(true)
         }
+        if (optionSelected.nombre === 'No seleccionar') {
+          handleRequest('POST', '/obtainRegistersDate', { date: answer, idLote: tabActive })
+          setRegistersActive(true)
+        }
       } else {
         handleRequest('POST', '/obtainRegistersDate', { date: answer, idLote: tabActive })
         setRegistersActive(true)

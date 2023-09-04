@@ -17,8 +17,8 @@ const CardGalera = ({
       toValue: 0.5,
       duration: 100,
       useNativeDriver: true,
-    }).start();
-  };
+    }).start()
+  }
 
   const onPressOut = () => {
     Animated.timing(opacityValue, {
@@ -36,7 +36,9 @@ const CardGalera = ({
     >
       <Animated.View
         testID="animated-view" // Add testID prop here
-        style={[styles.container, { width: windowWidth - windowWidth * 0.1, opacity: opacityValue }]}
+        style={
+          [styles.container, { width: windowWidth - windowWidth * 0.1, opacity: opacityValue }]
+        }
       >
         <View style={styles.caContainer}>
           <Text style={styles.smallText}>C.A</Text>

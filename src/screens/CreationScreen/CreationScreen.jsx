@@ -1,10 +1,13 @@
 import React, { useState, useContext } from 'react'
-import { View, ScrollView, StatusBar } from 'react-native'
-import { useRoute } from '@react-navigation/native'
+import {
+  View, ScrollView, StatusBar, Alert,
+} from 'react-native'
+import { useRoute, useNavigation } from '@react-navigation/native'
 import useApi from '../../hooks/useApi/useApi'
 import {
   SliderContainer, CommentsComponent, HeaderCreation,
 } from '../../components'
+
 import { GlobalContext } from '../../GlobalContext/GlobalContext'
 
 const CreationScreen = () => {
@@ -12,7 +15,9 @@ const CreationScreen = () => {
   const route = useRoute()
   const idGalera = route.params?.idGalera || null
   const galera = route.params?.galera || null
-  const [,, handleRequest] = useApi()
+  const [, , handleRequest] = useApi()
+  const navigation = useNavigation()
+
   const [registro, setRegistro] = useState({
     cantidadAlimento: 0,
     decesos: 0,
@@ -30,6 +35,36 @@ const CreationScreen = () => {
       pesado: registro.pesado,
     })
     setRefresh(true)
+  }
+
+  const handleSend = () => {
+    const hasData = registro.cantidadAlimento > 0 && registro.decesos > 0
+
+    if (hasData) {
+      handleRegistrar()
+      navigation.navigate('HomeWorker') // Navegar aquí si hay datos
+      setRefresh(true)
+    } else {
+      Alert.alert(
+        'Algunos campos tienen "0"',
+        '¿Deseas continuar de todas formas?',
+        [
+          {
+            text: 'Cancelar',
+            style: 'cancel',
+          },
+          {
+            text: 'Continuar',
+            onPress: () => {
+              handleRegistrar()
+              navigation.navigate('HomeWorker') // Navegar aquí si el usuario elige continuar
+              setRefresh(true)
+            },
+          },
+        ],
+        { cancelable: true },
+      )
+    }
   }
 
   const dayOfWeek = new Date().getDay()
@@ -88,7 +123,7 @@ const CreationScreen = () => {
           registro={registro}
           setRegistro={setRegistro}
         />
-        <CommentsComponent code="observaciones" registro={registro} setRegistro={setRegistro} handleRegistrar={handleRegistrar} />
+        <CommentsComponent code="observaciones" registro={registro} setRegistro={setRegistro} handleRegistrar={handleSend} />
       </ScrollView>
     </View>
   )

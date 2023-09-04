@@ -9,15 +9,12 @@ import ElCeibillalImg from '../../img/ElCeibillalSvg'
 import ElCeibillalImgV2 from '../../img/ElCeibillalV2Svg'
 import styles from './styles'
 
-
 const LoginAdministrator = ({ navigation }) => {
   const { setToken } = useContext(GlobalContext)
   const [response,, handleRequest] = useApi()
   const [correo, setCorreo] = useState('')
   const [contrasena, setContrasena] = useState('')
   const [, setHaveAccess] = useState(false)
-
-  
 
   const navigateToAdminScreen = () => {
     handleRequest('POST', '/login', { user: correo, password: contrasena })
