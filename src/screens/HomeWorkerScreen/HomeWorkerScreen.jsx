@@ -12,14 +12,18 @@ const HomeWorkerScreen = ({ navigation }) => {
   const [activeTab, setActiveTab] = useState(0)
   const [response, , handleRequest] = useApi()
   const [galeras, setGaleras] = useState([])
-  const [lote, setLote] = useState('')
+  //const [lote, setLote] = useState('')
 
-  const handleObtainLote = async () => {
-    await handleRequest('GET', '/loteObtain')
-  }
+  //const handleObtainLote = async () => {
+  //  await handleRequest('GET', '/loteObtain')
+  //}
+
+  //const handleObtainGaleras = async () => {
+  //  await handleRequest('POST', '/galeras', { numLote: lote })
+  //}
 
   const handleObtainGaleras = async () => {
-    await handleRequest('POST', '/galeras', { numLote: lote })
+    await handleRequest('GET', '/galerasWorker')
   }
 
   const navigateToGaleras = (idGalera, galera) => {
@@ -27,35 +31,28 @@ const HomeWorkerScreen = ({ navigation }) => {
   }
 
   useEffect(() => {
-    if (response?.data?.length > 0) {
-      const firstData = response.data[0]
-
-      if (firstData.idLote !== undefined && firstData.idLote !== null) {
-        setLote(firstData.idLote)
+    if (response?.data !== undefined) {
+      const firstData = response.data
+      if (firstData.length > 0) {
+        if (firstData[0].idGalera !== undefined && firstData[0].idGalera !== null) {
+          setGaleras(response.data)
+        }
       }
-
-      if (firstData.idGalera !== undefined && firstData.idGalera !== null) {
-        setGaleras(response.data)
+      if (response.message === 'Esta vacia') {
+        setGaleras([])
       }
     }
   }, [response])
 
   useEffect(() => {
+    if (galeras) {
+      handleObtainGaleras()
+    }
   }, [galeras])
 
   useEffect(() => {
-    handleObtainLote()
-  }, [])
-
-  useEffect(() => {
-    if (lote) {
-      handleObtainGaleras()
-    }
-  }, [lote])
-
-  useEffect(() => {
     if (refresh) {
-      handleObtainLote()
+      handleObtainGaleras()
       setRefresh(false)
     }
   }, [refresh])

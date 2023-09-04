@@ -7,8 +7,7 @@ import Slider from '@react-native-community/slider'
 import styles from './styles'
 
 const SliderContainer = ({
-  code,
-  title, minimumValue, maximumValue, step, medida, fixed, registro, setRegistro,
+  code, title, minimumValue, maximumValue, step, medida, fixed, registro, setRegistro,
 }) => {
   const [value, setValue] = useState(0.0)
   const [formattedValue, setFormattedValue] = useState('0')
