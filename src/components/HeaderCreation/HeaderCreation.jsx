@@ -4,6 +4,7 @@ import {
 } from 'react-native'
 import { Ionicons } from '@expo/vector-icons'
 import { useNavigation } from '@react-navigation/native'
+import PropTypes from 'prop-types' // Importa PropTypes
 import styles from './styles'
 
 const windowWidth = Dimensions.get('window').width
@@ -36,6 +37,11 @@ const HeaderCreation = ({ galera }) => {
       <View style={styles.line} />
     </View>
   )
+}
+
+// Agrega la validación de propiedades
+HeaderCreation.propTypes = {
+  galera: PropTypes.string.isRequired, // galera debe ser una cadena (string) requerida
 }
 
 export default HeaderCreation

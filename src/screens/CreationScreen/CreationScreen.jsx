@@ -3,7 +3,6 @@ import {
   View, ScrollView, StatusBar, Alert,
 } from 'react-native'
 import { useRoute, useNavigation } from '@react-navigation/native'
-import useApi from '../../hooks/useApi/useApi'
 import {
   SliderContainer, CommentsComponent, HeaderCreation,
 } from '../../components'
@@ -11,11 +10,11 @@ import {
 import { GlobalContext } from '../../GlobalContext/GlobalContext'
 
 const CreationScreen = () => {
-  const { setRefresh } = useContext(GlobalContext)
+  const { setRefresh, setSending, sending } = useContext(GlobalContext)
+
   const route = useRoute()
   const idGalera = route.params?.idGalera || null
   const galera = route.params?.galera || null
-  const [, , handleRequest] = useApi()
   const navigation = useNavigation()
 
   const [registro, setRegistro] = useState({
@@ -27,13 +26,15 @@ const CreationScreen = () => {
   })
 
   const handleRegistrar = () => {
-    handleRequest('POST', '/makeRegister', {
+    const newSending = sending
+    newSending.push({
       cantidadAlimento: registro.cantidadAlimento,
       decesos: registro.decesos,
       observaciones: registro.observaciones,
       idGalera,
       pesado: registro.pesado,
     })
+    setSending(newSending)
     setRefresh(true)
   }
 
@@ -41,8 +42,8 @@ const CreationScreen = () => {
     const hasData = registro.cantidadAlimento > 0 && registro.decesos > 0
 
     if (hasData) {
+      navigation.navigate('HomeWorker')
       handleRegistrar()
-      navigation.navigate('HomeWorker') // Navegar aquí si hay datos
       setRefresh(true)
     } else {
       Alert.alert(
@@ -56,8 +57,8 @@ const CreationScreen = () => {
           {
             text: 'Continuar',
             onPress: () => {
-              handleRegistrar()
               navigation.navigate('HomeWorker') // Navegar aquí si el usuario elige continuar
+              handleRegistrar()
               setRefresh(true)
             },
           },
