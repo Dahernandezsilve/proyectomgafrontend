@@ -35,6 +35,11 @@ const styles = StyleSheet.create({
     flexWrap: 'wrap',
     justifyContent: 'center',
   },
+  errorText: {
+    color: 'red',
+    fontSize: windowWidth * 0.04,
+    marginTop: windowWidth * 0.01,
+  },
   formContainer: {
     alignItems: 'center',
     display: 'flex',

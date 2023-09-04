@@ -11,37 +11,51 @@ import styles from './styles'
 
 const LoginAdministrator = ({ navigation }) => {
   const { setToken } = useContext(GlobalContext)
-  const [response,, handleRequest] = useApi()
+  const [response, , handleRequest] = useApi()
   const [correo, setCorreo] = useState('')
   const [contrasena, setContrasena] = useState('')
-  const [, setHaveAccess] = useState(false)
+  const [error, setError] = useState('')
 
   const navigateToAdminScreen = () => {
+    setError('')
+
+    if (!correo || !contrasena) {
+      setError('Por favor, completa todos los campos.')
+      return
+    }
+
     handleRequest('POST', '/login', { user: correo, password: contrasena })
   }
 
+  // Restablecer estados cuando se realiza la acción de "regresar"
+  useEffect(() => {
+    const unsubscribe = navigation.addListener('beforeRemove', () => {
+      setCorreo('')
+      setContrasena('')
+      setError('')
+    })
+
+    return unsubscribe
+  }, [navigation])
+
   useEffect(() => {
     if (response.message !== null || response.message !== undefined) {
-      // eslint-disable-next-line no-console
       if (response.data !== null || response.data !== undefined) {
         if (response.session_token !== null) {
           setToken(response.session_token)
         }
+        if (response.message !== 'Good Job') {
+          setError('Datos incorrectos.') // Mostrar mensaje de error
+        }
         if (response.data && response.data.length > 0) {
           if (response.message === 'Good Job' && response.data[0].rol === 'admin') {
-            setHaveAccess(true)
+            setError('')
             navigation.navigate('Home')
-          } else {
-            setHaveAccess(false)
           }
         }
       }
     }
-  }, [navigation, response])
-
-  /* {"data": [{"direccion": "11av zona10", "idTrabajador": "1", "nombre": "Diego Hernandez",
-   "puesto": "Servicio de limpieza", "rol": "trabajador", "telefono": "123213123"}], "error": 202,
-    "message": "Good Job"} */
+  }, [response, setToken, navigation])
 
   return (
     <View style={styles.container}>
@@ -63,6 +77,8 @@ const LoginAdministrator = ({ navigation }) => {
           secureTextEntry
           onChangeText={text => setContrasena(text)}
         />
+        {/* Mostrar el mensaje de error en rojo */}
+        <Text style={styles.errorText}>{error}</Text>
         <TouchableOpacity style={styles.button} onPress={navigateToAdminScreen}>
           <Text style={styles.buttonText}>Acceder</Text>
         </TouchableOpacity>
@@ -74,6 +90,7 @@ const LoginAdministrator = ({ navigation }) => {
 LoginAdministrator.propTypes = {
   navigation: PropTypes.shape({
     navigate: PropTypes.func.isRequired,
+    addListener: PropTypes.func.isRequired,
   }).isRequired,
 }
 
