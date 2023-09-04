@@ -87,6 +87,7 @@ const CreationScreen = () => {
               fixed="0"
               registro={registro}
               setRegistro={setRegistro}
+              maxLength={3}
             />
             <SliderContainer
               title="Peso total de pollos: "
@@ -98,6 +99,7 @@ const CreationScreen = () => {
               registro={registro}
               setRegistro={setRegistro}
               code="pesado"
+              maxLength={3}
             />
           </>
         )}
@@ -111,6 +113,7 @@ const CreationScreen = () => {
           fixed="2"
           registro={registro}
           setRegistro={setRegistro}
+          maxLength={3}
         />
         <SliderContainer
           code="decesos"
@@ -119,9 +122,11 @@ const CreationScreen = () => {
           maximumValue={5000}
           step={1}
           medida="pollos"
-          fixed="0"
+          fixed="2"
           registro={registro}
+          maxLength={4}
           setRegistro={setRegistro}
+
         />
         <CommentsComponent code="observaciones" registro={registro} setRegistro={setRegistro} handleRegistrar={handleSend} />
       </ScrollView>

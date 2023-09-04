@@ -8,7 +8,8 @@ import Slider from '@react-native-community/slider'
 import styles from './styles'
 
 const SliderContainer = ({
-  code, title, minimumValue, maximumValue, step, medida, fixed, registro, setRegistro,
+  code,
+  title, minimumValue, maximumValue, step, medida, fixed, registro, setRegistro, maxLength,
 }) => {
   const [value, setValue] = useState(0.0)
   const [formattedValue, setFormattedValue] = useState('0')
@@ -16,9 +17,18 @@ const SliderContainer = ({
   const [inputError, setInputError] = useState(null)
 
   const handleTextInputChange = text => {
-    setFormattedValue(text)
-    if (text === '') {
-      setValue(0)
+    // Remove any non-numeric characters
+    const numericText = text.replace(/[^0-9.]/g, '')
+
+    // Set the formatted value
+    setFormattedValue(numericText)
+
+    // Parse the numeric value
+    const numericValue = parseFloat(numericText)
+
+    // Check if the number of digits exceeds your desired maximum
+    if (!Number.isNaN(numericValue) && numericValue.toString().length <= maxLength) {
+      setValue(numericValue)
     }
   }
 
@@ -50,22 +60,7 @@ const SliderContainer = ({
         setInputError(`El valor debe estar entre ${minimumValue} y ${maximumValue}`)
       }
     } else {
-      setValue(0)
-      setFormattedValue('0')
       setInputError('Ingrese un número válido')
-      switch (code) {
-        case 'decesos':
-          setRegistro(prevRegistro => ({ ...prevRegistro, decesos: 0 }))
-          break
-        case 'cantidadAlimento':
-          setRegistro(prevRegistro => ({ ...prevRegistro, cantidadAlimento: 0 }))
-          break
-        case 'pesado':
-          setRegistro(prevRegistro => ({ ...prevRegistro, pesado: 0 }))
-          break
-        default:
-          break
-      }
     }
     Keyboard.dismiss()
   }
@@ -87,7 +82,7 @@ const SliderContainer = ({
           value={formattedValue}
           onBlur={handleDoneEditing}
           onSubmitEditing={handleDoneEditing}
-          maxLength={3}
+          maxLength={maxLength}
         />
       </TouchableOpacity>
       {inputError && (
@@ -128,6 +123,8 @@ SliderContainer.propTypes = {
   step: PropTypes.number.isRequired,
   medida: PropTypes.string.isRequired,
   fixed: PropTypes.string.isRequired,
+  // eslint-disable-next-line react/require-default-props
+  maxLength: PropTypes.number,
 }
 
 export default SliderContainer
