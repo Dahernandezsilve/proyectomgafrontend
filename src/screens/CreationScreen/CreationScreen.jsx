@@ -17,6 +17,8 @@ const CreationScreen = () => {
   const galera = route.params?.galera || null
   const [, , handleRequest] = useApi()
   const navigation = useNavigation()
+  // eslint-disable-next-line no-unused-vars
+  const [isFormValid, setIsFormValid] = useState(true)
 
   const [registro, setRegistro] = useState({
     cantidadAlimento: 0,
@@ -38,15 +40,19 @@ const CreationScreen = () => {
   }
 
   const handleSend = () => {
-    const hasData = registro.cantidadAlimento > 0 && registro.decesos > 0
+    // Check the validity of each value
+    const isCantidadAlimentoValid = registro.cantidadAlimento >= 0 && registro.cantidadAlimento <= 100
+    const isDecesosValid = registro.decesos >= 0 && registro.decesos <= 5000
 
-    if (hasData) {
+    const hasData = isCantidadAlimentoValid && isDecesosValid
+
+    if (isFormValid && hasData) {
       handleRegistrar()
-      navigation.navigate('HomeWorker') // Navegar aquí si hay datos
+      navigation.navigate('HomeWorker') // Navigate here if there is valid data
       setRefresh(true)
     } else {
       Alert.alert(
-        'Algunos campos tienen "0"',
+        'Algunos campos tienen valores incorrectos o están vacíos',
         '¿Deseas continuar de todas formas?',
         [
           {
@@ -57,7 +63,7 @@ const CreationScreen = () => {
             text: 'Continuar',
             onPress: () => {
               handleRegistrar()
-              navigation.navigate('HomeWorker') // Navegar aquí si el usuario elige continuar
+              navigation.navigate('HomeWorker') // Navigate here if the user chooses to continue
               setRefresh(true)
             },
           },
@@ -126,7 +132,6 @@ const CreationScreen = () => {
           registro={registro}
           maxLength={4}
           setRegistro={setRegistro}
-
         />
         <CommentsComponent code="observaciones" registro={registro} setRegistro={setRegistro} handleRegistrar={handleSend} />
       </ScrollView>

@@ -30,7 +30,7 @@ const SliderContainer = ({
       setValue(numericValue)
     } else if (text === '' || text === '-') {
       // Handle empty input or "-" sign to set the value to zero
-      setFormattedValue('0')
+      setFormattedValue('') // Clear the input field
       setValue(0)
     }
   }
