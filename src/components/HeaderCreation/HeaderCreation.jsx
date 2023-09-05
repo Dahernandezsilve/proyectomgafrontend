@@ -2,7 +2,7 @@ import React from 'react'
 import {
   Text, View, TouchableOpacity, Dimensions,
 } from 'react-native'
-  import { Ionicons } from '@expo/vector-icons'
+import { Ionicons } from '@expo/vector-icons'
 import { useNavigation } from '@react-navigation/native'
 import PropTypes from 'prop-types' // Importa PropTypes
 import styles from './styles'
