@@ -96,6 +96,7 @@ const ReportScreenAdmin = (
   };
 
   const handleObtainRegistersDate = (dateElected, optionSelected, tabActive) => {
+    console.log("Response: ",response)
     if (dateElected.length !== 0) {
       const answer = formatDate(dateElected)
       if (optionSelected !== null && optionSelected !== undefined) {
