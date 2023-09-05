@@ -21,8 +21,7 @@ const useApi = () => {
 
     // console.log('method', method)
     const fetchResponse = await fetch(`http://3.22.42.192/api${path}`, options)
-    
-   
+
     const JSONresponse = await fetchResponse.json()
 
     setResponse(JSONresponse)

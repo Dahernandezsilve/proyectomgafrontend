@@ -19,6 +19,10 @@ const styles = StyleSheet.create({
     width: windowWidth * 0.51, // Ajustar el ancho según el ancho de la pantalla
   },
   contentContainer: {},
+  date: {
+    fontSize: windowWidth * 0.04,
+    textAlign: 'center', // Centra el texto
+  },
   selectedDate: {
     color: '#000',
     fontFamily: SamsungOne,
@@ -29,10 +33,6 @@ const styles = StyleSheet.create({
     color: '#000',
     fontFamily: SamsungOne,
     fontSize: windowWidth * 0.04, // Ajustar el tamaño de fuente según el ancho de la pantalla
-  },
-  date: {
-    fontSize: windowWidth * 0.04,
-    textAlign: 'center', // Centra el texto
   },
 })
 
