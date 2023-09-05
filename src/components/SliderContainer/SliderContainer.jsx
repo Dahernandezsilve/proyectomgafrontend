@@ -128,7 +128,15 @@ const SliderContainer = ({
   )
 }
 
+const registroPropType = PropTypes.shape({
+  decesos: PropTypes.number.isRequired,
+  cantidadAlimento: PropTypes.number.isRequired,
+  pesado: PropTypes.number.isRequired,
+  // Agrega más propiedades si es necesario
+})
+
 SliderContainer.propTypes = {
+  code: PropTypes.string.isRequired,
   title: PropTypes.string.isRequired,
   minimumValue: PropTypes.number.isRequired,
   maximumValue: PropTypes.number.isRequired,
@@ -137,6 +145,8 @@ SliderContainer.propTypes = {
   fixed: PropTypes.string.isRequired,
   // eslint-disable-next-line react/require-default-props
   maxLength: PropTypes.number,
+  registro: registroPropType.isRequired,
+  setRegistro: PropTypes.func.isRequired, // Agregada la validación para la prop 'setRegistro'
 }
 
 export default SliderContainer

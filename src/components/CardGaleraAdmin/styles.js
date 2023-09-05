@@ -1,7 +1,6 @@
 import { StyleSheet, Dimensions } from 'react-native'
 import { SamsungOne } from '../../fonts/SamsungOne-400.ttf'
 
-
 const windowWidth = Dimensions.get('window').width
 
 const styles = StyleSheet.create({

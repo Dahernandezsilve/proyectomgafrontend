@@ -3,7 +3,6 @@ import {
   View, ScrollView, StatusBar, Alert,
 } from 'react-native'
 import { useRoute, useNavigation } from '@react-navigation/native'
-import useApi from '../../hooks/useApi/useApi'
 import {
   SliderContainer, CommentsComponent, HeaderCreation,
 } from '../../components'
@@ -11,11 +10,11 @@ import {
 import { GlobalContext } from '../../GlobalContext/GlobalContext'
 
 const CreationScreen = () => {
-  const { setRefresh } = useContext(GlobalContext)
+  const { setRefresh, setSending, sending } = useContext(GlobalContext)
+
   const route = useRoute()
   const idGalera = route.params?.idGalera || null
   const galera = route.params?.galera || null
-  const [, , handleRequest] = useApi()
   const navigation = useNavigation()
   // eslint-disable-next-line no-unused-vars
   const [isFormValid, setIsFormValid] = useState(true)
@@ -29,13 +28,15 @@ const CreationScreen = () => {
   })
 
   const handleRegistrar = () => {
-    handleRequest('POST', '/makeRegister', {
+    const newSending = sending
+    newSending.push({
       cantidadAlimento: registro.cantidadAlimento,
       decesos: registro.decesos,
       observaciones: registro.observaciones,
       idGalera,
       pesado: registro.pesado,
     })
+    setSending(newSending)
     setRefresh(true)
   }
 
@@ -46,9 +47,9 @@ const CreationScreen = () => {
 
     const hasData = isCantidadAlimentoValid && isDecesosValid
 
-    if (isFormValid && hasData) {
+    if (hasData) {
+      navigation.navigate('HomeWorker')
       handleRegistrar()
-      navigation.navigate('HomeWorker') // Navigate here if there is valid data
       setRefresh(true)
     } else {
       Alert.alert(
@@ -62,8 +63,8 @@ const CreationScreen = () => {
           {
             text: 'Continuar',
             onPress: () => {
+              navigation.navigate('HomeWorker') // Navegar aquí si el usuario elige continuar
               handleRegistrar()
-              navigation.navigate('HomeWorker') // Navigate here if the user chooses to continue
               setRefresh(true)
             },
           },
