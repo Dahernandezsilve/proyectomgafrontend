@@ -33,6 +33,11 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
   },
+  errorText: {
+    color: 'red',
+    fontSize: width * 0.04,
+    marginTop: width * 0.01,
+  },
   formContainer: {
     alignItems: 'center',
     marginTop: width * 0.05,
