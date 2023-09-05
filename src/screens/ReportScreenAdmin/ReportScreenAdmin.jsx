@@ -17,7 +17,6 @@ const formatDate = dateString => {
   const month = String(date.getMonth() + 1).padStart(2, '0')
   const day = String(date.getDate()).padStart(2, '0')
   const formattedDate = `${year}-${month}-${day}`
-
   return formattedDate
 }
 
@@ -29,7 +28,7 @@ const ReportScreenAdmin = (
   const lotes = ['1', '2', '3', '4']
   const [activeTab, setActiveTab] = useState(lotes[0])
   const [response, , handleRequest] = useApi()
-  const [WorkersPerLote, setWorkersPerLote] = useState([]);
+  const [WorkersPerLote, setWorkersPerLote] = useState([])
   const [, setGaleras] = useState([])
   const [selectedDate, setSelectedDate] = useState(new Date())
   const [showDatePicker, setShowDatePicker] = useState(false)
@@ -54,49 +53,49 @@ const ReportScreenAdmin = (
 
   const handleObtainGaleras = async () => {
     try {
-      const response = await handleRequest('POST', '/galeras');
+      const response = await handleRequest('POST', '/galeras')
       // Haz algo con la respuesta aquí si es necesario
     } catch (error) {
-      console.error("Error al obtener las galeras:", error);
+      console.error('Error al obtener las galeras:', error)
     }
   }
-  
+
   const handleObtainWorkers = async () => {
     try {
-      const response = await handleRequest('GET', '/obtainTrabajadores');
-      console.log("Trabajadores son:", response);
+      const response = await handleRequest('GET', '/obtainTrabajadores')
+      console.log('Trabajadores son:', response)
       // Haz algo con la respuesta aquí si es necesario
     } catch (error) {
-      console.error("Error al obtener los trabajadores:", error);
+      console.error('Error al obtener los trabajadores:', error)
     }
   }
 
-  const handleObtainWorkersPerLote = async (activeTab) => {
+  const handleObtainWorkersPerLote = async activeTab => {
     const body = {
-      id_lote: parseInt(activeTab,10),
-    };
+      id_lote: parseInt(activeTab, 10),
+    }
 
-    console.log("body",body)
+    console.log('body', body)
 
     // Realiza una solicitud POST a la ruta de Flask
-    const response = await handleRequest('POST', '/wperLote', body);
+    const response = await handleRequest('POST', '/wperLote', body)
 
-    console.log("Mensaje:", response);
-    console.log("Lote es: ", activeTab);
+    console.log('Mensaje:', response)
+    console.log('Lote es: ', activeTab)
 
     // Si la respuesta es un array con al menos un elemento, mapea el nombre del trabajador
-  if (Array.isArray(response.data) && response.data.length > 0) {
-    const workerNames = response.data.map(worker => worker.nombre_trabajador);
-    console.log("Nombres de los trabajadores:", workerNames);
+    if (Array.isArray(response.data) && response.data.length > 0) {
+      const workerNames = response.data.map(worker => worker.nombre_trabajador)
+      console.log('Nombres de los trabajadores:', workerNames)
 
-    setWorkersPerLote(workerNames);
-  } else {
-    console.error("La respuesta no contiene datos de trabajadores válidos.");
+      setWorkersPerLote(workerNames)
+    } else {
+      console.error('La respuesta no contiene datos de trabajadores válidos.')
+    }
   }
-  };
 
   const handleObtainRegistersDate = (dateElected, optionSelected, tabActive) => {
-    console.log("Response: ",response)
+    console.log('Response: ', response)
     if (dateElected.length !== 0) {
       const answer = formatDate(dateElected)
       if (optionSelected !== null && optionSelected !== undefined) {
@@ -196,11 +195,8 @@ const ReportScreenAdmin = (
   }, [])
 
   useEffect(() => {
-    // Llama a la función handleObtainWorkersPerLote para obtener los trabajadores del lote seleccionado
     handleObtainWorkersPerLote(activeTab)
-  }, [activeTab]);
-
-  
+  }, [activeTab])
 
   useEffect(() => {
     setTopValue(0)

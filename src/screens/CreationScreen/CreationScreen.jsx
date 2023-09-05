@@ -42,8 +42,9 @@ const CreationScreen = () => {
 
   const handleSend = () => {
     // Check the validity of each value
-    const isCantidadAlimentoValid = registro.cantidadAlimento >= 0 && registro.cantidadAlimento <= 100
-    const isDecesosValid = registro.decesos >= 0 && registro.decesos <= 5000
+    const isCantidadAlimentoValid = registro.cantidadAlimento > 0
+      && registro.cantidadAlimento <= 100
+    const isDecesosValid = registro.decesos > 0 && registro.decesos <= 5000
 
     const hasData = isCantidadAlimentoValid && isDecesosValid
 

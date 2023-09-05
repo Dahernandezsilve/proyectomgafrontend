@@ -82,7 +82,7 @@ const LoginWorker = ({ navigation }) => {
           autoCapitalize="none"
           secureTextEntry
           onChangeText={text => setCodigo(text)}
-        />        
+        />
         <Text style={styles.errorText}>{error}</Text>
         <TouchableOpacity style={styles.button} onPress={() => navigateToWorkerScreen(codigo)} accessibilityLabel="login-button">
 

@@ -1,4 +1,5 @@
 import { StyleSheet, Dimensions } from 'react-native'
+import { SamsungOne } from '../../fonts/SamsungOne-400.ttf'
 
 const { width } = Dimensions.get('window')
 
@@ -23,7 +24,7 @@ const styles = StyleSheet.create({
   },
   buttonText: {
     color: 'white',
-    fontFamily: 'SamsungOne',
+    fontFamily: SamsungOne,
     fontSize: width * 0.04,
     textAlign: 'center',
   },
