@@ -1,16 +1,14 @@
-import React, { useState, useContext } from 'react'
+import React, { useState } from 'react'
 import PropTypes from 'prop-types'
-import { View, TextInput, Button } from 'react-native'
-import { useNavigation } from '@react-navigation/native'
+import {
+  View, TextInput, Button,
+} from 'react-native'
 import styles from './styles'
-import { GlobalContext } from '../../GlobalContext/GlobalContext'
 
 const CommentsComponent = ({
-  handleRegistrar, registro, setRegistro, code,
+  handleRegistrar, setRegistro, code,
 }) => {
-  const { setRefresh } = useContext(GlobalContext)
   const [comentario, setComentario] = useState('')
-  const navigation = useNavigation()
 
   const handleComentarioChange = text => {
     setComentario(text)
@@ -38,18 +36,18 @@ const CommentsComponent = ({
           color="#2e4a85"
           onPress={() => {
             handleRegistrar()
-            navigation.navigate('HomeWorker')
-            setRefresh(true)
           }}
-
         />
       </View>
     </View>
-  );
-};
+  )
+}
 
+// Agrega la validación de propiedades
 CommentsComponent.propTypes = {
-  handleRegistrar: PropTypes.func.isRequired,
-};
+  handleRegistrar: PropTypes.func.isRequired, // handleRegistrar debe ser una función requerida
+  setRegistro: PropTypes.func.isRequired, // setRegistro debe ser una función requerida
+  code: PropTypes.string.isRequired, // code debe ser una cadena (string) requerida
+}
 
-export default CommentsComponent;
+export default CommentsComponent
