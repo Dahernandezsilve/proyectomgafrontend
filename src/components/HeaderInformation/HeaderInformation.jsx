@@ -9,6 +9,7 @@ const HeaderInformation = ({
   const handleTabPress = tabName => {
     setActiveTab(tabName)
   }
+ 
 
   return (
     <View style={styles.headerContainer}>

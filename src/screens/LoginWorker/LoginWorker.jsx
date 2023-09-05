@@ -82,10 +82,10 @@ const LoginWorker = ({ navigation }) => {
           autoCapitalize="none"
           secureTextEntry
           onChangeText={text => setCodigo(text)}
-        />
-        {/* Mostrar el mensaje de error en rojo */}
+        />        
         <Text style={styles.errorText}>{error}</Text>
-        <TouchableOpacity style={styles.button} onPress={() => navigateToWorkerScreen(codigo)}>
+        <TouchableOpacity style={styles.button} onPress={() => navigateToWorkerScreen(codigo)} accessibilityLabel="login-button">
+
           <Text style={styles.buttonText}>Acceder</Text>
         </TouchableOpacity>
 
