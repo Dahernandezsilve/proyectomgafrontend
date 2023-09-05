@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import React, { useState, useRef, useEffect } from 'react'
 import PropTypes from 'prop-types'
 import {
@@ -7,18 +8,40 @@ import Slider from '@react-native-community/slider'
 import styles from './styles'
 
 const SliderContainer = ({
-  code, title, minimumValue, maximumValue, step, medida, fixed, registro, setRegistro,
+  code,
+  title, minimumValue, maximumValue, step, medida, fixed, registro, setRegistro, maxLength,
 }) => {
   const [value, setValue] = useState(0.0)
   const [formattedValue, setFormattedValue] = useState('0')
   const textInputRef = useRef(null)
+  const [inputError, setInputError] = useState(null)
 
   const handleTextInputChange = text => {
-    setFormattedValue(text)
-    if (text === '') {
+    // Remove any commas from the input
+    const numericText = text.replace(/,/g, '')
+
+    // Parse the numeric value
+    const numericValue = parseFloat(numericText)
+
+    // Check if the number of digits exceeds your desired maximum
+    if (!Number.isNaN(numericValue) && numericValue.toString().length <= maxLength) {
+      // Set the formatted value without commas
+      setFormattedValue(numericText)
+      setValue(numericValue)
+    } else if (text === '' || text === '-') {
+      // Handle empty input or "-" sign to set the value to zero
+      setFormattedValue('') // Clear the input field
       setValue(0)
     }
   }
+
+  // Add a function to clear the value when the input is focused
+  const handleInputFocus = () => {
+    setFormattedValue('')
+    setValue(0)
+  }
+
+  // ...
 
   useEffect(() => {
   }, [registro])
@@ -27,37 +50,28 @@ const SliderContainer = ({
     const numericValue = parseFloat(formattedValue.replace(/\s/g, ''))
     if (!Number.isNaN(numericValue)) {
       const roundedValue = parseFloat(numericValue.toFixed(fixed))
-      setValue(roundedValue)
-      setFormattedValue(roundedValue.toFixed(fixed))
-      switch (code) {
-        case 'decesos':
-          setRegistro(prevRegistro => ({ ...prevRegistro, decesos: roundedValue }))
-          break
-        case 'cantidadAlimento':
-          setRegistro(prevRegistro => ({ ...prevRegistro, cantidadAlimento: roundedValue }))
-          break
-        case 'pesado':
-          setRegistro(prevRegistro => ({ ...prevRegistro, pesado: roundedValue }))
-          break
-        default:
-          break
+      if (roundedValue <= maximumValue && roundedValue >= minimumValue) {
+        setValue(roundedValue)
+        setFormattedValue(roundedValue.toFixed(fixed))
+        setInputError(null) // Clear the error message
+        switch (code) {
+          case 'decesos':
+            setRegistro(prevRegistro => ({ ...prevRegistro, decesos: roundedValue }))
+            break
+          case 'cantidadAlimento':
+            setRegistro(prevRegistro => ({ ...prevRegistro, cantidadAlimento: roundedValue }))
+            break
+          case 'pesado':
+            setRegistro(prevRegistro => ({ ...prevRegistro, pesado: roundedValue }))
+            break
+          default:
+            break
+        }
+      } else {
+        setInputError(`El valor debe estar entre ${minimumValue} y ${maximumValue}`)
       }
     } else {
-      setValue(0)
-      setFormattedValue('0')
-      switch (code) {
-        case 'decesos':
-          setRegistro(prevRegistro => ({ ...prevRegistro, decesos: 0 }))
-          break
-        case 'cantidadAlimento':
-          setRegistro(prevRegistro => ({ ...prevRegistro, cantidadAlimento: 0 }))
-          break
-        case 'pesado':
-          setRegistro(prevRegistro => ({ ...prevRegistro, pesado: 0 }))
-          break
-        default:
-          break
-      }
+      setInputError('Ingrese un número válido')
     }
     Keyboard.dismiss()
   }
@@ -70,14 +84,23 @@ const SliderContainer = ({
       >
         <TextInput
           ref={textInputRef}
+          placeholder="0"
+          minimumValue={minimumValue}
+          maximumValue={maximumValue}
           style={styles.valueText}
           onChangeText={handleTextInputChange}
           keyboardType="numeric"
           value={formattedValue}
+          onFocus={handleInputFocus} // Add this line to clear the value when focused
           onBlur={handleDoneEditing}
           onSubmitEditing={handleDoneEditing}
+          maxLength={maxLength}
         />
       </TouchableOpacity>
+      {inputError && (
+        <Text style={{ color: 'red' }}>{inputError}</Text>
+      )}
+
       <Text style={[styles.title, { textAlign: 'left' }]}>{title}</Text>
       <Slider
         style={styles.slider}
@@ -120,6 +143,8 @@ SliderContainer.propTypes = {
   step: PropTypes.number.isRequired,
   medida: PropTypes.string.isRequired,
   fixed: PropTypes.string.isRequired,
+  // eslint-disable-next-line react/require-default-props
+  maxLength: PropTypes.number,
   registro: registroPropType.isRequired,
   setRegistro: PropTypes.func.isRequired, // Agregada la validación para la prop 'setRegistro'
 }

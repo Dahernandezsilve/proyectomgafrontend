@@ -16,6 +16,8 @@ const CreationScreen = () => {
   const idGalera = route.params?.idGalera || null
   const galera = route.params?.galera || null
   const navigation = useNavigation()
+  // eslint-disable-next-line no-unused-vars
+  const [isFormValid, setIsFormValid] = useState(true)
 
   const [registro, setRegistro] = useState({
     cantidadAlimento: 0,
@@ -39,7 +41,11 @@ const CreationScreen = () => {
   }
 
   const handleSend = () => {
-    const hasData = registro.cantidadAlimento > 0 && registro.decesos > 0
+    // Check the validity of each value
+    const isCantidadAlimentoValid = registro.cantidadAlimento >= 0 && registro.cantidadAlimento <= 100
+    const isDecesosValid = registro.decesos >= 0 && registro.decesos <= 5000
+
+    const hasData = isCantidadAlimentoValid && isDecesosValid
 
     if (hasData) {
       navigation.navigate('HomeWorker')
@@ -47,7 +53,7 @@ const CreationScreen = () => {
       setRefresh(true)
     } else {
       Alert.alert(
-        'Algunos campos tienen "0"',
+        'Algunos campos tienen valores incorrectos o están vacíos',
         '¿Deseas continuar de todas formas?',
         [
           {
@@ -88,6 +94,7 @@ const CreationScreen = () => {
               fixed="0"
               registro={registro}
               setRegistro={setRegistro}
+              maxLength={3}
             />
             <SliderContainer
               title="Peso total de pollos: "
@@ -99,6 +106,7 @@ const CreationScreen = () => {
               registro={registro}
               setRegistro={setRegistro}
               code="pesado"
+              maxLength={3}
             />
           </>
         )}
@@ -112,6 +120,7 @@ const CreationScreen = () => {
           fixed="2"
           registro={registro}
           setRegistro={setRegistro}
+          maxLength={3}
         />
         <SliderContainer
           code="decesos"
@@ -120,8 +129,9 @@ const CreationScreen = () => {
           maximumValue={5000}
           step={1}
           medida="pollos"
-          fixed="0"
+          fixed="2"
           registro={registro}
+          maxLength={4}
           setRegistro={setRegistro}
         />
         <CommentsComponent code="observaciones" registro={registro} setRegistro={setRegistro} handleRegistrar={handleSend} />

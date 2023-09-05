@@ -55,6 +55,7 @@ const NewGalleyScreen = ({ navigation }) => {
               style={styles.input}
               placeholder="Ingrese el número de galera"
               keyboardType="numeric"
+              maxLength={2}
             />
           </View>
 
@@ -72,6 +73,7 @@ const NewGalleyScreen = ({ navigation }) => {
               style={styles.input}
               placeholder="Ingrese la cantidad de pollos"
               keyboardType="numeric"
+              maxLength={4}
             />
           </View>
 

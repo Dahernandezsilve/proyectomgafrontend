@@ -16,6 +16,7 @@ const CrearGalera = () => (
         style={styles.input}
         placeholder="No.Galera : "
         keyboardType="numeric"
+        maxLength={2}
       />
       <TextInput
         style={styles.input}
@@ -25,6 +26,7 @@ const CrearGalera = () => (
         style={styles.input}
         placeholder="Cantidad de pollos : "
         keyboardType="numeric"
+        maxLength={4}
       />
 
       <View style={styles.buttonContainer}>
