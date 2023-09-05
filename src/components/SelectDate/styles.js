@@ -30,6 +30,10 @@ const styles = StyleSheet.create({
     fontFamily: SamsungOne,
     fontSize: windowWidth * 0.04, // Ajustar el tamaño de fuente según el ancho de la pantalla
   },
+  date: {
+    fontSize: windowWidth * 0.04,
+    textAlign: 'center', // Centra el texto
+  },
 })
 
 export default styles

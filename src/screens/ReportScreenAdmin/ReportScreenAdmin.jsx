@@ -28,7 +28,8 @@ const ReportScreenAdmin = (
 ) => {
   const lotes = ['1', '2', '3', '4']
   const [activeTab, setActiveTab] = useState(lotes[0])
-  const [response,, handleRequest] = useApi()
+  const [response, , handleRequest] = useApi()
+  const [WorkersPerLote, setWorkersPerLote] = useState([]);
   const [, setGaleras] = useState([])
   const [selectedDate, setSelectedDate] = useState(new Date())
   const [showDatePicker, setShowDatePicker] = useState(false)
@@ -51,15 +52,51 @@ const ReportScreenAdmin = (
     setShowDatePicker(!showDatePicker)
   }
 
-  const handleObtainGaleras = () => {
-    handleRequest('POST', '/galeras')
+  const handleObtainGaleras = async () => {
+    try {
+      const response = await handleRequest('POST', '/galeras');
+      // Haz algo con la respuesta aquí si es necesario
+    } catch (error) {
+      console.error("Error al obtener las galeras:", error);
+    }
+  }
+  
+  const handleObtainWorkers = async () => {
+    try {
+      const response = await handleRequest('GET', '/obtainTrabajadores');
+      console.log("Trabajadores son:", response);
+      // Haz algo con la respuesta aquí si es necesario
+    } catch (error) {
+      console.error("Error al obtener los trabajadores:", error);
+    }
   }
 
-  const handleObtainWorkers = () => {
-    handleRequest('GET', '/obtainTrabajadores')
+  const handleObtainWorkersPerLote = async (activeTab) => {
+    const body = {
+      id_lote: parseInt(activeTab,10),
+    };
+
+    console.log("body",body)
+
+    // Realiza una solicitud POST a la ruta de Flask
+    const response = await handleRequest('POST', '/wperLote', body);
+
+    console.log("Mensaje:", response);
+    console.log("Lote es: ", activeTab);
+
+    // Si la respuesta es un array con al menos un elemento, mapea el nombre del trabajador
+  if (Array.isArray(response.data) && response.data.length > 0) {
+    const workerNames = response.data.map(worker => worker.nombre_trabajador);
+    console.log("Nombres de los trabajadores:", workerNames);
+
+    setWorkersPerLote(workerNames);
+  } else {
+    console.error("La respuesta no contiene datos de trabajadores válidos.");
   }
+  };
 
   const handleObtainRegistersDate = (dateElected, optionSelected, tabActive) => {
+    console.log("Response: ",response)
     if (dateElected.length !== 0) {
       const answer = formatDate(dateElected)
       if (optionSelected !== null && optionSelected !== undefined) {
@@ -157,6 +194,13 @@ const ReportScreenAdmin = (
     handleObtainGaleras()
     handleObtainWorkers()
   }, [])
+
+  useEffect(() => {
+    // Llama a la función handleObtainWorkersPerLote para obtener los trabajadores del lote seleccionado
+    handleObtainWorkersPerLote(activeTab)
+  }, [activeTab]);
+
+  
 
   useEffect(() => {
     setTopValue(0)
@@ -273,8 +317,9 @@ const ReportScreenAdmin = (
               )}
               <SelectOption
                 selectedOption={selectedOption}
-                options={workers}
+                options={WorkersPerLote}
                 setSelectedOption={setSelectedOption}
+                activeTab={activeTab}
               />
             </View>
             <TrafficLight
