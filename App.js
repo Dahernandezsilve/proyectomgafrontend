@@ -6,6 +6,7 @@ import * as Font from 'expo-font'
 import { GlobalProvider } from './src/GlobalContext/GlobalContext'
 import {
   ChoiceScreen, DetailsScreen, CreationScreen, HomeWorkerScreen, LoginAdministrator,
+  CreationScreenAdministrator,
 } from './src/screens'
 import ReportScreenAdmin from './src/screens/ReportScreenAdmin'
 import LoginWorker from './src/screens/LoginWorker/LoginWorker'
@@ -55,6 +56,11 @@ const App = () => {
               />
             )}
           </Stack.Screen>
+          <Stack.Screen
+            name="CreationScreenAdministrator"
+            component={CreationScreenAdministrator}
+            options={{ header: () => null }}
+          />
         </Stack.Navigator>
       </NavigationContainer>
     </GlobalProvider>
