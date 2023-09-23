@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react'
+import React, { useState, useContext, useEffect } from 'react'
 import {
   View, ScrollView, StatusBar, Alert,
 } from 'react-native'
@@ -39,6 +39,10 @@ const CreationScreen = () => {
     setSending(newSending)
     setRefresh(true)
   }
+
+  useEffect(() => {
+    console.log('registro', registro)
+  }, [registro])
 
   const handleSend = () => {
     // Check the validity of each value
@@ -130,7 +134,7 @@ const CreationScreen = () => {
           maximumValue={5000}
           step={1}
           medida="pollos"
-          fixed="2"
+          fixed="0"
           registro={registro}
           maxLength={4}
           setRegistro={setRegistro}
