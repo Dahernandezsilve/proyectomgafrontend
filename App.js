@@ -10,6 +10,7 @@ import {
 import ReportScreenAdmin from './src/screens/ReportScreenAdmin'
 import LoginWorker from './src/screens/LoginWorker/LoginWorker'
 import NewGalleyScreen from './src/screens/NewGalleyScreen/NewGalleyScreen'
+import MeasurementsHistory from './src/screens/MeasurementsHistory'
 
 const Stack = createNativeStackNavigator()
 
@@ -33,6 +34,7 @@ const App = () => {
           <Stack.Screen name="Administrador" component={LoginAdministrator} options={{ header: () => null }} />
           <Stack.Screen name="Trabajador" component={LoginWorker} options={{ header: () => null }} />
           <Stack.Screen name="NGalley" component={NewGalleyScreen} options={{ header: () => null }} />
+          <Stack.Screen name="MeasurementsHistory" component={MeasurementsHistory} options={{header: () => null}}/>
           <Stack.Screen
             name="HomeWorker"
             component={HomeWorkerScreen}
