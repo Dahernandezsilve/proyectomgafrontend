@@ -37,7 +37,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   errorText: {
-    color: 'red',
+    color: 'yellow',
     fontSize: windowWidth * 0.04,
     marginTop: windowWidth * 0.01,
   },

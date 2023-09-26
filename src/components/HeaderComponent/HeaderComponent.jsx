@@ -3,8 +3,8 @@ import { View, Text, TouchableOpacity } from 'react-native'
 import PropTypes from 'prop-types'
 import styles from './styles'
 
-const HeaderInformation = ({
-  lotes, title, customTitles, activeTab, setActiveTab, showLote,
+const HeaderComponent = ({
+  title, customTitles, activeTab, setActiveTab,
 }) => {
   const handleTabPress = tabName => {
     setActiveTab(tabName)
@@ -13,26 +13,24 @@ const HeaderInformation = ({
     <View style={styles.headerContainer}>
       <Text style={styles.headerText}>{title}</Text>
       <View style={styles.buttonContainer}>
-        {lotes.map((lote, index) => (
+        {customTitles.map((custom, index) => (
           <TouchableOpacity
             // eslint-disable-next-line react/no-array-index-key
             key={index}
             style={[
               styles.tabButton,
-              activeTab === lote ? styles.activeTabButton : null,
+              activeTab === custom ? styles.activeTabButton : null,
             ]}
             activeOpacity={0.7}
-            onPress={() => handleTabPress(lote)}
+            onPress={() => handleTabPress(custom)}
           >
             <Text
               style={[
                 styles.tabButtonText,
-                activeTab === lote ? styles.activeTabButtonText : null,
+                activeTab === custom ? styles.activeTabButtonText : null,
               ]}
             >
               {customTitles ? customTitles[index] : null}
-              {' '}
-              {showLote ? `Lote: ${lote}` : null}
             </Text>
           </TouchableOpacity>
         ))}
@@ -41,18 +39,15 @@ const HeaderInformation = ({
   )
 }
 
-HeaderInformation.propTypes = {
-  lotes: PropTypes.arrayOf(PropTypes.string).isRequired,
+HeaderComponent.propTypes = {
   title: PropTypes.string.isRequired,
   customTitles: PropTypes.arrayOf(PropTypes.string),
   activeTab: PropTypes.string.isRequired,
   setActiveTab: PropTypes.func.isRequired,
-  showLote: PropTypes.bool,
 }
 
-HeaderInformation.defaultProps = {
+HeaderComponent.defaultProps = {
   customTitles: null,
-  showLote: false,
 }
 
-export default HeaderInformation
+export default HeaderComponent

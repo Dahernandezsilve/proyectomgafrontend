@@ -29,7 +29,7 @@ const LoginWorker = ({ navigation }) => {
 
   const handleLogin = () => {
     if (codigo === '') {
-      setError('El campo de código no puede estar vacío.')
+      setError('Por favor, completa todos los campos.')
       return
     }
 
