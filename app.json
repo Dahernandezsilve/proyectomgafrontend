@@ -25,11 +25,13 @@
     "web": {
       "favicon": "./assets/favicon.png"
     },
+    "slug": "proyectomgafrontend",
     "extra": {
       "eas": {
-        "projectId": "0c5248e5-c6f8-49be-98d0-40574e46bb1b"
+        "projectId": "3956857f-8943-448e-bb07-26747b7d714a"
       }
-    },
-    "owner": "javieralvaradouvg"
+    },    
+    "owner": "dahernandez"
+    
   }
 }
