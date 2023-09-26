@@ -1,4 +1,3 @@
-/* eslint-disable react/prop-types */
 import React, { useState, useRef, useEffect } from 'react'
 import PropTypes from 'prop-types'
 import {
@@ -41,28 +40,72 @@ const SliderContainer = ({
     setValue(0)
   }
 
-  // ...
-
   useEffect(() => {
   }, [registro])
 
-  const handleDoneEditing = () => {
-    const numericValue = parseFloat(formattedValue.replace(/\s/g, ''))
+  const handleDoneEditing = formatted => {
+    const numericValue = parseFloat(formatted.replace(/\s/g, ''))
     if (!Number.isNaN(numericValue)) {
-      const roundedValue = parseFloat(numericValue.toFixed(fixed))
-      if (roundedValue <= maximumValue && roundedValue >= minimumValue) {
-        setValue(roundedValue)
-        setFormattedValue(roundedValue.toFixed(fixed))
+      let formattedV
+      if (Number.isInteger(numericValue)) {
+        // Si es un número entero, formatearlo sin decimales
+        formattedV = numericValue.toString()
+      } else {
+        // Si no es un número entero, formatearlo con la cantidad de decimales especificada
+        formattedV = numericValue.toFixed(fixed)
+      }
+
+      if (numericValue <= maximumValue && numericValue >= minimumValue) {
+        setValue(numericValue)
+        setFormattedValue(formattedV)
         setInputError(null) // Clear the error message
         switch (code) {
           case 'decesos':
-            setRegistro(prevRegistro => ({ ...prevRegistro, decesos: roundedValue }))
+            setRegistro(prevRegistro => ({ ...prevRegistro, decesos: numericValue }))
             break
           case 'cantidadAlimento':
-            setRegistro(prevRegistro => ({ ...prevRegistro, cantidadAlimento: roundedValue }))
+            setRegistro(prevRegistro => ({ ...prevRegistro, cantidadAlimento: numericValue }))
             break
           case 'pesado':
-            setRegistro(prevRegistro => ({ ...prevRegistro, pesado: roundedValue }))
+            setRegistro(prevRegistro => ({ ...prevRegistro, pesado: numericValue }))
+            break
+          default:
+            break
+        }
+      } else {
+        setInputError(`El valor debe estar entre ${minimumValue} y ${maximumValue}`)
+      }
+    } else {
+      setInputError('Ingrese un número válido')
+    }
+    Keyboard.dismiss()
+  }
+
+  const handleDoneEditingInput = () => {
+    const numericValue = parseFloat(formattedValue.replace(/\s/g, ''))
+    if (!Number.isNaN(numericValue)) {
+      let p
+      if (Number.isInteger(numericValue)) {
+        // Si es un número entero, formatearlo sin decimales
+        p = numericValue.toString()
+      } else {
+        // Si no es un número entero, formatearlo con la cantidad de decimales especificada
+        p = numericValue.toFixed(fixed)
+      }
+
+      if (numericValue <= maximumValue && numericValue >= minimumValue) {
+        setValue(numericValue)
+        setFormattedValue(p)
+        setInputError(null) // Clear the error message
+        switch (code) {
+          case 'decesos':
+            setRegistro(prevRegistro => ({ ...prevRegistro, decesos: numericValue }))
+            break
+          case 'cantidadAlimento':
+            setRegistro(prevRegistro => ({ ...prevRegistro, cantidadAlimento: numericValue }))
+            break
+          case 'pesado':
+            setRegistro(prevRegistro => ({ ...prevRegistro, pesado: numericValue }))
             break
           default:
             break
@@ -92,13 +135,13 @@ const SliderContainer = ({
           keyboardType="numeric"
           value={formattedValue}
           onFocus={handleInputFocus} // Add this line to clear the value when focused
-          onBlur={handleDoneEditing}
-          onSubmitEditing={handleDoneEditing}
+          onBlur={handleDoneEditingInput}
+          onSubmitEditing={handleDoneEditingInput}
           maxLength={maxLength}
         />
       </TouchableOpacity>
       {inputError && (
-        <Text style={{ color: 'red' }}>{inputError}</Text>
+        <Text style={styles.errorText}>{inputError}</Text>
       )}
 
       <Text style={[styles.title, { textAlign: 'left' }]}>{title}</Text>
@@ -116,7 +159,9 @@ const SliderContainer = ({
         onValueChange={newValue => {
           if (!textInputRef.current.isFocused()) {
             setValue(newValue)
-            setFormattedValue(newValue.toFixed(fixed))
+            const formatted = newValue.toFixed(fixed)
+            setFormattedValue(formatted)
+            handleDoneEditing(formatted)
           }
         }}
       />

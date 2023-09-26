@@ -1,8 +1,11 @@
-import { StyleSheet } from 'react-native'
+import { StyleSheet, Dimensions } from 'react-native'
+
+const windowWidth = Dimensions.get('window').width
+// const windowHeight = Dimensions.get('window').height
 
 const styles = StyleSheet.create({
   container: {
-    alignSelf: 'center', // Alinea horizontalmente el componente
+    alignSelf: 'center',
     backgroundColor: 'white',
     borderRadius: 5,
     elevation: 2,
@@ -12,12 +15,17 @@ const styles = StyleSheet.create({
     shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.5,
     shadowRadius: 2,
-    width: '90%',
+    width: windowWidth * 0.9, // Utiliza dimensiones para el ancho
+  },
+  errorText: {
+    color: 'red',
+    marginLeft: windowWidth * 0.03,
+    marginTop: windowWidth * 0.03,
   },
   slider: {
-    borderRadius: 5, // radio de las esquinas
-    height: 25, // altura del slider
-    overflow: 'hidden', // para recortar el borde del slider si se excede su tamaño
+    borderRadius: 5,
+    height: 25,
+    overflow: 'hidden',
     width: '100%',
   },
   sliderText: {
@@ -33,14 +41,14 @@ const styles = StyleSheet.create({
     width: '100%',
   },
   sliderThumb: {
-    backgroundColor: '#007AFF', // color del botón
-    borderRadius: 10, // radio del botón
-    height: 20, // altura del botón
-    width: 20, // ancho del botón que se arrastra para cambiar el valor del slider
+    backgroundColor: '#007AFF',
+    borderRadius: 10,
+    height: 20,
+    width: 20,
   },
   sliderTrack: {
     height: 100,
-    width: '90%',
+    width: windowWidth * 0.9, // Utiliza dimensiones para el ancho
   },
   title: {
     fontSize: 20,
@@ -52,7 +60,7 @@ const styles = StyleSheet.create({
   valueContainer: {
     alignItems: 'center',
     alignSelf: 'center',
-    backgroundColor: '#EFEFEF', // Color gris claro
+    backgroundColor: '#EFEFEF',
     borderRadius: 5,
     elevation: 2,
     marginTop: 10,
@@ -61,7 +69,7 @@ const styles = StyleSheet.create({
     shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.5,
     shadowRadius: 2,
-    width: '95%',
+    width: windowWidth * 0.80, // Utiliza dimensiones para el ancho
   },
   valueText: {
     fontSize: 20,
