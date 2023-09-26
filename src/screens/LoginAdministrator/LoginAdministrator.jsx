@@ -44,7 +44,7 @@ const LoginAdministrator = ({ navigation }) => {
         if (response.session_token !== null) {
           setToken(response.session_token)
         }
-        if (response.message !== 'Good Job') {
+        if (response.message !== 'Good Job' && contrasena !== '') {
           setError('Datos incorrectos.') // Mostrar mensaje de error
         }
         if (response.data && response.data.length > 0) {
@@ -77,7 +77,6 @@ const LoginAdministrator = ({ navigation }) => {
           secureTextEntry
           onChangeText={text => setContrasena(text)}
         />
-        {/* Mostrar el mensaje de error en rojo */}
         <Text style={styles.errorText}>{error}</Text>
         <TouchableOpacity style={styles.button} onPress={navigateToAdminScreen}>
           <Text style={styles.buttonText}>Acceder</Text>

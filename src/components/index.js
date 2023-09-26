@@ -4,6 +4,7 @@ import CommentsComponent from './CommentsComponent'
 import HeaderCreation from './HeaderCreation'
 import HeaderGalley from './HeaderGalley'
 import HeaderInformation from './HeaderInformation'
+import HeaderComponent from './HeaderComponent'
 import ModalComponent from './ModalComponent'
 import NoInfo from './NoInfo'
 import SelectDate from './SelectDate'
@@ -21,6 +22,7 @@ export {
   HeaderCreation,
   HeaderGalley,
   HeaderInformation,
+  HeaderComponent,
   ModalComponent,
   NoInfo,
   SelectDate,

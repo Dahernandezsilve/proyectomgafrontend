@@ -1,7 +1,7 @@
 {
   "expo": {
     "name": "MGA",
-    "slug": "projectmga",
+    "slug": "proyectomgafrontend",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
@@ -15,7 +15,8 @@
       "**/*"
     ],
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.dahernandez.proyectomgafrontend"
     },
     "android": {
       "package": "com.dahernandez.proyectomgafrontend",
@@ -25,13 +26,11 @@
     "web": {
       "favicon": "./assets/favicon.png"
     },
-    "slug": "proyectomgafrontend",
     "extra": {
       "eas": {
         "projectId": "3956857f-8943-448e-bb07-26747b7d714a"
       }
-    },    
+    },
     "owner": "dahernandez"
-    
   }
 }

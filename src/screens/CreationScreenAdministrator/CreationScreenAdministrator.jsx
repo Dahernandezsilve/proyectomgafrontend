@@ -4,17 +4,18 @@ import {
 } from 'react-native'
 import { useRoute, useNavigation } from '@react-navigation/native'
 import {
-  SliderContainer, CommentsComponent, HeaderCreation,
+  SliderContainer, CommentsComponent, HeaderComponent,
 } from '../../components'
 
 import { GlobalContext } from '../../GlobalContext/GlobalContext'
 
-const CreationScreen = () => {
+const CreationScreenAdministrator = () => {
   const { setRefresh, setSending, sending } = useContext(GlobalContext)
-
   const route = useRoute()
+  const customTitles = ['Mis mediciones', 'Nueva medición']
+  const [activeTab, setActiveTab] = useState(0)
   const idGalera = route.params?.idGalera || null
-  const galera = route.params?.galera || null
+  // const galera = route.params?.galera || null
   const navigation = useNavigation()
   // eslint-disable-next-line no-unused-vars
   const [isFormValid, setIsFormValid] = useState(true)
@@ -79,42 +80,41 @@ const CreationScreen = () => {
     }
   }
 
-  const dayOfWeek = new Date().getDay()
-
   return (
     <View style={{ flex: 1, backgroundColor: '#ECECEC' }}>
       <StatusBar barStyle="light-content" backgroundColor="#fff" />
       <StatusBar barStyle="dark-content" backgroundColor="#fff" />
-      <HeaderCreation galera={galera} />
-      <View style={{ height: 2, width: '100%', backgroundColor: '#2B4985' }} />
+      <HeaderComponent
+        title="Mediciones"
+        customTitles={customTitles}
+        activeTab={activeTab}
+        setActiveTab={setActiveTab}
+      />
       <ScrollView>
-        {dayOfWeek === 1 && (
-          <>
-            <SliderContainer
-              title="Cantidad de pollos pesados: "
-              minimumValue={20}
-              maximumValue={100}
-              step={1}
-              medida="pollos"
-              fixed="0"
-              registro={registro}
-              setRegistro={setRegistro}
-              maxLength={3}
-            />
-            <SliderContainer
-              title="Peso total de pollos: "
-              minimumValue={0}
-              maximumValue={200}
-              step={1}
-              medida="lbs"
-              fixed="2"
-              registro={registro}
-              setRegistro={setRegistro}
-              code="pesado"
-              maxLength={3}
-            />
-          </>
-        )}
+
+        <SliderContainer
+          title="Cantidad de pollos pesados: "
+          minimumValue={20}
+          maximumValue={100}
+          step={1}
+          medida="pollos"
+          fixed="0"
+          registro={registro}
+          setRegistro={setRegistro}
+          maxLength={3}
+        />
+        <SliderContainer
+          title="Peso total de pollos: "
+          minimumValue={0}
+          maximumValue={200}
+          step={1}
+          medida="lbs"
+          fixed="2"
+          registro={registro}
+          setRegistro={setRegistro}
+          code="pesado"
+          maxLength={3}
+        />
         <SliderContainer
           code="cantidadAlimento"
           title="Consumo de alimento: "
@@ -145,4 +145,4 @@ const CreationScreen = () => {
   )
 }
 
-export default CreationScreen
+export default CreationScreenAdministrator
