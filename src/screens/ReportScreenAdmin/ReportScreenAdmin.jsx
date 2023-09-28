@@ -1,3 +1,5 @@
+/* eslint-disable no-shadow */
+/* eslint-disable no-unused-vars */
 import React, { useState, useEffect } from 'react'
 import {
   View, ScrollView, StatusBar,
@@ -62,6 +64,7 @@ const ReportScreenAdmin = (
 
   const handleObtainWorkers = async () => {
     try {
+      // eslint-disable-next-line no-shadow
       const response = await handleRequest('GET', '/obtainTrabajadores')
       console.log('Trabajadores son:', response)
       // Haz algo con la respuesta aquí si es necesario
@@ -70,6 +73,7 @@ const ReportScreenAdmin = (
     }
   }
 
+  // eslint-disable-next-line no-shadow
   const handleObtainWorkersPerLote = async activeTab => {
     const body = {
       id_lote: parseInt(activeTab, 10),
