@@ -1,11 +1,13 @@
 import React, { useState, useContext, useEffect } from 'react'
 import {
-  View, ScrollView, StatusBar, Alert,
+  View, ScrollView, StatusBar, Alert, Button, TouchableOpacity, Text,
 } from 'react-native'
 import { useRoute, useNavigation } from '@react-navigation/native'
+import { render } from 'enzyme'
 import {
   SliderContainer, CommentsComponent, HeaderCreation,
 } from '../../components'
+import styles from './styles'
 
 import { GlobalContext } from '../../GlobalContext/GlobalContext'
 
@@ -19,6 +21,7 @@ const CreationScreen = () => {
   // eslint-disable-next-line no-unused-vars
   const [isFormValid, setIsFormValid] = useState(true)
 
+  const [arraySliderPesado, setArraySliderPesado] = useState([])
   const [registro, setRegistro] = useState({
     cantidadAlimento: 0,
     decesos: 0,
@@ -26,7 +29,19 @@ const CreationScreen = () => {
     idGalera,
     pesado: 0,
   })
-
+  const setRegistroPesado = index => fn => {
+    const valor = fn({})
+    console.log('valor', valor)
+    setArraySliderPesado(current => current.map((array, i) => {
+      if (i === index) {
+        return { ...valor }
+      }
+      return array
+    }))
+  }
+  const promedioPesado = arraySliderPesado
+    .reduce((acc, obj) => obj.pesado + acc, 0) / arraySliderPesado.length
+  console.log('promedio pesado:', promedioPesado)
   const handleRegistrar = () => {
     const newSending = sending
     newSending.push({
@@ -44,7 +59,29 @@ const CreationScreen = () => {
     console.log('registro', registro)
   }, [registro])
 
-  const handleSend = () => {
+  const showAlert = () => {
+    Alert.alert(
+      'Confirmación',
+      '¿Quieres añadir más pesos?',
+      [
+        {
+          text: 'Cancelar',
+          onPress: () => console.log('Cancel pressed'),
+          style: 'cancel',
+        },
+        {
+          text: 'Si',
+          onPress: handleAñadir,
+        },
+      ],
+      { cancelable: false },
+    )
+  }
+  function handleAñadir() {
+    setArraySliderPesado([...arraySliderPesado, { pesado: 0 }])
+  }
+
+  function handleSend() {
     // Check the validity of each value
     const isCantidadAlimentoValid = registro.cantidadAlimento > 0
       && registro.cantidadAlimento <= 100
@@ -80,7 +117,7 @@ const CreationScreen = () => {
   }
 
   const dayOfWeek = new Date().getDay()
-
+  console.log(arraySliderPesado)
   return (
     <View style={{ flex: 1, backgroundColor: '#ECECEC' }}>
       <StatusBar barStyle="light-content" backgroundColor="#fff" />
@@ -139,6 +176,32 @@ const CreationScreen = () => {
           maxLength={4}
           setRegistro={setRegistro}
         />
+        <View style={styles.buttonContainer}>
+          <Button title="Añadir más registros" style={styles.button} onPress={showAlert} />
+        </View>
+        {arraySliderPesado.map((reg, index) => (
+          <SliderContainer
+            // eslint-disable-next-line react/no-array-index-key
+            key={index}
+            title="Peso total de pollos: "
+            minimumValue={0}
+            maximumValue={200}
+            step={1}
+            medida="lbs"
+            fixed="2"
+            registro={registro}
+            setRegistro={setRegistroPesado(index)}
+            code="pesado"
+            maxLength={3}
+          />
+        ))}
+        <Text
+          style={styles.text}
+        >
+          Promedio de Peso:
+          {' '}
+          { promedioPesado}
+        </Text>
         <CommentsComponent code="observaciones" registro={registro} setRegistro={setRegistro} handleRegistrar={handleSend} />
       </ScrollView>
     </View>

@@ -1,7 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react'
 import PropTypes from 'prop-types'
 import {
-  View, Text, TextInput, Keyboard, TouchableOpacity,
+  View, Text, TextInput, Keyboard, TouchableOpacity, Button,
 } from 'react-native'
 import Slider from '@react-native-community/slider'
 import styles from './styles'
@@ -134,7 +134,7 @@ const SliderContainer = ({
           onChangeText={handleTextInputChange}
           keyboardType="numeric"
           value={formattedValue}
-          onFocus={handleInputFocus} // Add this line to clear the value when focused
+          onFocus={handleInputFocus}
           onBlur={handleDoneEditingInput}
           onSubmitEditing={handleDoneEditingInput}
           maxLength={maxLength}
@@ -168,6 +168,7 @@ const SliderContainer = ({
       <View style={styles.sliderTextContainer}>
         <Text style={styles.sliderText}>{`${minimumValue} ${medida}`}</Text>
         <Text style={[styles.sliderText, { textAlign: 'right' }]}>{`${maximumValue} ${medida}`}</Text>
+
       </View>
     </View>
   )
