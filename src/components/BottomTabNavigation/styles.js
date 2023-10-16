@@ -4,7 +4,7 @@ const windowWidth = Dimensions.get('window').width
 
 const styles = StyleSheet.create({
   activeTab: {
-    backgroundColor: '#007bff',
+    backgroundColor: '#007934',
     elevation: 4, // Añadir sombreado en el tab activo
   },
   activeTabText: {
@@ -13,7 +13,7 @@ const styles = StyleSheet.create({
   container: {
     backgroundColor: '#f0f0f0',
     borderTopColor: '#ccc',
-    borderTopWidth: 1,
+    borderTopWidth: 3,
     flexDirection: 'row',
     height: windowWidth * 0.16,
   },
