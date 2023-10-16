@@ -23,7 +23,7 @@ const styles = StyleSheet.create({
     borderTopRightRadius: 10, // Agregar bordes redondeados a la esquina superior derecha
     borderTopWidth: 2,
     flexDirection: 'row',
-    height: windowWidth * 0.16,
+    height: windowWidth * 0.18,
   },
   tabItem: {
     alignItems: 'center',
