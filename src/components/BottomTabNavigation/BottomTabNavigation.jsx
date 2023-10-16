@@ -45,22 +45,24 @@ const BottomTabNavigation = ({
   }
 
   return (
-    <View style={styles.container}>
-      {tabs.map((tab, index) => (
-        <TouchableOpacity
-          key={tab.label}
-          style={[
-            styles.tabItem,
-            activeTab === index ? styles.activeTab : null,
-          ]}
-          onPress={() => navigation.navigate(tab.route)}
-        >
-          {verify(tab, index)}
-          <Text style={[styles.tabText, activeTab === index ? styles.activeTabText : null]}>
-            {tab.label}
-          </Text>
-        </TouchableOpacity>
-      ))}
+    <View style={styles.AbContainer}>
+      <View style={styles.container}>
+        {tabs.map((tab, index) => (
+          <TouchableOpacity
+            key={tab.label}
+            style={[
+              styles.tabItem,
+              activeTab === index ? styles.activeTab : null,
+            ]}
+            onPress={() => navigation.navigate(tab.route)}
+          >
+            {verify(tab, index)}
+            <Text style={[styles.tabText, activeTab === index ? styles.activeTabText : null]}>
+              {tab.label}
+            </Text>
+          </TouchableOpacity>
+        ))}
+      </View>
     </View>
   )
 }
