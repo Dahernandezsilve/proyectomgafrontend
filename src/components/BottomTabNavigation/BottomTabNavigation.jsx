@@ -48,7 +48,7 @@ const BottomTabNavigation = ({
     <View style={styles.container}>
       {tabs.map((tab, index) => (
         <TouchableOpacity
-          key={index}
+          key={tab.label}
           style={[
             styles.tabItem,
             activeTab === index ? styles.activeTab : null,
