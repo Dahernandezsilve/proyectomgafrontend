@@ -3,7 +3,7 @@ import {
   View, ScrollView, StatusBar, Alert, Button, TouchableOpacity, Text,
 } from 'react-native'
 import { useRoute, useNavigation } from '@react-navigation/native'
-import { render } from 'enzyme'
+
 import {
   SliderContainer, CommentsComponent, HeaderCreation,
 } from '../../components'
