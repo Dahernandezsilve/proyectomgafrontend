@@ -1,19 +1,40 @@
-import React from 'react';
-import { View, Text } from 'react-native';
+import React,{useState} from 'react';
+import { View, Text, Dimensions} from 'react-native';
 import {
-    CardAssignment
+    CardAssignment, HeaderInformation
   } from '../../components'
 
-const GalleyAssignment = () => {
+import styles from './styles';
+
+const windowWidth = Dimensions.get('window').width
+
+const GalleyAssignment = ({navigation}) => {
+
+  const lotes = ['20', '1', '2']
+  const [activeTab, setActiveTab] = useState(lotes[0])
+
   return (
-    <><View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-          <Text>Hola mundo</Text>
-      </View>
+    <>
+      <HeaderInformation
+        title="Granja"
+        customTitles={['Mi granja', 'Asignacion', 'Crear galera']}
+        lotes={lotes}
+        activeTab={activeTab}
+        setActiveTab={setActiveTab}
+        showLote={false}
+        navigation={navigation}
+        shouldNavigate={true}
+      />
+      
+        <View style={styles.rectangle}>
+          <Text style={[styles.info, { fontSize: windowWidth * 0.055 }]}>Pendientes por asignar</Text>
+        </View>
+      
           <CardAssignment
           customValues={{
-                  galera: 'Galera ',
-                  cantidadAlimento: ' qq',
-                  pesado: ' lbs',
+                  galera: 'Parametrizar ',
+                  cantidadAlimento: 'esto',
+                  pesado: 'xd',
               }}
               customTitles={['No. Galera:', 'Tipo de población:', 'Cantidad de pollos:']} /></>
   );

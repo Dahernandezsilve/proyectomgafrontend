@@ -300,6 +300,8 @@ const ReportScreenAdmin = (
         activeTab={activeTab}
         setActiveTab={setActiveTab}
         showLote
+        navigation={navigation}
+        shouldNavigate={false}
       />
       <View style={{ flex: 1 }}>
         <ScrollView>

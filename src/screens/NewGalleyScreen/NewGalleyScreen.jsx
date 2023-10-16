@@ -45,6 +45,8 @@ const NewGalleyScreen = ({ navigation }) => {
         activeTab={activeTab}
         setActiveTab={setActiveTab}
         showLote={false}
+        navigation={navigation}
+        shouldNavigate={true}
       />
       <ScrollView>
         <View style={styles.container}>

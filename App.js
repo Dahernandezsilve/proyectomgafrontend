@@ -35,9 +35,9 @@ const App = () => {
           <Stack.Screen name="SelectUser" component={ChoiceScreen} options={{ headerShown: false }} />
           <Stack.Screen name="Administrador" component={LoginAdministrator} options={{ header: () => null }} />
           <Stack.Screen name="Trabajador" component={LoginWorker} options={{ header: () => null }} />
-          <Stack.Screen name="NGalley" component={NewGalleyScreen} options={{ header: () => null }} />
+          <Stack.Screen name="Crear galera" component={NewGalleyScreen} options={{ header: () => null }} />
           <Stack.Screen name="MeasurementsHistory" component={MeasurementsHistory} options={{ header: () => null }} />
-          <Stack.Screen name="GalleyAssignment" component={GalleyAssignment} options={{ header: () => null }} />
+          <Stack.Screen name="Asignacion" component={GalleyAssignment} options={{ header: () => null }} />
           <Stack.Screen
             name="HomeWorker"
             component={HomeWorkerScreen}
