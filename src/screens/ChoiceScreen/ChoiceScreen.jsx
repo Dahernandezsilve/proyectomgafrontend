@@ -32,7 +32,7 @@ const ChoiceScreen = ({ navigation }) => (
         onPress={() => navigation.navigate('Administrador')}
         accessibilityLabel="admin-button"
       >
-        <Text style={styles.buttonText}>Administador</Text>
+        <Text style={styles.buttonText}>Administrador</Text>
       </TouchableOpacity>
     </View>
   </View>

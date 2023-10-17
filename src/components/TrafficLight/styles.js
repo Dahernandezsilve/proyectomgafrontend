@@ -44,7 +44,7 @@ const styles = StyleSheet.create({
     backgroundColor: 'green',
   },
   orangeBox: {
-    backgroundColor: 'orange',
+    backgroundColor: '#ff8c00',
   },
   redBox: {
     backgroundColor: 'red',
