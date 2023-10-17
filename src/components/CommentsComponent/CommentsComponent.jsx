@@ -1,20 +1,21 @@
-import React, { useState } from 'react';
-import PropTypes from 'prop-types';
-import { View, TextInput, Button } from 'react-native';
-import { useNavigation } from '@react-navigation/native';
-import styles from './styles';
+import React, { useState } from 'react'
+import PropTypes from 'prop-types'
+import {
+  View, TextInput, Button,
+} from 'react-native'
+import styles from './styles'
 
-
-const CommentsComponent = ({ handleRegistrar, registro, setRegistro, code }) => {
+const CommentsComponent = ({
+  handleRegistrar, setRegistro, code,
+}) => {
   const [comentario, setComentario] = useState('')
-  const navigation = useNavigation()
 
   const handleComentarioChange = text => {
     setComentario(text)
     setRegistro(prevRegistro => ({
       ...prevRegistro,
       [code]: text,
-    }));
+    }))
   }
 
   return (
@@ -33,15 +34,20 @@ const CommentsComponent = ({ handleRegistrar, registro, setRegistro, code }) => 
           title="Completar"
           style={{ borderRadius: 5 }}
           color="#2e4a85"
-          onPress={handleComplete}
+          onPress={() => {
+            handleRegistrar()
+          }}
         />
       </View>
     </View>
-  );
-};
+  )
+}
 
+// Agrega la validación de propiedades
 CommentsComponent.propTypes = {
-  handleRegistrar: PropTypes.func.isRequired,
-};
+  handleRegistrar: PropTypes.func.isRequired, // handleRegistrar debe ser una función requerida
+  setRegistro: PropTypes.func.isRequired, // setRegistro debe ser una función requerida
+  code: PropTypes.string.isRequired, // code debe ser una cadena (string) requerida
+}
 
-export default CommentsComponent;
+export default CommentsComponent

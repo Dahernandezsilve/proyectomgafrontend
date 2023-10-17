@@ -17,6 +17,8 @@ const SelectDate = ({ onPress, selectedDate }) => {
       <View style={styles.contentContainer}>
         <Text style={styles.text}>
           Seleccionar fecha:
+        </Text>
+        <Text style={styles.date}>
           {formattedDate}
         </Text>
       </View>

@@ -15,11 +15,13 @@
       "**/*"
     ],
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.dahernandez.proyectomgafrontend"
     },
     "android": {
       "package": "com.dahernandez.proyectomgafrontend",
-      "icon": "./assets/icon.png"
+      "icon": "./assets/icon.png",
+      "versionCode": 1
     },
     "web": {
       "favicon": "./assets/favicon.png"

@@ -7,6 +7,7 @@ import LoginAdministrator from './LoginAdministrator'
 import LoginWorker from './LoginWorker'
 import ReportScreenAdmin from './ReportScreenAdmin'
 import CrearGalera from './CrearGalera'
+import CreationScreenAdministrator from './CreationScreenAdministrator'
 
 export {
   ChoiceScreen,
@@ -18,4 +19,5 @@ export {
   LoginWorker,
   ReportScreenAdmin,
   CrearGalera,
+  CreationScreenAdministrator,
 }

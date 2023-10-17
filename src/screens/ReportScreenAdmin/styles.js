@@ -9,6 +9,7 @@ const styles = StyleSheet.create({
     left: 0,
     position: 'absolute',
     right: 0, // Ajusta el color de fondo según tus necesidades
+    zIndex: 3,
   },
   optionsContainer: {
     flex: 1,

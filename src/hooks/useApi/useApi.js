@@ -7,7 +7,6 @@ const useApi = () => {
   const [loading, setLoading] = useState(false)
   const handleRequest = async (method, path, body = '') => {
     setLoading(true)
-    console.log('Tokened', token)
     // fetch
     const options = {
       method,
@@ -20,12 +19,14 @@ const useApi = () => {
       options.body = JSON.stringify(body)
     }
 
-    console.log('method', method)
+    // console.log('method', method)
     const fetchResponse = await fetch(`http://3.22.42.192/api${path}`, options)
+
     const JSONresponse = await fetchResponse.json()
 
     setResponse(JSONresponse)
     setLoading(false)
+    return JSONresponse
   }
 
   return [response, loading, handleRequest]

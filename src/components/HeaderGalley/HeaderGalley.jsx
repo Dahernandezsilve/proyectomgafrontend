@@ -58,8 +58,14 @@ const HeaderGalley = ({
 HeaderGalley.propTypes = {
   lotes: PropTypes.arrayOf(PropTypes.string).isRequired,
   title: PropTypes.string.isRequired,
-  activeTab: PropTypes.string,
-  setActiveTab: PropTypes.func,
+  activeTab: PropTypes.number, // Propiedad no requerida
+  setActiveTab: PropTypes.func, // Propiedad no requerida
+}
+
+// Agrega los valores predeterminados para las propiedades no requeridas
+HeaderGalley.defaultProps = {
+  activeTab: null, // Puedes ajustar este valor predeterminado según sea necesario
+  setActiveTab: () => {}, // Puedes proporcionar una función vacía o ajustarla según sea necesario
 }
 
 export default HeaderGalley

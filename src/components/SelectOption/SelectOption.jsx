@@ -3,13 +3,14 @@ import { View, Text, TouchableOpacity } from 'react-native'
 import PropTypes from 'prop-types'
 import styles from './styles'
 
-const SelectOption = ({ selectedOption, options, setSelectedOption }) => {
+const SelectOption = ({ selectedOption, options, setSelectedOption, activeTab }) => {
   const [showOptions, setShowOptions] = useState(false)
 
   const handleOptionSelect = option => {
     setSelectedOption(option)
     setShowOptions(false)
   }
+  console.log("Trabajador en SelectOption: ", options);
 
   const handleToggleOptions = () => {
     setShowOptions(!showOptions)
@@ -18,6 +19,12 @@ const SelectOption = ({ selectedOption, options, setSelectedOption }) => {
   const noSeleccionar = {
     nombre: 'No seleccionar',
   }
+
+   // Mapea el array de nombres en el formato esperado
+   const trabajadores = options.map((nombre, index) => ({
+      idTrabajador: `id_${index}`, // Puedes utilizar un índice como identificador único
+      nombre,
+    }));
 
   return (
     <TouchableOpacity onPress={handleToggleOptions}>
@@ -36,7 +43,7 @@ const SelectOption = ({ selectedOption, options, setSelectedOption }) => {
             >
               <Text style={styles.selectedOptionText}>No seleccionar</Text>
             </TouchableOpacity>
-            {options.map(option => (
+            {trabajadores.map(option => (
               <TouchableOpacity
                 key={option.idTrabajador}
                 style={styles.optionButton}
@@ -58,7 +65,7 @@ SelectOption.propTypes = {
   }),
   options: PropTypes.arrayOf(
     PropTypes.shape({
-      idTrabajador: PropTypes.number.isRequired,
+      idTrabajador: PropTypes.string.isRequired,
       nombre: PropTypes.string.isRequired,
     }),
   ).isRequired,

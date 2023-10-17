@@ -4,7 +4,7 @@ import {
 } from 'react-native'
 import * as Font from 'expo-font'
 import PropTypes from 'prop-types'
-import { GlobalContext } from '../../GlobalContext/GlobalContext.js'
+import { GlobalContext } from '../../GlobalContext/GlobalContext'
 import SamsungOne from '../../fonts/SamsungOne-400.ttf'
 import useApi from '../../hooks/useApi/useApi'
 import ElCeibillalImg from '../../img/ElCeibillalSvg'
@@ -18,15 +18,21 @@ const loadFonts = async () => {
 }
 
 const LoginWorker = ({ navigation }) => {
-  const { token, setToken } = useContext(GlobalContext)
-  const [response,, handleRequest] = useApi()
+  const { setToken } = useContext(GlobalContext)
+  const [response, , handleRequest] = useApi()
   const [codigo, setCodigo] = useState('')
-  const [, setHaveAccess] = useState(false)
+  const [error, setError] = useState('')
+
   useEffect(() => {
     loadFonts()
   }, [])
 
   const handleLogin = () => {
+    if (codigo === '') {
+      setError('Por favor, completa todos los campos.')
+      return
+    }
+
     handleRequest('POST', '/login', { password: codigo })
   }
 
@@ -34,25 +40,34 @@ const LoginWorker = ({ navigation }) => {
     handleLogin(correo, contrasena)
   }
 
+  // Restablecer estados cuando se genera la acción "regresar"
   useEffect(() => {
-    if (response.message !== null || response.message !== undefined) {
-      console.log(response)
-      if (response.data !== null || response.data !== undefined) {
-        if(response.session_token !== null){
-          console.log("Token: ",response.session_token)
-          setToken(response.session_token)
-        }
-        if (response.data && response.data.length > 0) {
-          if (response.message === 'Good Job' && response.data[0].rol === 'trabajador') {
-            setHaveAccess(true)
-            navigation.navigate('HomeWorker')
-          } else {
-            setHaveAccess(false)
-          }
+    const unsubscribe = navigation.addListener('beforeRemove', () => {
+      setCodigo('')
+      setError('')
+    })
+
+    return unsubscribe
+  }, [navigation])
+
+  useEffect(() => {
+    console.log('response', response)
+    if (response.data !== null || response.data !== undefined) {
+      if (response.session_token !== null) {
+        setToken(response.session_token)
+      }
+      console.log('response', response)
+      if (response.error === 404) {
+        setError('Código incorrecto.')
+      }
+      if (response.data && response.data.length > 0) {
+        if (response.message === 'Good Job' && response.data[0].rol === 'trabajador') {
+          setError('')
+          navigation.navigate('HomeWorker')
         }
       }
     }
-  }, [response])
+  }, [response, setToken, navigation, error, setError])
 
   return (
     <View style={styles.container}>
@@ -68,9 +83,12 @@ const LoginWorker = ({ navigation }) => {
           secureTextEntry
           onChangeText={text => setCodigo(text)}
         />
-        <TouchableOpacity style={styles.button} onPress={() => navigateToWorkerScreen(codigo)}>
+        <Text style={styles.errorText}>{error}</Text>
+        <TouchableOpacity style={styles.button} onPress={() => navigateToWorkerScreen(codigo)} accessibilityLabel="login-button">
+
           <Text style={styles.buttonText}>Acceder</Text>
         </TouchableOpacity>
+
       </View>
     </View>
   )
@@ -79,6 +97,7 @@ const LoginWorker = ({ navigation }) => {
 LoginWorker.propTypes = {
   navigation: PropTypes.shape({
     navigate: PropTypes.func.isRequired,
+    addListener: PropTypes.func.isRequired,
   }).isRequired,
 }
 

@@ -8,9 +8,7 @@ const HeaderInformation = ({
 }) => {
   const handleTabPress = tabName => {
     setActiveTab(tabName)
-    console.log('loteactivoiNFO', activeTab)
   }
-
   return (
     <View style={styles.headerContainer}>
       <Text style={styles.headerText}>{title}</Text>

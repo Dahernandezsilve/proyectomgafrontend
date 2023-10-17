@@ -1,16 +1,18 @@
-import { StyleSheet } from 'react-native'
+import { StyleSheet, Dimensions } from 'react-native'
 import { SamsungOne } from '../../fonts/SamsungOne-400.ttf'
+
+const windowWidth = Dimensions.get('window').width
 
 const styles = StyleSheet.create({
   activeTabButton: {
     backgroundColor: '#FFFFFF',
-    borderBottomColor: '#FFC107',
+    borderBottomColor: '#ff8c00',
     borderBottomWidth: 3,
     color: '#FFC107',
     width: '33.33%',
   },
   activeTabButtonText: {
-    color: '#FFC107',
+    color: '#ff8c00',
     textAlign: 'center',
   },
   buttonContainer: {
@@ -32,7 +34,7 @@ const styles = StyleSheet.create({
   },
   headerText: {
     fontFamily: SamsungOne,
-    fontSize: 24,
+    fontSize: windowWidth * 0.055,
     marginBottom: 8,
     textAlign: 'center',
   },
@@ -50,7 +52,7 @@ const styles = StyleSheet.create({
   tabButtonText: {
     color: '#000000',
     fontFamily: SamsungOne,
-    fontSize: 20,
+    fontSize: windowWidth * 0.040913,
     textAlign: 'center',
   },
 })

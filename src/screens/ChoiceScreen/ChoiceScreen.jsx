@@ -17,21 +17,22 @@ const ChoiceScreen = ({ navigation }) => (
     <View style={styles.formContainer}>
       <ElCeibillalImg style={styles.logo} />
     </View>
-
     <ElCeibillalImgV2 style={styles.logoEsquina} />
 
     <View style={styles.containerBoton}>
       <TouchableOpacity
         style={styles.botonTrabajador}
         onPress={() => navigation.navigate('Trabajador')}
+        accessibilityLabel="worker-button"
       >
         <Text style={styles.buttonTextTrabajador}>Trabajador</Text>
       </TouchableOpacity>
       <TouchableOpacity
         style={styles.botonAdministrador}
         onPress={() => navigation.navigate('Administrador')}
+        accessibilityLabel="admin-button"
       >
-        <Text style={styles.buttonText}>Administador</Text>
+        <Text style={styles.buttonText}>Administrador</Text>
       </TouchableOpacity>
     </View>
   </View>

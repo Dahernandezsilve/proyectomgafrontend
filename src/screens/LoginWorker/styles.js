@@ -1,4 +1,5 @@
 import { StyleSheet, Dimensions } from 'react-native'
+import { SamsungOne } from '../../fonts/SamsungOne-400.ttf'
 
 const windowWidth = Dimensions.get('window').width
 
@@ -23,7 +24,7 @@ const styles = StyleSheet.create({
   },
   buttonText: {
     color: 'white',
-    fontFamily: 'SamsungOne',
+    fontFamily: SamsungOne,
     fontSize: 16,
     textAlign: 'center',
   },
@@ -34,6 +35,11 @@ const styles = StyleSheet.create({
     flex: 1,
     flexWrap: 'wrap',
     justifyContent: 'center',
+  },
+  errorText: {
+    color: 'yellow',
+    fontSize: windowWidth * 0.04,
+    marginTop: windowWidth * 0.01,
   },
   formContainer: {
     alignItems: 'center',

@@ -9,61 +9,53 @@ import ElCeibillalImg from '../../img/ElCeibillalSvg'
 import ElCeibillalImgV2 from '../../img/ElCeibillalV2Svg'
 import styles from './styles'
 
-export const handleLogin = async (correo, contrasena) => {
-  try {
-    const response = await fetch('/login', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({ user: correo, password: contrasena }),
-    });
-    const data = await response.json();
-    return data;
-  } catch (error) {
-    console.error('Error occurred during login:', error);
-    return null;
-  }
-};
-
-
 const LoginAdministrator = ({ navigation }) => {
-  const { token , setToken } = useContext(GlobalContext)
-  const [response,, handleRequest] = useApi()
+  const { setToken } = useContext(GlobalContext)
+  const [response, , handleRequest] = useApi()
   const [correo, setCorreo] = useState('')
   const [contrasena, setContrasena] = useState('')
-  const [, setHaveAccess] = useState(false)
-
-  
+  const [error, setError] = useState('')
 
   const navigateToAdminScreen = () => {
-    handleLogin(correo, contrasena)
+    setError('')
+
+    if (!correo || !contrasena) {
+      setError('Por favor, completa todos los campos.')
+      return
+    }
+
+    handleRequest('POST', '/login', { user: correo, password: contrasena })
   }
+
+  // Restablecer estados cuando se realiza la acción de "regresar"
+  useEffect(() => {
+    const unsubscribe = navigation.addListener('beforeRemove', () => {
+      setCorreo('')
+      setContrasena('')
+      setError('')
+    })
+
+    return unsubscribe
+  }, [navigation])
 
   useEffect(() => {
     if (response.message !== null || response.message !== undefined) {
-      // eslint-disable-next-line no-console
-      console.log(response)
       if (response.data !== null || response.data !== undefined) {
         if (response.session_token !== null) {
-          console.log('Token: ', response.session_token)
           setToken(response.session_token)
+        }
+        if (response.message !== 'Good Job' && contrasena !== '') {
+          setError('Datos incorrectos.') // Mostrar mensaje de error
         }
         if (response.data && response.data.length > 0) {
           if (response.message === 'Good Job' && response.data[0].rol === 'admin') {
-            setHaveAccess(true)
+            setError('')
             navigation.navigate('Home')
-          } else {
-            setHaveAccess(false)
           }
         }
       }
     }
-  }, [navigation, response])
-
-  /* {"data": [{"direccion": "11av zona10", "idTrabajador": "1", "nombre": "Diego Hernandez",
-   "puesto": "Servicio de limpieza", "rol": "trabajador", "telefono": "123213123"}], "error": 202,
-    "message": "Good Job"} */
+  }, [response, setToken, navigation])
 
   return (
     <View style={styles.container}>
@@ -85,6 +77,7 @@ const LoginAdministrator = ({ navigation }) => {
           secureTextEntry
           onChangeText={text => setContrasena(text)}
         />
+        <Text style={styles.errorText}>{error}</Text>
         <TouchableOpacity style={styles.button} onPress={navigateToAdminScreen}>
           <Text style={styles.buttonText}>Acceder</Text>
         </TouchableOpacity>
@@ -96,6 +89,7 @@ const LoginAdministrator = ({ navigation }) => {
 LoginAdministrator.propTypes = {
   navigation: PropTypes.shape({
     navigate: PropTypes.func.isRequired,
+    addListener: PropTypes.func.isRequired,
   }).isRequired,
 }
 

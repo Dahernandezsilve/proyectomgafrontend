@@ -1,3 +1,5 @@
+/* eslint-disable no-shadow */
+/* eslint-disable no-unused-vars */
 import React, { useState, useEffect } from 'react'
 import {
   View, ScrollView, StatusBar,
@@ -6,7 +8,7 @@ import DateTimePicker from '@react-native-community/datetimepicker'
 import PropTypes from 'prop-types'
 import {
   SelectDate,
-  SelectOption, TrafficLight, CardGaleraAdmin, NoInfo, BottomTabNavigation, HeaderInformation,
+  SelectOption, TrafficLight, CardGaleraAdmin, NoInfo, HeaderInformation, BottomTabNavigation,
 } from '../../components'
 import useApi from '../../hooks/useApi/useApi'
 import styles from './styles'
@@ -17,7 +19,6 @@ const formatDate = dateString => {
   const month = String(date.getMonth() + 1).padStart(2, '0')
   const day = String(date.getDate()).padStart(2, '0')
   const formattedDate = `${year}-${month}-${day}`
-
   return formattedDate
 }
 
@@ -28,7 +29,8 @@ const ReportScreenAdmin = (
 ) => {
   const lotes = ['1', '2', '3', '4']
   const [activeTab, setActiveTab] = useState(lotes[0])
-  const [response,, handleRequest] = useApi()
+  const [response, , handleRequest] = useApi()
+  const [WorkersPerLote, setWorkersPerLote] = useState([])
   const [, setGaleras] = useState([])
   const [selectedDate, setSelectedDate] = useState(new Date())
   const [showDatePicker, setShowDatePicker] = useState(false)
@@ -41,6 +43,7 @@ const ReportScreenAdmin = (
   const [middleValue, setMiddleValue] = useState(0)
   const [bottomValue, setBottomValue] = useState(0)
   const [showNoInfo, setShowNoInfo] = useState(false)
+  const [activeTabb, setActiveTabb] = useState(0)
 
   const handleDateChange = (event, date) => {
     setSelectedDate(date)
@@ -51,25 +54,65 @@ const ReportScreenAdmin = (
     setShowDatePicker(!showDatePicker)
   }
 
-  const handleObtainGaleras = () => {
-    handleRequest('POST', '/galeras')
+  const handleObtainGaleras = async () => {
+    try {
+      const response = await handleRequest('POST', '/galeras')
+      // Haz algo con la respuesta aquí si es necesario
+    } catch (error) {
+      console.error('Error al obtener las galeras:', error)
+    }
   }
 
-  const handleObtainWorkers = () => {
-    handleRequest('GET', '/obtainTrabajadores')
+  const handleObtainWorkers = async () => {
+    try {
+      // eslint-disable-next-line no-shadow
+      const response = await handleRequest('GET', '/obtainTrabajadores')
+      console.log('Trabajadores son:', response)
+      // Haz algo con la respuesta aquí si es necesario
+    } catch (error) {
+      console.error('Error al obtener los trabajadores:', error)
+    }
+  }
+
+  // eslint-disable-next-line no-shadow
+  const handleObtainWorkersPerLote = async activeTab => {
+    const body = {
+      id_lote: parseInt(activeTab, 10),
+    }
+
+    console.log('body', body)
+
+    // Realiza una solicitud POST a la ruta de Flask
+    const response = await handleRequest('POST', '/wperLote', body)
+
+    console.log('Mensaje:', response)
+    console.log('Lote es: ', activeTab)
+
+    // Si la respuesta es un array con al menos un elemento, mapea el nombre del trabajador
+    if (Array.isArray(response.data) && response.data.length > 0) {
+      const workerNames = response.data.map(worker => worker.nombre_trabajador)
+      console.log('Nombres de los trabajadores:', workerNames)
+
+      setWorkersPerLote(workerNames)
+    } else {
+      console.error('La respuesta no contiene datos de trabajadores válidos.')
+    }
   }
 
   const handleObtainRegistersDate = (dateElected, optionSelected, tabActive) => {
+    console.log('Response: ', response)
     if (dateElected.length !== 0) {
       const answer = formatDate(dateElected)
       if (optionSelected !== null && optionSelected !== undefined) {
         if (optionSelected.nombre !== 'No seleccionar') {
           handleRequest('POST', '/obtainRegistersDate', { date: answer, idTrabajador: optionSelected.idTrabajador, idLote: tabActive })
           setRegistersActive(true)
-          console.log(response)
+        }
+        if (optionSelected.nombre === 'No seleccionar') {
+          handleRequest('POST', '/obtainRegistersDate', { date: answer, idLote: tabActive })
+          setRegistersActive(true)
         }
       } else {
-        console.log('lote activo', tabActive)
         handleRequest('POST', '/obtainRegistersDate', { date: answer, idLote: tabActive })
         setRegistersActive(true)
       }
@@ -115,13 +158,13 @@ const ReportScreenAdmin = (
       ],
     }
 
-    const index = Math.floor((p - 1) / 7);
+    const index = Math.floor((p - 1) / 7)
 
     if (index < 0 || index >= thresholds[tipo].length) {
       return 'red'
     }
 
-    const [greenThreshold, orangeThreshold] = thresholds[tipo][index];
+    const [greenThreshold, orangeThreshold] = thresholds[tipo][index]
 
     if (ca > greenThreshold) {
       return 'green'
@@ -132,7 +175,6 @@ const ReportScreenAdmin = (
   }
 
   useEffect(() => {
-    console.log('lote', activeTab)
     if (response.data !== undefined && response.data !== null) {
       if (typeof response.data.ca !== 'undefined') {
         setGaleras(response.data)
@@ -155,8 +197,11 @@ const ReportScreenAdmin = (
   useEffect(() => {
     handleObtainGaleras()
     handleObtainWorkers()
-    console.log('registers', registers)
   }, [])
+
+  useEffect(() => {
+    handleObtainWorkersPerLote(activeTab)
+  }, [activeTab])
 
   useEffect(() => {
     setTopValue(0)
@@ -168,9 +213,6 @@ const ReportScreenAdmin = (
   useEffect(() => {
     if (response.data !== undefined && response.data !== null) {
       if (Array.isArray(response.data) && response.data.length > 0 && 'cantidadAlimento' in response.data[0]) {
-        console.log('inform', registers)
-        console.log(registers)
-
         registers.map(inform => {
           if (verifyCA({ p: inform.edadGalera, ca: inform.ca, tipo: inform.tipoPollo }) === 'red') {
             setBottomValue(prevBottomValue => prevBottomValue + 1)
@@ -195,33 +237,38 @@ const ReportScreenAdmin = (
     }
 
     if (Array.isArray(registers) && registers.length > 0) {
-      return registers.map(inform => {
-        const params = { p: inform.edadGalera, ca: inform.ca, tipo: inform.tipoPollo }
-        const resultP = verifyCA(params)
-        const caValue = inform.ca === null || inform.ca === 0 ? 'gray' : resultP;
+      return (
+        <>
+          {registers.map(inform => {
+            const params = { p: inform.edadGalera, ca: inform.ca, tipo: inform.tipoPollo }
+            const resultP = verifyCA(params)
+            const caValue = inform.ca === null || inform.ca === 0 ? 'gray' : resultP
 
-        if (resultP !== undefined) {
-          return (
-            <CardGaleraAdmin
-              ca={caValue}
-              msgCA="C.A: "
-              numberCA={inform.ca}
-              customValues={{
-                galera: `Galera ${inform.idGalera}`,
-                cantidadAlimento: `${inform.cantidadAlimento} qq`,
-                pesado: `${inform.pesoMedido} lbs`,
-                decesos: inform.decesos,
-                edad: `${inform.edadGalera} días`,
-                observaciones: inform.observaciones,
-                navigateToGaleras,
-              }}
-              customTitles={['Identificador:', 'Alimento:', 'Peso (Pollos):', 'Muertes:', 'Edad:', 'Observaciones:']}
-            />
-          )
-        }
+            if (resultP !== undefined) {
+              return (
+                <CardGaleraAdmin
+                  key={`${inform.idGalera} ${inform.edad}`}
+                  ca={caValue}
+                  msgCA="C.A: "
+                  numberCA={inform.ca}
+                  customValues={{
+                    galera: `Galera ${inform.idGalera}`,
+                    cantidadAlimento: `${inform.cantidadAlimento} qq`,
+                    pesado: `${inform.pesoMedido} lbs`,
+                    decesos: inform.decesos,
+                    edad: `${inform.edadGalera} días`,
+                    observaciones: inform.observaciones,
+                    navigateToGaleras,
+                  }}
+                  customTitles={['Identificador:', 'Alimento:', 'Peso (Pollos):', 'Muertes:', 'Edad:', 'Observaciones:']}
+                />
+              )
+            }
 
-        return null
-      })
+            return null
+          })}
+        </>
+      )
     }
 
     return null
@@ -229,20 +276,20 @@ const ReportScreenAdmin = (
 
   const tabs = [
     {
-      label: 'Informe', route: 'Home', icon: 'home', method: 'AntDesign',
+      label: 'Informe', route: 'Home', icon: 'ios-home', method: 'Ionicons',
     },
     {
-      label: 'Medición', route: 'Administrador', icon: 'bird', method: 'MaterialCommunityIcons',
+      label: 'Medición', route: 'Administrador', icon: 'new-message', method: 'Entypo',
     },
     {
-      label: 'Granja', route: 'NGalley', icon: 'line-graph', method: 'Entypo',
+      label: 'Granja', route: 'NGalley', icon: 'book', method: 'Entypo',
     },
     {
-      label: 'Personal', route: 'Administrador', icon: 'people', method: 'Octicons',
+      label: 'Personal', route: 'Administrador', icon: 'people-alt', method: 'MaterialIcons',
     },
   ]
 
-  const [activeTabb, setActiveTabb] = useState(0)
+  // const [activeTabb, setActiveTabb] = useState(0)
 
   return (
     <View style={{ flex: 1 }}>
@@ -271,8 +318,9 @@ const ReportScreenAdmin = (
               )}
               <SelectOption
                 selectedOption={selectedOption}
-                options={workers}
+                options={WorkersPerLote}
                 setSelectedOption={setSelectedOption}
+                activeTab={activeTab}
               />
             </View>
             <TrafficLight
@@ -280,19 +328,18 @@ const ReportScreenAdmin = (
               middleValue={middleValue} // Valor para el cuadro naranja
               bottomValue={bottomValue}
             />
-
           </View>
           <RenderContentRegisters />
         </ScrollView>
       </View>
-      {/* <View style={styles.bottomTabNavigator}>
+      <View style={styles.bottomTabNavigator}>
         <BottomTabNavigation
           activeTab={activeTabb}
-          setActiveTab={setActiveTabb}
+          // setActiveTab={setActiveTabb}
           tabs={tabs}
           navigation={navigation}
         />
-      </View> */}
+      </View>
     </View>
   )
 }

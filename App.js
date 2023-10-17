@@ -3,13 +3,15 @@ import React, { useEffect } from 'react'
 import { NavigationContainer } from '@react-navigation/native'
 import { createNativeStackNavigator } from '@react-navigation/native-stack'
 import * as Font from 'expo-font'
-import { GlobalProvider } from './src/GlobalContext/GlobalContext.js'
+import { GlobalProvider } from './src/GlobalContext/GlobalContext'
 import {
   ChoiceScreen, DetailsScreen, CreationScreen, HomeWorkerScreen, LoginAdministrator,
+  CreationScreenAdministrator,
 } from './src/screens'
 import ReportScreenAdmin from './src/screens/ReportScreenAdmin'
 import LoginWorker from './src/screens/LoginWorker/LoginWorker'
 import NewGalleyScreen from './src/screens/NewGalleyScreen/NewGalleyScreen'
+import MeasurementsHistory from './src/screens/MeasurementsHistory'
 
 const Stack = createNativeStackNavigator()
 
@@ -32,7 +34,8 @@ const App = () => {
           <Stack.Screen name="SelectUser" component={ChoiceScreen} options={{ headerShown: false }} />
           <Stack.Screen name="Administrador" component={LoginAdministrator} options={{ header: () => null }} />
           <Stack.Screen name="Trabajador" component={LoginWorker} options={{ header: () => null }} />
-          <Stack.Screen name="NGalley" component={NewGalleyScreen} options={{ header: () => null }} />
+          <Stack.Screen name="NGalley" component={NewGalleyScreen} options={{ header: () => null, animation: 'none' }} />
+          <Stack.Screen name="MeasurementsHistory" component={MeasurementsHistory} options={{ header: () => null }} />
           <Stack.Screen
             name="HomeWorker"
             component={HomeWorkerScreen}
@@ -55,6 +58,11 @@ const App = () => {
               />
             )}
           </Stack.Screen>
+          <Stack.Screen
+            name="CreationScreenAdministrator"
+            component={CreationScreenAdministrator}
+            options={{ header: () => null }}
+          />
         </Stack.Navigator>
       </NavigationContainer>
     </GlobalProvider>
