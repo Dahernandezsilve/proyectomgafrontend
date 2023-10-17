@@ -1,15 +1,15 @@
-import React, { useState, useContext, useEffect } from 'react'
+import React, { useState, useContext } from 'react'
 import {
-  View, ScrollView, StatusBar, Alert, Button, TouchableOpacity, Text,
+  View, ScrollView, StatusBar, Alert, Button, Text,
 } from 'react-native'
 import { useRoute, useNavigation } from '@react-navigation/native'
 
 import {
-  SliderContainer, CommentsComponent, HeaderCreation,
+  CommentsComponent, HeaderCreation,
 } from '../../components'
 import styles from './styles'
-
 import { GlobalContext } from '../../GlobalContext/GlobalContext'
+import SliderComponentRefactor from '../../components/SliderComponentRefactor/SliderComponentRefactor'
 
 const CreationScreen = () => {
   const { setRefresh, setSending, sending } = useContext(GlobalContext)
@@ -18,47 +18,41 @@ const CreationScreen = () => {
   const idGalera = route.params?.idGalera || null
   const galera = route.params?.galera || null
   const navigation = useNavigation()
-  // eslint-disable-next-line no-unused-vars
-  const [isFormValid, setIsFormValid] = useState(true)
-
+  const [pollos, setPollos] = useState(0)
+  const [pesado, setPesado] = useState(0)
+  const [alimento, setAlimento] = useState(0)
+  const [decesos, setDecesos] = useState(0)
   const [arraySliderPesado, setArraySliderPesado] = useState([])
-  const [registro, setRegistro] = useState({
-    cantidadAlimento: 0,
-    decesos: 0,
-    observaciones: 'Nada',
-    idGalera,
-    pesado: 0,
-  })
-  const setRegistroPesado = index => fn => {
-    const valor = fn({})
-    console.log('valor', valor)
+  const [comentario, setComentario] = useState('Nada')
+
+  const setValueArrayPesado = index => valor => {
     setArraySliderPesado(current => current.map((array, i) => {
       if (i === index) {
-        return { ...valor }
+        return valor
       }
       return array
     }))
   }
   const promedioPesado = arraySliderPesado
-    .reduce((acc, obj) => obj.pesado + acc, 0) / arraySliderPesado.length
+    .reduce((acc, value) => value + acc, 0)
+    / arraySliderPesado.filter(valor => valor !== 0).length
   console.log('promedio pesado:', promedioPesado)
   const handleRegistrar = () => {
     const newSending = sending
     newSending.push({
-      cantidadAlimento: registro.cantidadAlimento,
-      decesos: registro.decesos,
-      observaciones: registro.observaciones,
+      cantidadAlimento: alimento,
+      decesos,
+      observaciones: comentario,
       idGalera,
-      pesado: registro.pesado,
+      pesado: pesado + arraySliderPesado.reduce((acc, value) => value + acc, 0),
     })
     setSending(newSending)
     setRefresh(true)
   }
 
-  useEffect(() => {
-    console.log('registro', registro)
-  }, [registro])
-
+  const handleAñadir = () => {
+    setArraySliderPesado([...arraySliderPesado, 0])
+  }
   const showAlert = () => {
     Alert.alert(
       'Confirmación',
@@ -77,15 +71,12 @@ const CreationScreen = () => {
       { cancelable: false },
     )
   }
-  function handleAñadir() {
-    setArraySliderPesado([...arraySliderPesado, { pesado: 0 }])
-  }
 
   function handleSend() {
     // Check the validity of each value
-    const isCantidadAlimentoValid = registro.cantidadAlimento > 0
-      && registro.cantidadAlimento <= 100
-    const isDecesosValid = registro.decesos > 0 && registro.decesos <= 5000
+    const isCantidadAlimentoValid = alimento > 0
+      && alimento <= 100
+    const isDecesosValid = decesos > 0 && decesos <= 5000
 
     const hasData = isCantidadAlimentoValid && isDecesosValid
 
@@ -127,60 +118,53 @@ const CreationScreen = () => {
       <ScrollView>
         {dayOfWeek === 1 && (
           <>
-            <SliderContainer
+            <SliderComponentRefactor
               title="Cantidad de pollos pesados: "
               minimumValue={20}
               maximumValue={100}
               step={1}
               medida="pollos"
-              fixed="0"
-              registro={registro}
-              setRegistro={setRegistro}
-              maxLength={3}
+              fixed={0}
+              value={pollos}
+              setValue={setPollos}
+
             />
-            <SliderContainer
+            <SliderComponentRefactor
               title="Peso total de pollos: "
               minimumValue={0}
               maximumValue={200}
               step={1}
               medida="lbs"
-              fixed="2"
-              registro={registro}
-              setRegistro={setRegistro}
-              code="pesado"
-              maxLength={3}
+              value={pesado}
+              setValue={setPesado}
+
             />
           </>
         )}
-        <SliderContainer
-          code="cantidadAlimento"
+        <SliderComponentRefactor
           title="Consumo de alimento: "
           minimumValue={0}
           maximumValue={100}
           step={1}
           medida="qq"
-          fixed="2"
-          registro={registro}
-          setRegistro={setRegistro}
-          maxLength={3}
+          value={alimento}
+          setValue={setAlimento}
+
         />
-        <SliderContainer
-          code="decesos"
+        <SliderComponentRefactor
           title="Cantidad de pollos muertos: "
           minimumValue={0}
           maximumValue={5000}
           step={1}
           medida="pollos"
-          fixed="0"
-          registro={registro}
-          maxLength={4}
-          setRegistro={setRegistro}
+          value={decesos}
+          setValue={setDecesos}
         />
         <View style={styles.buttonContainer}>
           <Button title="Añadir más registros" style={styles.button} onPress={showAlert} />
         </View>
         {arraySliderPesado.map((reg, index) => (
-          <SliderContainer
+          <SliderComponentRefactor
             // eslint-disable-next-line react/no-array-index-key
             key={index}
             title="Peso total de pollos: "
@@ -188,10 +172,8 @@ const CreationScreen = () => {
             maximumValue={200}
             step={1}
             medida="lbs"
-            fixed="2"
-            registro={registro}
-            setRegistro={setRegistroPesado(index)}
-            code="pesado"
+            value={reg}
+            setValue={setValueArrayPesado(index)}
             maxLength={3}
           />
         ))}
@@ -200,9 +182,18 @@ const CreationScreen = () => {
         >
           Promedio de Peso:
           {' '}
-          { promedioPesado}
+          {promedioPesado}
         </Text>
-        <CommentsComponent code="observaciones" registro={registro} setRegistro={setRegistro} handleRegistrar={handleSend} />
+        <CommentsComponent code="observaciones" value={comentario} setValue={setComentario} />
+        <View style={styles.buttonContainer}>
+          <Button
+            title="Completar"
+            style={{ borderRadius: 5 }}
+            color="#2e4a85"
+            // eslint-disable-next-line react/jsx-no-bind
+            onPress={handleSend}
+          />
+        </View>
       </ScrollView>
     </View>
   )
