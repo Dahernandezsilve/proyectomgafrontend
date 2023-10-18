@@ -282,7 +282,7 @@ const ReportScreenAdmin = (
       label: 'Medición', route: 'Administrador', icon: 'new-message', method: 'Entypo',
     },
     {
-      label: 'Granja', route: 'NGalley', icon: 'book', method: 'Entypo',
+      label: 'Granja', route: 'Crear galera', icon: 'book', method: 'Entypo',
     },
     {
       label: 'Personal', route: 'Administrador', icon: 'people-alt', method: 'MaterialIcons',

@@ -1,7 +1,7 @@
 import React,{useState, useEffect} from 'react';
 import { View, Text, Button, Dimensions, ScrollView} from 'react-native';
 import {
-    CardAssignment, HeaderInformation
+    CardAssignment, HeaderInformation, BottomTabNavigation
   } from '../../components'
 
 import styles from './styles';
@@ -19,7 +19,7 @@ const GalleyAssignment = ({ navigation }) => {
   const [verLotes, setLotes] = useState(lotes[0])
   const [response, , handleRequest] = useApi()
   const [galleysPerLote, setGalleysPerLote] = useState([]); // Estado para almacenar los datos de las galeras
-
+  const [activeTabb, setActiveTabb] = useState(0)
 
   // eslint-disable-next-line no-shadow
   const handleObtainGalleysPerLote = async verLotes => {
@@ -75,6 +75,21 @@ const GalleyAssignment = ({ navigation }) => {
     />
   ));
 
+  const tabs = [
+    {
+      label: 'Informe', route: 'Home', icon: 'ios-home', method: 'Ionicons',
+    },
+    {
+      label: 'Medición', route: 'Administrador', icon: 'new-message', method: 'Entypo',
+    },
+    {
+      label: 'Granja', route: 'Crear galera', icon: 'book', method: 'Entypo',
+    },
+    {
+      label: 'Personal', route: 'Administrador', icon: 'people-alt', method: 'MaterialIcons',
+    },
+  ]
+
   return (
     <>
       <HeaderInformation
@@ -101,6 +116,12 @@ const GalleyAssignment = ({ navigation }) => {
       onPress={() => handleObtainGalleysPerLote('1')} // Pasa un valor de lote de prueba aquí
         />
       </ScrollView>
+      <BottomTabNavigation
+          activeTab={activeTabb}
+          // setActiveTab={setActiveTabb}
+          tabs={tabs}
+          navigation={navigation}
+        />
     </>
   );
 };
