@@ -29,7 +29,7 @@ const ChoiceScreen = ({ navigation }) => (
       </TouchableOpacity>
       <TouchableOpacity
         style={styles.botonAdministrador}
-        onPress={() => navigation.navigate('Asignacion')}
+        onPress={() => navigation.navigate('Administrador')}
         accessibilityLabel="admin-button"
       >
         <Text style={styles.buttonText}>Administador</Text>
