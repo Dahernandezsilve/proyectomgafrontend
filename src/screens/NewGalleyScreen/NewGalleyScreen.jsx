@@ -12,8 +12,8 @@ const pesado = ['Oratorio', 'Cuilapa', 'Barberena']
 const decesos = ['Encargado de Lote', 'Encargado de Lote', 'Encargado de Lote']
 
 const NewGalleyScreen = ({ navigation }) => {
-  const lotes = ['20', '1', '2']
-  const [activeTab, setActiveTab] = useState(lotes[0])
+  const lotes = ['Mi granja', 'Asignacion', 'Crear galera']
+  const [activeTab, setActiveTab] = useState(lotes[2])
 
   const navigateToGaleras = async () => {
     navigation.navigate('Creacion')

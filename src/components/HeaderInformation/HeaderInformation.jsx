@@ -24,8 +24,9 @@ const HeaderInformation = ({
             activeOpacity={0.7}
             onPress={() => {
               if (shouldNavigate) {
-                handleTabPress(lote);
+                //handleTabPress(lote);
                 navigation.navigate(customTitles[index], { activeTab: customTitles[index] });
+                handleTabPress(activeTab);
               } else {
                 handleTabPress(lote);
               }

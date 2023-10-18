@@ -10,8 +10,9 @@ const windowWidth = Dimensions.get('window').width
 
 const GalleyAssignment = ({navigation}) => {
 
-  const lotes = ['20', '1', '2']
-  const [activeTab, setActiveTab] = useState(lotes[0])
+  const lotes = ['Mi granja', 'Asignacion', 'Crear galera']
+  const [activeTab, setActiveTab] = useState(lotes[1])
+
 
   return (
     <>
