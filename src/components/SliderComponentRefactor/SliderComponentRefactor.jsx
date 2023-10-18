@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from 'react'
+import React, { useState, useRef } from 'react'
 import PropTypes from 'prop-types'
 import {
   View, Text, TextInput, Keyboard, TouchableOpacity,
@@ -6,14 +6,13 @@ import {
 import Slider from '@react-native-community/slider'
 import styles from './styles'
 
-const SliderContainer = ({
-  code,
-  title, minimumValue, maximumValue, step, medida, fixed, registro, setRegistro, maxLength,
+const SliderComponentRefactor = ({
+  title, minimumValue, maximumValue, step, medida, fixed, value, setValue,
 }) => {
-  const [value, setValue] = useState(0.0)
   const [formattedValue, setFormattedValue] = useState('0')
   const textInputRef = useRef(null)
   const [inputError, setInputError] = useState(null)
+  const maxLength = maximumValue.toString().length
 
   const handleTextInputChange = text => {
     // Remove any commas from the input
@@ -40,9 +39,6 @@ const SliderContainer = ({
     setValue(0)
   }
 
-  useEffect(() => {
-  }, [registro])
-
   const handleDoneEditing = formatted => {
     const numericValue = parseFloat(formatted.replace(/\s/g, ''))
     if (!Number.isNaN(numericValue)) {
@@ -59,19 +55,6 @@ const SliderContainer = ({
         setValue(numericValue)
         setFormattedValue(formattedV)
         setInputError(null) // Clear the error message
-        switch (code) {
-          case 'decesos':
-            setRegistro(prevRegistro => ({ ...prevRegistro, decesos: numericValue }))
-            break
-          case 'cantidadAlimento':
-            setRegistro(prevRegistro => ({ ...prevRegistro, cantidadAlimento: numericValue }))
-            break
-          case 'pesado':
-            setRegistro(prevRegistro => ({ ...prevRegistro, pesado: numericValue }))
-            break
-          default:
-            break
-        }
       } else {
         setInputError(`El valor debe estar entre ${minimumValue} y ${maximumValue}`)
       }
@@ -97,19 +80,6 @@ const SliderContainer = ({
         setValue(numericValue)
         setFormattedValue(p)
         setInputError(null) // Clear the error message
-        switch (code) {
-          case 'decesos':
-            setRegistro(prevRegistro => ({ ...prevRegistro, decesos: numericValue }))
-            break
-          case 'cantidadAlimento':
-            setRegistro(prevRegistro => ({ ...prevRegistro, cantidadAlimento: numericValue }))
-            break
-          case 'pesado':
-            setRegistro(prevRegistro => ({ ...prevRegistro, pesado: numericValue }))
-            break
-          default:
-            break
-        }
       } else {
         setInputError(`El valor debe estar entre ${minimumValue} y ${maximumValue}`)
       }
@@ -174,25 +144,18 @@ const SliderContainer = ({
   )
 }
 
-const registroPropType = PropTypes.shape({
-  decesos: PropTypes.number.isRequired,
-  cantidadAlimento: PropTypes.number.isRequired,
-  pesado: PropTypes.number.isRequired,
-  // Agrega más propiedades si es necesario
-})
-
-SliderContainer.propTypes = {
-  code: PropTypes.string.isRequired,
+SliderComponentRefactor.propTypes = {
   title: PropTypes.string.isRequired,
   minimumValue: PropTypes.number.isRequired,
   maximumValue: PropTypes.number.isRequired,
   step: PropTypes.number.isRequired,
   medida: PropTypes.string.isRequired,
-  fixed: PropTypes.string.isRequired,
-  // eslint-disable-next-line react/require-default-props
-  maxLength: PropTypes.number,
-  registro: registroPropType.isRequired,
-  setRegistro: PropTypes.func.isRequired, // Agregada la validación para la prop 'setRegistro'
+  fixed: PropTypes.number,
+  value: PropTypes.number.isRequired,
+  setValue: PropTypes.func.isRequired, // Agregada la validación para la prop 'setRegistro'
 }
 
-export default SliderContainer
+SliderComponentRefactor.defaultProps = {
+  fixed: 2,
+}
+export default SliderComponentRefactor

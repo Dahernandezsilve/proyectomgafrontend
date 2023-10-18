@@ -3,19 +3,27 @@ import { StyleSheet, Dimensions } from 'react-native'
 const windowWidth = Dimensions.get('window').width
 
 const styles = StyleSheet.create({
+  AbContainer: {
+    backgroundColor: '#f0f0f0',
+  },
   activeTab: {
-    backgroundColor: '#007bff',
+    backgroundColor: '#ff8c00',
+    borderTopLeftRadius: 10, // Agregar bordes redondeados a la esquina superior izquierda
+    borderTopRightRadius: 10, // Agregar bordes redondeados a la esquina superior derecha
     elevation: 4, // Añadir sombreado en el tab activo
   },
   activeTabText: {
     color: '#fff',
+    zIndex: -1,
   },
   container: {
     backgroundColor: '#f0f0f0',
     borderTopColor: '#ccc',
-    borderTopWidth: 1,
+    borderTopLeftRadius: 10, // Agregar bordes redondeados a la esquina superior izquierda
+    borderTopRightRadius: 10, // Agregar bordes redondeados a la esquina superior derecha
+    borderTopWidth: 2,
     flexDirection: 'row',
-    height: windowWidth * 0.16,
+    height: windowWidth * 0.18,
   },
   tabItem: {
     alignItems: 'center',

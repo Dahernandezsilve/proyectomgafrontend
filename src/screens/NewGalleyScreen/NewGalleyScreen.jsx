@@ -21,16 +21,16 @@ const NewGalleyScreen = ({ navigation }) => {
 
   const tabs = [
     {
-      label: 'Informe', route: 'Home', icon: 'home', method: 'AntDesign',
+      label: 'Informe', route: 'Home', icon: 'ios-home', method: 'Ionicons',
     },
     {
-      label: 'Medición', route: 'Administrador', icon: 'bird', method: 'MaterialCommunityIcons',
+      label: 'Medición', route: 'Administrador', icon: 'new-message', method: 'Entypo',
     },
     {
-      label: 'Granja', route: 'NGalley', icon: 'line-graph', method: 'Entypo',
+      label: 'Granja', route: 'NGalley', icon: 'book', method: 'Entypo',
     },
     {
-      label: 'Personal', route: 'Administrador', icon: 'people', method: 'Octicons',
+      label: 'Personal', route: 'Administrador', icon: 'people-alt', method: 'MaterialIcons',
     },
   ]
 
@@ -106,7 +106,6 @@ const NewGalleyScreen = ({ navigation }) => {
       <View style={styles.bottomTabNavigator}>
         <BottomTabNavigation
           activeTab={activeTabb}
-          setActiveTab={setActiveTabb}
           tabs={tabs}
           navigation={navigation}
         />

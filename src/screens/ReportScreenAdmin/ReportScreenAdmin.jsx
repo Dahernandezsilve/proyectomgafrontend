@@ -8,7 +8,7 @@ import DateTimePicker from '@react-native-community/datetimepicker'
 import PropTypes from 'prop-types'
 import {
   SelectDate,
-  SelectOption, TrafficLight, CardGaleraAdmin, NoInfo, HeaderInformation,
+  SelectOption, TrafficLight, CardGaleraAdmin, NoInfo, HeaderInformation, BottomTabNavigation,
 } from '../../components'
 import useApi from '../../hooks/useApi/useApi'
 import styles from './styles'
@@ -43,6 +43,7 @@ const ReportScreenAdmin = (
   const [middleValue, setMiddleValue] = useState(0)
   const [bottomValue, setBottomValue] = useState(0)
   const [showNoInfo, setShowNoInfo] = useState(false)
+  const [activeTabb, setActiveTabb] = useState(0)
 
   const handleDateChange = (event, date) => {
     setSelectedDate(date)
@@ -272,21 +273,21 @@ const ReportScreenAdmin = (
 
     return null
   }
-  /*
+
   const tabs = [
     {
-      label: 'Informe', route: 'Home', icon: 'home', method: 'AntDesign',
+      label: 'Informe', route: 'Home', icon: 'ios-home', method: 'Ionicons',
     },
     {
-      label: 'Medición', route: 'Administrador', icon: 'bird', method: 'MaterialCommunityIcons',
+      label: 'Medición', route: 'Administrador', icon: 'new-message', method: 'Entypo',
     },
     {
-      label: 'Granja', route: 'NGalley', icon: 'line-graph', method: 'Entypo',
+      label: 'Granja', route: 'NGalley', icon: 'book', method: 'Entypo',
     },
     {
-      label: 'Personal', route: 'Administrador', icon: 'people', method: 'Octicons',
+      label: 'Personal', route: 'Administrador', icon: 'people-alt', method: 'MaterialIcons',
     },
-  ] */
+  ]
 
   // const [activeTabb, setActiveTabb] = useState(0)
 
@@ -333,14 +334,14 @@ const ReportScreenAdmin = (
           <RenderContentRegisters />
         </ScrollView>
       </View>
-      {/* <View style={styles.bottomTabNavigator}>
+      <View style={styles.bottomTabNavigator}>
         <BottomTabNavigation
           activeTab={activeTabb}
-          setActiveTab={setActiveTabb}
+          // setActiveTab={setActiveTabb}
           tabs={tabs}
           navigation={navigation}
         />
-      </View> */}
+      </View>
     </View>
   )
 }
