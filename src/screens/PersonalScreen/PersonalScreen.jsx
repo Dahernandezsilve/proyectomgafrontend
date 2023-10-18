@@ -11,7 +11,7 @@ const cantidadAlimento = ['4356 7890', '9234 5632', '1208 6684']
 const pesado = ['Oratorio', 'Cuilapa', 'Barberena']
 const decesos = ['Encargado de Lote', 'Encargado de Lote', 'Encargado de Lote']
 
-const NewGalleyScreen = ({ navigation }) => {
+const PersonalScreen = ({ navigation }) => {
   const lotes = ['20', '1', '2']
   const [activeTab, setActiveTab] = useState(lotes[0])
 
@@ -34,13 +34,13 @@ const NewGalleyScreen = ({ navigation }) => {
     },
   ]
 
-  const [activeTabb] = useState(2)
+  const [activeTabb] = useState(3)
 
   return (
     <View style={styles.container}>
       <HeaderInformation
-        title="Granja"
-        customTitles={['Mi granja', 'Asignacion', 'Crear galera']}
+        title="Personal"
+        customTitles={['Mi personal', 'Ranking', 'Añadir personal']}
         lotes={lotes}
         activeTab={activeTab}
         setActiveTab={setActiveTab}
@@ -48,37 +48,8 @@ const NewGalleyScreen = ({ navigation }) => {
       />
       <ScrollView>
         <View style={styles.container}>
-
-          <View style={styles.formGroup}>
-            <Text style={styles.label}>No. galera:</Text>
-            <TextInput
-              style={styles.input}
-              placeholder="Ingrese el número de galera"
-              keyboardType="numeric"
-              maxLength={2}
-            />
-          </View>
-
-          <View style={styles.formGroup}>
-            <Text style={styles.label}>Tipo de población:</Text>
-            <TextInput
-              style={styles.input}
-              placeholder="Ingrese el tipo de población"
-            />
-          </View>
-
-          <View style={styles.formGroup}>
-            <Text style={styles.label}>Cantidad de pollos:</Text>
-            <TextInput
-              style={styles.input}
-              placeholder="Ingrese la cantidad de pollos"
-              keyboardType="numeric"
-              maxLength={4}
-            />
-          </View>
-
           <View style={styles.rectangle}>
-            <Text style={styles.workerTitle}>Asignar trabajador</Text>
+            <Text style={styles.workerTitle}>Personal</Text>
           </View>
 
           {galera.map((nombre, index) => (
@@ -113,10 +84,10 @@ const NewGalleyScreen = ({ navigation }) => {
   )
 }
 
-NewGalleyScreen.propTypes = {
+PersonalScreen.propTypes = {
   navigation: PropTypes.shape({
     navigate: PropTypes.func.isRequired,
   }).isRequired,
 }
 
-export default NewGalleyScreen
+export default PersonalScreen
