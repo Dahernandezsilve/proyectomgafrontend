@@ -77,10 +77,10 @@ const PersonalScreen = ({ navigation }) => {
               <CardPersonal
                 key={worker.id_trabajador}
                 customValues={{
-                  galera: worker.nombre,
-                  cantidadAlimento: worker.telefono,
-                  pesado: worker.direccion,
-                  decesos: worker.puesto,
+                  nombre: worker.nombre,
+                  telefono: worker.telefono,
+                  direccion: worker.direccion,
+                  puesto: worker.puesto,
                 }}
                 customTitles={['Nombre:', 'Telefono:', 'Direccion:', 'Puesto:']}
               />
