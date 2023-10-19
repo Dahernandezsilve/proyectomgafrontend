@@ -9,7 +9,7 @@ const styles = StyleSheet.create({
     right: 0, // Ajusta el color de fondo según tus necesidades
   },
   container: {
-    backgroundColor: '#fff',
+    backgroundColor: '#f0f0f0',
     flex: 1,
   },
   formGroup: {
@@ -31,7 +31,7 @@ const styles = StyleSheet.create({
   },
   rectangle: {
     alignSelf: 'center',
-    backgroundColor: '#FFFFFF',
+    backgroundColor: '#f0f0f0',
     borderBottomWidth: 1,
     borderColor: '#2B4985',
     marginTop: 20,

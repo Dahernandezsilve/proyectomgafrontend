@@ -3,24 +3,15 @@ import {
   View, Text, ScrollView,
 } from 'react-native'
 import PropTypes from 'prop-types'
-import { CardGaleraAdmin, HeaderInformation, BottomTabNavigation } from '../../components'
+import { HeaderInformation, BottomTabNavigation, CardPersonal } from '../../components'
 import styles from './styles'
 import useApi from '../../hooks/useApi/useApi'
-
-const galera = ['Jose Fernandez', 'Esteban Escalante', 'Raul Vasquez']
-const cantidadAlimento = ['4356 7890', '9234 5632', '1208 6684']
-const pesado = ['Oratorio', 'Cuilapa', 'Barberena']
-const decesos = ['Encargado de Lote', 'Encargado de Lote', 'Encargado de Lote']
 
 const PersonalScreen = ({ navigation }) => {
   const lotes = ['20', '1', '2']
   const [workers, setWorkers] = useState()
   const [activeTab, setActiveTab] = useState(lotes[0])
   const [response, , handleRequest] = useApi()
-
-  const navigateToGaleras = async () => {
-    navigation.navigate('Creacion')
-  }
 
   const handleObtainWorkers = () => {
     try {
@@ -75,26 +66,21 @@ const PersonalScreen = ({ navigation }) => {
         setActiveTab={setActiveTab}
         showLote={false}
       />
-      <ScrollView>
-        <View style={styles.container}>
+      <ScrollView style={styles.scrollabe}>
+        <View style={styles.container2}>
           <View style={styles.rectangle}>
             <Text style={styles.workerTitle}>Personal</Text>
           </View>
 
           {workers !== undefined && workers.length > 0 ? (
-            workers.map((worker, index) => (
-              <CardGaleraAdmin
-      // eslint-disable-next-line react/no-array-index-key
-                key={index}
-                ca="#FFFFFF"
-                msgCA=""
-                numberCA={null}
+            workers.map(worker => (
+              <CardPersonal
+                key={worker.id_trabajador}
                 customValues={{
                   galera: worker.nombre,
                   cantidadAlimento: worker.telefono,
                   pesado: worker.direccion,
                   decesos: worker.puesto,
-                  navigateToGaleras,
                 }}
                 customTitles={['Nombre:', 'Telefono:', 'Direccion:', 'Puesto:']}
               />

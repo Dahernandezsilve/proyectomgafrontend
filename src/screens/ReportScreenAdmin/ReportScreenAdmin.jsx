@@ -303,7 +303,7 @@ const ReportScreenAdmin = (
         showLote
       />
       <View style={{ flex: 1 }}>
-        <ScrollView>
+        <ScrollView style={styles.scrollabe}>
           <View style={styles.rowContainer}>
             <View style={{ flexDirection: 'column' }}>
               <SelectDate onPress={handleSelectDatePress} selectedDate={selectedDate} />

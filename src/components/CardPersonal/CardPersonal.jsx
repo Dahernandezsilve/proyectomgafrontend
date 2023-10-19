@@ -3,13 +3,14 @@
 /* eslint-disable no-unused-vars */
 import React, { useState } from 'react'
 import {
-  View, Text, TouchableWithoutFeedback, Animated, useWindowDimensions,
+  View, Text, TouchableWithoutFeedback, Animated, useWindowDimensions, Image,
 } from 'react-native'
 import PropTypes from 'prop-types'
 import styles from './styles'
+import usuarioImage from './usuario.png'
 
-const CardGaleraAdmin = ({
-  ca, msgCA, numberCA, customValues, customTitles, navigateToGaleras,
+const CardPersonal = ({
+  customValues, customTitles,
 }) => {
   const [opacityValue] = useState(new Animated.Value(1))
   const windowWidth = useWindowDimensions().width
@@ -30,13 +31,6 @@ const CardGaleraAdmin = ({
     }).start()
   }
 
-  const filteredNumberCA = numCA => {
-    if (numCA !== null) {
-      return numCA.toFixed(2)
-    }
-    return 'N.A.'
-  }
-
   return (
     <TouchableWithoutFeedback onPressIn={onPressIn} onPressOut={onPressOut} testID="card-galera">
       <Animated.View
@@ -45,11 +39,17 @@ const CardGaleraAdmin = ({
         }
       >
         <View style={styles.caContainer}>
-          <Text style={styles.smallText}>
-            {msgCA}
-            {filteredNumberCA(numberCA)}
-          </Text>
-          <View style={[styles.square, { backgroundColor: ca }]} />
+          <View style={styles.square}>
+            <Image
+              source={usuarioImage}
+              style={{
+                width: '50%',
+                height: '80%',
+                resizeMode: 'cover',
+                alignSelf: 'center',
+              }}
+            />
+          </View>
         </View>
         <View style={[styles.galeraContainer, styles.row]}>
           <View style={styles.column}>
@@ -59,7 +59,7 @@ const CardGaleraAdmin = ({
               </Text>
             ))}
           </View>
-          <View style={[styles.column, styles.valuesContainer]}>
+          <View style={[styles.column2, styles.valuesContainer]}>
             {Object.entries(customValues).map(([key, value]) => (
               <Text key={key} style={[styles.info, styles.rightAlignedText]}>
                 {value}
@@ -72,17 +72,15 @@ const CardGaleraAdmin = ({
   )
 }
 
-CardGaleraAdmin.propTypes = {
+CardPersonal.propTypes = {
   // eslint-disable-next-line react/forbid-prop-types
   customValues: PropTypes.objectOf(PropTypes.any),
   customTitles: PropTypes.arrayOf(PropTypes.string),
-  // eslint-disable-next-line react/require-default-props
-  navigateToGaleras: PropTypes.func,
 }
 
-CardGaleraAdmin.defaultProps = {
+CardPersonal.defaultProps = {
   customValues: {},
   customTitles: [],
 }
 
-export default CardGaleraAdmin
+export default CardPersonal
