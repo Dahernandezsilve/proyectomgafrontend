@@ -10,7 +10,7 @@ import styles from './styles'
 import usuarioImage from './usuario.png'
 
 const CardPersonal = ({
-  customValues, customTitles,
+  customValues, customTitles, img,
 }) => {
   const [opacityValue] = useState(new Animated.Value(1))
   const windowWidth = useWindowDimensions().width
@@ -40,15 +40,27 @@ const CardPersonal = ({
       >
         <View style={styles.caContainer}>
           <View style={styles.square}>
-            <Image
-              source={usuarioImage}
-              style={{
-                width: '50%',
-                height: '80%',
-                resizeMode: 'cover',
-                alignSelf: 'center',
-              }}
-            />
+            {img && img !== 'N.A' ? ( // Comprobar si customValues.img existe
+              <Image
+                source={{ uri: img }}
+                style={{
+                  width: '100%',
+                  height: '100%',
+                  resizeMode: 'cover',
+                  alignSelf: 'center',
+                }}
+              />
+            ) : (
+              <Image
+                source={usuarioImage}
+                style={{
+                  width: '50%',
+                  height: '80%',
+                  resizeMode: 'cover',
+                  alignSelf: 'center',
+                }}
+              />
+            )}
           </View>
         </View>
         <View style={[styles.galeraContainer, styles.row]}>

@@ -82,6 +82,7 @@ const PersonalScreen = ({ navigation }) => {
                   direccion: worker.direccion,
                   puesto: worker.puesto,
                 }}
+                img={worker.img}
                 customTitles={['Nombre:', 'Telefono:', 'Direccion:', 'Puesto:']}
               />
             ))
