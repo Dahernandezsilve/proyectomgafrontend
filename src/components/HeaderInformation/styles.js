@@ -47,7 +47,7 @@ const styles = StyleSheet.create({
     marginHorizontal: 4,
     paddingHorizontal: 16,
     paddingVertical: 8,
-    width: '33.33%',
+    width: '25%',
   },
   tabButtonText: {
     color: '#000000',
