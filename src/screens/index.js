@@ -23,6 +23,6 @@ export {
   ReportScreenAdmin,
   CrearGalera,
   CreationScreenAdministrator,
-  CardAssignment
+  CardAssignment,
   PersonalScreen,
 }
