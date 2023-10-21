@@ -14,6 +14,7 @@ import SliderContainer from './SliderContainer'
 import TextCard from './TextCard'
 import TrafficLight from './TrafficLight'
 import BottomTabNavigation from './BottomTabNavigation'
+import CardAssignment from './CardAssignment'
 import CardPersonal from './CardPersonal'
 
 export {
@@ -33,5 +34,6 @@ export {
   TextCard,
   TrafficLight,
   BottomTabNavigation,
+  CardAssignment,
   CardPersonal,
 }

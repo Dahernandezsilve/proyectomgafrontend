@@ -12,8 +12,8 @@ const pesado = ['Oratorio', 'Cuilapa', 'Barberena']
 const decesos = ['Encargado de Lote', 'Encargado de Lote', 'Encargado de Lote']
 
 const NewGalleyScreen = ({ navigation }) => {
-  const lotes = ['20', '1', '2']
-  const [activeTab, setActiveTab] = useState(lotes[0])
+  const lotes = ['Mi granja', 'Asignacion', 'Crear galera']
+  const [activeTab, setActiveTab] = useState(lotes[2])
 
   const navigateToGaleras = async () => {
     navigation.navigate('Creacion')
@@ -27,7 +27,7 @@ const NewGalleyScreen = ({ navigation }) => {
       label: 'Medición', route: 'Administrador', icon: 'new-message', method: 'Entypo',
     },
     {
-      label: 'Granja', route: 'NGalley', icon: 'book', method: 'Entypo',
+      label: 'Granja', route: 'Crear galera', icon: 'book', method: 'Entypo',
     },
     {
       label: 'Personal', route: 'PersonalScreen', icon: 'people-alt', method: 'MaterialIcons',
@@ -45,6 +45,8 @@ const NewGalleyScreen = ({ navigation }) => {
         activeTab={activeTab}
         setActiveTab={setActiveTab}
         showLote={false}
+        navigation={navigation}
+        shouldNavigate={true}
       />
       <ScrollView>
         <View style={styles.container}>
