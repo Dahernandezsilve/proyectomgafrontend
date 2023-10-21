@@ -8,7 +8,9 @@ import LoginWorker from './LoginWorker'
 import ReportScreenAdmin from './ReportScreenAdmin'
 import CrearGalera from './CrearGalera'
 import CreationScreenAdministrator from './CreationScreenAdministrator'
+import CardAssignment from '../components/CardAssignment'
 import PersonalScreen from './PersonalScreen'
+
 
 export {
   ChoiceScreen,
@@ -21,5 +23,6 @@ export {
   ReportScreenAdmin,
   CrearGalera,
   CreationScreenAdministrator,
+  CardAssignment
   PersonalScreen,
 }

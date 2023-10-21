@@ -282,7 +282,7 @@ const ReportScreenAdmin = (
       label: 'Medición', route: 'Administrador', icon: 'new-message', method: 'Entypo',
     },
     {
-      label: 'Granja', route: 'NGalley', icon: 'book', method: 'Entypo',
+      label: 'Granja', route: 'Crear galera', icon: 'book', method: 'Entypo',
     },
     {
       label: 'Personal', route: 'PersonalScreen', icon: 'people-alt', method: 'MaterialIcons',
@@ -301,6 +301,8 @@ const ReportScreenAdmin = (
         activeTab={activeTab}
         setActiveTab={setActiveTab}
         showLote
+        navigation={navigation}
+        shouldNavigate={false}
       />
       <View style={{ flex: 1 }}>
         <ScrollView style={styles.scrollabe}>
