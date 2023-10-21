@@ -63,6 +63,36 @@ const styles = StyleSheet.create({
     fontFamily: SamsungOne,
     fontSize: windowWidth * 0.037,
   },
+  modalContainer: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: 'rgba(0, 0, 0, 0.5)', // Aquí puedes definir el color de fondo del modal
+  },
+  centeredView: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  modalView: {
+    margin: windowWidth * 0.04,
+    backgroundColor: 'white',
+    borderRadius: 20,
+    padding: windowWidth * 0.10,
+    alignItems: 'center',
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 4,
+    elevation: 5,
+  },
+  modalText: {
+    marginBottom: windowWidth * 0.10,
+    textAlign: 'center',
+  },
 })
 
 export default styles

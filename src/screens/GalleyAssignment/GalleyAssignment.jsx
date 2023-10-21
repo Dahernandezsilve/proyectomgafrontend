@@ -1,7 +1,7 @@
 import React,{useState, useEffect} from 'react';
 import { View, Text, Button, Dimensions, ScrollView} from 'react-native';
 import {
-    CardAssignment, HeaderInformation, BottomTabNavigation
+    CardAssignment, HeaderInformation, BottomTabNavigation, ModalComponent
   } from '../../components'
 
 import styles from './styles';
@@ -19,7 +19,7 @@ const GalleyAssignment = ({ navigation }) => {
   const [verLotes, setLotes] = useState(lotes[0])
   const [response, , handleRequest] = useApi()
   const [galleysPerLote, setGalleysPerLote] = useState([]); // Estado para almacenar los datos de las galeras
-  const [activeTabb, setActiveTabb] = useState(0)
+  const [activeTabb, setActiveTabb] = useState(2)
 
   // eslint-disable-next-line no-shadow
   const handleObtainGalleysPerLote = async verLotes => {
@@ -31,16 +31,15 @@ const GalleyAssignment = ({ navigation }) => {
 
     // Realiza una solicitud POST a la ruta de Flask
     const response = await handleRequest('POST', '/galeras', body)
-
-    //console.log('Mensaje:', response)
+    console.log('Mensaje:', response)
     if (Array.isArray(response.data) && response.data.length > 0) {
       const galleysData = response.data.map(galley => ({
         numeroGalera: galley.numeroGalera,
         typeChicken: galley.typeChicken,
         existence: galley.existence
       }));
-      //console.log('Datos de las galeras:');
-      //console.log(galleysData);
+      console.log('Datos de las galeras:');
+      console.log(galleysData);
 
       // Accede solo al número de galera
       const numerosGalera = galleysData.map(galley => galley.numeroGalera);
@@ -102,12 +101,12 @@ const GalleyAssignment = ({ navigation }) => {
         navigation={navigation}
         shouldNavigate={true}
       />
-      
+      <ScrollView contentContainerStyle={{ alignItems: 'center' }} style={{ margin: 0, padding: 0 }}>
+
         <View style={styles.rectangle}>
           <Text style={[styles.info, { fontSize: windowWidth * 0.055 }]}>Lote 1</Text>
         </View>
       
-      <ScrollView contentContainerStyle={{ alignItems: 'center' }} style={{ margin: 0, padding: 0 }}>
 
         {renderedGalleys}
       
@@ -116,6 +115,7 @@ const GalleyAssignment = ({ navigation }) => {
       onPress={() => handleObtainGalleysPerLote('1')} // Pasa un valor de lote de prueba aquí
         />
       </ScrollView>
+      
       <BottomTabNavigation
           activeTab={activeTabb}
           // setActiveTab={setActiveTabb}
