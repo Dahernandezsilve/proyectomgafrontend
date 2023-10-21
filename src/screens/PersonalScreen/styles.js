@@ -1,4 +1,6 @@
-import { StyleSheet } from 'react-native'
+import { StyleSheet, Dimensions } from 'react-native'
+
+const windowWidth = Dimensions.get('window').width
 
 const styles = StyleSheet.create({
   bottomTabNavigator: {
@@ -11,6 +13,11 @@ const styles = StyleSheet.create({
   container: {
     backgroundColor: '#f0f0f0',
     flex: 1,
+  },
+  container2: {
+    backgroundColor: '#f0f0f0',
+    flex: 1,
+    marginBottom: windowWidth * 0.20,
   },
   formGroup: {
     marginBottom: 20,
@@ -32,17 +39,21 @@ const styles = StyleSheet.create({
   rectangle: {
     alignSelf: 'center',
     backgroundColor: '#f0f0f0',
-    borderBottomWidth: 1,
-    borderColor: '#2B4985',
-    marginTop: 20,
-    paddingHorizontal: 20,
+    borderBottomWidth: 2,
+    borderColor: '#ff8c00',
+    marginTop: windowWidth * 0.01,
+    paddingHorizontal: windowWidth * 0.32,
     paddingVertical: 10,
+    marginBottom: windowWidth * 0.001
   },
   scrollContainer: {
     flex: 1,
   },
+  scrollable: {
+    marginBottom: 20000,
+  },
   workerTitle: {
-    color: '#2B4985',
+    color: '#ff8c00',
     fontSize: 20,
     fontWeight: 'bold',
     textAlign: 'center',
