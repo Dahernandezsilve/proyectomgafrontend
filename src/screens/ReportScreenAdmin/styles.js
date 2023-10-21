@@ -26,7 +26,9 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     marginBottom: windowWidth * 0.04, // Utiliza un porcentaje del ancho de la ventana
   },
-  // Agrega este estilo para anclar el TabNavigator en la parte inferior.
+  scrollabe: {
+    marginBottom: windowWidth * 0.20,
+  },
   tabNavigator: {
     bottom: 0,
     left: 0,
