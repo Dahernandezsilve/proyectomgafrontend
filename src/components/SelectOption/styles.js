@@ -22,16 +22,16 @@ const styles = StyleSheet.create({
     // Ajuste de zIndex para asegurar que el contenedor esté por encima de otros componentes
   },
   optionButton: {
-    marginBottom: windowHeight * 0.01, // Ajustar el margen inferior según la altura de la pantalla
-    marginTop: windowHeight * 0.01, // Ajustar el margen superior según la altura de la pantalla
-    padding: windowWidth * 0.03, // Ajustar el padding según el ancho de la pantalla
+    marginBottom: windowHeight * 0.015, // Ajustar el margen inferior según la altura de la pantalla
+    marginTop: windowHeight * 0.015, // Ajustar el margen superior según la altura de la pantalla
+    padding: windowWidth * 0.0001, // Ajustar el padding según el ancho de la pantalla
   },
   optionsContainer: {
     backgroundColor: '#FFFFFF',
     borderRadius: 5,
     elevation: 2,
-    marginTop: windowHeight * 0.03, // Ajustar el margen superior según la altura de la pantalla
-    paddingHorizontal: windowWidth * 0.04,
+    marginTop: windowHeight * 0.055, // Ajustar el margen superior según la altura de la pantalla
+    paddingHorizontal: windowWidth * 0.02,
     position: 'absolute', // Añadido para superponer las opciones
     shadowColor: '#000',
     shadowOffset: { width: 0, height: 2 },
@@ -41,7 +41,10 @@ const styles = StyleSheet.create({
     zIndex: 2,
   },
   selectedOptionText: {
-    fontSize: windowWidth * 0.04, // Ajustar el tamaño de fuente según el ancho de la pantalla
+    fontSize: windowWidth * 0.04,
+    paddingTop: 0,
+    padding: windowWidth * 0.02,
+    textAlign: 'center',
   },
   text: {
     color: '#000',

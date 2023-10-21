@@ -30,11 +30,11 @@ const NewGalleyScreen = ({ navigation }) => {
       label: 'Granja', route: 'Crear galera', icon: 'book', method: 'Entypo',
     },
     {
-      label: 'Personal', route: 'Administrador', icon: 'people-alt', method: 'MaterialIcons',
+      label: 'Personal', route: 'PersonalScreen', icon: 'people-alt', method: 'MaterialIcons',
     },
   ]
 
-  const [activeTabb, setActiveTabb] = useState(2)
+  const [activeTabb] = useState(2)
 
   return (
     <View style={styles.container}>

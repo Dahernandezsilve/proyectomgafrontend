@@ -285,7 +285,7 @@ const ReportScreenAdmin = (
       label: 'Granja', route: 'Crear galera', icon: 'book', method: 'Entypo',
     },
     {
-      label: 'Personal', route: 'Administrador', icon: 'people-alt', method: 'MaterialIcons',
+      label: 'Personal', route: 'PersonalScreen', icon: 'people-alt', method: 'MaterialIcons',
     },
   ]
 
@@ -305,7 +305,7 @@ const ReportScreenAdmin = (
         shouldNavigate={false}
       />
       <View style={{ flex: 1 }}>
-        <ScrollView>
+        <ScrollView style={styles.scrollabe}>
           <View style={styles.rowContainer}>
             <View style={{ flexDirection: 'column' }}>
               <SelectDate onPress={handleSelectDatePress} selectedDate={selectedDate} />

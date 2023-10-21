@@ -3,14 +3,16 @@ import { View, Text, TouchableOpacity } from 'react-native'
 import PropTypes from 'prop-types'
 import styles from './styles'
 
-const SelectOption = ({ selectedOption, options, setSelectedOption, activeTab }) => {
+const SelectOption = ({
+  selectedOption, options, setSelectedOption,
+}) => {
   const [showOptions, setShowOptions] = useState(false)
 
   const handleOptionSelect = option => {
     setSelectedOption(option)
     setShowOptions(false)
   }
-  console.log("Trabajador en SelectOption: ", options);
+  console.log('Trabajador en SelectOption: ', options)
 
   const handleToggleOptions = () => {
     setShowOptions(!showOptions)
@@ -20,11 +22,11 @@ const SelectOption = ({ selectedOption, options, setSelectedOption, activeTab })
     nombre: 'No seleccionar',
   }
 
-   // Mapea el array de nombres en el formato esperado
-   const trabajadores = options.map((nombre, index) => ({
-      idTrabajador: `id_${index}`, // Puedes utilizar un índice como identificador único
-      nombre,
-    }));
+  // Mapea el array de nombres en el formato esperado
+  const trabajadores = options.map((nombre, index) => ({
+    idTrabajador: `id_${index}`, // Puedes utilizar un índice como identificador único
+    nombre,
+  }))
 
   return (
     <TouchableOpacity onPress={handleToggleOptions}>

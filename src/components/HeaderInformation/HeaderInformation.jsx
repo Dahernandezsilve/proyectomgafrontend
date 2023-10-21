@@ -9,6 +9,7 @@ const HeaderInformation = ({
   const handleTabPress = tabName => {
     setActiveTab(tabName)
   }
+  const percentage = 100 / lotes.length
   return (
     <View style={styles.headerContainer}>
       <Text style={styles.headerText}>{title}</Text>
@@ -20,6 +21,7 @@ const HeaderInformation = ({
             style={[
               styles.tabButton,
               activeTab === lote ? styles.activeTabButton : null,
+              { width: `${percentage}%` },
             ]}
             activeOpacity={0.7}
             onPress={() => {
