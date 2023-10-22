@@ -69,6 +69,21 @@ const styles = StyleSheet.create({
     fontFamily: SamsungOne,
     fontSize: windowWidth * 0.037,
   },
+  checkBoxChecked: {
+    width: windowWidth * 0.037,
+    height: windowWidth * 0.037,
+    backgroundColor: '#2B4985', // Color de fondo para indicar que está marcado
+    borderWidth: 2, // Grosor del borde
+    borderColor: '#2B4985', // Color del borde
+    borderRadius: 5, // Hacer que el cuadro sea redondeado
+    alignItems: 'center', // Alinear contenido al centro horizontalmente
+    justifyContent: 'center', // Alinear contenido al centro verticalmente
+    marginRight: windowWidth * 0.017,
+    marginTop: windowWidth * 0.017,
+    position: 'absolute', // Establecer posición absoluta
+    top: 5, // Ajustar la posición desde la parte superior
+    right: 5, // Ajustar la posición desde la derecha
+  },
 })
 
 export default styles
