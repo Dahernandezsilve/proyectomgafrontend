@@ -41,43 +41,6 @@ const CreationScreenAdministrator = () => {
     setRefresh(true)
   }
 
-   // const handleAddWorker = async () => {
-  //   try {
-  //     const response = await handleRequest('POST', '/trabajadores', newWorkerData)
-
-  //     if (response.success) {
-  //       // Trabajador agregado con éxito, puedes mostrar un mensaje de éxito
-  //       console.log('Trabajador agregado con éxito')
-
-  //       // Actualiza la lista de trabajadores
-  //       setWorkers([...workers, newWorkerData])
-
-  //       // Limpia los datos del nuevo trabajador
-  //       setNewWorkerData({ name: '', otherInfo: '' })
-  //     } else {
-  //       // Maneja cualquier error que pueda ocurrir en la respuesta
-  //       console.error('Error al agregar trabajador')
-  //     }
-  //   } catch (error) {
-  //     console.error('Error en la solicitud: ', error)
-  //   }
-  // }
-
-  // const crearTrabajador = async workerData => {
-    //   setCreateWorkerLoading(true)
-
-    //   // Define la ruta para crear un trabajador
-    //   const createWorkerPath = '/workers'
-
-    //   // Realiza la solicitud POST para crear el trabajador
-    //   const response = await handleRequest('POST', createWorkerPath, workerData)
-
-    //   setCreateWorkerResponse(response)
-    //   setCreateWorkerLoading(false)
-
-    //   return response
-    // }
-
   useEffect(() => {
     console.log('registro', registro)
   }, [registro])

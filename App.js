@@ -8,6 +8,7 @@ import {
   ChoiceScreen, DetailsScreen, CreationScreen, HomeWorkerScreen, LoginAdministrator,
   CreationScreenAdministrator,
   PersonalScreen,
+  AddWorkerScreen,
 } from './src/screens'
 import ReportScreenAdmin from './src/screens/ReportScreenAdmin'
 import LoginWorker from './src/screens/LoginWorker/LoginWorker'
@@ -66,6 +67,10 @@ const App = () => {
             name="CreationScreenAdministrator"
             component={CreationScreenAdministrator}
             options={{ header: () => null }}
+          />
+          <Stack.Screen
+            name="AddWorkerScreen"
+            component={AddWorkerScreen}
           />
         </Stack.Navigator>
       </NavigationContainer>

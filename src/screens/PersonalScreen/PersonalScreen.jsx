@@ -23,8 +23,6 @@ const PersonalScreen = ({ navigation }) => {
     }
   }
 
- 
-
   useEffect(() => {
     console.log('response', workers)
   }, [workers])
