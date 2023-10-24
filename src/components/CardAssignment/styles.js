@@ -59,6 +59,14 @@ const styles = StyleSheet.create({
     shadowRadius: 2,
     width: windowWidth * 0.2,
   },
+  rectangle: {
+    alignSelf: 'center',
+    borderBottomWidth: 1,
+    borderColor: '#2B4985',
+    marginTop: windowWidth * 0.000005,
+    paddingHorizontal: windowWidth * 0.05,
+    paddingVertical: windowWidth * 0.0000005,
+  },
   title: {
     fontFamily: SamsungOne,
     fontSize: windowWidth * 0.037,
@@ -90,8 +98,20 @@ const styles = StyleSheet.create({
     elevation: 5,
   },
   modalText: {
-    marginBottom: windowWidth * 0.10,
+    marginBottom: windowWidth * 0.05,
+    fontFamily: SamsungOne,
+    fontSize: windowWidth * 0.05,
     textAlign: 'center',
+    color: '#2B4985',
+  },
+  scrollable: {
+    marginBottom: 20000,
+  },
+  buttonContainer: {
+    marginTop: windowWidth * 0.05, // o cualquier otro valor de margen superior que desees
+  },
+  button: {
+    marginBottom: windowWidth * 0.75, // Agregar margen superior al botón
   },
 })
 
