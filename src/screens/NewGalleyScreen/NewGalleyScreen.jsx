@@ -12,8 +12,8 @@ const pesado = ['Oratorio', 'Cuilapa', 'Barberena']
 const decesos = ['Encargado de Lote', 'Encargado de Lote', 'Encargado de Lote']
 
 const NewGalleyScreen = ({ navigation }) => {
-  const lotes = ['20', '1', '2']
-  const [activeTab, setActiveTab] = useState(lotes[0])
+  const lotes = ['Mi granja', 'Asignacion', 'Crear galera']
+  const [activeTab, setActiveTab] = useState(lotes[2])
 
   const navigateToGaleras = async () => {
     navigation.navigate('Creacion')
@@ -21,20 +21,20 @@ const NewGalleyScreen = ({ navigation }) => {
 
   const tabs = [
     {
-      label: 'Informe', route: 'Home', icon: 'home', method: 'AntDesign',
+      label: 'Informe', route: 'Home', icon: 'ios-home', method: 'Ionicons',
     },
     {
-      label: 'Medición', route: 'Administrador', icon: 'bird', method: 'MaterialCommunityIcons',
+      label: 'Medición', route: 'Administrador', icon: 'new-message', method: 'Entypo',
     },
     {
-      label: 'Granja', route: 'NGalley', icon: 'line-graph', method: 'Entypo',
+      label: 'Granja', route: 'Crear galera', icon: 'book', method: 'Entypo',
     },
     {
-      label: 'Personal', route: 'Administrador', icon: 'people', method: 'Octicons',
+      label: 'Personal', route: 'PersonalScreen', icon: 'people-alt', method: 'MaterialIcons',
     },
   ]
 
-  const [activeTabb, setActiveTabb] = useState(2)
+  const [activeTabb] = useState(2)
 
   return (
     <View style={styles.container}>
@@ -45,6 +45,8 @@ const NewGalleyScreen = ({ navigation }) => {
         activeTab={activeTab}
         setActiveTab={setActiveTab}
         showLote={false}
+        navigation={navigation}
+        shouldNavigate={true}
       />
       <ScrollView>
         <View style={styles.container}>
@@ -104,7 +106,6 @@ const NewGalleyScreen = ({ navigation }) => {
       <View style={styles.bottomTabNavigator}>
         <BottomTabNavigation
           activeTab={activeTabb}
-          setActiveTab={setActiveTabb}
           tabs={tabs}
           navigation={navigation}
         />
