@@ -8,7 +8,8 @@ import {
 import styles from './styles'
 import useApi from '../../hooks/useApi/useApi'
 
-const AddWorkerScreen = () => {
+// eslint-disable-next-line react/prop-types
+const AddWorkerScreen = ({ }) => {
   const [workerData, setWorkerData] = useState({
     nombre: '',
     apellidos: '',
@@ -16,8 +17,15 @@ const AddWorkerScreen = () => {
     telefono: '',
     direccion: '',
     puesto: '',
-    imagen: null, // Puedes manejar la imagen como sea necesario
+    imagen: null,
   })
+  const lotes = []
+  const {
+    refresh, setRefresh, sending, setSending,
+  } = useContext(GlobalContext)
+  const [activeTab, setActiveTab] = useState(0)
+
+  const [galeras, setGaleras] = useState([])
 
   const [response, , handleRequest] = useApi()
   const handleObtainWorkers = () => {
@@ -57,45 +65,49 @@ const AddWorkerScreen = () => {
   }, [response])
 
   return (
-    <ScrollView>
-      <View style={{ padding: 16 }}>
-        <Text style={styles.input}>Añadir Nuevo Trabajador</Text>
-        <TextInput
-          placeholder="Nombre"
-          value={workerData.nombre}
-          onChangeText={text => setWorkerData({ ...workerData, nombre: text })}
-        />
-        <TextInput
-          placeholder="Apellidos"
-          value={workerData.apellidos}
-          onChangeText={text => setWorkerData({ ...workerData, apellidos: text })}
-        />
-        <TextInput
-          placeholder="DPI"
-          value={workerData.dpi}
-          onChangeText={text => setWorkerData({ ...workerData, dpi: text })}
-        />
-        <TextInput
-          placeholder="Teléfono"
-          value={workerData.telefono}
-          onChangeText={text => setWorkerData({ ...workerData, telefono: text })}
-        />
-        <TextInput
-          placeholder="Dirección"
-          value={workerData.direccion}
-          onChangeText={text => setWorkerData({ ...workerData, direccion: text })}
-        />
-        <TextInput
-          placeholder="Puesto"
-          value={workerData.puesto}
-          onChangeText={text => setWorkerData({ ...workerData, puesto: text })}
-        />
-        <Text>Añadir Nuevo Trabajador</Text>
-        <Button title="Completar" onPress={handleAddWorker} />
+    <>
 
-      </View>
+      <ScrollView>
+        <View style={{ padding: 16 }}>
+          <Text style={styles.input}>Añadir Nuevo Trabajador</Text>
+          <TextInput
+            placeholder="Nombre"
+            value={workerData.nombre}
+            onChangeText={text => setWorkerData({ ...workerData, nombre: text })}
+          />
+          <TextInput
+            placeholder="Apellidos"
+            value={workerData.apellidos}
+            onChangeText={text => setWorkerData({ ...workerData, apellidos: text })}
+          />
+          <TextInput
+            placeholder="DPI"
+            value={workerData.dpi}
+            onChangeText={text => setWorkerData({ ...workerData, dpi: text })}
+          />
+          <TextInput
+            placeholder="Teléfono"
+            value={workerData.telefono}
+            onChangeText={text => setWorkerData({ ...workerData, telefono: text })}
+          />
+          <TextInput
+            placeholder="Dirección"
+            value={workerData.direccion}
+            onChangeText={text => setWorkerData({ ...workerData, direccion: text })}
+          />
+          <TextInput
+            placeholder="Puesto"
+            value={workerData.puesto}
+            onChangeText={text => setWorkerData({ ...workerData, puesto: text })}
+          />
+          <Text>Añadir Nuevo Trabajador</Text>
+          <Button title="Completar" onPress={handleAddWorker} />
 
-    </ScrollView>
+        </View>
+
+      </ScrollView>
+
+    </>
   )
 }
 
