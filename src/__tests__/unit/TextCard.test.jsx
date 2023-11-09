@@ -1,6 +1,6 @@
 import React from 'react'
 import { render } from '@testing-library/react-native'
-import TextCard from '../components/TextCard/TextCard'
+import TextCard from '../../components/TextCard/TextCard'
 
 describe('TextCard component', () => {
   test('renders correctly', () => {

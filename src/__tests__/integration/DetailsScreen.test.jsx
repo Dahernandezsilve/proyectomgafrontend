@@ -1,6 +1,6 @@
 import React from 'react'
 import { render, fireEvent } from '@testing-library/react-native'
-import DetailsScreen from '../screens/DetailsScreen/DetailsScreen' // Adjust the import path accordingly
+import DetailsScreen from '../../screens/DetailsScreen/DetailsScreen' // Adjust the import path accordingly
 
 // Mocking the required dependencies
 jest.mock('@react-navigation/native', () => ({

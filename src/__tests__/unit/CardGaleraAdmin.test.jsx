@@ -1,6 +1,6 @@
 import React from 'react'
-import { render } from '../../test-utils'
-import CardGaleraAdmin from '../components/CardGaleraAdmin/CardGaleraAdmin'
+import { render } from '../../../test-utils'
+import CardGaleraAdmin from '../../components/CardGaleraAdmin/CardGaleraAdmin'
 
 describe('CardGaleraAdmin component', () => {
   test('renders without errors', () => {

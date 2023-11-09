@@ -1,6 +1,6 @@
 import React from 'react'
 import { render, fireEvent } from '@testing-library/react-native'
-import ChoiceScreen from '../screens/ChoiceScreen/ChoiceScreen'
+import ChoiceScreen from '../../screens/ChoiceScreen/ChoiceScreen'
 import 'setimmediate'
 
 describe('ChoiceScreen component', () => {

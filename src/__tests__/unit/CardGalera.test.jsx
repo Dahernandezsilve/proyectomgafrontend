@@ -1,6 +1,6 @@
 import React from 'react'
 import { render, fireEvent } from '@testing-library/react-native'
-import CardGalera from ''
+import CardGalera from '../../components/CardGalera/CardGalera'
 
 describe('CardGalera Component', () => {
   it('renders correctly with default props', () => {

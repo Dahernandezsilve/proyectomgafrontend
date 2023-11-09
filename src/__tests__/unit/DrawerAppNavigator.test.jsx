@@ -2,7 +2,7 @@ import React from 'react'
 import { NavigationContainer } from '@react-navigation/native'
 import { render, screen, fireEvent } from '@testing-library/react-native'
 
-import App from '../../App'
+import App from '../../../App'
 
 describe('Testing react navigation', () => {
   test('screen contains a button linking to the notifications page', async () => {

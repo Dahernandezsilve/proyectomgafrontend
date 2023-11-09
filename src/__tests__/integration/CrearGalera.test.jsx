@@ -1,6 +1,6 @@
 import React from 'react'
-import { render, fireEvent } from '@testing-library/react-native'
-import CrearGalera from '../screens/CrearGalera/CrearGalera'
+import { render } from '@testing-library/react-native'
+import CrearGalera from '../../screens/CrearGalera/CrearGalera'
 
 describe('CrearGalera component', () => {
   // prueba de renderizado correcto de pantalla
