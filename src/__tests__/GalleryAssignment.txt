@@ -1,0 +1,37 @@
+import React from 'react'
+import { render } from '@testing-library/react-native'
+import GalleryAssignment from '../screens/GalleryAssignment'
+
+jest.mock('../hooks/useApi/useApi', () => () => ([
+  jest.fn().mockReturnValue({}),
+  false,
+  jest.fn().mockResolvedValue('42'),
+]))
+
+describe('Gallery Assignment Component', () => {
+  // Renders the component without crashing
+  it('should render the component without crashing', () => {
+    const navigation = {
+      navigate: jest.fn(),
+      goBack: jest.fn(),
+    }
+
+    render(<GalleryAssignment navigation={navigation} />)
+  })
+
+  // Displays the correct title and submenu
+  it('should display the correct title and submenu', () => {
+    const navigation = {
+      navigate: jest.fn(),
+      goBack: jest.fn(),
+    }
+
+    const { getByText } = render(<GalleryAssignment navigation={navigation} />)
+
+    const miGranja = getByText('Mi granja')
+
+    expect(miGranja).toBeTruthy()
+    expect(getByText('Asignacion')).toBeTruthy()
+    expect(getByText('Crear galera')).toBeTruthy()
+  })
+})

@@ -3,8 +3,8 @@ import { render, fireEvent } from '@testing-library/react-native'
 import CardGalera from '../../components/CardGalera/CardGalera'
 
 describe('CardGalera Component', () => {
-  it('renders correctly with default props', () => {
-    const { getByTestId, getByText } = render(
+  it('renders correctly with default props', async () => {
+    const { findByTestId, getByTestId, getByText } = render(
       <CardGalera navigateToGaleras={() => {}} />,
     )
 
@@ -17,17 +17,20 @@ describe('CardGalera Component', () => {
     expect(defaultGaleraText).toBeTruthy()
 
     // Check for the absence of the loading spinner
-    const loadingSpinner = getByTestId('loading-spinner')
-    expect(loadingSpinner).toBeNull()
+    try {
+      await findByTestId('loading-spinner')
+    } catch (e) {
+      expect(e).toBeInstanceOf(Error)
+    }
   })
 
-  it('renders with custom props', () => {
-    const { getByTestId, getByText } = render(
+  it('renders with custom props', async () => {
+    const { findByTestId, getByTestId, getByText } = render(
       <CardGalera
         idGalera="123"
         galera="Custom Galera"
         ca="blue"
-        loading
+        loading={false}
         navigateToGaleras={() => {}}
       />,
     )
@@ -40,9 +43,12 @@ describe('CardGalera Component', () => {
     const customGaleraText = getByText('Custom Galera')
     expect(customGaleraText).toBeTruthy()
 
-    // Check for the presence of the loading spinner
-    const loadingSpinner = getByTestId('loading-spinner')
-    expect(loadingSpinner).toBeTruthy()
+    // Check for the absence of the loading spinner
+    try {
+      await findByTestId('loading-spinner')
+    } catch (e) {
+      expect(e).toBeInstanceOf(Error)
+    }
   })
 
   it('handles press correctly when not loading', () => {

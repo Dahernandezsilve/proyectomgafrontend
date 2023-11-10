@@ -14,7 +14,7 @@ import ReportScreenAdmin from './src/screens/ReportScreenAdmin'
 import LoginWorker from './src/screens/LoginWorker/LoginWorker'
 import NewGalleyScreen from './src/screens/NewGalleyScreen/NewGalleyScreen'
 import MeasurementsHistory from './src/screens/MeasurementsHistory'
-import GalleyAssignment from './src/screens/GalleyAssignment'
+import GalleryAssignment from './src/screens/GalleryAssignment'
 
 const Stack = createNativeStackNavigator()
 
@@ -39,7 +39,7 @@ const App = () => {
           <Stack.Screen name="Trabajador" component={LoginWorker} options={{ header: () => null }} />
           <Stack.Screen name="Crear galera" component={NewGalleyScreen} options={{ header: () => null }} />
           <Stack.Screen name="MeasurementsHistory" component={MeasurementsHistory} options={{ header: () => null }} />
-          <Stack.Screen name="Asignacion" component={GalleyAssignment} options={{ header: () => null }} />
+          <Stack.Screen name="Asignacion" component={GalleryAssignment} options={{ header: () => null }} />
           <Stack.Screen name="PersonalScreen" component={PersonalScreen} options={{ header: () => null, animation: 'none' }} />
           <Stack.Screen
             name="HomeWorker"

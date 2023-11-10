@@ -3,10 +3,10 @@
 /* eslint-disable no-unused-vars */
 import React, { useState, useEffect } from 'react'
 import {
-  View, Button, Text, TouchableWithoutFeedback, Animated, useWindowDimensions, Modal
+  View, Button, Text, TouchableWithoutFeedback, Animated, useWindowDimensions, Modal,
 } from 'react-native'
-import CardGaleraAdmin from '../CardGaleraAdmin'
 import PropTypes from 'prop-types'
+import CardGaleraAdmin from '../CardGaleraAdmin'
 import styles from './styles'
 import useApi from '../../hooks/useApi/useApi'
 
@@ -45,7 +45,6 @@ const CardAssignment = ({
     handleObtainWorkers()
   }, [])
 
-
   const onPressIn = () => {
     Animated.timing(opacityValue, {
       toValue: 0.5,
@@ -63,12 +62,12 @@ const CardAssignment = ({
   }
 
   const handlePress = () => {
-    setModalVisible(true);
-  };
+    setModalVisible(true)
+  }
 
   const closeModal = () => {
-    setModalVisible(false);
-  };
+    setModalVisible(false)
+  }
 
   return (
     <View>
@@ -78,8 +77,7 @@ const CardAssignment = ({
             [styles.container, { width: windowWidth - windowWidth * 0.1, opacity: opacityValue }]
           }
         >
-          <View style={styles.caContainer}>
-          </View>
+          <View style={styles.caContainer} />
           <View style={[styles.galeraContainer, styles.row]}>
             <View style={styles.column}>
               {customTitles.map((title, index) => (
@@ -100,33 +98,34 @@ const CardAssignment = ({
       </TouchableWithoutFeedback>
       <Modal
         animationType="slide"
-        transparent={true}
+        transparent
         visible={modalVisible}
         onRequestClose={() => {
-          setModalVisible(!modalVisible);
+          setModalVisible(!modalVisible)
         }}
       >
         <View style={styles.modalContainer}>
-        <View style={styles.centeredView}>
-          <View style={styles.modalView}>
+          <View style={styles.centeredView}>
+            <View style={styles.modalView}>
               <Text style={styles.modalText}>Asignar trabajador: </Text>
               <CardGaleraAdmin
               // eslint-disable-next-line react/no-array-index-key
-              key={1}
-              ca="#FFFFFF"
-              msgCA=""
-              numberCA={null}
-              customValues={{
-                galera: 'Javier',
-                cantidadAlimento: 'xd',
-                pesado: 'saber',
-                decesos: 'sd',
-              }}
-              customTitles={['Nombre:', 'Telefono:', 'Direccion:', 'Puesto:']}/>
-            <Button title="Cerrar" onPress={closeModal} />
+                key={1}
+                ca="#FFFFFF"
+                msgCA=""
+                numberCA={null}
+                customValues={{
+                  galera: 'Javier',
+                  cantidadAlimento: 'xd',
+                  pesado: 'saber',
+                  decesos: 'sd',
+                }}
+                customTitles={['Nombre:', 'Telefono:', 'Direccion:', 'Puesto:']}
+              />
+              <Button title="Cerrar" onPress={closeModal} />
+            </View>
           </View>
         </View>
-      </View>
       </Modal>
     </View>
   )
