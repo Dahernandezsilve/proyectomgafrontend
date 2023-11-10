@@ -44,7 +44,7 @@ const PersonalScreen = ({ navigation }) => {
       label: 'Informe', route: 'Home', icon: 'ios-home', method: 'Ionicons',
     },
     {
-      label: 'Medición', route: 'Administrador', icon: 'new-message', method: 'Entypo',
+      label: 'Medición', route: 'Home', icon: 'new-message', method: 'Entypo',
     },
     {
       label: 'Granja', route: 'Crear galera', icon: 'book', method: 'Entypo',

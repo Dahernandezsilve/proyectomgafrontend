@@ -1,4 +1,6 @@
-import { StyleSheet } from 'react-native'
+import { StyleSheet, Dimensions } from 'react-native'
+
+const windowWidth = Dimensions.get('window').width
 
 const styles = StyleSheet.create({
   bottomTabNavigator: {
@@ -13,7 +15,9 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   formGroup: {
-    marginBottom: 20,
+    marginLeft: windowWidth * 0.03,
+    marginTop: windowWidth * 0.05,
+
   },
   input: {
     borderColor: '#ccc',
@@ -21,7 +25,7 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     fontSize: 16,
     marginLeft: 10,
-    marginRight: 10,
+    marginRight: windowWidth * 0.05,
     padding: 10,
   },
   label: {
