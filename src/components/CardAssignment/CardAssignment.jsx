@@ -6,16 +6,17 @@ import {
   View, Button, Text, TouchableWithoutFeedback, Animated, useWindowDimensions, Modal,
 } from 'react-native'
 import PropTypes from 'prop-types'
-import CardGaleraAdmin from '../CardGaleraAdmin'
+import CardPersonal from '../CardPersonal'
 import styles from './styles'
 import useApi from '../../hooks/useApi/useApi'
 
 const CardAssignment = ({
-  customValues, customTitles,
+  customValues, customTitles, selectedGalera
 }) => {
   const [opacityValue] = useState(new Animated.Value(1))
   const [modalVisible, setModalVisible] = useState(false)
   const [workers, setWorkers] = useState()
+  const [workerName, setWorkerName] = useState()
   const [response, , handleRequest] = useApi()
   const windowWidth = useWindowDimensions().width
 
@@ -28,6 +29,12 @@ const CardAssignment = ({
       console.error('Error al obtener los trabajadores:', error)
     }
   }
+
+  const handleWorkerSelection = (name) => {
+    // Realiza alguna acción con el nombre del trabajador seleccionado
+    //console.log("Nombre del trabajador seleccionado:", name);
+    setWorkerName(name);
+  };
 
   useEffect(() => {
     console.log('Trabajadores: ', workers)
@@ -104,6 +111,7 @@ const CardAssignment = ({
           setModalVisible(!modalVisible)
         }}
       >
+      <ScrollView style={styles.scrollabe}>
         <View style={styles.modalContainer}>
           <View style={styles.centeredView}>
             <View style={styles.modalView}>

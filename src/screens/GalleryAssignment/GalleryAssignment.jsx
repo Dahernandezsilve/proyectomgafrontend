@@ -64,6 +64,7 @@ const GalleryAssignment = ({ navigation }) => {
         cantidadPollos: galley.existence.toString(),
       }}
       customTitles={['No. Galera:', 'Tipo de población:', 'Cantidad de pollos:']}
+      selectedGalera={galley.numeroGalera} 
     />
   ))
 
@@ -78,7 +79,7 @@ const GalleryAssignment = ({ navigation }) => {
       label: 'Granja', route: 'Crear galera', icon: 'book', method: 'Entypo',
     },
     {
-      label: 'Personal', route: 'Administrador', icon: 'people-alt', method: 'MaterialIcons',
+      label: 'Personal', route: 'PersonalScreen', icon: 'people-alt', method: 'MaterialIcons',
     },
   ]
 

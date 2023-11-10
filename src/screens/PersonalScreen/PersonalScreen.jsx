@@ -48,7 +48,7 @@ const PersonalScreen = ({ navigation }) => {
       label: 'Medición', route: 'Administrador', icon: 'new-message', method: 'Entypo',
     },
     {
-      label: 'Granja', route: 'NGalley', icon: 'book', method: 'Entypo',
+      label: 'Granja', route: 'Crear galera', icon: 'book', method: 'Entypo',
     },
     {
       label: 'Personal', route: 'PersonalScreen', icon: 'people-alt', method: 'MaterialIcons',
@@ -86,6 +86,7 @@ const PersonalScreen = ({ navigation }) => {
                 }}
                 img={worker.img}
                 customTitles={['Nombre:', 'Telefono:', 'Direccion:', 'Puesto:']}
+                isTouchable={false}
               />
             ))
           ) : null}
