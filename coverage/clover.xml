@@ -1,57 +1,26 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1699595728468" clover="3.2.0">
-  <project timestamp="1699595728468" name="All files">
-    <metrics statements="59" coveredstatements="53" conditionals="12" coveredconditionals="10" methods="21" coveredmethods="16" elements="92" coveredelements="79" complexity="0" loc="59" ncloc="59" packages="4" files="4" classes="4"/>
+<coverage generated="1699656977296" clover="3.2.0">
+  <project timestamp="1699656977296" name="All files">
+    <metrics statements="85" coveredstatements="79" conditionals="14" coveredconditionals="12" methods="29" coveredmethods="24" elements="128" coveredelements="115" complexity="0" loc="85" ncloc="85" packages="10" files="19" classes="19"/>
     <package name="proyectomgafrontend">
-      <metrics statements="3" coveredstatements="2" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="0"/>
-      <file name="assetsTransformer.js" path="/home/diego/Dev/personal/proyectomgafrontend/assetsTransformer.js">
+      <metrics statements="7" coveredstatements="6" conditionals="0" coveredconditionals="0" methods="3" coveredmethods="2"/>
+      <file name="assetsTransformer.js" path="D:\proyectomgafrontend\assetsTransformer.js">
         <metrics statements="3" coveredstatements="2" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="0"/>
-        <line num="1" count="7" type="stmt"/>
-        <line num="3" count="7" type="stmt"/>
+        <line num="1" count="6" type="stmt"/>
+        <line num="3" count="6" type="stmt"/>
         <line num="5" count="0" type="stmt"/>
       </file>
-    </package>
-    <package name="proyectomgafrontend.src.components.CardAssignment">
-      <metrics statements="32" coveredstatements="29" conditionals="6" coveredconditionals="4" methods="12" coveredmethods="10"/>
-      <file name="CardAssignment.jsx" path="/home/diego/Dev/personal/proyectomgafrontend/src/components/CardAssignment/CardAssignment.jsx">
-        <metrics statements="32" coveredstatements="29" conditionals="6" coveredconditionals="4" methods="12" coveredmethods="10"/>
+      <file name="test-utils.js" path="D:\proyectomgafrontend\test-utils.js">
+        <metrics statements="4" coveredstatements="4" conditionals="0" coveredconditionals="0" methods="2" coveredmethods="2"/>
+        <line num="4" count="1" type="stmt"/>
+        <line num="5" count="1" type="stmt"/>
+        <line num="12" count="1" type="stmt"/>
         <line num="13" count="1" type="stmt"/>
-        <line num="16" count="11" type="stmt"/>
-        <line num="17" count="11" type="stmt"/>
-        <line num="18" count="11" type="stmt"/>
-        <line num="19" count="11" type="stmt"/>
-        <line num="20" count="11" type="stmt"/>
-        <line num="22" count="11" type="stmt"/>
-        <line num="23" count="3" type="stmt"/>
-        <line num="25" count="3" type="stmt"/>
-        <line num="28" count="0" type="stmt"/>
-        <line num="32" count="11" type="stmt"/>
-        <line num="33" count="6" type="stmt"/>
-        <line num="36" count="11" type="stmt"/>
-        <line num="37" count="7" type="cond" truecount="3" falsecount="1"/>
-        <line num="38" count="7" type="cond" truecount="1" falsecount="1"/>
-        <line num="39" count="7" type="stmt"/>
-        <line num="44" count="11" type="stmt"/>
-        <line num="45" count="3" type="stmt"/>
-        <line num="48" count="11" type="stmt"/>
-        <line num="49" count="1" type="stmt"/>
-        <line num="56" count="11" type="stmt"/>
-        <line num="57" count="1" type="stmt"/>
-        <line num="64" count="11" type="stmt"/>
-        <line num="65" count="1" type="stmt"/>
-        <line num="68" count="11" type="stmt"/>
-        <line num="69" count="0" type="stmt"/>
-        <line num="72" count="11" type="stmt"/>
-        <line num="84" count="12" type="stmt"/>
-        <line num="91" count="12" type="stmt"/>
-        <line num="104" count="0" type="stmt"/>
-        <line num="134" count="1" type="stmt"/>
-        <line num="141" count="1" type="stmt"/>
       </file>
     </package>
     <package name="proyectomgafrontend.src.components.CardGalera">
-      <metrics statements="19" coveredstatements="17" conditionals="6" coveredconditionals="6" methods="5" coveredmethods="3"/>
-      <file name="CardGalera.jsx" path="/home/diego/Dev/personal/proyectomgafrontend/src/components/CardGalera/CardGalera.jsx">
+      <metrics statements="21" coveredstatements="19" conditionals="6" coveredconditionals="6" methods="5" coveredmethods="3"/>
+      <file name="CardGalera.jsx" path="D:\proyectomgafrontend\src\components\CardGalera\CardGalera.jsx">
         <metrics statements="19" coveredstatements="17" conditionals="6" coveredconditionals="6" methods="5" coveredmethods="3"/>
         <line num="8" count="1" type="stmt"/>
         <line num="11" count="4" type="stmt"/>
@@ -73,16 +42,136 @@
         <line num="97" count="1" type="stmt"/>
         <line num="105" count="1" type="stmt"/>
       </file>
+      <file name="styles.js" path="D:\proyectomgafrontend\src\components\CardGalera\styles.js">
+        <metrics statements="2" coveredstatements="2" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+        <line num="4" count="1" type="stmt"/>
+        <line num="6" count="1" type="stmt"/>
+      </file>
+    </package>
+    <package name="proyectomgafrontend.src.components.CardGaleraAdmin">
+      <metrics statements="18" coveredstatements="15" conditionals="2" coveredconditionals="1" methods="6" coveredmethods="4"/>
+      <file name="CardGaleraAdmin.jsx" path="D:\proyectomgafrontend\src\components\CardGaleraAdmin\CardGaleraAdmin.jsx">
+        <metrics statements="16" coveredstatements="13" conditionals="2" coveredconditionals="1" methods="6" coveredmethods="4"/>
+        <line num="11" count="1" type="stmt"/>
+        <line num="14" count="1" type="stmt"/>
+        <line num="15" count="1" type="stmt"/>
+        <line num="17" count="1" type="stmt"/>
+        <line num="18" count="0" type="stmt"/>
+        <line num="25" count="1" type="stmt"/>
+        <line num="26" count="0" type="stmt"/>
+        <line num="33" count="1" type="stmt"/>
+        <line num="34" count="1" type="cond" truecount="1" falsecount="1"/>
+        <line num="35" count="1" type="stmt"/>
+        <line num="37" count="0" type="stmt"/>
+        <line num="40" count="1" type="stmt"/>
+        <line num="57" count="2" type="stmt"/>
+        <line num="64" count="2" type="stmt"/>
+        <line num="75" count="1" type="stmt"/>
+        <line num="83" count="1" type="stmt"/>
+      </file>
+      <file name="styles.js" path="D:\proyectomgafrontend\src\components\CardGaleraAdmin\styles.js">
+        <metrics statements="2" coveredstatements="2" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+        <line num="4" count="1" type="stmt"/>
+        <line num="6" count="1" type="stmt"/>
+      </file>
+    </package>
+    <package name="proyectomgafrontend.src.components.CommentsComponent">
+      <metrics statements="7" coveredstatements="7" conditionals="0" coveredconditionals="0" methods="2" coveredmethods="2"/>
+      <file name="CommentsComponent.jsx" path="D:\proyectomgafrontend\src\components\CommentsComponent\CommentsComponent.jsx">
+        <metrics statements="5" coveredstatements="5" conditionals="0" coveredconditionals="0" methods="2" coveredmethods="2"/>
+        <line num="8" count="1" type="stmt"/>
+        <line num="11" count="2" type="stmt"/>
+        <line num="12" count="1" type="stmt"/>
+        <line num="15" count="2" type="stmt"/>
+        <line num="33" count="1" type="stmt"/>
+      </file>
+      <file name="styles.js" path="D:\proyectomgafrontend\src\components\CommentsComponent\styles.js">
+        <metrics statements="2" coveredstatements="2" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+        <line num="3" count="1" type="stmt"/>
+        <line num="5" count="1" type="stmt"/>
+      </file>
+    </package>
+    <package name="proyectomgafrontend.src.components.HeaderComponent">
+      <metrics statements="11" coveredstatements="11" conditionals="6" coveredconditionals="5" methods="4" coveredmethods="4"/>
+      <file name="HeaderComponent.jsx" path="D:\proyectomgafrontend\src\components\HeaderComponent\HeaderComponent.jsx">
+        <metrics statements="8" coveredstatements="8" conditionals="6" coveredconditionals="5" methods="4" coveredmethods="4"/>
+        <line num="6" count="1" type="stmt"/>
+        <line num="9" count="2" type="stmt"/>
+        <line num="10" count="1" type="stmt"/>
+        <line num="12" count="2" type="stmt"/>
+        <line num="17" count="6" type="stmt"/>
+        <line num="27" count="1" type="stmt"/>
+        <line num="44" count="1" type="stmt"/>
+        <line num="51" count="1" type="stmt"/>
+      </file>
+      <file name="styles.js" path="D:\proyectomgafrontend\src\components\HeaderComponent\styles.js">
+        <metrics statements="3" coveredstatements="3" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+        <line num="4" count="1" type="stmt"/>
+        <line num="5" count="1" type="stmt"/>
+        <line num="7" count="1" type="stmt"/>
+      </file>
+    </package>
+    <package name="proyectomgafrontend.src.components.TextCard">
+      <metrics statements="4" coveredstatements="4" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
+      <file name="TextCard.jsx" path="D:\proyectomgafrontend\src\components\TextCard\TextCard.jsx">
+        <metrics statements="2" coveredstatements="2" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
+        <line num="6" count="1" type="stmt"/>
+        <line num="7" count="1" type="stmt"/>
+      </file>
+      <file name="styles.js" path="D:\proyectomgafrontend\src\components\TextCard\styles.js">
+        <metrics statements="2" coveredstatements="2" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+        <line num="4" count="1" type="stmt"/>
+        <line num="6" count="1" type="stmt"/>
+      </file>
+    </package>
+    <package name="proyectomgafrontend.src.img">
+      <metrics statements="4" coveredstatements="4" conditionals="0" coveredconditionals="0" methods="2" coveredmethods="2"/>
+      <file name="ElCeibillalSvg.jsx" path="D:\proyectomgafrontend\src\img\ElCeibillalSvg.jsx">
+        <metrics statements="2" coveredstatements="2" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
+        <line num="6" count="2" type="stmt"/>
+        <line num="7" count="4" type="stmt"/>
+      </file>
+      <file name="ElCeibillalV2Svg.jsx" path="D:\proyectomgafrontend\src\img\ElCeibillalV2Svg.jsx">
+        <metrics statements="2" coveredstatements="2" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
+        <line num="6" count="2" type="stmt"/>
+        <line num="7" count="4" type="stmt"/>
+      </file>
     </package>
     <package name="proyectomgafrontend.src.screens.ChoiceScreen">
-      <metrics statements="5" coveredstatements="5" conditionals="0" coveredconditionals="0" methods="3" coveredmethods="3"/>
-      <file name="ChoiceScreen.jsx" path="/home/diego/Dev/personal/proyectomgafrontend/src/screens/ChoiceScreen/ChoiceScreen.jsx">
+      <metrics statements="6" coveredstatements="6" conditionals="0" coveredconditionals="0" methods="3" coveredmethods="3"/>
+      <file name="ChoiceScreen.jsx" path="D:\proyectomgafrontend\src\screens\ChoiceScreen\ChoiceScreen.jsx">
         <metrics statements="5" coveredstatements="5" conditionals="0" coveredconditionals="0" methods="3" coveredmethods="3"/>
         <line num="13" count="2" type="stmt"/>
         <line num="14" count="4" type="stmt"/>
         <line num="25" count="2" type="stmt"/>
         <line num="33" count="1" type="stmt"/>
         <line num="43" count="2" type="stmt"/>
+      </file>
+      <file name="styles.js" path="D:\proyectomgafrontend\src\screens\ChoiceScreen\styles.js">
+        <metrics statements="1" coveredstatements="1" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+        <line num="4" count="2" type="stmt"/>
+      </file>
+    </package>
+    <package name="proyectomgafrontend.src.screens.CrearGalera">
+      <metrics statements="3" coveredstatements="3" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
+      <file name="CrearGalera.jsx" path="D:\proyectomgafrontend\src\screens\CrearGalera\CrearGalera.jsx">
+        <metrics statements="2" coveredstatements="2" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
+        <line num="8" count="1" type="stmt"/>
+        <line num="10" count="1" type="stmt"/>
+      </file>
+      <file name="styles.js" path="D:\proyectomgafrontend\src\screens\CrearGalera\styles.js">
+        <metrics statements="1" coveredstatements="1" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+        <line num="3" count="1" type="stmt"/>
+      </file>
+    </package>
+    <package name="proyectomgafrontend.src.screens.DetailsScreen">
+      <metrics statements="4" coveredstatements="4" conditionals="0" coveredconditionals="0" methods="2" coveredmethods="2"/>
+      <file name="DetailsScreen.jsx" path="D:\proyectomgafrontend\src\screens\DetailsScreen\DetailsScreen.jsx">
+        <metrics statements="4" coveredstatements="4" conditionals="0" coveredconditionals="0" methods="2" coveredmethods="2"/>
+        <line num="5" count="1" type="stmt"/>
+        <line num="6" count="1" type="stmt"/>
+        <line num="10" count="1" type="stmt"/>
+        <line num="15" count="1" type="stmt"/>
       </file>
     </package>
   </project>

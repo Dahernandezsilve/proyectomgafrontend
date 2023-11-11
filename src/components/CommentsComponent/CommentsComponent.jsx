@@ -13,9 +13,10 @@ const CommentsComponent = ({
   }
 
   return (
-    <View style={styles.container}>
-      <View style={styles.comentariosContainer}>
+    <View testID="container" style={styles.container}>
+      <View testID="comentariosContainer" style={styles.comentariosContainer}>
         <TextInput
+          testID="input"
           style={styles.input}
           placeholder="Comentarios u observaciones"
           value={value}
@@ -30,8 +31,8 @@ const CommentsComponent = ({
 
 // Agrega la validación de propiedades
 CommentsComponent.propTypes = {
-  setValue: PropTypes.func.isRequired, // setRegistro debe ser una función requerida
-  value: PropTypes.string.isRequired, // code debe ser una cadena (string) requerida
+  setValue: PropTypes.func.isRequired, // setRegistro must be a required function
+  value: PropTypes.string.isRequired, // code must be a required string
 }
 
 export default CommentsComponent

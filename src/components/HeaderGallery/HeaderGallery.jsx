@@ -7,7 +7,7 @@ import styles from './styles'
 
 const windowWidth = Dimensions.get('window').width
 
-const HeaderGalley = ({
+const HeaderGallery = ({
   lotes, title, activeTab, setActiveTab,
 }) => {
   const handleTabPress = tabName => {
@@ -28,6 +28,7 @@ const HeaderGalley = ({
         <View style={styles.buttonContainer}>
           {lotes.map((lote, index) => (
             <TouchableOpacity
+              testID="tab-button"
               key={generateUniqueKey(lote, index)}
               style={[
                 styles.tabButton,
@@ -55,7 +56,7 @@ const HeaderGalley = ({
   )
 }
 
-HeaderGalley.propTypes = {
+HeaderGallery.propTypes = {
   lotes: PropTypes.arrayOf(PropTypes.string).isRequired,
   title: PropTypes.string.isRequired,
   activeTab: PropTypes.number, // Propiedad no requerida
@@ -63,9 +64,9 @@ HeaderGalley.propTypes = {
 }
 
 // Agrega los valores predeterminados para las propiedades no requeridas
-HeaderGalley.defaultProps = {
+HeaderGallery.defaultProps = {
   activeTab: null, // Puedes ajustar este valor predeterminado según sea necesario
   setActiveTab: () => {}, // Puedes proporcionar una función vacía o ajustarla según sea necesario
 }
 
-export default HeaderGalley
+export default HeaderGallery

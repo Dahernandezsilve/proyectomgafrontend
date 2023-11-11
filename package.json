@@ -11,7 +11,7 @@
     "build": "eas build",
     "detox": "detox",
     "lint": "eslint src",
-    "test": "jest --watch --coverage=true",
+    "test": "jest --coverage=true",
     "e2e:android": "detox test --configuration android.emulator",
     "detox:buid": "detox build -c android.emulator",
     "android:detox": "react-native run-android",

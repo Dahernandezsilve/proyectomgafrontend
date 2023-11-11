@@ -23,30 +23,30 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">37.5% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>3/8</span>
+                <span class='fraction'>8/8</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">83.33% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>0/6</span>
+                <span class='fraction'>5/6</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>0/4</span>
+                <span class='fraction'>4/4</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">37.5% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>3/8</span>
+                <span class='fraction'>8/8</span>
             </div>
         
             
@@ -61,7 +61,7 @@
             </div>
         </template>
     </div>
-    <div class='status-line low'></div>
+    <div class='status-line high'></div>
     <pre><table class="coverage">
 <tr><td class="line-count quiet"><a name='L1'></a><a href='#L1'>1</a>
 <a name='L2'></a><a href='#L2'>2</a>
@@ -116,7 +116,9 @@
 <a name='L51'></a><a href='#L51'>51</a>
 <a name='L52'></a><a href='#L52'>52</a>
 <a name='L53'></a><a href='#L53'>53</a>
-<a name='L54'></a><a href='#L54'>54</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L54'></a><a href='#L54'>54</a>
+<a name='L55'></a><a href='#L55'>55</a>
+<a name='L56'></a><a href='#L56'>56</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -124,23 +126,25 @@
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">6x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -174,18 +178,20 @@ import { View, Text, TouchableOpacity } from 'react-native'
 import PropTypes from 'prop-types'
 import styles from './styles'
 &nbsp;
-const HeaderComponent = <span class="fstat-no" title="function not covered" >({</span>
+const HeaderComponent = ({
   title, customTitles, activeTab, setActiveTab,
 }) =&gt; {
-  const handleTabPress = <span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >ta</span>bName =&gt; {</span>
-<span class="cstat-no" title="statement not covered" >    setActiveTab(tabName)</span>
+  const handleTabPress = tabName =&gt; {
+    setActiveTab(tabName)
   }
-<span class="cstat-no" title="statement not covered" >  return (</span>
+  return (
     &lt;View style={styles.headerContainer}&gt;
       &lt;Text style={styles.headerText}&gt;{title}&lt;/Text&gt;
       &lt;View style={styles.buttonContainer}&gt;
-        {customTitles.map(<span class="fstat-no" title="function not covered" >(c</span>ustom, index) =&gt; (
-<span class="cstat-no" title="statement not covered" >          &lt;TouchableOpacity</span>
+        {customTitles.map((custom, index) =&gt; (
+          &lt;TouchableOpacity
+            // eslint-disable-next-line react/no-array-index-key
+            testID="tab-button"
             // eslint-disable-next-line react/no-array-index-key
             key={index}
             style={[
@@ -193,7 +199,7 @@ const HeaderComponent = <span class="fstat-no" title="function not covered" >({<
               activeTab === custom ? styles.activeTabButton : null,
             ]}
             activeOpacity={0.7}
-            onPress={<span class="fstat-no" title="function not covered" >()</span> =&gt; <span class="cstat-no" title="statement not covered" >handleTabPress(custom)}</span>
+            onPress={() =&gt; handleTabPress(custom)}
           &gt;
             &lt;Text
               style={[
@@ -201,7 +207,7 @@ const HeaderComponent = <span class="fstat-no" title="function not covered" >({<
                 activeTab === custom ? styles.activeTabButtonText : null,
               ]}
             &gt;
-              {customTitles ? customTitles[index] : null}
+              {customTitles ? customTitles[index] : <span class="branch-1 cbranch-no" title="branch not covered" >null}</span>
             &lt;/Text&gt;
           &lt;/TouchableOpacity&gt;
         ))}
@@ -229,7 +235,7 @@ export default HeaderComponent
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2023-11-10T05:05:15.663Z
+                at 2023-11-10T22:56:17.232Z
             </div>
         <script src="../../../../prettify.js"></script>
         <script>

@@ -22,7 +22,7 @@ const HeaderCreation = ({ galera }) => {
             top: 30, bottom: 30, left: 30, right: 30,
           }}
         >
-          <View style={styles.iconContainer}>
+          <View testID="back-button" style={styles.iconContainer}>
             <Ionicons name="arrow-back" size={windowWidth * 0.07} color="#2B4985" />
           </View>
         </TouchableOpacity>

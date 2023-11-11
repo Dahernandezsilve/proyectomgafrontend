@@ -1,3 +1,5 @@
+/* eslint-disable react/forbid-prop-types */
+/* eslint-disable react/require-default-props */
 import React from 'react'
 import { View, Text, TouchableOpacity } from 'react-native'
 import PropTypes from 'prop-types'
@@ -58,6 +60,9 @@ HeaderInformation.propTypes = {
   activeTab: PropTypes.string.isRequired,
   setActiveTab: PropTypes.func.isRequired,
   showLote: PropTypes.bool,
+  // eslint-disable-next-line react/forbid-prop-types
+  navigation: PropTypes.any,
+  shouldNavigate: PropTypes.any,
 }
 
 HeaderInformation.defaultProps = {

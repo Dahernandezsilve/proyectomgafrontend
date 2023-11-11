@@ -16,6 +16,8 @@ const HeaderComponent = ({
         {customTitles.map((custom, index) => (
           <TouchableOpacity
             // eslint-disable-next-line react/no-array-index-key
+            testID="tab-button"
+            // eslint-disable-next-line react/no-array-index-key
             key={index}
             style={[
               styles.tabButton,
