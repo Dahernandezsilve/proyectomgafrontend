@@ -84,9 +84,9 @@ const CardGalera = ({
         </View>
         <View style={styles.galeraContainer}>
           {loading ? (
-            <ActivityIndicator size="large" color="#2B4985" /> // Agregar el spinner si loading es true
+            <ActivityIndicator size="large" color="#2B4985" testID="loading-spinner" /> // Agregar el spinner si loading es true
           ) : (
-            <Text style={styles.text}>{galera}</Text>
+            <Text style={styles.text} testID="texto-galera">{galera}</Text>
           )}
         </View>
       </Animated.View>

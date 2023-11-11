@@ -24,6 +24,7 @@ const ChoiceScreen = ({ navigation }) => (
         style={styles.botonTrabajador}
         onPress={() => navigation.navigate('Trabajador')}
         accessibilityLabel="worker-button"
+        testID="worker-button"
       >
         <Text style={styles.buttonTextTrabajador}>Trabajador</Text>
       </TouchableOpacity>
@@ -31,6 +32,7 @@ const ChoiceScreen = ({ navigation }) => (
         style={styles.botonAdministrador}
         onPress={() => navigation.navigate('Administrador')}
         accessibilityLabel="admin-button"
+        testID="admin-button"
       >
         <Text style={styles.buttonText}>Administrador</Text>
       </TouchableOpacity>

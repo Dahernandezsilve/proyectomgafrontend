@@ -19,6 +19,7 @@ const PersonalScreen = ({ navigation }) => {
       handleRequest('GET', '/obtainTrabajadores')
       // Haz algo con la respuesta aquí si es necesario
     } catch (error) {
+      // eslint-disable-next-line no-console
       console.error('Error al obtener los trabajadores:', error)
     }
   }
@@ -66,10 +67,11 @@ const PersonalScreen = ({ navigation }) => {
         setActiveTab={setActiveTab}
         showLote={false}
       />
-      <ScrollView style={styles.scrollabe}>
+      <ScrollView style={styles.scrollable}>
         <View style={styles.container2}>
           <View style={styles.rectangle}>
             <Text style={styles.workerTitle}>Personal</Text>
+
           </View>
 
           {workers !== undefined && workers.length > 0 ? (

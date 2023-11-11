@@ -1,10 +1,12 @@
+/* eslint-disable react/forbid-prop-types */
+/* eslint-disable react/require-default-props */
 import React from 'react'
 import { View, Text, TouchableOpacity } from 'react-native'
 import PropTypes from 'prop-types'
 import styles from './styles'
 
 const HeaderInformation = ({
-  lotes, title, customTitles, activeTab, setActiveTab, showLote, navigation, shouldNavigate
+  lotes, title, customTitles, activeTab, setActiveTab, showLote, navigation, shouldNavigate,
 }) => {
   const handleTabPress = tabName => {
     setActiveTab(tabName)
@@ -26,11 +28,11 @@ const HeaderInformation = ({
             activeOpacity={0.7}
             onPress={() => {
               if (shouldNavigate) {
-                //handleTabPress(lote);
-                navigation.navigate(customTitles[index], { activeTab: customTitles[index] });
-                handleTabPress(activeTab);
+                // handleTabPress(lote);
+                navigation.navigate(customTitles[index], { activeTab: customTitles[index] })
+                handleTabPress(activeTab)
               } else {
-                handleTabPress(lote);
+                handleTabPress(lote)
               }
             }}
           >
@@ -58,6 +60,9 @@ HeaderInformation.propTypes = {
   activeTab: PropTypes.string.isRequired,
   setActiveTab: PropTypes.func.isRequired,
   showLote: PropTypes.bool,
+  // eslint-disable-next-line react/forbid-prop-types
+  navigation: PropTypes.any,
+  shouldNavigate: PropTypes.any,
 }
 
 HeaderInformation.defaultProps = {

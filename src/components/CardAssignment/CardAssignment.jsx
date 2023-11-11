@@ -3,10 +3,10 @@
 /* eslint-disable no-unused-vars */
 import React, { useState, useEffect } from 'react'
 import {
-  View, Button, Text, TouchableWithoutFeedback, Animated, useWindowDimensions, Modal, ScrollView
+  View, Button, Text, TouchableWithoutFeedback, Animated, useWindowDimensions, Modal,
 } from 'react-native'
-import CardPersonal from '../CardPersonal'
 import PropTypes from 'prop-types'
+import CardPersonal from '../CardPersonal'
 import styles from './styles'
 import useApi from '../../hooks/useApi/useApi'
 
@@ -52,11 +52,6 @@ const CardAssignment = ({
     handleObtainWorkers()
   }, [])
 
-  useEffect(() => {
-    //console.log("Actualizando trabajador: ", workerName);
-  }, [workerName]);
-  
-
   const onPressIn = () => {
     Animated.timing(opacityValue, {
       toValue: 0.5,
@@ -74,20 +69,12 @@ const CardAssignment = ({
   }
 
   const handlePress = () => {
-    setModalVisible(true);
-    //console.log("Este es el numero de galera seleccionada: ", selectedGalera);
-    //console.log("Esta el trabajador: ", workerName);
-  };
-
-  const handlePressButton = () => {
-    console.log("Mandando galera: ", selectedGalera)
-    console.log("Mandando trabajador: ", workerName)
-    closeModal()
+    setModalVisible(true)
   }
 
   const closeModal = () => {
-    setModalVisible(false);
-  };
+    setModalVisible(false)
+  }
 
   return (
     <View>
@@ -97,8 +84,7 @@ const CardAssignment = ({
             [styles.container, { width: windowWidth - windowWidth * 0.1, opacity: opacityValue }]
           }
         >
-          <View style={styles.caContainer}>
-          </View>
+          <View style={styles.caContainer} />
           <View style={[styles.galeraContainer, styles.row]}>
             <View style={styles.column}>
               {customTitles.map((title, index) => (
@@ -119,47 +105,35 @@ const CardAssignment = ({
       </TouchableWithoutFeedback>
       <Modal
         animationType="slide"
-        transparent={true}
+        transparent
         visible={modalVisible}
         onRequestClose={() => {
-          setModalVisible(!modalVisible);
+          setModalVisible(!modalVisible)
         }}
       >
       <ScrollView style={styles.scrollabe}>
         <View style={styles.modalContainer}>
-        <View style={styles.centeredView}>
-              <View style={styles.modalView}>
-              <View style={styles.rectangle}>
-                  <Text style={styles.modalText}>Asignar trabajador: </Text>
-              </View>
-              {workers !== undefined && workers.length > 0 ? (
-            workers.map(worker => (
-              <CardPersonal
-                key={worker.id_trabajador}
+          <View style={styles.centeredView}>
+            <View style={styles.modalView}>
+              <Text style={styles.modalText}>Asignar trabajador: </Text>
+              <CardGaleraAdmin
+              // eslint-disable-next-line react/no-array-index-key
+                key={1}
+                ca="#FFFFFF"
+                msgCA=""
+                numberCA={null}
                 customValues={{
-                  nombre: worker.nombre,
-                  telefono: worker.telefono,
-                  direccion: worker.direccion,
-                  puesto: worker.puesto,
+                  galera: 'Javier',
+                  cantidadAlimento: 'xd',
+                  pesado: 'saber',
+                  decesos: 'sd',
                 }}
-                img={worker.img}
                 customTitles={['Nombre:', 'Telefono:', 'Direccion:', 'Puesto:']}
-                isTouchable={true}
-                workerSelected={worker.nombre}
-                onWorkerSelect={handleWorkerSelection}
               />
-            ))
-                ) : null}
-
-                <View style={styles.buttonContainer}>
-                  <Button title="Asignar" onPress={handlePressButton} style={styles.button} />
-                </View>
-              </View>
-              
-                
-        </View>
+              <Button title="Cerrar" onPress={closeModal} />
+            </View>
           </View>
-          </ScrollView>
+        </View>
       </Modal>
     </View>
   )

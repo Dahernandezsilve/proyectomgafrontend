@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Slider } from '@miblanchard/react-native-slider'
+import Slider from '@miblanchard/react-native-slider'
 import { View, Text } from 'react-native'
 import styles from './styles'
 

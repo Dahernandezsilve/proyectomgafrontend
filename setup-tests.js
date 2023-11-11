@@ -1,16 +1,16 @@
-const detox = require('detox');
-const { device, init, cleanup, reloadApp } = require('detox');
+const detox = require('detox')
 
 // Configuración de Enzyme
-const Enzyme = require('enzyme');
-const Adapter = require('enzyme-adapter-react-16');
-Enzyme.configure({ adapter: new Adapter() });
+const Enzyme = require('enzyme')
+const Adapter = require('enzyme-adapter-react-16')
+
+Enzyme.configure({ adapter: new Adapter() })
 
 // Configuración adicional de Detox (si es necesario)
 beforeAll(async () => {
-  await detox.init();
-});
+  await detox.init()
+})
 
 afterAll(async () => {
-  await detox.cleanup();
-});
+  await detox.cleanup()
+})

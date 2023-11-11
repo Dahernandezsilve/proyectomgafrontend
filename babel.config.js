@@ -13,6 +13,7 @@ module.exports = function (api) {
           },
         },
       ],
+      ['@babel/plugin-transform-private-methods', { loose: true }],
     ],
   }
 }
