@@ -12,11 +12,11 @@ const pesado = ['Oratorio', 'Cuilapa', 'Barberena']
 const decesos = ['Encargado de Lote', 'Encargado de Lote', 'Encargado de Lote']
 
 const NewGalleyScreen = ({ navigation }) => {
-  const lotes = ['Mi granja', 'Asignacion', 'Crear galera']
-  const [activeTab, setActiveTab] = useState(lotes[2])
+  const lotes = ['Mi granja', 'Crear galera']
+  const [activeTab, setActiveTab] = useState(lotes[1])
 
   const navigateToGaleras = async () => {
-    navigation.navigate('Creacion')
+    navigation.navigate('Home')
   }
 
   const tabs = [
@@ -24,7 +24,7 @@ const NewGalleyScreen = ({ navigation }) => {
       label: 'Informe', route: 'Home', icon: 'ios-home', method: 'Ionicons',
     },
     {
-      label: 'Medición', route: 'Administrador', icon: 'new-message', method: 'Entypo',
+      label: 'Medición', route: 'Home', icon: 'new-message', method: 'Entypo',
     },
     {
       label: 'Granja', route: 'Crear galera', icon: 'book', method: 'Entypo',
@@ -40,7 +40,7 @@ const NewGalleyScreen = ({ navigation }) => {
     <View style={styles.container}>
       <HeaderInformation
         title="Granja"
-        customTitles={['Mi granja', 'Asignacion', 'Crear galera']}
+        customTitles={['Home', 'Crear galera']}
         lotes={lotes}
         activeTab={activeTab}
         setActiveTab={setActiveTab}
@@ -78,29 +78,6 @@ const NewGalleyScreen = ({ navigation }) => {
               maxLength={4}
             />
           </View>
-
-          <View style={styles.rectangle}>
-            <Text style={styles.workerTitle}>Asignar trabajador</Text>
-          </View>
-
-          {galera.map((nombre, index) => (
-            <CardGaleraAdmin
-              // eslint-disable-next-line react/no-array-index-key
-              key={index}
-              ca="#FFFFFF"
-              msgCA=""
-              numberCA={null}
-              customValues={{
-                galera: nombre,
-                cantidadAlimento: cantidadAlimento[index],
-                pesado: pesado[index],
-                decesos: decesos[index],
-                navigateToGaleras,
-              }}
-              customTitles={['Nombre:', 'Telefono:', 'Direccion:', 'Puesto:']}
-            />
-          ))}
-
         </View>
       </ScrollView>
       <View style={styles.bottomTabNavigator}>

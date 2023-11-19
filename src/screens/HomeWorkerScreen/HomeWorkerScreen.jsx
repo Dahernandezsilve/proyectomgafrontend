@@ -14,13 +14,18 @@ const HomeWorkerScreen = ({ navigation }) => {
   const [activeTab, setActiveTab] = useState(0)
   const [response, , handleRequest] = useApi()
   const [galeras, setGaleras] = useState([])
+  const [cantidadP, setCantidadLote] = useState(0)
+
+  const handleObtainCantidadLote = async () => {
+    await handleRequest('GET', '/countObtain')
+  }
 
   const handleObtainGaleras = async () => {
     await handleRequest('GET', '/galerasWorker')
   }
 
-  const navigateToGaleras = (idGalera, galera) => {
-    navigation.navigate('Creacion', { idGalera, galera })
+  const navigateToGaleras = (idGalera, galera, tiempoEnDias) => {
+    navigation.navigate('Creacion', { idGalera, galera, tiempoEnDias })
   }
 
   const handleSending = async () => {
@@ -52,12 +57,19 @@ const HomeWorkerScreen = ({ navigation }) => {
   useEffect(() => {
     if (response?.data !== undefined) {
       const firstData = response.data
+      if (typeof firstData === 'number') {
+        console.log('Todo', response)
+        if (firstData !== undefined) {
+          setCantidadLote(firstData)
+        }
+      }
       if (firstData.length > 0) {
         if (firstData[0].idGalera !== undefined && firstData[0].idGalera !== null) {
           // eslint-disable-next-line no-plusplus
           for (let i = 0; i < firstData.length; i++) {
             firstData[i].loading = false
           }
+          console.log(firstData)
           setGaleras(firstData)
         }
       }
@@ -75,6 +87,14 @@ const HomeWorkerScreen = ({ navigation }) => {
   }, [])
 
   useEffect(() => {
+    handleObtainCantidadLote()
+  }, [])
+
+  useEffect(() => {
+    handleObtainCantidadLote()
+  }, [galeras])
+
+  useEffect(() => {
     handleSending()
   }, [galeras])
 
@@ -83,6 +103,7 @@ const HomeWorkerScreen = ({ navigation }) => {
       handleObtainGaleras()
       setRefresh(false)
     }
+    handleObtainCantidadLote()
   }, [refresh])
 
   return (
@@ -99,22 +120,22 @@ const HomeWorkerScreen = ({ navigation }) => {
         setActiveTab={setActiveTab}
       />
       <ScrollView contentContainerStyle={{ alignItems: 'center' }} style={{ margin: 0, padding: 0 }}>
-        <TextCard number="10000" />
+        <TextCard number={` ${cantidadP}`} />
         {
           galeras.map(galer => {
             if (galer.ca === null) {
-              return <CardGalera idGalera={galer.idGalera} key={galer.idGalera} galera={`Galera ${galer.numeroGalera}`} ca="gray" navigateToGaleras={navigateToGaleras} loading={galer.loading} />
+              return <CardGalera idGalera={galer.idGalera} key={galer.idGalera} galera={`Lote ${galer.idLote} - Galera ${galer.numeroGalera}`} tiempoEnDias={galer.tiempoEnDias} ca="gray" navigateToGaleras={navigateToGaleras} loading={galer.loading} />
             }
             if (parseFloat(galer.ca) > 4.9) {
-              return <CardGalera idGalera={galer.idGalera} key={galer.idGalera} galera={`Galera ${galer.numeroGalera}`} ca="red" navigateToGaleras={navigateToGaleras} loading={galer.loading} />
+              return <CardGalera idGalera={galer.idGalera} key={galer.idGalera} galera={`Lote ${galer.idLote} - Galera ${galer.numeroGalera}`} tiempoEnDias={galer.tiempoEnDias} ca="red" navigateToGaleras={navigateToGaleras} loading={galer.loading} />
             }
 
             if (parseFloat(galer.ca) < 2.6) {
-              return <CardGalera idGalera={galer.idGalera} key={galer.idGalera} galera={`Galera ${galer.numeroGalera}`} ca="green" navigateToGaleras={navigateToGaleras} loading={galer.loading} />
+              return <CardGalera idGalera={galer.idGalera} key={galer.idGalera} galera={`Lote ${galer.idLote} - Galera ${galer.numeroGalera}`} tiempoEnDias={galer.tiempoEnDias} ca="green" navigateToGaleras={navigateToGaleras} loading={galer.loading} />
             }
 
             if (parseFloat(galer.ca) > 2.6 && galer.ca < 4.9) {
-              return <CardGalera idGalera={galer.idGalera} key={galer.idGalera} galera={`Galera ${galer.numeroGalera}`} ca="orange" navigateToGaleras={navigateToGaleras} loading={galer.loading} />
+              return <CardGalera idGalera={galer.idGalera} key={galer.idGalera} galera={`Lote ${galer.idLote} - Galera ${galer.numeroGalera}`} tiempoEnDias={galer.tiempoEnDias} ca="orange" navigateToGaleras={navigateToGaleras} loading={galer.loading} />
             }
             return null
           })

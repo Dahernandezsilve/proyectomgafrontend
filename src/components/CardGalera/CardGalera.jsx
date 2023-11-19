@@ -6,7 +6,7 @@ import {
 import styles from './styles'
 
 const CardGalera = ({
-  idGalera, galera, ca, navigateToGaleras, loading,
+  idGalera, galera, ca, tiempoEnDias, navigateToGaleras, loading,
 }) => {
   const [opacityValue] = useState(new Animated.Value(1))
   const [scaleValue] = useState(new Animated.Value(1)) // Nuevo valor de escala
@@ -61,7 +61,7 @@ const CardGalera = ({
     <TouchableWithoutFeedback
       onPress={() => {
         if (!loading) {
-          navigateToGaleras(idGalera, galera)
+          navigateToGaleras(idGalera, galera, tiempoEnDias)
         }
       }}
       onPressIn={onPressIn}
@@ -98,6 +98,7 @@ CardGalera.propTypes = {
   idGalera: PropTypes.string,
   galera: PropTypes.string,
   ca: PropTypes.string,
+  tiempoEnDias: PropTypes.string,
   navigateToGaleras: PropTypes.func.isRequired,
   loading: PropTypes.bool,
 }
@@ -107,6 +108,7 @@ CardGalera.defaultProps = {
   ca: 'red',
   idGalera: null,
   loading: false,
+  tiempoEnDias: '78',
 }
 
 export default CardGalera

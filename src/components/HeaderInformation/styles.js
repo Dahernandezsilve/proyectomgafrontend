@@ -51,7 +51,7 @@ const styles = StyleSheet.create({
   tabButtonText: {
     color: '#000000',
     fontFamily: SamsungOne,
-    fontSize: windowWidth * 0.040913,
+    fontSize: windowWidth * 0.036,
     textAlign: 'center',
   },
 })

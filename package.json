@@ -8,6 +8,7 @@
     "android": "expo start --android",
     "ios": "expo start --ios",
     "web": "expo start --web",
+    "submit": "eas submit --platform android",
     "build": "eas build",
     "detox": "detox",
     "lint": "eslint src",

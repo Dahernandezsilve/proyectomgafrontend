@@ -3,15 +3,15 @@
 /* eslint-disable no-unused-vars */
 import React, { useState, useEffect } from 'react'
 import {
-  View, Button, Text, TouchableWithoutFeedback, Animated, useWindowDimensions, Modal, ScrollView
+  View, Button, Text, TouchableWithoutFeedback, Animated, useWindowDimensions, Modal, ScrollView,
 } from 'react-native'
-import CardPersonal from '../CardPersonal'
 import PropTypes from 'prop-types'
+import CardPersonal from '../CardPersonal'
 import styles from './styles'
 import useApi from '../../hooks/useApi/useApi'
 
 const CardAssignment = ({
-  customValues, customTitles, selectedGalera
+  customValues, customTitles, selectedGalera,
 }) => {
   const [opacityValue] = useState(new Animated.Value(1))
   const [modalVisible, setModalVisible] = useState(false)
@@ -30,11 +30,11 @@ const CardAssignment = ({
     }
   }
 
-  const handleWorkerSelection = (name) => {
+  const handleWorkerSelection = name => {
     // Realiza alguna acción con el nombre del trabajador seleccionado
-    //console.log("Nombre del trabajador seleccionado:", name);
-    setWorkerName(name);
-  };
+    // console.log("Nombre del trabajador seleccionado:", name);
+    setWorkerName(name)
+  }
 
   useEffect(() => {
     console.log('Trabajadores: ', workers)
@@ -53,9 +53,8 @@ const CardAssignment = ({
   }, [])
 
   useEffect(() => {
-    //console.log("Actualizando trabajador: ", workerName);
-  }, [workerName]);
-  
+    // console.log("Actualizando trabajador: ", workerName);
+  }, [workerName])
 
   const onPressIn = () => {
     Animated.timing(opacityValue, {
@@ -74,20 +73,20 @@ const CardAssignment = ({
   }
 
   const handlePress = () => {
-    setModalVisible(true);
-    //console.log("Este es el numero de galera seleccionada: ", selectedGalera);
-    //console.log("Esta el trabajador: ", workerName);
-  };
+    setModalVisible(true)
+    // console.log("Este es el numero de galera seleccionada: ", selectedGalera);
+    // console.log("Esta el trabajador: ", workerName);
+  }
 
   const handlePressButton = () => {
-    console.log("Mandando galera: ", selectedGalera)
-    console.log("Mandando trabajador: ", workerName)
+    console.log('Mandando galera: ', selectedGalera)
+    console.log('Mandando trabajador: ', workerName)
     closeModal()
   }
 
   const closeModal = () => {
-    setModalVisible(false);
-  };
+    setModalVisible(false)
+  }
 
   return (
     <View>
@@ -97,8 +96,7 @@ const CardAssignment = ({
             [styles.container, { width: windowWidth - windowWidth * 0.1, opacity: opacityValue }]
           }
         >
-          <View style={styles.caContainer}>
-          </View>
+          <View style={styles.caContainer} />
           <View style={[styles.galeraContainer, styles.row]}>
             <View style={styles.column}>
               {customTitles.map((title, index) => (
@@ -119,47 +117,46 @@ const CardAssignment = ({
       </TouchableWithoutFeedback>
       <Modal
         animationType="slide"
-        transparent={true}
+        transparent
         visible={modalVisible}
         onRequestClose={() => {
-          setModalVisible(!modalVisible);
+          setModalVisible(!modalVisible)
         }}
       >
-      <ScrollView style={styles.scrollabe}>
-        <View style={styles.modalContainer}>
-        <View style={styles.centeredView}>
+        <ScrollView style={styles.scrollabe}>
+          <View style={styles.modalContainer}>
+            <View style={styles.centeredView}>
               <View style={styles.modalView}>
-              <View style={styles.rectangle}>
+                <View style={styles.rectangle}>
                   <Text style={styles.modalText}>Asignar trabajador: </Text>
-              </View>
-              {workers !== undefined && workers.length > 0 ? (
-            workers.map(worker => (
-              <CardPersonal
-                key={worker.id_trabajador}
-                customValues={{
-                  nombre: worker.nombre,
-                  telefono: worker.telefono,
-                  direccion: worker.direccion,
-                  puesto: worker.puesto,
-                }}
-                img={worker.img}
-                customTitles={['Nombre:', 'Telefono:', 'Direccion:', 'Puesto:']}
-                isTouchable={true}
-                workerSelected={worker.nombre}
-                onWorkerSelect={handleWorkerSelection}
-              />
-            ))
+                </View>
+                {workers !== undefined && workers.length > 0 ? (
+                  workers.map(worker => (
+                    <CardPersonal
+                      key={worker.id_trabajador}
+                      customValues={{
+                        nombre: worker.nombre,
+                        telefono: worker.telefono,
+                        direccion: worker.direccion,
+                        puesto: worker.puesto,
+                      }}
+                      img={worker.img}
+                      customTitles={['Nombre:', 'Telefono:', 'Direccion:', 'Puesto:']}
+                      isTouchable
+                      workerSelected={worker.nombre}
+                      onWorkerSelect={handleWorkerSelection}
+                    />
+                  ))
                 ) : null}
 
                 <View style={styles.buttonContainer}>
                   <Button title="Asignar" onPress={handlePressButton} style={styles.button} />
                 </View>
               </View>
-              
-                
-        </View>
+
+            </View>
           </View>
-          </ScrollView>
+        </ScrollView>
       </Modal>
     </View>
   )
