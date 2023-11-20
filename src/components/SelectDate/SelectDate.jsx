@@ -13,12 +13,12 @@ const formatDate = date => {
 const SelectDate = ({ onPress, selectedDate }) => {
   const formattedDate = selectedDate ? formatDate(selectedDate) : null
   return (
-    <TouchableOpacity style={styles.container} onPress={onPress}>
+    <TouchableOpacity testID="select-date-button" style={styles.container} onPress={onPress}>
       <View style={styles.contentContainer}>
         <Text style={styles.text}>
           Seleccionar fecha:
         </Text>
-        <Text style={styles.date}>
+        <Text testID="test-date" style={styles.date}>
           {formattedDate}
         </Text>
       </View>
