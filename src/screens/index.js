@@ -10,7 +10,7 @@ import CrearGalera from './CrearGalera'
 import CreationScreenAdministrator from './CreationScreenAdministrator'
 import CardAssignment from '../components/CardAssignment'
 import PersonalScreen from './PersonalScreen'
-
+import Calculator from './Calculator'
 
 export {
   ChoiceScreen,
@@ -25,4 +25,5 @@ export {
   CreationScreenAdministrator,
   CardAssignment,
   PersonalScreen,
+  Calculator,
 }
