@@ -9,8 +9,8 @@ import PropTypes from 'prop-types'
 import styles from './styles'
 import usuarioImage from './usuario.png'
 
-const CardPersonal = ({
-  customValues, customTitles, img, isTouchable, workerSelected, onWorkerSelect,
+const CardPersonalRanking = ({
+  customValues, customTitles, img, isTouchable, workerSelected, onWorkerSelect, position,
 }) => {
   const [opacityValue] = useState(new Animated.Value(1))
   const [isChecked, setIsChecked] = useState(false) // Nuevo estado para la marca de verificación
@@ -55,6 +55,11 @@ const CardPersonal = ({
           {isChecked && (
           <View style={styles.checkBoxChecked} />
           )}
+          <View style={styles.positionContainer}>
+            <View style={styles.circle}>
+              <Text style={styles.circleText}>{position}</Text>
+            </View>
+          </View>
 
           <View style={styles.caContainer}>
             <View style={styles.square}>
@@ -92,9 +97,7 @@ const CardPersonal = ({
             <View style={[styles.column2, styles.valuesContainer]}>
               {Object.entries(customValues).map(([key, value]) => (
                 <Text key={key} style={[styles.info, styles.rightAlignedText]}>
-                  {value.length > 25 ? `${value.substring(0, 25)}...` : value}
-                  {' '}
-
+                  {value !== null ? (value.length > 15 ? `${value.substring(0, 12)}...` : value) : 'Sin registros'}
                 </Text>
               ))}
             </View>
@@ -116,6 +119,11 @@ const CardPersonal = ({
           {isChecked && (
             <View style={styles.checkBoxChecked} />
           )}
+          <View style={styles.positionContainer}>
+            <View style={styles.circle}>
+              <Text style={styles.circleText}>{position}</Text>
+            </View>
+          </View>
 
           <View style={styles.caContainer}>
             <View style={styles.square}>
@@ -153,7 +161,7 @@ const CardPersonal = ({
             <View style={[styles.column2, styles.valuesContainer]}>
               {Object.entries(customValues).map(([key, value]) => (
                 <Text key={key} style={[styles.info, styles.rightAlignedText]}>
-                  {value.length > 25 ? `${value.substring(0, 25)}...` : value}
+                  {value !== null ? (value.length > 15 ? `${value.substring(0, 12)}...` : value) : 'Sin registros'}
                 </Text>
               ))}
             </View>
@@ -165,16 +173,16 @@ const CardPersonal = ({
   )
 }
 
-CardPersonal.propTypes = {
+CardPersonalRanking.propTypes = {
   // eslint-disable-next-line react/forbid-prop-types
   customValues: PropTypes.objectOf(PropTypes.any),
   customTitles: PropTypes.arrayOf(PropTypes.string),
   isTouchable: PropTypes.bool,
 }
 
-CardPersonal.defaultProps = {
+CardPersonalRanking.defaultProps = {
   customValues: {},
   customTitles: [],
 }
 
-export default CardPersonal
+export default CardPersonalRanking
