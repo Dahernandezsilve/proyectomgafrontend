@@ -123,9 +123,15 @@ const Calculator = ({ navigation }) => {
   }, [refresh])
 
   const handleCalcular = () => {
-    const resultadoCalculado = alimento / (pesado - lastPesado)
-    const resultadoConTresDecimales = parseFloat(resultadoCalculado.toFixed(3))
-    setResultado(resultadoConTresDecimales)
+    const denominador = pesado - lastPesado
+    if (denominador === 0) {
+      console.error('Error: La resta de pesado - lastPesado es igual a cero.')
+      setResultado(0)
+    } else {
+      const resultadoCalculado = alimento / denominador
+      const resultadoConTresDecimales = parseFloat(resultadoCalculado.toFixed(3))
+      setResultado(resultadoConTresDecimales)
+    }
   }
 
   useEffect(() => {
