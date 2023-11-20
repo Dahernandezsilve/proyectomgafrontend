@@ -3,15 +3,16 @@
 /* eslint-disable no-unused-vars */
 import React, { useState, useEffect } from 'react'
 import {
-  View, Button, Text, TouchableWithoutFeedback, Animated, useWindowDimensions, Modal,
+  View, Button, Text, TouchableWithoutFeedback, Animated, useWindowDimensions, Modal, ScrollView,
 } from 'react-native'
 import PropTypes from 'prop-types'
 import CardPersonal from '../CardPersonal'
 import styles from './styles'
 import useApi from '../../hooks/useApi/useApi'
+import CardGaleraAdmin from '../CardGaleraAdmin'
 
 const CardAssignment = ({
-  customValues, customTitles, selectedGalera
+  customValues, customTitles, selectedGalera,
 }) => {
   const [opacityValue] = useState(new Animated.Value(1))
   const [modalVisible, setModalVisible] = useState(false)
@@ -30,11 +31,11 @@ const CardAssignment = ({
     }
   }
 
-  const handleWorkerSelection = (name) => {
+  const handleWorkerSelection = name => {
     // Realiza alguna acción con el nombre del trabajador seleccionado
-    //console.log("Nombre del trabajador seleccionado:", name);
-    setWorkerName(name);
-  };
+    // console.log("Nombre del trabajador seleccionado:", name);
+    setWorkerName(name)
+  }
 
   useEffect(() => {
     console.log('Trabajadores: ', workers)
@@ -111,38 +112,43 @@ const CardAssignment = ({
           setModalVisible(!modalVisible)
         }}
       >
-      <ScrollView style={styles.scrollabe}>
-        <View style={styles.modalContainer}>
-          <View style={styles.centeredView}>
-            <View style={styles.modalView}>
-              <Text style={styles.modalText}>Asignar trabajador: </Text>
-              <CardGaleraAdmin
+        <ScrollView style={styles.scrollabe}>
+          <View style={styles.modalContainer}>
+            <View style={styles.centeredView}>
+              <View style={styles.modalView}>
+                <Text style={styles.modalText}>Asignar trabajador: </Text>
+                <CardGaleraAdmin
               // eslint-disable-next-line react/no-array-index-key
-                key={1}
-                ca="#FFFFFF"
-                msgCA=""
-                numberCA={null}
-                customValues={{
-                  galera: 'Javier',
-                  cantidadAlimento: 'xd',
-                  pesado: 'saber',
-                  decesos: 'sd',
-                }}
-                customTitles={['Nombre:', 'Telefono:', 'Direccion:', 'Puesto:']}
-              />
-              <Button title="Cerrar" onPress={closeModal} />
+                  key={1}
+                  ca="#FFFFFF"
+                  msgCA=""
+                  numberCA={null}
+                  customValues={{
+                    galera: 'Javier',
+                    cantidadAlimento: 'xd',
+                    pesado: 'saber',
+                    decesos: 'sd',
+                  }}
+                  customTitles={['Nombre:', 'Telefono:', 'Direccion:', 'Puesto:']}
+                />
+                <Button title="Cerrar" onPress={closeModal} />
+              </View>
             </View>
           </View>
-        </View>
+        </ScrollView>
+        {' '}
+
       </Modal>
     </View>
+
   )
 }
 
 CardAssignment.propTypes = {
+  // eslint-disable-next-line react/forbid-prop-types
   customValues: PropTypes.objectOf(PropTypes.any),
   customTitles: PropTypes.arrayOf(PropTypes.string),
-  // eslint-disable-next-line react/require-default-props
+  // eslint-disable-next-line react/require-default-props, react/no-unused-prop-types
   navigateToGaleras: PropTypes.func,
 }
 

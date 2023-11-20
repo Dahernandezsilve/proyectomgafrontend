@@ -2,7 +2,7 @@ import React from 'react'
 import {
   act, render, screen, userEvent, waitFor,
 } from '@testing-library/react-native'
-import CardAssignment from '../components/CardAssignment/CardAssignment'
+import CardAssignment from '../../components/CardAssignment/CardAssignment'
 
 const mockWorkers = [
   {
@@ -23,6 +23,7 @@ const mockWorkers = [
   },
 ]
 
+// Mock the useApi hook
 jest.mock('../hooks/useApi/useApi', () => () => ([
   { data: mockWorkers },
   false,

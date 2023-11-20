@@ -4,9 +4,20 @@ import { SamsungOne } from '../../fonts/SamsungOne-400.ttf'
 const windowWidth = Dimensions.get('window').width
 
 const styles = StyleSheet.create({
+  button: {
+    marginBottom: windowWidth * 0.75, // Agregar margen superior al botón
+  },
+  buttonContainer: {
+    marginTop: windowWidth * 0.05, // o cualquier otro valor de margen superior que desees
+  },
   caContainer: {
     alignItems: 'center',
     flexDirection: 'column',
+  },
+  centeredView: {
+    alignItems: 'center',
+    flex: 1,
+    justifyContent: 'center',
   },
   column: {
     flex: 1,
@@ -34,6 +45,42 @@ const styles = StyleSheet.create({
     fontFamily: SamsungOne,
     fontSize: windowWidth * 0.037,
   },
+  modalContainer: {
+    alignItems: 'center',
+    backgroundColor: 'rgba(0, 0, 0, 0.5)',
+    flex: 1,
+    justifyContent: 'center', // Aquí puedes definir el color de fondo del modal
+  },
+  modalText: {
+    color: '#2B4985',
+    fontFamily: SamsungOne,
+    fontSize: windowWidth * 0.05,
+    marginBottom: windowWidth * 0.05,
+    textAlign: 'center',
+  },
+  modalView: {
+    alignItems: 'center',
+    backgroundColor: 'white',
+    borderRadius: 20,
+    elevation: 5,
+    margin: windowWidth * 0.04,
+    padding: windowWidth * 0.10,
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 4,
+  },
+  rectangle: {
+    alignSelf: 'center',
+    borderBottomWidth: 1,
+    borderColor: '#2B4985',
+    marginTop: windowWidth * 0.000005,
+    paddingHorizontal: windowWidth * 0.05,
+    paddingVertical: windowWidth * 0.0000005,
+  },
   rightAlignedText: {
     textAlign: 'right',
   },
@@ -41,6 +88,9 @@ const styles = StyleSheet.create({
     alignItems: 'flex-start',
     flexDirection: 'row',
     marginBottom: windowWidth * 0.01,
+  },
+  scrollable: {
+    marginBottom: 20000,
   },
   smallText: {
     fontFamily: SamsungOne,
@@ -59,59 +109,9 @@ const styles = StyleSheet.create({
     shadowRadius: 2,
     width: windowWidth * 0.2,
   },
-  rectangle: {
-    alignSelf: 'center',
-    borderBottomWidth: 1,
-    borderColor: '#2B4985',
-    marginTop: windowWidth * 0.000005,
-    paddingHorizontal: windowWidth * 0.05,
-    paddingVertical: windowWidth * 0.0000005,
-  },
   title: {
     fontFamily: SamsungOne,
     fontSize: windowWidth * 0.037,
-  },
-  modalContainer: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: 'rgba(0, 0, 0, 0.5)', // Aquí puedes definir el color de fondo del modal
-  },
-  centeredView: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  modalView: {
-    margin: windowWidth * 0.04,
-    backgroundColor: 'white',
-    borderRadius: 20,
-    padding: windowWidth * 0.10,
-    alignItems: 'center',
-    shadowColor: '#000',
-    shadowOffset: {
-      width: 0,
-      height: 2,
-    },
-    shadowOpacity: 0.25,
-    shadowRadius: 4,
-    elevation: 5,
-  },
-  modalText: {
-    marginBottom: windowWidth * 0.05,
-    fontFamily: SamsungOne,
-    fontSize: windowWidth * 0.05,
-    textAlign: 'center',
-    color: '#2B4985',
-  },
-  scrollable: {
-    marginBottom: 20000,
-  },
-  buttonContainer: {
-    marginTop: windowWidth * 0.05, // o cualquier otro valor de margen superior que desees
-  },
-  button: {
-    marginBottom: windowWidth * 0.75, // Agregar margen superior al botón
   },
 })
 

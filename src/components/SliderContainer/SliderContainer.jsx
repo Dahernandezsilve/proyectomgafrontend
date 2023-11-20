@@ -120,12 +120,14 @@ const SliderContainer = ({
   }
 
   return (
-    <View style={styles.container}>
+    <View testID="textbox" style={styles.container}>
       <TouchableOpacity
+        testID="textbox"
         style={styles.valueContainer}
         onPress={() => textInputRef.current.focus()}
       >
         <TextInput
+          testID="textbox"
           ref={textInputRef}
           placeholder="0"
           minimumValue={minimumValue}
@@ -141,11 +143,12 @@ const SliderContainer = ({
         />
       </TouchableOpacity>
       {inputError && (
-        <Text style={styles.errorText}>{inputError}</Text>
+        <Text testID="textbox" style={styles.errorText}>{inputError}</Text>
       )}
 
-      <Text style={[styles.title, { textAlign: 'left' }]}>{title}</Text>
+      <Text testID="textbox" style={[styles.title, { textAlign: 'left' }]}>{title}</Text>
       <Slider
+        testID="slider"
         style={styles.slider}
         minimumValue={minimumValue}
         maximumValue={maximumValue}
@@ -165,9 +168,9 @@ const SliderContainer = ({
           }
         }}
       />
-      <View style={styles.sliderTextContainer}>
-        <Text style={styles.sliderText}>{`${minimumValue} ${medida}`}</Text>
-        <Text style={[styles.sliderText, { textAlign: 'right' }]}>{`${maximumValue} ${medida}`}</Text>
+      <View testID="textbox" style={styles.sliderTextContainer}>
+        <Text testID="textbox" style={styles.sliderText}>{`${minimumValue} ${medida}`}</Text>
+        <Text testID="textbox" style={[styles.sliderText, { textAlign: 'right' }]}>{`${maximumValue} ${medida}`}</Text>
 
       </View>
     </View>

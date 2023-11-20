@@ -90,12 +90,14 @@ const SliderComponentRefactor = ({
   }
 
   return (
-    <View style={styles.container}>
+    <View testID="input-test" style={styles.container}>
       <TouchableOpacity
+        testID="input-test"
         style={styles.valueContainer}
         onPress={() => textInputRef.current.focus()}
       >
         <TextInput
+          testID="input-test"
           ref={textInputRef}
           placeholder="0"
           minimumValue={minimumValue}
@@ -111,11 +113,12 @@ const SliderComponentRefactor = ({
         />
       </TouchableOpacity>
       {inputError && (
-        <Text style={styles.errorText}>{inputError}</Text>
+        <Text testID="input-test" style={styles.errorText}>{inputError}</Text>
       )}
 
       <Text style={[styles.title, { textAlign: 'left' }]}>{title}</Text>
       <Slider
+        testID="slider-test"
         style={styles.slider}
         minimumValue={minimumValue}
         maximumValue={maximumValue}

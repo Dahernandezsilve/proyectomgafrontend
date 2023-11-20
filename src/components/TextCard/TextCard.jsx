@@ -5,7 +5,7 @@ import styles from './styles'
 // eslint-disable-next-line react/prop-types
 const TextCard = ({ number }) => (
   <View style={styles.container}>
-    <Text style={styles.text}>
+    <Text testID="text" style={styles.text}>
       {' '}
       Total de aves:
       {number}
