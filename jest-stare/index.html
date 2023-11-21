@@ -1,0 +1,1667 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>jest-stare!</title>
+    <link href="css/bootstrap.min.css" rel="stylesheet" type="text/css">
+    <link href="css/diff2html.min.css" rel="stylesheet" type="text/css">
+    <link href="css/jest-stare.css" rel="stylesheet" type="text/css">
+    <script src="js/jquery.min.js"></script>
+    <script src="js/holder.js"></script>
+    <script src="js/diff2html.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/view.js"></script>
+</head>
+
+<body>
+    <header>
+        <!-- Fixed navbar -->
+        <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+            <a class="navbar-brand" id="navbar-title" href="#">jest-stare</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse"
+                aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarCollapse">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item active">
+                        <a class="nav-link" href="#">Home
+                            <span class="sr-only">(current)</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a id="coverage-link" class="nav-link disabled" href="#">Coverage</a>
+                    </li>
+                    <li class="nav-item">
+                        <div class="onoff-switch mr-sm-2 ml-sm-2">
+                            <input type="checkbox" name="off-switch" class="off-switch-checkbox" id="lab-passoff-switch" checked>
+                            <label class="onoff-switch-label" for="lab-passoff-switch">
+                                <span class="pass off-switch-inner"></span>
+                                <span class="off-switch-switch"></span>
+                            </label>
+                        </div>
+                    </li>
+                    <li class="nav-item">
+                        <div class="onoff-switch mr-sm-2 ml-sm-2">
+                            <input type="checkbox" name="off-switch" class="off-switch-checkbox" id="lab-failoff-switch" checked>
+                            <label class="onoff-switch-label" for="lab-failoff-switch">
+                                <span class="fail off-switch-inner"></span>
+                                <span class="off-switch-switch"></span>
+                            </label>
+                        </div>
+                    </li>
+                    <li class="nav-item">
+                        <div class="onoff-switch mr-sm-2 ml-sm-2">
+                            <input type="checkbox" name="off-switch" class="off-switch-checkbox" id="lab-pendingoff-switch" checked>
+                            <label class="onoff-switch-label" for="lab-pendingoff-switch">
+                                <span class="pending off-switch-inner"></span>
+                                <span class="off-switch-switch"></span>
+                            </label>
+                        </div>
+                    </li>
+                    <li class="nav-item">
+                        <div class="onoff-switch mr-sm-2 ml-sm-2">
+                            <input type="checkbox" name="off-switch" class="off-switch-checkbox" id="lab-todooff-switch" checked>
+                            <label class="onoff-switch-label" for="lab-todooff-switch">
+                                <span class="todo off-switch-inner"></span>
+                                <span class="off-switch-switch"></span>
+                            </label>
+                        </div>
+                    </li>
+                </ul>
+                <!-- <form class="form-inline mt-2 mt-md-0">
+                    <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search" disabled>
+                    <button class="btn btn-outline-success my-2 my-sm-0" type="submit" disabled>Search</button>
+                </form> -->
+            </div>
+        </nav>
+    </header>
+
+    <!-- Begin page content -->
+    <main role="main" class="container">
+
+        <h1 class="mt-5"></h1>
+
+        <!-- Three columns of text below the carousel -->
+        <div class="row">
+            <div class="col-lg-4">
+                <canvas id="test-suites-canvas" width="100" height="100"></canvas>
+                <h2>Test Suites</h2>
+                <div class="list-group">
+                    <p id="test-suites-results" class="list-group-item list-group-item-action">17 passed, 25 total</p>
+                </div>
+            </div>
+            <!-- /.col-lg-4 -->
+            <div class="col-lg-4">
+                <canvas id="tests-canvas" width="100" height="100"></canvas>
+                <h2>Tests</h2>
+                <div class="list-group">
+                    <p id="tests-results" class="list-group-item list-group-item-action">40 passed, 46 total</p>
+                </div>
+            </div>
+            <!-- /.col-lg-4 -->
+            <div class="col-lg-4" id="snapshots-group">
+                <canvas id="snapshots-canvas" width="100" height="100"></canvas>
+                <h2>Snapshots</h2>
+                <div class="list-group">
+                    <p id="snapshots-results" class="list-group-item list-group-item-action">0 passed, 0 total</p>
+                </div>
+            </div>
+            <!-- /.col-lg-4 -->
+        </div>
+
+        <div id="loading-info" class="progress">
+            <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="100" aria-valuemin="0"
+                aria-valuemax="100" style="width: 100%"></div>
+        </div>
+
+        <div class="d-none" id="test-summary"></div>
+        <div class="d-none" id="test-config">{
+  &quot;additionalResultsProcessors&quot;: [],
+  &quot;resultDir&quot;: &quot;.&#x2F;jest-stare&#x2F;&quot;,
+  &quot;resultHtml&quot;: &quot;index.html&quot;,
+  &quot;resultJson&quot;: &quot;jest-results.json&quot;
+}</div>
+        <div id="accordion">
+            <div class="d-none" id="test-results">{
+  &quot;numFailedTestSuites&quot;: 8,
+  &quot;numFailedTests&quot;: 6,
+  &quot;numPassedTestSuites&quot;: 17,
+  &quot;numPassedTests&quot;: 40,
+  &quot;numPendingTestSuites&quot;: 0,
+  &quot;numPendingTests&quot;: 0,
+  &quot;numRuntimeErrorTestSuites&quot;: 4,
+  &quot;numTodoTests&quot;: 0,
+  &quot;numTotalTestSuites&quot;: 25,
+  &quot;numTotalTests&quot;: 46,
+  &quot;openHandles&quot;: [],
+  &quot;snapshot&quot;: {
+    &quot;added&quot;: 0,
+    &quot;didUpdate&quot;: false,
+    &quot;failure&quot;: false,
+    &quot;filesAdded&quot;: 0,
+    &quot;filesRemoved&quot;: 0,
+    &quot;filesRemovedList&quot;: [],
+    &quot;filesUnmatched&quot;: 0,
+    &quot;filesUpdated&quot;: 0,
+    &quot;matched&quot;: 0,
+    &quot;total&quot;: 0,
+    &quot;unchecked&quot;: 0,
+    &quot;uncheckedKeysByFile&quot;: [],
+    &quot;unmatched&quot;: 0,
+    &quot;updated&quot;: 0
+  },
+  &quot;startTime&quot;: 1700581224872,
+  &quot;success&quot;: false,
+  &quot;testResults&quot;: [
+    {
+      &quot;leaks&quot;: false,
+      &quot;numFailingTests&quot;: 0,
+      &quot;numPassingTests&quot;: 1,
+      &quot;numPendingTests&quot;: 0,
+      &quot;numTodoTests&quot;: 0,
+      &quot;openHandles&quot;: [],
+      &quot;perfStats&quot;: {
+        &quot;end&quot;: 1700581234857,
+        &quot;runtime&quot;: 8040,
+        &quot;slow&quot;: true,
+        &quot;start&quot;: 1700581226817
+      },
+      &quot;skipped&quot;: false,
+      &quot;snapshot&quot;: {
+        &quot;added&quot;: 0,
+        &quot;fileDeleted&quot;: false,
+        &quot;matched&quot;: 0,
+        &quot;unchecked&quot;: 0,
+        &quot;uncheckedKeys&quot;: [],
+        &quot;unmatched&quot;: 0,
+        &quot;updated&quot;: 0
+      },
+      &quot;testFilePath&quot;: &quot;D:\\proyectomgafrontend\\src\\__tests__\\integration\\DetailsScreen.test.jsx&quot;,
+      &quot;testResults&quot;: [
+        {
+          &quot;ancestorTitles&quot;: [
+            &quot;DetailsScreen&quot;
+          ],
+          &quot;duration&quot;: 1300,
+          &quot;failureDetails&quot;: [],
+          &quot;failureMessages&quot;: [],
+          &quot;fullName&quot;: &quot;DetailsScreen should navigate to Creacion screen when button is pressed&quot;,
+          &quot;invocations&quot;: 1,
+          &quot;location&quot;: null,
+          &quot;numPassingAsserts&quot;: 1,
+          &quot;retryReasons&quot;: [],
+          &quot;status&quot;: &quot;passed&quot;,
+          &quot;title&quot;: &quot;should navigate to Creacion screen when button is pressed&quot;
+        }
+      ],
+      &quot;failureMessage&quot;: null
+    },
+    {
+      &quot;leaks&quot;: false,
+      &quot;numFailingTests&quot;: 0,
+      &quot;numPassingTests&quot;: 2,
+      &quot;numPendingTests&quot;: 0,
+      &quot;numTodoTests&quot;: 0,
+      &quot;openHandles&quot;: [],
+      &quot;perfStats&quot;: {
+        &quot;end&quot;: 1700581234896,
+        &quot;runtime&quot;: 8141,
+        &quot;slow&quot;: true,
+        &quot;start&quot;: 1700581226755
+      },
+      &quot;skipped&quot;: false,
+      &quot;snapshot&quot;: {
+        &quot;added&quot;: 0,
+        &quot;fileDeleted&quot;: false,
+        &quot;matched&quot;: 0,
+        &quot;unchecked&quot;: 0,
+        &quot;uncheckedKeys&quot;: [],
+        &quot;unmatched&quot;: 0,
+        &quot;updated&quot;: 0
+      },
+      &quot;testFilePath&quot;: &quot;D:\\proyectomgafrontend\\src\\__tests__\\unit\\HeaderInformation.test.jsx&quot;,
+      &quot;testResults&quot;: [
+        {
+          &quot;ancestorTitles&quot;: [
+            &quot;code snippet&quot;
+          ],
+          &quot;duration&quot;: 1097,
+          &quot;failureDetails&quot;: [],
+          &quot;failureMessages&quot;: [],
+          &quot;fullName&quot;: &quot;code snippet should render correctly with required props&quot;,
+          &quot;invocations&quot;: 1,
+          &quot;location&quot;: null,
+          &quot;numPassingAsserts&quot;: 0,
+          &quot;retryReasons&quot;: [],
+          &quot;status&quot;: &quot;passed&quot;,
+          &quot;title&quot;: &quot;should render correctly with required props&quot;
+        },
+        {
+          &quot;ancestorTitles&quot;: [
+            &quot;code snippet&quot;
+          ],
+          &quot;duration&quot;: 35,
+          &quot;failureDetails&quot;: [],
+          &quot;failureMessages&quot;: [],
+          &quot;fullName&quot;: &quot;code snippet should not crash when customTitles prop is shorter than lotes prop&quot;,
+          &quot;invocations&quot;: 1,
+          &quot;location&quot;: null,
+          &quot;numPassingAsserts&quot;: 0,
+          &quot;retryReasons&quot;: [],
+          &quot;status&quot;: &quot;passed&quot;,
+          &quot;title&quot;: &quot;should not crash when customTitles prop is shorter than lotes prop&quot;
+        }
+      ],
+      &quot;failureMessage&quot;: null
+    },
+    {
+      &quot;leaks&quot;: false,
+      &quot;numFailingTests&quot;: 0,
+      &quot;numPassingTests&quot;: 3,
+      &quot;numPendingTests&quot;: 0,
+      &quot;numTodoTests&quot;: 0,
+      &quot;openHandles&quot;: [],
+      &quot;perfStats&quot;: {
+        &quot;end&quot;: 1700581234970,
+        &quot;runtime&quot;: 8097,
+        &quot;slow&quot;: true,
+        &quot;start&quot;: 1700581226873
+      },
+      &quot;skipped&quot;: false,
+      &quot;snapshot&quot;: {
+        &quot;added&quot;: 0,
+        &quot;fileDeleted&quot;: false,
+        &quot;matched&quot;: 0,
+        &quot;unchecked&quot;: 0,
+        &quot;uncheckedKeys&quot;: [],
+        &quot;unmatched&quot;: 0,
+        &quot;updated&quot;: 0
+      },
+      &quot;testFilePath&quot;: &quot;D:\\proyectomgafrontend\\src\\__tests__\\unit\\CommentsComponent.test.jsx&quot;,
+      &quot;testResults&quot;: [
+        {
+          &quot;ancestorTitles&quot;: [
+            &quot;CommentsComponent&quot;
+          ],
+          &quot;duration&quot;: 1111,
+          &quot;failureDetails&quot;: [],
+          &quot;failureMessages&quot;: [],
+          &quot;fullName&quot;: &quot;CommentsComponent renders without errors&quot;,
+          &quot;invocations&quot;: 1,
+          &quot;location&quot;: null,
+          &quot;numPassingAsserts&quot;: 1,
+          &quot;retryReasons&quot;: [],
+          &quot;status&quot;: &quot;passed&quot;,
+          &quot;title&quot;: &quot;renders without errors&quot;
+        },
+        {
+          &quot;ancestorTitles&quot;: [
+            &quot;CommentsComponent&quot;
+          ],
+          &quot;duration&quot;: 27,
+          &quot;failureDetails&quot;: [],
+          &quot;failureMessages&quot;: [],
+          &quot;fullName&quot;: &quot;CommentsComponent calls setValue when text is entered&quot;,
+          &quot;invocations&quot;: 1,
+          &quot;location&quot;: null,
+          &quot;numPassingAsserts&quot;: 1,
+          &quot;retryReasons&quot;: [],
+          &quot;status&quot;: &quot;passed&quot;,
+          &quot;title&quot;: &quot;calls setValue when text is entered&quot;
+        },
+        {
+          &quot;ancestorTitles&quot;: [
+            &quot;CommentsComponent&quot;
+          ],
+          &quot;duration&quot;: 44,
+          &quot;failureDetails&quot;: [],
+          &quot;failureMessages&quot;: [],
+          &quot;fullName&quot;: &quot;CommentsComponent validates prop types&quot;,
+          &quot;invocations&quot;: 1,
+          &quot;location&quot;: null,
+          &quot;numPassingAsserts&quot;: 1,
+          &quot;retryReasons&quot;: [],
+          &quot;status&quot;: &quot;passed&quot;,
+          &quot;title&quot;: &quot;validates prop types&quot;
+        }
+      ],
+      &quot;failureMessage&quot;: null
+    },
+    {
+      &quot;leaks&quot;: false,
+      &quot;numFailingTests&quot;: 3,
+      &quot;numPassingTests&quot;: 1,
+      &quot;numPendingTests&quot;: 0,
+      &quot;numTodoTests&quot;: 0,
+      &quot;openHandles&quot;: [],
+      &quot;perfStats&quot;: {
+        &quot;end&quot;: 1700581235214,
+        &quot;runtime&quot;: 8511,
+        &quot;slow&quot;: true,
+        &quot;start&quot;: 1700581226703
+      },
+      &quot;skipped&quot;: false,
+      &quot;snapshot&quot;: {
+        &quot;added&quot;: 0,
+        &quot;fileDeleted&quot;: false,
+        &quot;matched&quot;: 0,
+        &quot;unchecked&quot;: 0,
+        &quot;uncheckedKeys&quot;: [],
+        &quot;unmatched&quot;: 0,
+        &quot;updated&quot;: 0
+      },
+      &quot;testFilePath&quot;: &quot;D:\\proyectomgafrontend\\src\\__tests__\\unit\\SliderContainer.test.jsx&quot;,
+      &quot;testResults&quot;: [
+        {
+          &quot;ancestorTitles&quot;: [
+            &quot;SliderContainer&quot;
+          ],
+          &quot;duration&quot;: 1166,
+          &quot;failureDetails&quot;: [],
+          &quot;failureMessages&quot;: [],
+          &quot;fullName&quot;: &quot;SliderContainer should render correctly&quot;,
+          &quot;invocations&quot;: 1,
+          &quot;location&quot;: null,
+          &quot;numPassingAsserts&quot;: 4,
+          &quot;retryReasons&quot;: [],
+          &quot;status&quot;: &quot;passed&quot;,
+          &quot;title&quot;: &quot;should render correctly&quot;
+        },
+        {
+          &quot;ancestorTitles&quot;: [
+            &quot;SliderContainer&quot;
+          ],
+          &quot;duration&quot;: 41,
+          &quot;failureDetails&quot;: [
+            {
+              &quot;matcherResult&quot;: {
+                &quot;message&quot;: &quot;\u001b[2mexpect(\u001b[22m\u001b[31mjest.fn()\u001b[39m\u001b[2m).\u001b[22mtoHaveBeenCalledWith\u001b[2m(\u001b[22m\u001b[32m...expected\u001b[39m\u001b[2m)\u001b[22m\n\nExpected: \u001b[32m{\&quot;cantidadAlimento\&quot;: 0, \&quot;decesos\&quot;: 0, \&quot;pesado\&quot;: 75}\u001b[39m\n\nNumber of calls: \u001b[31m0\u001b[39m&quot;,
+                &quot;pass&quot;: false
+              }
+            }
+          ],
+          &quot;failureMessages&quot;: [
+            &quot;Error: \u001b[2mexpect(\u001b[22m\u001b[31mjest.fn()\u001b[39m\u001b[2m).\u001b[22mtoHaveBeenCalledWith\u001b[2m(\u001b[22m\u001b[32m...expected\u001b[39m\u001b[2m)\u001b[22m\n\nExpected: \u001b[32m{\&quot;cantidadAlimento\&quot;: 0, \&quot;decesos\&quot;: 0, \&quot;pesado\&quot;: 75}\u001b[39m\n\nNumber of calls: \u001b[31m0\u001b[39m\n    at Object.toHaveBeenCalledWith (D:\\proyectomgafrontend\\src\\__tests__\\unit\\SliderContainer.test.jsx:39:29)\n    at Promise.then.completed (D:\\proyectomgafrontend\\node_modules\\jest-circus\\build\\utils.js:298:28)\n    at new Promise (&lt;anonymous&gt;)\n    at callAsyncCircusFn (D:\\proyectomgafrontend\\node_modules\\jest-circus\\build\\utils.js:231:10)\n    at _callCircusTest (D:\\proyectomgafrontend\\node_modules\\jest-circus\\build\\run.js:316:40)\n    at _runTest (D:\\proyectomgafrontend\\node_modules\\jest-circus\\build\\run.js:252:3)\n    at _runTestsForDescribeBlock (D:\\proyectomgafrontend\\node_modules\\jest-circus\\build\\run.js:126:9)\n    at _runTestsForDescribeBlock (D:\\proyectomgafrontend\\node_modules\\jest-circus\\build\\run.js:121:9)\n    at run (D:\\proyectomgafrontend\\node_modules\\jest-circus\\build\\run.js:71:3)\n    at runAndTransformResultsToJestFormat (D:\\proyectomgafrontend\\node_modules\\jest-circus\\build\\legacy-code-todo-rewrite\\jestAdapterInit.js:122:21)\n    at jestAdapter (D:\\proyectomgafrontend\\node_modules\\jest-circus\\build\\legacy-code-todo-rewrite\\jestAdapter.js:79:19)\n    at runTestInternal (D:\\proyectomgafrontend\\node_modules\\jest-runner\\build\\runTest.js:367:16)\n    at runTest (D:\\proyectomgafrontend\\node_modules\\jest-runner\\build\\runTest.js:444:34)\n    at Object.worker (D:\\proyectomgafrontend\\node_modules\\jest-runner\\build\\testWorker.js:106:12)&quot;
+          ],
+          &quot;fullName&quot;: &quot;SliderContainer should update value on slider change&quot;,
+          &quot;invocations&quot;: 1,
+          &quot;location&quot;: null,
+          &quot;numPassingAsserts&quot;: 0,
+          &quot;retryReasons&quot;: [],
+          &quot;status&quot;: &quot;failed&quot;,
+          &quot;title&quot;: &quot;should update value on slider change&quot;
+        },
+        {
+          &quot;ancestorTitles&quot;: [
+            &quot;SliderContainer&quot;
+          ],
+          &quot;duration&quot;: 29,
+          &quot;failureDetails&quot;: [
+            {
+              &quot;matcherResult&quot;: {
+                &quot;message&quot;: &quot;\u001b[2mexpect(\u001b[22m\u001b[31mjest.fn()\u001b[39m\u001b[2m).\u001b[22mtoHaveBeenCalledWith\u001b[2m(\u001b[22m\u001b[32m...expected\u001b[39m\u001b[2m)\u001b[22m\n\nExpected: \u001b[32m{\&quot;cantidadAlimento\&quot;: 0, \&quot;decesos\&quot;: 0, \&quot;pesado\&quot;: 75}\u001b[39m\n\nNumber of calls: \u001b[31m0\u001b[39m&quot;,
+                &quot;pass&quot;: false
+              }
+            }
+          ],
+          &quot;failureMessages&quot;: [
+            &quot;Error: \u001b[2mexpect(\u001b[22m\u001b[31mjest.fn()\u001b[39m\u001b[2m).\u001b[22mtoHaveBeenCalledWith\u001b[2m(\u001b[22m\u001b[32m...expected\u001b[39m\u001b[2m)\u001b[22m\n\nExpected: \u001b[32m{\&quot;cantidadAlimento\&quot;: 0, \&quot;decesos\&quot;: 0, \&quot;pesado\&quot;: 75}\u001b[39m\n\nNumber of calls: \u001b[31m0\u001b[39m\n    at Object.toHaveBeenCalledWith (D:\\proyectomgafrontend\\src\\__tests__\\unit\\SliderContainer.test.jsx:52:29)\n    at Promise.then.completed (D:\\proyectomgafrontend\\node_modules\\jest-circus\\build\\utils.js:298:28)\n    at new Promise (&lt;anonymous&gt;)\n    at callAsyncCircusFn (D:\\proyectomgafrontend\\node_modules\\jest-circus\\build\\utils.js:231:10)\n    at _callCircusTest (D:\\proyectomgafrontend\\node_modules\\jest-circus\\build\\run.js:316:40)\n    at _runTest (D:\\proyectomgafrontend\\node_modules\\jest-circus\\build\\run.js:252:3)\n    at _runTestsForDescribeBlock (D:\\proyectomgafrontend\\node_modules\\jest-circus\\build\\run.js:126:9)\n    at _runTestsForDescribeBlock (D:\\proyectomgafrontend\\node_modules\\jest-circus\\build\\run.js:121:9)\n    at run (D:\\proyectomgafrontend\\node_modules\\jest-circus\\build\\run.js:71:3)\n    at runAndTransformResultsToJestFormat (D:\\proyectomgafrontend\\node_modules\\jest-circus\\build\\legacy-code-todo-rewrite\\jestAdapterInit.js:122:21)\n    at jestAdapter (D:\\proyectomgafrontend\\node_modules\\jest-circus\\build\\legacy-code-todo-rewrite\\jestAdapter.js:79:19)\n    at runTestInternal (D:\\proyectomgafrontend\\node_modules\\jest-runner\\build\\runTest.js:367:16)\n    at runTest (D:\\proyectomgafrontend\\node_modules\\jest-runner\\build\\runTest.js:444:34)\n    at Object.worker (D:\\proyectomgafrontend\\node_modules\\jest-runner\\build\\testWorker.js:106:12)&quot;
+          ],
+          &quot;fullName&quot;: &quot;SliderContainer should update value on text input change&quot;,
+          &quot;invocations&quot;: 1,
+          &quot;location&quot;: null,
+          &quot;numPassingAsserts&quot;: 0,
+          &quot;retryReasons&quot;: [],
+          &quot;status&quot;: &quot;failed&quot;,
+          &quot;title&quot;: &quot;should update value on text input change&quot;
+        },
+        {
+          &quot;ancestorTitles&quot;: [
+            &quot;SliderContainer&quot;
+          ],
+          &quot;duration&quot;: 67,
+          &quot;failureDetails&quot;: [
+            {}
+          ],
+          &quot;failureMessages&quot;: [
+            &quot;Error: Unable to find an element with text: Ingrese un número válido\n\n\u001b[36m&lt;View\u001b[39m\n  \u001b[33mtestID\u001b[39m&#x3D;\u001b[32m\&quot;textbox\&quot;\u001b[39m\n\u001b[36m&gt;\u001b[39m\n  \u001b[36m&lt;View\u001b[39m\n    \u001b[33maccessible\u001b[39m&#x3D;\u001b[32m{true}\u001b[39m\n    \u001b[33mtestID\u001b[39m&#x3D;\u001b[32m\&quot;textbox\&quot;\u001b[39m\n  \u001b[36m&gt;\u001b[39m\n    \u001b[36m&lt;TextInput\u001b[39m\n      \u001b[33mplaceholder\u001b[39m&#x3D;\u001b[32m\&quot;0\&quot;\u001b[39m\n      \u001b[33mtestID\u001b[39m&#x3D;\u001b[32m\&quot;textbox\&quot;\u001b[39m\n      \u001b[33mvalue\u001b[39m&#x3D;\u001b[32m\&quot;0\&quot;\u001b[39m\n    \u001b[36m&#x2F;&gt;\u001b[39m\n  \u001b[36m&lt;&#x2F;View&gt;\u001b[39m\n  \u001b[36m&lt;Text\u001b[39m\n    \u001b[33mtestID\u001b[39m&#x3D;\u001b[32m\&quot;textbox\&quot;\u001b[39m\n  \u001b[36m&gt;\u001b[39m\n    \u001b[0mTest Slider\u001b[0m\n  \u001b[36m&lt;&#x2F;Text&gt;\u001b[39m\n  \u001b[36m&lt;RNCSlider\u001b[39m\n    \u001b[33mtestID\u001b[39m&#x3D;\u001b[32m\&quot;slider\&quot;\u001b[39m\n  \u001b[36m&#x2F;&gt;\u001b[39m\n  \u001b[36m&lt;View\u001b[39m\n    \u001b[33mtestID\u001b[39m&#x3D;\u001b[32m\&quot;textbox\&quot;\u001b[39m\n  \u001b[36m&gt;\u001b[39m\n    \u001b[36m&lt;Text\u001b[39m\n      \u001b[33mtestID\u001b[39m&#x3D;\u001b[32m\&quot;textbox\&quot;\u001b[39m\n    \u001b[36m&gt;\u001b[39m\n      \u001b[0m0 units\u001b[0m\n    \u001b[36m&lt;&#x2F;Text&gt;\u001b[39m\n    \u001b[36m&lt;Text\u001b[39m\n      \u001b[33mtestID\u001b[39m&#x3D;\u001b[32m\&quot;textbox\&quot;\u001b[39m\n    \u001b[36m&gt;\u001b[39m\n      \u001b[0m100 units\u001b[0m\n    \u001b[36m&lt;&#x2F;Text&gt;\u001b[39m\n  \u001b[36m&lt;&#x2F;View&gt;\u001b[39m\n\u001b[36m&lt;&#x2F;View&gt;\u001b[39m\n    at Object.getByText (D:\\proyectomgafrontend\\src\\__tests__\\unit\\SliderContainer.test.jsx:66:12)\n    at Promise.then.completed (D:\\proyectomgafrontend\\node_modules\\jest-circus\\build\\utils.js:298:28)\n    at new Promise (&lt;anonymous&gt;)\n    at callAsyncCircusFn (D:\\proyectomgafrontend\\node_modules\\jest-circus\\build\\utils.js:231:10)\n    at _callCircusTest (D:\\proyectomgafrontend\\node_modules\\jest-circus\\build\\run.js:316:40)\n    at _runTest (D:\\proyectomgafrontend\\node_modules\\jest-circus\\build\\run.js:252:3)\n    at _runTestsForDescribeBlock (D:\\proyectomgafrontend\\node_modules\\jest-circus\\build\\run.js:126:9)\n    at _runTestsForDescribeBlock (D:\\proyectomgafrontend\\node_modules\\jest-circus\\build\\run.js:121:9)\n    at run (D:\\proyectomgafrontend\\node_modules\\jest-circus\\build\\run.js:71:3)\n    at runAndTransformResultsToJestFormat (D:\\proyectomgafrontend\\node_modules\\jest-circus\\build\\legacy-code-todo-rewrite\\jestAdapterInit.js:122:21)\n    at jestAdapter (D:\\proyectomgafrontend\\node_modules\\jest-circus\\build\\legacy-code-todo-rewrite\\jestAdapter.js:79:19)\n    at runTestInternal (D:\\proyectomgafrontend\\node_modules\\jest-runner\\build\\runTest.js:367:16)\n    at runTest (D:\\proyectomgafrontend\\node_modules\\jest-runner\\build\\runTest.js:444:34)\n    at Object.worker (D:\\proyectomgafrontend\\node_modules\\jest-runner\\build\\testWorker.js:106:12)&quot;
+          ],
+          &quot;fullName&quot;: &quot;SliderContainer should handle invalid input&quot;,
+          &quot;invocations&quot;: 1,
+          &quot;location&quot;: null,
+          &quot;numPassingAsserts&quot;: 1,
+          &quot;retryReasons&quot;: [],
+          &quot;status&quot;: &quot;failed&quot;,
+          &quot;title&quot;: &quot;should handle invalid input&quot;
+        }
+      ],
+      &quot;failureMessage&quot;: &quot;\u001b[1m\u001b[31m  \u001b[1m● \u001b[22m\u001b[1mSliderContainer › should update value on slider change\u001b[39m\u001b[22m\n\n    \u001b[2mexpect(\u001b[22m\u001b[31mjest.fn()\u001b[39m\u001b[2m).\u001b[22mtoHaveBeenCalledWith\u001b[2m(\u001b[22m\u001b[32m...expected\u001b[39m\u001b[2m)\u001b[22m\n\n    Expected: \u001b[32m{\&quot;cantidadAlimento\&quot;: 0, \&quot;decesos\&quot;: 0, \&quot;pesado\&quot;: 75}\u001b[39m\n\n    Number of calls: \u001b[31m0\u001b[39m\n\u001b[2m\u001b[22m\n\u001b[2m    \u001b[0m \u001b[90m 37 |\u001b[39m     fireEvent(slider\u001b[33m,\u001b[39m \u001b[32m&#39;valueChange&#39;\u001b[39m\u001b[33m,\u001b[39m \u001b[35m75\u001b[39m)\u001b[0m\u001b[22m\n\u001b[2m    \u001b[0m \u001b[90m 38 |\u001b[39m\u001b[0m\u001b[22m\n\u001b[2m    \u001b[0m\u001b[31m\u001b[1m&gt;\u001b[22m\u001b[2m\u001b[39m\u001b[90m 39 |\u001b[39m     expect(mockSetRegistro)\u001b[33m.\u001b[39mtoHaveBeenCalledWith({\u001b[0m\u001b[22m\n\u001b[2m    \u001b[0m \u001b[90m    |\u001b[39m                             \u001b[31m\u001b[1m^\u001b[22m\u001b[2m\u001b[39m\u001b[0m\u001b[22m\n\u001b[2m    \u001b[0m \u001b[90m 40 |\u001b[39m       decesos\u001b[33m:\u001b[39m \u001b[35m0\u001b[39m\u001b[33m,\u001b[39m\u001b[0m\u001b[22m\n\u001b[2m    \u001b[0m \u001b[90m 41 |\u001b[39m       cantidadAlimento\u001b[33m:\u001b[39m \u001b[35m0\u001b[39m\u001b[33m,\u001b[39m\u001b[0m\u001b[22m\n\u001b[2m    \u001b[0m \u001b[90m 42 |\u001b[39m       pesado\u001b[33m:\u001b[39m \u001b[35m75\u001b[39m\u001b[33m,\u001b[39m\u001b[0m\u001b[22m\n\u001b[2m\u001b[22m\n\u001b[2m      \u001b[2mat Object.toHaveBeenCalledWith (\u001b[22m\u001b[2m\u001b[0m\u001b[36msrc&#x2F;__tests__&#x2F;unit&#x2F;SliderContainer.test.jsx\u001b[39m\u001b[0m\u001b[2m:39:29)\u001b[22m\u001b[2m\u001b[22m\n\n\u001b[1m\u001b[31m  \u001b[1m● \u001b[22m\u001b[1mSliderContainer › should update value on text input change\u001b[39m\u001b[22m\n\n    \u001b[2mexpect(\u001b[22m\u001b[31mjest.fn()\u001b[39m\u001b[2m).\u001b[22mtoHaveBeenCalledWith\u001b[2m(\u001b[22m\u001b[32m...expected\u001b[39m\u001b[2m)\u001b[22m\n\n    Expected: \u001b[32m{\&quot;cantidadAlimento\&quot;: 0, \&quot;decesos\&quot;: 0, \&quot;pesado\&quot;: 75}\u001b[39m\n\n    Number of calls: \u001b[31m0\u001b[39m\n\u001b[2m\u001b[22m\n\u001b[2m    \u001b[0m \u001b[90m 50 |\u001b[39m     fireEvent\u001b[33m.\u001b[39mchangeText(input\u001b[33m,\u001b[39m \u001b[32m&#39;75&#39;\u001b[39m)\u001b[0m\u001b[22m\n\u001b[2m    \u001b[0m \u001b[90m 51 |\u001b[39m\u001b[0m\u001b[22m\n\u001b[2m    \u001b[0m\u001b[31m\u001b[1m&gt;\u001b[22m\u001b[2m\u001b[39m\u001b[90m 52 |\u001b[39m     expect(mockSetRegistro)\u001b[33m.\u001b[39mtoHaveBeenCalledWith({\u001b[0m\u001b[22m\n\u001b[2m    \u001b[0m \u001b[90m    |\u001b[39m                             \u001b[31m\u001b[1m^\u001b[22m\u001b[2m\u001b[39m\u001b[0m\u001b[22m\n\u001b[2m    \u001b[0m \u001b[90m 53 |\u001b[39m       decesos\u001b[33m:\u001b[39m \u001b[35m0\u001b[39m\u001b[33m,\u001b[39m\u001b[0m\u001b[22m\n\u001b[2m    \u001b[0m \u001b[90m 54 |\u001b[39m       cantidadAlimento\u001b[33m:\u001b[39m \u001b[35m0\u001b[39m\u001b[33m,\u001b[39m\u001b[0m\u001b[22m\n\u001b[2m    \u001b[0m \u001b[90m 55 |\u001b[39m       pesado\u001b[33m:\u001b[39m \u001b[35m75\u001b[39m\u001b[33m,\u001b[39m\u001b[0m\u001b[22m\n\u001b[2m\u001b[22m\n\u001b[2m      \u001b[2mat Object.toHaveBeenCalledWith (\u001b[22m\u001b[2m\u001b[0m\u001b[36msrc&#x2F;__tests__&#x2F;unit&#x2F;SliderContainer.test.jsx\u001b[39m\u001b[0m\u001b[2m:52:29)\u001b[22m\u001b[2m\u001b[22m\n\n\u001b[1m\u001b[31m  \u001b[1m● \u001b[22m\u001b[1mSliderContainer › should handle invalid input\u001b[39m\u001b[22m\n\n    Unable to find an element with text: Ingrese un número válido\n\n    \u001b[36m&lt;View\u001b[39m\n      \u001b[33mtestID\u001b[39m&#x3D;\u001b[32m\&quot;textbox\&quot;\u001b[39m\n    \u001b[36m&gt;\u001b[39m\n      \u001b[36m&lt;View\u001b[39m\n        \u001b[33maccessible\u001b[39m&#x3D;\u001b[32m{true}\u001b[39m\n        \u001b[33mtestID\u001b[39m&#x3D;\u001b[32m\&quot;textbox\&quot;\u001b[39m\n      \u001b[36m&gt;\u001b[39m\n        \u001b[36m&lt;TextInput\u001b[39m\n          \u001b[33mplaceholder\u001b[39m&#x3D;\u001b[32m\&quot;0\&quot;\u001b[39m\n          \u001b[33mtestID\u001b[39m&#x3D;\u001b[32m\&quot;textbox\&quot;\u001b[39m\n          \u001b[33mvalue\u001b[39m&#x3D;\u001b[32m\&quot;0\&quot;\u001b[39m\n        \u001b[36m&#x2F;&gt;\u001b[39m\n      \u001b[36m&lt;&#x2F;View&gt;\u001b[39m\n      \u001b[36m&lt;Text\u001b[39m\n        \u001b[33mtestID\u001b[39m&#x3D;\u001b[32m\&quot;textbox\&quot;\u001b[39m\n      \u001b[36m&gt;\u001b[39m\n        \u001b[0mTest Slider\u001b[0m\n      \u001b[36m&lt;&#x2F;Text&gt;\u001b[39m\n      \u001b[36m&lt;RNCSlider\u001b[39m\n        \u001b[33mtestID\u001b[39m&#x3D;\u001b[32m\&quot;slider\&quot;\u001b[39m\n      \u001b[36m&#x2F;&gt;\u001b[39m\n      \u001b[36m&lt;View\u001b[39m\n        \u001b[33mtestID\u001b[39m&#x3D;\u001b[32m\&quot;textbox\&quot;\u001b[39m\n      \u001b[36m&gt;\u001b[39m\n        \u001b[36m&lt;Text\u001b[39m\n          \u001b[33mtestID\u001b[39m&#x3D;\u001b[32m\&quot;textbox\&quot;\u001b[39m\n        \u001b[36m&gt;\u001b[39m\n          \u001b[0m0 units\u001b[0m\n        \u001b[36m&lt;&#x2F;Text&gt;\u001b[39m\n        \u001b[36m&lt;Text\u001b[39m\n          \u001b[33mtestID\u001b[39m&#x3D;\u001b[32m\&quot;textbox\&quot;\u001b[39m\n        \u001b[36m&gt;\u001b[39m\n          \u001b[0m100 units\u001b[0m\n        \u001b[36m&lt;&#x2F;Text&gt;\u001b[39m\n      \u001b[36m&lt;&#x2F;View&gt;\u001b[39m\n    \u001b[36m&lt;&#x2F;View&gt;\u001b[39m\n\u001b[2m\u001b[22m\n\u001b[2m    \u001b[0m \u001b[90m 64 |\u001b[39m\u001b[0m\u001b[22m\n\u001b[2m    \u001b[0m \u001b[90m 65 |\u001b[39m     expect(mockSetRegistro)\u001b[33m.\u001b[39mnot\u001b[33m.\u001b[39mtoHaveBeenCalled()\u001b[0m\u001b[22m\n\u001b[2m    \u001b[0m\u001b[31m\u001b[1m&gt;\u001b[22m\u001b[2m\u001b[39m\u001b[90m 66 |\u001b[39m     expect(getByText(\u001b[32m&#39;Ingrese un número válido&#39;\u001b[39m))\u001b[33m.\u001b[39mtoBeTruthy()\u001b[0m\u001b[22m\n\u001b[2m    \u001b[0m \u001b[90m    |\u001b[39m            \u001b[31m\u001b[1m^\u001b[22m\u001b[2m\u001b[39m\u001b[0m\u001b[22m\n\u001b[2m    \u001b[0m \u001b[90m 67 |\u001b[39m   })\u001b[0m\u001b[22m\n\u001b[2m    \u001b[0m \u001b[90m 68 |\u001b[39m })\u001b[0m\u001b[22m\n\u001b[2m    \u001b[0m \u001b[90m 69 |\u001b[39m\u001b[0m\u001b[22m\n\u001b[2m\u001b[22m\n\u001b[2m      \u001b[2mat Object.getByText (\u001b[22m\u001b[2m\u001b[0m\u001b[36msrc&#x2F;__tests__&#x2F;unit&#x2F;SliderContainer.test.jsx\u001b[39m\u001b[0m\u001b[2m:66:12)\u001b[22m\u001b[2m\u001b[22m\n&quot;
+    },
+    {
+      &quot;leaks&quot;: false,
+      &quot;numFailingTests&quot;: 0,
+      &quot;numPassingTests&quot;: 3,
+      &quot;numPendingTests&quot;: 0,
+      &quot;numTodoTests&quot;: 0,
+      &quot;openHandles&quot;: [],
+      &quot;perfStats&quot;: {
+        &quot;end&quot;: 1700581235176,
+        &quot;runtime&quot;: 8331,
+        &quot;slow&quot;: true,
+        &quot;start&quot;: 1700581226845
+      },
+      &quot;skipped&quot;: false,
+      &quot;snapshot&quot;: {
+        &quot;added&quot;: 0,
+        &quot;fileDeleted&quot;: false,
+        &quot;matched&quot;: 0,
+        &quot;unchecked&quot;: 0,
+        &quot;uncheckedKeys&quot;: [],
+        &quot;unmatched&quot;: 0,
+        &quot;updated&quot;: 0
+      },
+      &quot;testFilePath&quot;: &quot;D:\\proyectomgafrontend\\src\\__tests__\\unit\\SelectDate.test.jsx&quot;,
+      &quot;testResults&quot;: [
+        {
+          &quot;ancestorTitles&quot;: [
+            &quot;SelectDate&quot;
+          ],
+          &quot;duration&quot;: 1127,
+          &quot;failureDetails&quot;: [],
+          &quot;failureMessages&quot;: [],
+          &quot;fullName&quot;: &quot;SelectDate should render the component without errors&quot;,
+          &quot;invocations&quot;: 1,
+          &quot;location&quot;: null,
+          &quot;numPassingAsserts&quot;: 2,
+          &quot;retryReasons&quot;: [],
+          &quot;status&quot;: &quot;passed&quot;,
+          &quot;title&quot;: &quot;should render the component without errors&quot;
+        },
+        {
+          &quot;ancestorTitles&quot;: [
+            &quot;SelectDate&quot;
+          ],
+          &quot;duration&quot;: 33,
+          &quot;failureDetails&quot;: [],
+          &quot;failureMessages&quot;: [],
+          &quot;fullName&quot;: &quot;SelectDate should display the selected date&quot;,
+          &quot;invocations&quot;: 1,
+          &quot;location&quot;: null,
+          &quot;numPassingAsserts&quot;: 1,
+          &quot;retryReasons&quot;: [],
+          &quot;status&quot;: &quot;passed&quot;,
+          &quot;title&quot;: &quot;should display the selected date&quot;
+        },
+        {
+          &quot;ancestorTitles&quot;: [
+            &quot;SelectDate&quot;
+          ],
+          &quot;duration&quot;: 8,
+          &quot;failureDetails&quot;: [],
+          &quot;failureMessages&quot;: [],
+          &quot;fullName&quot;: &quot;SelectDate should call the onPress function when pressed&quot;,
+          &quot;invocations&quot;: 1,
+          &quot;location&quot;: null,
+          &quot;numPassingAsserts&quot;: 1,
+          &quot;retryReasons&quot;: [],
+          &quot;status&quot;: &quot;passed&quot;,
+          &quot;title&quot;: &quot;should call the onPress function when pressed&quot;
+        }
+      ],
+      &quot;failureMessage&quot;: null
+    },
+    {
+      &quot;leaks&quot;: false,
+      &quot;numFailingTests&quot;: 0,
+      &quot;numPassingTests&quot;: 2,
+      &quot;numPendingTests&quot;: 0,
+      &quot;numTodoTests&quot;: 0,
+      &quot;openHandles&quot;: [],
+      &quot;perfStats&quot;: {
+        &quot;end&quot;: 1700581235216,
+        &quot;runtime&quot;: 8429,
+        &quot;slow&quot;: true,
+        &quot;start&quot;: 1700581226787
+      },
+      &quot;skipped&quot;: false,
+      &quot;snapshot&quot;: {
+        &quot;added&quot;: 0,
+        &quot;fileDeleted&quot;: false,
+        &quot;matched&quot;: 0,
+        &quot;unchecked&quot;: 0,
+        &quot;uncheckedKeys&quot;: [],
+        &quot;unmatched&quot;: 0,
+        &quot;updated&quot;: 0
+      },
+      &quot;testFilePath&quot;: &quot;D:\\proyectomgafrontend\\src\\__tests__\\unit\\HeaderComponent.test.jsx&quot;,
+      &quot;testResults&quot;: [
+        {
+          &quot;ancestorTitles&quot;: [
+            &quot;HeaderComponent&quot;
+          ],
+          &quot;duration&quot;: 1137,
+          &quot;failureDetails&quot;: [],
+          &quot;failureMessages&quot;: [],
+          &quot;fullName&quot;: &quot;HeaderComponent renders without errors&quot;,
+          &quot;invocations&quot;: 1,
+          &quot;location&quot;: null,
+          &quot;numPassingAsserts&quot;: 2,
+          &quot;retryReasons&quot;: [],
+          &quot;status&quot;: &quot;passed&quot;,
+          &quot;title&quot;: &quot;renders without errors&quot;
+        },
+        {
+          &quot;ancestorTitles&quot;: [
+            &quot;HeaderComponent&quot;
+          ],
+          &quot;duration&quot;: 32,
+          &quot;failureDetails&quot;: [],
+          &quot;failureMessages&quot;: [],
+          &quot;fullName&quot;: &quot;HeaderComponent calls setActiveTab when a tab is pressed&quot;,
+          &quot;invocations&quot;: 1,
+          &quot;location&quot;: null,
+          &quot;numPassingAsserts&quot;: 1,
+          &quot;retryReasons&quot;: [],
+          &quot;status&quot;: &quot;passed&quot;,
+          &quot;title&quot;: &quot;calls setActiveTab when a tab is pressed&quot;
+        }
+      ],
+      &quot;failureMessage&quot;: null
+    },
+    {
+      &quot;leaks&quot;: false,
+      &quot;numFailingTests&quot;: 0,
+      &quot;numPassingTests&quot;: 2,
+      &quot;numPendingTests&quot;: 0,
+      &quot;numTodoTests&quot;: 0,
+      &quot;openHandles&quot;: [],
+      &quot;perfStats&quot;: {
+        &quot;end&quot;: 1700581235251,
+        &quot;runtime&quot;: 8486,
+        &quot;slow&quot;: true,
+        &quot;start&quot;: 1700581226765
+      },
+      &quot;skipped&quot;: false,
+      &quot;snapshot&quot;: {
+        &quot;added&quot;: 0,
+        &quot;fileDeleted&quot;: false,
+        &quot;matched&quot;: 0,
+        &quot;unchecked&quot;: 0,
+        &quot;uncheckedKeys&quot;: [],
+        &quot;unmatched&quot;: 0,
+        &quot;updated&quot;: 0
+      },
+      &quot;testFilePath&quot;: &quot;D:\\proyectomgafrontend\\src\\__tests__\\unit\\HeaderGallery.test.jsx&quot;,
+      &quot;testResults&quot;: [
+        {
+          &quot;ancestorTitles&quot;: [
+            &quot;HeaderGalley&quot;
+          ],
+          &quot;duration&quot;: 1108,
+          &quot;failureDetails&quot;: [],
+          &quot;failureMessages&quot;: [],
+          &quot;fullName&quot;: &quot;HeaderGalley renders without errors&quot;,
+          &quot;invocations&quot;: 1,
+          &quot;location&quot;: null,
+          &quot;numPassingAsserts&quot;: 3,
+          &quot;retryReasons&quot;: [],
+          &quot;status&quot;: &quot;passed&quot;,
+          &quot;title&quot;: &quot;renders without errors&quot;
+        },
+        {
+          &quot;ancestorTitles&quot;: [
+            &quot;HeaderGalley&quot;
+          ],
+          &quot;duration&quot;: 33,
+          &quot;failureDetails&quot;: [],
+          &quot;failureMessages&quot;: [],
+          &quot;fullName&quot;: &quot;HeaderGalley calls setActiveTab when a tab is pressed&quot;,
+          &quot;invocations&quot;: 1,
+          &quot;location&quot;: null,
+          &quot;numPassingAsserts&quot;: 1,
+          &quot;retryReasons&quot;: [],
+          &quot;status&quot;: &quot;passed&quot;,
+          &quot;title&quot;: &quot;calls setActiveTab when a tab is pressed&quot;
+        }
+      ],
+      &quot;failureMessage&quot;: null
+    },
+    {
+      &quot;leaks&quot;: false,
+      &quot;numFailingTests&quot;: 0,
+      &quot;numPassingTests&quot;: 4,
+      &quot;numPendingTests&quot;: 0,
+      &quot;numTodoTests&quot;: 0,
+      &quot;openHandles&quot;: [],
+      &quot;perfStats&quot;: {
+        &quot;end&quot;: 1700581237272,
+        &quot;runtime&quot;: 10508,
+        &quot;slow&quot;: true,
+        &quot;start&quot;: 1700581226764
+      },
+      &quot;skipped&quot;: false,
+      &quot;snapshot&quot;: {
+        &quot;added&quot;: 0,
+        &quot;fileDeleted&quot;: false,
+        &quot;matched&quot;: 0,
+        &quot;unchecked&quot;: 0,
+        &quot;uncheckedKeys&quot;: [],
+        &quot;unmatched&quot;: 0,
+        &quot;updated&quot;: 0
+      },
+      &quot;testFilePath&quot;: &quot;D:\\proyectomgafrontend\\src\\__tests__\\unit\\CardGalera.test.jsx&quot;,
+      &quot;testResults&quot;: [
+        {
+          &quot;ancestorTitles&quot;: [
+            &quot;CardGalera Component&quot;
+          ],
+          &quot;duration&quot;: 2125,
+          &quot;failureDetails&quot;: [],
+          &quot;failureMessages&quot;: [],
+          &quot;fullName&quot;: &quot;CardGalera Component renders correctly with default props&quot;,
+          &quot;invocations&quot;: 1,
+          &quot;location&quot;: null,
+          &quot;numPassingAsserts&quot;: 3,
+          &quot;retryReasons&quot;: [],
+          &quot;status&quot;: &quot;passed&quot;,
+          &quot;title&quot;: &quot;renders correctly with default props&quot;
+        },
+        {
+          &quot;ancestorTitles&quot;: [
+            &quot;CardGalera Component&quot;
+          ],
+          &quot;duration&quot;: 1025,
+          &quot;failureDetails&quot;: [],
+          &quot;failureMessages&quot;: [],
+          &quot;fullName&quot;: &quot;CardGalera Component renders with custom props&quot;,
+          &quot;invocations&quot;: 1,
+          &quot;location&quot;: null,
+          &quot;numPassingAsserts&quot;: 3,
+          &quot;retryReasons&quot;: [],
+          &quot;status&quot;: &quot;passed&quot;,
+          &quot;title&quot;: &quot;renders with custom props&quot;
+        },
+        {
+          &quot;ancestorTitles&quot;: [
+            &quot;CardGalera Component&quot;
+          ],
+          &quot;duration&quot;: 85,
+          &quot;failureDetails&quot;: [],
+          &quot;failureMessages&quot;: [],
+          &quot;fullName&quot;: &quot;CardGalera Component handles press correctly when not loading&quot;,
+          &quot;invocations&quot;: 1,
+          &quot;location&quot;: null,
+          &quot;numPassingAsserts&quot;: 1,
+          &quot;retryReasons&quot;: [],
+          &quot;status&quot;: &quot;passed&quot;,
+          &quot;title&quot;: &quot;handles press correctly when not loading&quot;
+        },
+        {
+          &quot;ancestorTitles&quot;: [
+            &quot;CardGalera Component&quot;
+          ],
+          &quot;duration&quot;: 41,
+          &quot;failureDetails&quot;: [],
+          &quot;failureMessages&quot;: [],
+          &quot;fullName&quot;: &quot;CardGalera Component does not handle press when loading&quot;,
+          &quot;invocations&quot;: 1,
+          &quot;location&quot;: null,
+          &quot;numPassingAsserts&quot;: 1,
+          &quot;retryReasons&quot;: [],
+          &quot;status&quot;: &quot;passed&quot;,
+          &quot;title&quot;: &quot;does not handle press when loading&quot;
+        }
+      ],
+      &quot;failureMessage&quot;: null
+    },
+    {
+      &quot;leaks&quot;: false,
+      &quot;numFailingTests&quot;: 0,
+      &quot;numPassingTests&quot;: 3,
+      &quot;numPendingTests&quot;: 0,
+      &quot;numTodoTests&quot;: 0,
+      &quot;openHandles&quot;: [],
+      &quot;perfStats&quot;: {
+        &quot;end&quot;: 1700581236795,
+        &quot;runtime&quot;: 1673,
+        &quot;slow&quot;: false,
+        &quot;start&quot;: 1700581235122
+      },
+      &quot;skipped&quot;: false,
+      &quot;snapshot&quot;: {
+        &quot;added&quot;: 0,
+        &quot;fileDeleted&quot;: false,
+        &quot;matched&quot;: 0,
+        &quot;unchecked&quot;: 0,
+        &quot;uncheckedKeys&quot;: [],
+        &quot;unmatched&quot;: 0,
+        &quot;updated&quot;: 0
+      },
+      &quot;testFilePath&quot;: &quot;D:\\proyectomgafrontend\\src\\__tests__\\unit\\ChoiceScreen.test.jsx&quot;,
+      &quot;testResults&quot;: [
+        {
+          &quot;ancestorTitles&quot;: [
+            &quot;ChoiceScreen component&quot;
+          ],
+          &quot;duration&quot;: 193,
+          &quot;failureDetails&quot;: [],
+          &quot;failureMessages&quot;: [],
+          &quot;fullName&quot;: &quot;ChoiceScreen component renders correctly&quot;,
+          &quot;invocations&quot;: 1,
+          &quot;location&quot;: null,
+          &quot;numPassingAsserts&quot;: 2,
+          &quot;retryReasons&quot;: [],
+          &quot;status&quot;: &quot;passed&quot;,
+          &quot;title&quot;: &quot;renders correctly&quot;
+        },
+        {
+          &quot;ancestorTitles&quot;: [
+            &quot;ChoiceScreen component&quot;
+          ],
+          &quot;duration&quot;: 45,
+          &quot;failureDetails&quot;: [],
+          &quot;failureMessages&quot;: [],
+          &quot;fullName&quot;: &quot;ChoiceScreen component navigates to \&quot;Trabajador\&quot; screen on \&quot;Trabajador\&quot; button press&quot;,
+          &quot;invocations&quot;: 1,
+          &quot;location&quot;: null,
+          &quot;numPassingAsserts&quot;: 1,
+          &quot;retryReasons&quot;: [],
+          &quot;status&quot;: &quot;passed&quot;,
+          &quot;title&quot;: &quot;navigates to \&quot;Trabajador\&quot; screen on \&quot;Trabajador\&quot; button press&quot;
+        },
+        {
+          &quot;ancestorTitles&quot;: [
+            &quot;ChoiceScreen component&quot;
+          ],
+          &quot;duration&quot;: 41,
+          &quot;failureDetails&quot;: [],
+          &quot;failureMessages&quot;: [],
+          &quot;fullName&quot;: &quot;ChoiceScreen component navigates to \&quot;Administrador\&quot; screen on \&quot;Administrador\&quot; button press&quot;,
+          &quot;invocations&quot;: 1,
+          &quot;location&quot;: null,
+          &quot;numPassingAsserts&quot;: 1,
+          &quot;retryReasons&quot;: [],
+          &quot;status&quot;: &quot;passed&quot;,
+          &quot;title&quot;: &quot;navigates to \&quot;Administrador\&quot; screen on \&quot;Administrador\&quot; button press&quot;
+        }
+      ],
+      &quot;failureMessage&quot;: null
+    },
+    {
+      &quot;leaks&quot;: false,
+      &quot;numFailingTests&quot;: 0,
+      &quot;numPassingTests&quot;: 2,
+      &quot;numPendingTests&quot;: 0,
+      &quot;numTodoTests&quot;: 0,
+      &quot;openHandles&quot;: [],
+      &quot;perfStats&quot;: {
+        &quot;end&quot;: 1700581236859,
+        &quot;runtime&quot;: 1209,
+        &quot;slow&quot;: false,
+        &quot;start&quot;: 1700581235650
+      },
+      &quot;skipped&quot;: false,
+      &quot;snapshot&quot;: {
+        &quot;added&quot;: 0,
+        &quot;fileDeleted&quot;: false,
+        &quot;matched&quot;: 0,
+        &quot;unchecked&quot;: 0,
+        &quot;uncheckedKeys&quot;: [],
+        &quot;unmatched&quot;: 0,
+        &quot;updated&quot;: 0
+      },
+      &quot;testFilePath&quot;: &quot;D:\\proyectomgafrontend\\src\\__tests__\\integration\\ChoiceScreen.test.jsx&quot;,
+      &quot;testResults&quot;: [
+        {
+          &quot;ancestorTitles&quot;: [],
+          &quot;duration&quot;: 196,
+          &quot;failureDetails&quot;: [],
+          &quot;failureMessages&quot;: [],
+          &quot;fullName&quot;: &quot;navigates to \&quot;Trabajador\&quot; screen on \&quot;Trabajador\&quot; button press&quot;,
+          &quot;invocations&quot;: 1,
+          &quot;location&quot;: null,
+          &quot;numPassingAsserts&quot;: 1,
+          &quot;retryReasons&quot;: [],
+          &quot;status&quot;: &quot;passed&quot;,
+          &quot;title&quot;: &quot;navigates to \&quot;Trabajador\&quot; screen on \&quot;Trabajador\&quot; button press&quot;
+        },
+        {
+          &quot;ancestorTitles&quot;: [],
+          &quot;duration&quot;: 12,
+          &quot;failureDetails&quot;: [],
+          &quot;failureMessages&quot;: [],
+          &quot;fullName&quot;: &quot;should not have any specific behaviour to test&quot;,
+          &quot;invocations&quot;: 1,
+          &quot;location&quot;: null,
+          &quot;numPassingAsserts&quot;: 1,
+          &quot;retryReasons&quot;: [],
+          &quot;status&quot;: &quot;passed&quot;,
+          &quot;title&quot;: &quot;should not have any specific behaviour to test&quot;
+        }
+      ],
+      &quot;failureMessage&quot;: null
+    },
+    {
+      &quot;leaks&quot;: false,
+      &quot;numFailingTests&quot;: 0,
+      &quot;numPassingTests&quot;: 3,
+      &quot;numPendingTests&quot;: 0,
+      &quot;numTodoTests&quot;: 0,
+      &quot;openHandles&quot;: [],
+      &quot;perfStats&quot;: {
+        &quot;end&quot;: 1700581237135,
+        &quot;runtime&quot;: 2175,
+        &quot;slow&quot;: false,
+        &quot;start&quot;: 1700581234960
+      },
+      &quot;skipped&quot;: false,
+      &quot;snapshot&quot;: {
+        &quot;added&quot;: 0,
+        &quot;fileDeleted&quot;: false,
+        &quot;matched&quot;: 0,
+        &quot;unchecked&quot;: 0,
+        &quot;uncheckedKeys&quot;: [],
+        &quot;unmatched&quot;: 0,
+        &quot;updated&quot;: 0
+      },
+      &quot;testFilePath&quot;: &quot;D:\\proyectomgafrontend\\src\\__tests__\\integration\\LoginWorker.test.jsx&quot;,
+      &quot;testResults&quot;: [
+        {
+          &quot;ancestorTitles&quot;: [],
+          &quot;duration&quot;: 205,
+          &quot;failureDetails&quot;: [],
+          &quot;failureMessages&quot;: [],
+          &quot;fullName&quot;: &quot;should be called only once during the component lifecycle&quot;,
+          &quot;invocations&quot;: 1,
+          &quot;location&quot;: null,
+          &quot;numPassingAsserts&quot;: 1,
+          &quot;retryReasons&quot;: [],
+          &quot;status&quot;: &quot;passed&quot;,
+          &quot;title&quot;: &quot;should be called only once during the component lifecycle&quot;
+        },
+        {
+          &quot;ancestorTitles&quot;: [],
+          &quot;duration&quot;: 51,
+          &quot;failureDetails&quot;: [],
+          &quot;failureMessages&quot;: [],
+          &quot;fullName&quot;: &quot;should not affect the components state&quot;,
+          &quot;invocations&quot;: 1,
+          &quot;location&quot;: null,
+          &quot;numPassingAsserts&quot;: 0,
+          &quot;retryReasons&quot;: [],
+          &quot;status&quot;: &quot;passed&quot;,
+          &quot;title&quot;: &quot;should not affect the components state&quot;
+        },
+        {
+          &quot;ancestorTitles&quot;: [],
+          &quot;duration&quot;: 101,
+          &quot;failureDetails&quot;: [],
+          &quot;failureMessages&quot;: [],
+          &quot;fullName&quot;: &quot;should not have any side effects&quot;,
+          &quot;invocations&quot;: 1,
+          &quot;location&quot;: null,
+          &quot;numPassingAsserts&quot;: 0,
+          &quot;retryReasons&quot;: [],
+          &quot;status&quot;: &quot;passed&quot;,
+          &quot;title&quot;: &quot;should not have any side effects&quot;
+        }
+      ],
+      &quot;failureMessage&quot;: null
+    },
+    {
+      &quot;leaks&quot;: false,
+      &quot;numFailingTests&quot;: 1,
+      &quot;numPassingTests&quot;: 0,
+      &quot;numPendingTests&quot;: 0,
+      &quot;numTodoTests&quot;: 0,
+      &quot;openHandles&quot;: [],
+      &quot;perfStats&quot;: {
+        &quot;end&quot;: 1700581238265,
+        &quot;runtime&quot;: 11587,
+        &quot;slow&quot;: true,
+        &quot;start&quot;: 1700581226678
+      },
+      &quot;skipped&quot;: false,
+      &quot;snapshot&quot;: {
+        &quot;added&quot;: 0,
+        &quot;fileDeleted&quot;: false,
+        &quot;matched&quot;: 0,
+        &quot;unchecked&quot;: 0,
+        &quot;uncheckedKeys&quot;: [],
+        &quot;unmatched&quot;: 0,
+        &quot;updated&quot;: 0
+      },
+      &quot;testFilePath&quot;: &quot;D:\\proyectomgafrontend\\src\\screens\\MeasurementsHistory\\MeasurementsHistory.test.jsx&quot;,
+      &quot;testResults&quot;: [
+        {
+          &quot;ancestorTitles&quot;: [
+            &quot;MeasurementsHistory&quot;
+          ],
+          &quot;duration&quot;: 695,
+          &quot;failureDetails&quot;: [
+            {}
+          ],
+          &quot;failureMessages&quot;: [
+            &quot;TypeError: Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.\n    at _nonIterableRest (D:\\proyectomgafrontend\\node_modules\\@babel\\runtime\\helpers\\nonIterableRest.js:2:9)\n    at _slicedToArray (D:\\proyectomgafrontend\\node_modules\\@babel\\runtime\\helpers\\slicedToArray.js:6:103)\n    at MeasurementsHistory (D:\\proyectomgafrontend\\src\\screens\\MeasurementsHistory\\MeasurementsHistory.jsx:18:47)\n    at renderWithHooks (D:\\proyectomgafrontend\\node_modules\\react-test-renderer\\cjs\\react-test-renderer.development.js:6351:18)\n    at mountIndeterminateComponent (D:\\proyectomgafrontend\\node_modules\\react-test-renderer\\cjs\\react-test-renderer.development.js:9855:13)\n    at beginWork (D:\\proyectomgafrontend\\node_modules\\react-test-renderer\\cjs\\react-test-renderer.development.js:11312:16)\n    at performUnitOfWork (D:\\proyectomgafrontend\\node_modules\\react-test-renderer\\cjs\\react-test-renderer.development.js:15811:12)\n    at workLoopSync (D:\\proyectomgafrontend\\node_modules\\react-test-renderer\\cjs\\react-test-renderer.development.js:15745:5)\n    at renderRootSync (D:\\proyectomgafrontend\\node_modules\\react-test-renderer\\cjs\\react-test-renderer.development.js:15717:7)\n    at performSyncWorkOnRoot (D:\\proyectomgafrontend\\node_modules\\react-test-renderer\\cjs\\react-test-renderer.development.js:15422:20)\n    at flushSyncCallbacks (D:\\proyectomgafrontend\\node_modules\\react-test-renderer\\cjs\\react-test-renderer.development.js:2597:22)\n    at flushActQueue (D:\\proyectomgafrontend\\node_modules\\react\\cjs\\react.development.js:2667:24)\n    at Object.act (D:\\proyectomgafrontend\\node_modules\\react\\cjs\\react.development.js:2521:11)\n    at act (D:\\proyectomgafrontend\\node_modules\\@testing-library\\react-native\\src\\render-act.ts:13:16)\n    at renderInternal (D:\\proyectomgafrontend\\node_modules\\@testing-library\\react-native\\src\\render.tsx:62:33)\n    at renderInternal (D:\\proyectomgafrontend\\node_modules\\@testing-library\\react-native\\src\\render.tsx:32:10)\n    at Object.&lt;anonymous&gt; (D:\\proyectomgafrontend\\src\\screens\\MeasurementsHistory\\MeasurementsHistory.test.jsx:31:47)\n    at Generator.next (&lt;anonymous&gt;)\n    at asyncGeneratorStep (D:\\proyectomgafrontend\\node_modules\\@babel\\runtime\\helpers\\asyncToGenerator.js:3:24)\n    at _next (D:\\proyectomgafrontend\\node_modules\\@babel\\runtime\\helpers\\asyncToGenerator.js:22:9)\n    at D:\\proyectomgafrontend\\node_modules\\@babel\\runtime\\helpers\\asyncToGenerator.js:27:7\n    at new Promise (&lt;anonymous&gt;)\n    at Object.&lt;anonymous&gt; (D:\\proyectomgafrontend\\node_modules\\@babel\\runtime\\helpers\\asyncToGenerator.js:19:12)\n    at Promise.then.completed (D:\\proyectomgafrontend\\node_modules\\jest-circus\\build\\utils.js:298:28)\n    at new Promise (&lt;anonymous&gt;)\n    at callAsyncCircusFn (D:\\proyectomgafrontend\\node_modules\\jest-circus\\build\\utils.js:231:10)\n    at _callCircusTest (D:\\proyectomgafrontend\\node_modules\\jest-circus\\build\\run.js:316:40)\n    at processTicksAndRejections (node:internal&#x2F;process&#x2F;task_queues:95:5)\n    at _runTest (D:\\proyectomgafrontend\\node_modules\\jest-circus\\build\\run.js:252:3)\n    at _runTestsForDescribeBlock (D:\\proyectomgafrontend\\node_modules\\jest-circus\\build\\run.js:126:9)\n    at _runTestsForDescribeBlock (D:\\proyectomgafrontend\\node_modules\\jest-circus\\build\\run.js:121:9)\n    at run (D:\\proyectomgafrontend\\node_modules\\jest-circus\\build\\run.js:71:3)\n    at runAndTransformResultsToJestFormat (D:\\proyectomgafrontend\\node_modules\\jest-circus\\build\\legacy-code-todo-rewrite\\jestAdapterInit.js:122:21)\n    at jestAdapter (D:\\proyectomgafrontend\\node_modules\\jest-circus\\build\\legacy-code-todo-rewrite\\jestAdapter.js:79:19)\n    at runTestInternal (D:\\proyectomgafrontend\\node_modules\\jest-runner\\build\\runTest.js:367:16)\n    at runTest (D:\\proyectomgafrontend\\node_modules\\jest-runner\\build\\runTest.js:444:34)\n    at Object.worker (D:\\proyectomgafrontend\\node_modules\\jest-runner\\build\\testWorker.js:106:12)&quot;
+          ],
+          &quot;fullName&quot;: &quot;MeasurementsHistory renders correctly&quot;,
+          &quot;invocations&quot;: 1,
+          &quot;location&quot;: null,
+          &quot;numPassingAsserts&quot;: 0,
+          &quot;retryReasons&quot;: [],
+          &quot;status&quot;: &quot;failed&quot;,
+          &quot;title&quot;: &quot;renders correctly&quot;
+        }
+      ],
+      &quot;failureMessage&quot;: &quot;\u001b[1m\u001b[31m  \u001b[1m● \u001b[22m\u001b[1mMeasurementsHistory › renders correctly\u001b[39m\u001b[22m\n\n    TypeError: Invalid attempt to destructure non-iterable instance.\n    In order to be iterable, non-array objects must have a [Symbol.iterator]() method.\n\u001b[2m\u001b[22m\n\u001b[2m    \u001b[0m \u001b[90m 16 |\u001b[39m   \u001b[36mconst\u001b[39m titles \u001b[33m&#x3D;\u001b[39m [\u001b[32m&#39;Mis mediciones&#39;\u001b[39m\u001b[33m,\u001b[39m \u001b[32m&#39;Nueva medicion&#39;\u001b[39m]\u001b[0m\u001b[22m\n\u001b[2m    \u001b[0m \u001b[90m 17 |\u001b[39m   \u001b[36mconst\u001b[39m [activeTab\u001b[33m,\u001b[39m setActiveTab] \u001b[33m&#x3D;\u001b[39m useState(titles[\u001b[35m0\u001b[39m])\u001b[0m\u001b[22m\n\u001b[2m    \u001b[0m\u001b[31m\u001b[1m&gt;\u001b[22m\u001b[2m\u001b[39m\u001b[90m 18 |\u001b[39m   \u001b[36mconst\u001b[39m [response\u001b[33m,\u001b[39m \u001b[33m,\u001b[39m handleRequest] \u001b[33m&#x3D;\u001b[39m useApi()\u001b[0m\u001b[22m\n\u001b[2m    \u001b[0m \u001b[90m    |\u001b[39m                                               \u001b[31m\u001b[1m^\u001b[22m\u001b[2m\u001b[39m\u001b[0m\u001b[22m\n\u001b[2m    \u001b[0m \u001b[90m 19 |\u001b[39m   \u001b[36mconst\u001b[39m [showNoInfo\u001b[33m,\u001b[39m setShowNoInfo] \u001b[33m&#x3D;\u001b[39m useState(\u001b[36mfalse\u001b[39m)\u001b[0m\u001b[22m\n\u001b[2m    \u001b[0m \u001b[90m 20 |\u001b[39m   \u001b[36mconst\u001b[39m [registers\u001b[33m,\u001b[39m setRegisters] \u001b[33m&#x3D;\u001b[39m useState()\u001b[0m\u001b[22m\n\u001b[2m    \u001b[0m \u001b[90m 21 |\u001b[39m\u001b[0m\u001b[22m\n\u001b[2m\u001b[22m\n\u001b[2m      \u001b[2mat _nonIterableRest (\u001b[22m\u001b[2mnode_modules&#x2F;@babel&#x2F;runtime&#x2F;helpers&#x2F;nonIterableRest.js\u001b[2m:2:9)\u001b[22m\u001b[2m\u001b[22m\n\u001b[2m      \u001b[2mat _slicedToArray (\u001b[22m\u001b[2mnode_modules&#x2F;@babel&#x2F;runtime&#x2F;helpers&#x2F;slicedToArray.js\u001b[2m:6:103)\u001b[22m\u001b[2m\u001b[22m\n\u001b[2m      \u001b[2mat MeasurementsHistory (\u001b[22m\u001b[2msrc&#x2F;screens&#x2F;MeasurementsHistory&#x2F;MeasurementsHistory.jsx\u001b[2m:18:47)\u001b[22m\u001b[2m\u001b[22m\n\u001b[2m      \u001b[2mat renderWithHooks (\u001b[22m\u001b[2mnode_modules&#x2F;react-test-renderer&#x2F;cjs&#x2F;react-test-renderer.development.js\u001b[2m:6351:18)\u001b[22m\u001b[2m\u001b[22m\n\u001b[2m      \u001b[2mat mountIndeterminateComponent (\u001b[22m\u001b[2mnode_modules&#x2F;react-test-renderer&#x2F;cjs&#x2F;react-test-renderer.development.js\u001b[2m:9855:13)\u001b[22m\u001b[2m\u001b[22m\n\u001b[2m      \u001b[2mat beginWork (\u001b[22m\u001b[2mnode_modules&#x2F;react-test-renderer&#x2F;cjs&#x2F;react-test-renderer.development.js\u001b[2m:11312:16)\u001b[22m\u001b[2m\u001b[22m\n\u001b[2m      \u001b[2mat performUnitOfWork (\u001b[22m\u001b[2mnode_modules&#x2F;react-test-renderer&#x2F;cjs&#x2F;react-test-renderer.development.js\u001b[2m:15811:12)\u001b[22m\u001b[2m\u001b[22m\n\u001b[2m      \u001b[2mat workLoopSync (\u001b[22m\u001b[2mnode_modules&#x2F;react-test-renderer&#x2F;cjs&#x2F;react-test-renderer.development.js\u001b[2m:15745:5)\u001b[22m\u001b[2m\u001b[22m\n\u001b[2m      \u001b[2mat renderRootSync (\u001b[22m\u001b[2mnode_modules&#x2F;react-test-renderer&#x2F;cjs&#x2F;react-test-renderer.development.js\u001b[2m:15717:7)\u001b[22m\u001b[2m\u001b[22m\n\u001b[2m      \u001b[2mat performSyncWorkOnRoot (\u001b[22m\u001b[2mnode_modules&#x2F;react-test-renderer&#x2F;cjs&#x2F;react-test-renderer.development.js\u001b[2m:15422:20)\u001b[22m\u001b[2m\u001b[22m\n\u001b[2m      \u001b[2mat flushSyncCallbacks (\u001b[22m\u001b[2mnode_modules&#x2F;react-test-renderer&#x2F;cjs&#x2F;react-test-renderer.development.js\u001b[2m:2597:22)\u001b[22m\u001b[2m\u001b[22m\n\u001b[2m      \u001b[2mat flushActQueue (\u001b[22m\u001b[2mnode_modules&#x2F;react&#x2F;cjs&#x2F;react.development.js\u001b[2m:2667:24)\u001b[22m\u001b[2m\u001b[22m\n\u001b[2m      \u001b[2mat Object.act (\u001b[22m\u001b[2mnode_modules&#x2F;react&#x2F;cjs&#x2F;react.development.js\u001b[2m:2521:11)\u001b[22m\u001b[2m\u001b[22m\n\u001b[2m      \u001b[2mat act (\u001b[22m\u001b[2mnode_modules&#x2F;@testing-library&#x2F;react-native&#x2F;src&#x2F;render-act.ts\u001b[2m:13:16)\u001b[22m\u001b[2m\u001b[22m\n\u001b[2m      \u001b[2mat renderInternal (\u001b[22m\u001b[2mnode_modules&#x2F;@testing-library&#x2F;react-native&#x2F;src&#x2F;render.tsx\u001b[2m:62:33)\u001b[22m\u001b[2m\u001b[22m\n\u001b[2m      \u001b[2mat renderInternal (\u001b[22m\u001b[2mnode_modules&#x2F;@testing-library&#x2F;react-native&#x2F;src&#x2F;render.tsx\u001b[2m:32:10)\u001b[22m\u001b[2m\u001b[22m\n\u001b[2m      \u001b[2mat Object.&lt;anonymous&gt; (\u001b[22m\u001b[2m\u001b[0m\u001b[36msrc&#x2F;screens&#x2F;MeasurementsHistory&#x2F;MeasurementsHistory.test.jsx\u001b[39m\u001b[0m\u001b[2m:31:47)\u001b[22m\u001b[2m\u001b[22m\n\u001b[2m      \u001b[2mat asyncGeneratorStep (\u001b[22m\u001b[2mnode_modules&#x2F;@babel&#x2F;runtime&#x2F;helpers&#x2F;asyncToGenerator.js\u001b[2m:3:24)\u001b[22m\u001b[2m\u001b[22m\n\u001b[2m      \u001b[2mat _next (\u001b[22m\u001b[2mnode_modules&#x2F;@babel&#x2F;runtime&#x2F;helpers&#x2F;asyncToGenerator.js\u001b[2m:22:9)\u001b[22m\u001b[2m\u001b[22m\n\u001b[2m      \u001b[2mat \u001b[22m\u001b[2mnode_modules&#x2F;@babel&#x2F;runtime&#x2F;helpers&#x2F;asyncToGenerator.js\u001b[2m:27:7\u001b[22m\u001b[2m\u001b[22m\n\u001b[2m      \u001b[2mat Object.&lt;anonymous&gt; (\u001b[22m\u001b[2mnode_modules&#x2F;@babel&#x2F;runtime&#x2F;helpers&#x2F;asyncToGenerator.js\u001b[2m:19:12)\u001b[22m\u001b[2m\u001b[22m\n&quot;
+    },
+    {
+      &quot;leaks&quot;: false,
+      &quot;numFailingTests&quot;: 0,
+      &quot;numPassingTests&quot;: 5,
+      &quot;numPendingTests&quot;: 0,
+      &quot;numTodoTests&quot;: 0,
+      &quot;openHandles&quot;: [],
+      &quot;perfStats&quot;: {
+        &quot;end&quot;: 1700581237684,
+        &quot;runtime&quot;: 583,
+        &quot;slow&quot;: false,
+        &quot;start&quot;: 1700581237101
+      },
+      &quot;skipped&quot;: false,
+      &quot;snapshot&quot;: {
+        &quot;added&quot;: 0,
+        &quot;fileDeleted&quot;: false,
+        &quot;matched&quot;: 0,
+        &quot;unchecked&quot;: 0,
+        &quot;uncheckedKeys&quot;: [],
+        &quot;unmatched&quot;: 0,
+        &quot;updated&quot;: 0
+      },
+      &quot;testFilePath&quot;: &quot;D:\\proyectomgafrontend\\src\\__tests__\\unit\\SelectOption.test.jsx&quot;,
+      &quot;testResults&quot;: [
+        {
+          &quot;ancestorTitles&quot;: [
+            &quot;SelectOption&quot;
+          ],
+          &quot;duration&quot;: 118,
+          &quot;failureDetails&quot;: [],
+          &quot;failureMessages&quot;: [],
+          &quot;fullName&quot;: &quot;SelectOption should render correctly&quot;,
+          &quot;invocations&quot;: 1,
+          &quot;location&quot;: null,
+          &quot;numPassingAsserts&quot;: 1,
+          &quot;retryReasons&quot;: [],
+          &quot;status&quot;: &quot;passed&quot;,
+          &quot;title&quot;: &quot;should render correctly&quot;
+        },
+        {
+          &quot;ancestorTitles&quot;: [
+            &quot;SelectOption&quot;
+          ],
+          &quot;duration&quot;: 26,
+          &quot;failureDetails&quot;: [],
+          &quot;failureMessages&quot;: [],
+          &quot;fullName&quot;: &quot;SelectOption should toggle options on press&quot;,
+          &quot;invocations&quot;: 1,
+          &quot;location&quot;: null,
+          &quot;numPassingAsserts&quot;: 2,
+          &quot;retryReasons&quot;: [],
+          &quot;status&quot;: &quot;passed&quot;,
+          &quot;title&quot;: &quot;should toggle options on press&quot;
+        },
+        {
+          &quot;ancestorTitles&quot;: [
+            &quot;SelectOption&quot;
+          ],
+          &quot;duration&quot;: 32,
+          &quot;failureDetails&quot;: [],
+          &quot;failureMessages&quot;: [],
+          &quot;fullName&quot;: &quot;SelectOption should select an option&quot;,
+          &quot;invocations&quot;: 1,
+          &quot;location&quot;: null,
+          &quot;numPassingAsserts&quot;: 1,
+          &quot;retryReasons&quot;: [],
+          &quot;status&quot;: &quot;passed&quot;,
+          &quot;title&quot;: &quot;should select an option&quot;
+        },
+        {
+          &quot;ancestorTitles&quot;: [
+            &quot;SelectOption&quot;
+          ],
+          &quot;duration&quot;: 41,
+          &quot;failureDetails&quot;: [],
+          &quot;failureMessages&quot;: [],
+          &quot;fullName&quot;: &quot;SelectOption should handle \&quot;No seleccionar\&quot; option&quot;,
+          &quot;invocations&quot;: 1,
+          &quot;location&quot;: null,
+          &quot;numPassingAsserts&quot;: 1,
+          &quot;retryReasons&quot;: [],
+          &quot;status&quot;: &quot;passed&quot;,
+          &quot;title&quot;: &quot;should handle \&quot;No seleccionar\&quot; option&quot;
+        },
+        {
+          &quot;ancestorTitles&quot;: [
+            &quot;SelectOption&quot;
+          ],
+          &quot;duration&quot;: 8,
+          &quot;failureDetails&quot;: [],
+          &quot;failureMessages&quot;: [],
+          &quot;fullName&quot;: &quot;SelectOption should display the selected option&quot;,
+          &quot;invocations&quot;: 1,
+          &quot;location&quot;: null,
+          &quot;numPassingAsserts&quot;: 1,
+          &quot;retryReasons&quot;: [],
+          &quot;status&quot;: &quot;passed&quot;,
+          &quot;title&quot;: &quot;should display the selected option&quot;
+        }
+      ],
+      &quot;failureMessage&quot;: null
+    },
+    {
+      &quot;leaks&quot;: false,
+      &quot;numFailingTests&quot;: 1,
+      &quot;numPassingTests&quot;: 0,
+      &quot;numPendingTests&quot;: 0,
+      &quot;numTodoTests&quot;: 0,
+      &quot;openHandles&quot;: [],
+      &quot;perfStats&quot;: {
+        &quot;end&quot;: 1700581238471,
+        &quot;runtime&quot;: 11799,
+        &quot;slow&quot;: true,
+        &quot;start&quot;: 1700581226672
+      },
+      &quot;skipped&quot;: false,
+      &quot;snapshot&quot;: {
+        &quot;added&quot;: 0,
+        &quot;fileDeleted&quot;: false,
+        &quot;matched&quot;: 0,
+        &quot;unchecked&quot;: 0,
+        &quot;uncheckedKeys&quot;: [],
+        &quot;unmatched&quot;: 0,
+        &quot;updated&quot;: 0
+      },
+      &quot;testFilePath&quot;: &quot;D:\\proyectomgafrontend\\src\\__tests__\\integration\\GalleryAssignment.test.jsx&quot;,
+      &quot;testResults&quot;: [
+        {
+          &quot;ancestorTitles&quot;: [
+            &quot;GalleryAssignment&quot;
+          ],
+          &quot;duration&quot;: 888,
+          &quot;failureDetails&quot;: [
+            {
+              &quot;code&quot;: &quot;ERR_FONT_SOURCE&quot;
+            },
+            {
+              &quot;code&quot;: &quot;ERR_FONT_SOURCE&quot;
+            },
+            {
+              &quot;code&quot;: &quot;ERR_FONT_SOURCE&quot;
+            },
+            {
+              &quot;code&quot;: &quot;ERR_FONT_SOURCE&quot;
+            },
+            {}
+          ],
+          &quot;failureMessages&quot;: [
+            &quot;Error: &#x60;loadSingleFontAsync&#x60; expected resource of type &#x60;Asset&#x60; from expo-asset on native\n    at D:\\proyectomgafrontend\\node_modules\\expo-font\\src\\FontLoader.ts:46:11\n    at Generator.next (&lt;anonymous&gt;)\n    at asyncGeneratorStep (D:\\proyectomgafrontend\\node_modules\\@babel\\runtime\\helpers\\asyncToGenerator.js:3:24)\n    at _next (D:\\proyectomgafrontend\\node_modules\\@babel\\runtime\\helpers\\asyncToGenerator.js:22:9)\n    at D:\\proyectomgafrontend\\node_modules\\@babel\\runtime\\helpers\\asyncToGenerator.js:27:7\n    at new Promise (&lt;anonymous&gt;)\n    at D:\\proyectomgafrontend\\node_modules\\@babel\\runtime\\helpers\\asyncToGenerator.js:19:12\n    at apply (D:\\proyectomgafrontend\\node_modules\\expo-font\\src\\FontLoader.ts:57:2)\n    at apply (D:\\proyectomgafrontend\\node_modules\\expo-font\\src\\FontLoader.ts:40:42)\n    at D:\\proyectomgafrontend\\node_modules\\expo-font\\src\\Font.ts:133:32\n    at Generator.next (&lt;anonymous&gt;)\n    at asyncGeneratorStep (D:\\proyectomgafrontend\\node_modules\\@babel\\runtime\\helpers\\asyncToGenerator.js:3:24)\n    at _next (D:\\proyectomgafrontend\\node_modules\\@babel\\runtime\\helpers\\asyncToGenerator.js:22:9)\n    at D:\\proyectomgafrontend\\node_modules\\@babel\\runtime\\helpers\\asyncToGenerator.js:27:7\n    at new Promise (&lt;anonymous&gt;)\n    at D:\\proyectomgafrontend\\node_modules\\@babel\\runtime\\helpers\\asyncToGenerator.js:19:12\n    at D:\\proyectomgafrontend\\node_modules\\expo-font\\src\\Font.ts:138:4\n    at Generator.next (&lt;anonymous&gt;)\n    at asyncGeneratorStep (D:\\proyectomgafrontend\\node_modules\\@babel\\runtime\\helpers\\asyncToGenerator.js:3:24)\n    at _next (D:\\proyectomgafrontend\\node_modules\\@babel\\runtime\\helpers\\asyncToGenerator.js:22:9)\n    at D:\\proyectomgafrontend\\node_modules\\@babel\\runtime\\helpers\\asyncToGenerator.js:27:7\n    at new Promise (&lt;anonymous&gt;)\n    at D:\\proyectomgafrontend\\node_modules\\@babel\\runtime\\helpers\\asyncToGenerator.js:19:12\n    at apply (D:\\proyectomgafrontend\\node_modules\\expo-font\\src\\Font.ts:141:2)\n    at apply (D:\\proyectomgafrontend\\node_modules\\expo-font\\src\\Font.ts:106:40)\n    at loadFontInNamespaceAsync (D:\\proyectomgafrontend\\node_modules\\expo-font\\src\\Font.ts:99:43)\n    at Array.map (&lt;anonymous&gt;)\n    at Object.map (D:\\proyectomgafrontend\\node_modules\\expo-font\\src\\Font.ts:99:29)\n    at Generator.next (&lt;anonymous&gt;)\n    at asyncGeneratorStep (D:\\proyectomgafrontend\\node_modules\\@babel\\runtime\\helpers\\asyncToGenerator.js:3:24)\n    at _next (D:\\proyectomgafrontend\\node_modules\\@babel\\runtime\\helpers\\asyncToGenerator.js:22:9)\n    at D:\\proyectomgafrontend\\node_modules\\@babel\\runtime\\helpers\\asyncToGenerator.js:27:7\n    at new Promise (&lt;anonymous&gt;)\n    at Object.&lt;anonymous&gt; (D:\\proyectomgafrontend\\node_modules\\@babel\\runtime\\helpers\\asyncToGenerator.js:19:12)\n    at Object.apply (D:\\proyectomgafrontend\\node_modules\\expo-font\\src\\Font.ts:104:2)\n    at Object.apply [as loadAsync] (D:\\proyectomgafrontend\\node_modules\\expo-font\\src\\Font.ts:86:32)\n    at Icon.loadAsync (D:\\proyectomgafrontend\\node_modules\\@expo\\vector-icons\\src\\createIconSet.tsx:131:20)\n    at Generator.next (&lt;anonymous&gt;)\n    at asyncGeneratorStep (D:\\proyectomgafrontend\\node_modules\\@babel\\runtime\\helpers\\asyncToGenerator.js:3:24)\n    at _next (D:\\proyectomgafrontend\\node_modules\\@babel\\runtime\\helpers\\asyncToGenerator.js:22:9)\n    at D:\\proyectomgafrontend\\node_modules\\@babel\\runtime\\helpers\\asyncToGenerator.js:27:7\n    at new Promise (&lt;anonymous&gt;)\n    at Icon.&lt;anonymous&gt; (D:\\proyectomgafrontend\\node_modules\\@babel\\runtime\\helpers\\asyncToGenerator.js:19:12)\n    at Icon.apply [as componentDidMount] (D:\\proyectomgafrontend\\node_modules\\@expo\\vector-icons\\src\\createIconSet.tsx:134:6)\n    at commitLayoutEffectOnFiber (D:\\proyectomgafrontend\\node_modules\\react-test-renderer\\cjs\\react-test-renderer.development.js:13151:28)\n    at commitLayoutMountEffects_complete (D:\\proyectomgafrontend\\node_modules\\react-test-renderer\\cjs\\react-test-renderer.development.js:14330:9)\n    at commitLayoutEffects_begin (D:\\proyectomgafrontend\\node_modules\\react-test-renderer\\cjs\\react-test-renderer.development.js:14316:7)\n    at commitLayoutEffects (D:\\proyectomgafrontend\\node_modules\\react-test-renderer\\cjs\\react-test-renderer.development.js:14301:3)\n    at commitRootImpl (D:\\proyectomgafrontend\\node_modules\\react-test-renderer\\cjs\\react-test-renderer.development.js:16062:5)\n    at commitRoot (D:\\proyectomgafrontend\\node_modules\\react-test-renderer\\cjs\\react-test-renderer.development.js:15933:5)\n    at performSyncWorkOnRoot (D:\\proyectomgafrontend\\node_modules\\react-test-renderer\\cjs\\react-test-renderer.development.js:15454:3)\n    at flushSyncCallbacks (D:\\proyectomgafrontend\\node_modules\\react-test-renderer\\cjs\\react-test-renderer.development.js:2597:22)\n    at flushActQueue (D:\\proyectomgafrontend\\node_modules\\react\\cjs\\react.development.js:2667:24)\n    at Object.act (D:\\proyectomgafrontend\\node_modules\\react\\cjs\\react.development.js:2521:11)\n    at act (D:\\proyectomgafrontend\\node_modules\\@testing-library\\react-native\\src\\render-act.ts:13:16)\n    at renderInternal (D:\\proyectomgafrontend\\node_modules\\@testing-library\\react-native\\src\\render.tsx:62:33)\n    at renderInternal (D:\\proyectomgafrontend\\node_modules\\@testing-library\\react-native\\src\\render.tsx:32:10)\n    at Object.&lt;anonymous&gt; (D:\\proyectomgafrontend\\src\\__tests__\\integration\\GalleryAssignment.test.jsx:48:33)\n    at Generator.next (&lt;anonymous&gt;)\n    at asyncGeneratorStep (D:\\proyectomgafrontend\\node_modules\\@babel\\runtime\\helpers\\asyncToGenerator.js:3:24)\n    at _next (D:\\proyectomgafrontend\\node_modules\\@babel\\runtime\\helpers\\asyncToGenerator.js:22:9)\n    at D:\\proyectomgafrontend\\node_modules\\@babel\\runtime\\helpers\\asyncToGenerator.js:27:7\n    at new Promise (&lt;anonymous&gt;)\n    at Object.&lt;anonymous&gt; (D:\\proyectomgafrontend\\node_modules\\@babel\\runtime\\helpers\\asyncToGenerator.js:19:12)\n    at Promise.then.completed (D:\\proyectomgafrontend\\node_modules\\jest-circus\\build\\utils.js:298:28)\n    at new Promise (&lt;anonymous&gt;)\n    at callAsyncCircusFn (D:\\proyectomgafrontend\\node_modules\\jest-circus\\build\\utils.js:231:10)\n    at _callCircusTest (D:\\proyectomgafrontend\\node_modules\\jest-circus\\build\\run.js:316:40)\n    at processTicksAndRejections (node:internal&#x2F;process&#x2F;task_queues:95:5)\n    at _runTest (D:\\proyectomgafrontend\\node_modules\\jest-circus\\build\\run.js:252:3)\n    at _runTestsForDescribeBlock (D:\\proyectomgafrontend\\node_modules\\jest-circus\\build\\run.js:126:9)\n    at _runTestsForDescribeBlock (D:\\proyectomgafrontend\\node_modules\\jest-circus\\build\\run.js:121:9)\n    at run (D:\\proyectomgafrontend\\node_modules\\jest-circus\\build\\run.js:71:3)\n    at runAndTransformResultsToJestFormat (D:\\proyectomgafrontend\\node_modules\\jest-circus\\build\\legacy-code-todo-rewrite\\jestAdapterInit.js:122:21)\n    at jestAdapter (D:\\proyectomgafrontend\\node_modules\\jest-circus\\build\\legacy-code-todo-rewrite\\jestAdapter.js:79:19)\n    at runTestInternal (D:\\proyectomgafrontend\\node_modules\\jest-runner\\build\\runTest.js:367:16)\n    at runTest (D:\\proyectomgafrontend\\node_modules\\jest-runner\\build\\runTest.js:444:34)\n    at Object.worker (D:\\proyectomgafrontend\\node_modules\\jest-runner\\build\\testWorker.js:106:12)&quot;,
+            &quot;Error: &#x60;loadSingleFontAsync&#x60; expected resource of type &#x60;Asset&#x60; from expo-asset on native\n    at D:\\proyectomgafrontend\\node_modules\\expo-font\\src\\FontLoader.ts:46:11\n    at Generator.next (&lt;anonymous&gt;)\n    at asyncGeneratorStep (D:\\proyectomgafrontend\\node_modules\\@babel\\runtime\\helpers\\asyncToGenerator.js:3:24)\n    at _next (D:\\proyectomgafrontend\\node_modules\\@babel\\runtime\\helpers\\asyncToGenerator.js:22:9)\n    at D:\\proyectomgafrontend\\node_modules\\@babel\\runtime\\helpers\\asyncToGenerator.js:27:7\n    at new Promise (&lt;anonymous&gt;)\n    at D:\\proyectomgafrontend\\node_modules\\@babel\\runtime\\helpers\\asyncToGenerator.js:19:12\n    at apply (D:\\proyectomgafrontend\\node_modules\\expo-font\\src\\FontLoader.ts:40:42)\n    at D:\\proyectomgafrontend\\node_modules\\expo-font\\src\\Font.ts:133:32\n    at Generator.next (&lt;anonymous&gt;)\n    at asyncGeneratorStep (D:\\proyectomgafrontend\\node_modules\\@babel\\runtime\\helpers\\asyncToGenerator.js:3:24)\n    at _next (D:\\proyectomgafrontend\\node_modules\\@babel\\runtime\\helpers\\asyncToGenerator.js:22:9)\n    at D:\\proyectomgafrontend\\node_modules\\@babel\\runtime\\helpers\\asyncToGenerator.js:27:7\n    at new Promise (&lt;anonymous&gt;)\n    at D:\\proyectomgafrontend\\node_modules\\@babel\\runtime\\helpers\\asyncToGenerator.js:19:12\n    at D:\\proyectomgafrontend\\node_modules\\expo-font\\src\\Font.ts:138:4\n    at Generator.next (&lt;anonymous&gt;)\n    at asyncGeneratorStep (D:\\proyectomgafrontend\\node_modules\\@babel\\runtime\\helpers\\asyncToGenerator.js:3:24)\n    at _next (D:\\proyectomgafrontend\\node_modules\\@babel\\runtime\\helpers\\asyncToGenerator.js:22:9)\n    at D:\\proyectomgafrontend\\node_modules\\@babel\\runtime\\helpers\\asyncToGenerator.js:27:7\n    at new Promise (&lt;anonymous&gt;)\n    at D:\\proyectomgafrontend\\node_modules\\@babel\\runtime\\helpers\\asyncToGenerator.js:19:12\n    at apply (D:\\proyectomgafrontend\\node_modules\\expo-font\\src\\Font.ts:106:40)\n    at loadFontInNamespaceAsync (D:\\proyectomgafrontend\\node_modules\\expo-font\\src\\Font.ts:99:43)\n    at Array.map (&lt;anonymous&gt;)\n    at Object.map (D:\\proyectomgafrontend\\node_modules\\expo-font\\src\\Font.ts:99:29)\n    at Generator.next (&lt;anonymous&gt;)\n    at asyncGeneratorStep (D:\\proyectomgafrontend\\node_modules\\@babel\\runtime\\helpers\\asyncToGenerator.js:3:24)\n    at _next (D:\\proyectomgafrontend\\node_modules\\@babel\\runtime\\helpers\\asyncToGenerator.js:22:9)\n    at D:\\proyectomgafrontend\\node_modules\\@babel\\runtime\\helpers\\asyncToGenerator.js:27:7\n    at new Promise (&lt;anonymous&gt;)\n    at Object.&lt;anonymous&gt; (D:\\proyectomgafrontend\\node_modules\\@babel\\runtime\\helpers\\asyncToGenerator.js:19:12)\n    at Object.apply [as loadAsync] (D:\\proyectomgafrontend\\node_modules\\expo-font\\src\\Font.ts:86:32)\n    at Icon.loadAsync (D:\\proyectomgafrontend\\node_modules\\@expo\\vector-icons\\src\\createIconSet.tsx:131:20)\n    at Generator.next (&lt;anonymous&gt;)\n    at asyncGeneratorStep (D:\\proyectomgafrontend\\node_modules\\@babel\\runtime\\helpers\\asyncToGenerator.js:3:24)\n    at _next (D:\\proyectomgafrontend\\node_modules\\@babel\\runtime\\helpers\\asyncToGenerator.js:22:9)\n    at D:\\proyectomgafrontend\\node_modules\\@babel\\runtime\\helpers\\asyncToGenerator.js:27:7\n    at new Promise (&lt;anonymous&gt;)\n    at Icon.&lt;anonymous&gt; (D:\\proyectomgafrontend\\node_modules\\@babel\\runtime\\helpers\\asyncToGenerator.js:19:12)\n    at Icon.apply [as componentDidMount] (D:\\proyectomgafrontend\\node_modules\\@expo\\vector-icons\\src\\createIconSet.tsx:134:6)\n    at commitLayoutEffectOnFiber (D:\\proyectomgafrontend\\node_modules\\react-test-renderer\\cjs\\react-test-renderer.development.js:13151:28)\n    at commitLayoutMountEffects_complete (D:\\proyectomgafrontend\\node_modules\\react-test-renderer\\cjs\\react-test-renderer.development.js:14330:9)\n    at commitLayoutEffects_begin (D:\\proyectomgafrontend\\node_modules\\react-test-renderer\\cjs\\react-test-renderer.development.js:14316:7)\n    at commitLayoutEffects (D:\\proyectomgafrontend\\node_modules\\react-test-renderer\\cjs\\react-test-renderer.development.js:14301:3)\n    at commitRootImpl (D:\\proyectomgafrontend\\node_modules\\react-test-renderer\\cjs\\react-test-renderer.development.js:16062:5)\n    at commitRoot (D:\\proyectomgafrontend\\node_modules\\react-test-renderer\\cjs\\react-test-renderer.development.js:15933:5)\n    at performSyncWorkOnRoot (D:\\proyectomgafrontend\\node_modules\\react-test-renderer\\cjs\\react-test-renderer.development.js:15454:3)\n    at flushSyncCallbacks (D:\\proyectomgafrontend\\node_modules\\react-test-renderer\\cjs\\react-test-renderer.development.js:2597:22)\n    at flushActQueue (D:\\proyectomgafrontend\\node_modules\\react\\cjs\\react.development.js:2667:24)\n    at Object.act (D:\\proyectomgafrontend\\node_modules\\react\\cjs\\react.development.js:2521:11)\n    at act (D:\\proyectomgafrontend\\node_modules\\@testing-library\\react-native\\src\\render-act.ts:13:16)\n    at renderInternal (D:\\proyectomgafrontend\\node_modules\\@testing-library\\react-native\\src\\render.tsx:62:33)\n    at renderInternal (D:\\proyectomgafrontend\\node_modules\\@testing-library\\react-native\\src\\render.tsx:32:10)\n    at Object.&lt;anonymous&gt; (D:\\proyectomgafrontend\\src\\__tests__\\integration\\GalleryAssignment.test.jsx:48:33)\n    at Generator.next (&lt;anonymous&gt;)\n    at asyncGeneratorStep (D:\\proyectomgafrontend\\node_modules\\@babel\\runtime\\helpers\\asyncToGenerator.js:3:24)\n    at _next (D:\\proyectomgafrontend\\node_modules\\@babel\\runtime\\helpers\\asyncToGenerator.js:22:9)\n    at D:\\proyectomgafrontend\\node_modules\\@babel\\runtime\\helpers\\asyncToGenerator.js:27:7\n    at new Promise (&lt;anonymous&gt;)\n    at Object.&lt;anonymous&gt; (D:\\proyectomgafrontend\\node_modules\\@babel\\runtime\\helpers\\asyncToGenerator.js:19:12)\n    at Promise.then.completed (D:\\proyectomgafrontend\\node_modules\\jest-circus\\build\\utils.js:298:28)\n    at new Promise (&lt;anonymous&gt;)\n    at callAsyncCircusFn (D:\\proyectomgafrontend\\node_modules\\jest-circus\\build\\utils.js:231:10)\n    at _callCircusTest (D:\\proyectomgafrontend\\node_modules\\jest-circus\\build\\run.js:316:40)\n    at processTicksAndRejections (node:internal&#x2F;process&#x2F;task_queues:95:5)\n    at _runTest (D:\\proyectomgafrontend\\node_modules\\jest-circus\\build\\run.js:252:3)\n    at _runTestsForDescribeBlock (D:\\proyectomgafrontend\\node_modules\\jest-circus\\build\\run.js:126:9)\n    at _runTestsForDescribeBlock (D:\\proyectomgafrontend\\node_modules\\jest-circus\\build\\run.js:121:9)\n    at run (D:\\proyectomgafrontend\\node_modules\\jest-circus\\build\\run.js:71:3)\n    at runAndTransformResultsToJestFormat (D:\\proyectomgafrontend\\node_modules\\jest-circus\\build\\legacy-code-todo-rewrite\\jestAdapterInit.js:122:21)\n    at jestAdapter (D:\\proyectomgafrontend\\node_modules\\jest-circus\\build\\legacy-code-todo-rewrite\\jestAdapter.js:79:19)\n    at runTestInternal (D:\\proyectomgafrontend\\node_modules\\jest-runner\\build\\runTest.js:367:16)\n    at runTest (D:\\proyectomgafrontend\\node_modules\\jest-runner\\build\\runTest.js:444:34)\n    at Object.worker (D:\\proyectomgafrontend\\node_modules\\jest-runner\\build\\testWorker.js:106:12)&quot;,
+            &quot;Error: &#x60;loadSingleFontAsync&#x60; expected resource of type &#x60;Asset&#x60; from expo-asset on native\n    at D:\\proyectomgafrontend\\node_modules\\expo-font\\src\\FontLoader.ts:46:11\n    at Generator.next (&lt;anonymous&gt;)\n    at asyncGeneratorStep (D:\\proyectomgafrontend\\node_modules\\@babel\\runtime\\helpers\\asyncToGenerator.js:3:24)\n    at _next (D:\\proyectomgafrontend\\node_modules\\@babel\\runtime\\helpers\\asyncToGenerator.js:22:9)\n    at D:\\proyectomgafrontend\\node_modules\\@babel\\runtime\\helpers\\asyncToGenerator.js:27:7\n    at new Promise (&lt;anonymous&gt;)\n    at D:\\proyectomgafrontend\\node_modules\\@babel\\runtime\\helpers\\asyncToGenerator.js:19:12\n    at apply (D:\\proyectomgafrontend\\node_modules\\expo-font\\src\\FontLoader.ts:40:42)\n    at D:\\proyectomgafrontend\\node_modules\\expo-font\\src\\Font.ts:133:32\n    at Generator.next (&lt;anonymous&gt;)\n    at asyncGeneratorStep (D:\\proyectomgafrontend\\node_modules\\@babel\\runtime\\helpers\\asyncToGenerator.js:3:24)\n    at _next (D:\\proyectomgafrontend\\node_modules\\@babel\\runtime\\helpers\\asyncToGenerator.js:22:9)\n    at D:\\proyectomgafrontend\\node_modules\\@babel\\runtime\\helpers\\asyncToGenerator.js:27:7\n    at new Promise (&lt;anonymous&gt;)\n    at D:\\proyectomgafrontend\\node_modules\\@babel\\runtime\\helpers\\asyncToGenerator.js:19:12\n    at D:\\proyectomgafrontend\\node_modules\\expo-font\\src\\Font.ts:138:4\n    at Generator.next (&lt;anonymous&gt;)\n    at asyncGeneratorStep (D:\\proyectomgafrontend\\node_modules\\@babel\\runtime\\helpers\\asyncToGenerator.js:3:24)\n    at _next (D:\\proyectomgafrontend\\node_modules\\@babel\\runtime\\helpers\\asyncToGenerator.js:22:9)\n    at D:\\proyectomgafrontend\\node_modules\\@babel\\runtime\\helpers\\asyncToGenerator.js:27:7\n    at new Promise (&lt;anonymous&gt;)\n    at D:\\proyectomgafrontend\\node_modules\\@babel\\runtime\\helpers\\asyncToGenerator.js:19:12\n    at apply (D:\\proyectomgafrontend\\node_modules\\expo-font\\src\\Font.ts:106:40)\n    at loadFontInNamespaceAsync (D:\\proyectomgafrontend\\node_modules\\expo-font\\src\\Font.ts:99:43)\n    at Array.map (&lt;anonymous&gt;)\n    at Object.map (D:\\proyectomgafrontend\\node_modules\\expo-font\\src\\Font.ts:99:29)\n    at Generator.next (&lt;anonymous&gt;)\n    at asyncGeneratorStep (D:\\proyectomgafrontend\\node_modules\\@babel\\runtime\\helpers\\asyncToGenerator.js:3:24)\n    at _next (D:\\proyectomgafrontend\\node_modules\\@babel\\runtime\\helpers\\asyncToGenerator.js:22:9)\n    at D:\\proyectomgafrontend\\node_modules\\@babel\\runtime\\helpers\\asyncToGenerator.js:27:7\n    at new Promise (&lt;anonymous&gt;)\n    at Object.&lt;anonymous&gt; (D:\\proyectomgafrontend\\node_modules\\@babel\\runtime\\helpers\\asyncToGenerator.js:19:12)\n    at Object.apply [as loadAsync] (D:\\proyectomgafrontend\\node_modules\\expo-font\\src\\Font.ts:86:32)\n    at Icon.loadAsync (D:\\proyectomgafrontend\\node_modules\\@expo\\vector-icons\\src\\createIconSet.tsx:131:20)\n    at Generator.next (&lt;anonymous&gt;)\n    at asyncGeneratorStep (D:\\proyectomgafrontend\\node_modules\\@babel\\runtime\\helpers\\asyncToGenerator.js:3:24)\n    at _next (D:\\proyectomgafrontend\\node_modules\\@babel\\runtime\\helpers\\asyncToGenerator.js:22:9)\n    at D:\\proyectomgafrontend\\node_modules\\@babel\\runtime\\helpers\\asyncToGenerator.js:27:7\n    at new Promise (&lt;anonymous&gt;)\n    at Icon.&lt;anonymous&gt; (D:\\proyectomgafrontend\\node_modules\\@babel\\runtime\\helpers\\asyncToGenerator.js:19:12)\n    at Icon.apply [as componentDidMount] (D:\\proyectomgafrontend\\node_modules\\@expo\\vector-icons\\src\\createIconSet.tsx:134:6)\n    at commitLayoutEffectOnFiber (D:\\proyectomgafrontend\\node_modules\\react-test-renderer\\cjs\\react-test-renderer.development.js:13151:28)\n    at commitLayoutMountEffects_complete (D:\\proyectomgafrontend\\node_modules\\react-test-renderer\\cjs\\react-test-renderer.development.js:14330:9)\n    at commitLayoutEffects_begin (D:\\proyectomgafrontend\\node_modules\\react-test-renderer\\cjs\\react-test-renderer.development.js:14316:7)\n    at commitLayoutEffects (D:\\proyectomgafrontend\\node_modules\\react-test-renderer\\cjs\\react-test-renderer.development.js:14301:3)\n    at commitRootImpl (D:\\proyectomgafrontend\\node_modules\\react-test-renderer\\cjs\\react-test-renderer.development.js:16062:5)\n    at commitRoot (D:\\proyectomgafrontend\\node_modules\\react-test-renderer\\cjs\\react-test-renderer.development.js:15933:5)\n    at performSyncWorkOnRoot (D:\\proyectomgafrontend\\node_modules\\react-test-renderer\\cjs\\react-test-renderer.development.js:15454:3)\n    at flushSyncCallbacks (D:\\proyectomgafrontend\\node_modules\\react-test-renderer\\cjs\\react-test-renderer.development.js:2597:22)\n    at flushActQueue (D:\\proyectomgafrontend\\node_modules\\react\\cjs\\react.development.js:2667:24)\n    at Object.act (D:\\proyectomgafrontend\\node_modules\\react\\cjs\\react.development.js:2521:11)\n    at act (D:\\proyectomgafrontend\\node_modules\\@testing-library\\react-native\\src\\render-act.ts:13:16)\n    at renderInternal (D:\\proyectomgafrontend\\node_modules\\@testing-library\\react-native\\src\\render.tsx:62:33)\n    at renderInternal (D:\\proyectomgafrontend\\node_modules\\@testing-library\\react-native\\src\\render.tsx:32:10)\n    at Object.&lt;anonymous&gt; (D:\\proyectomgafrontend\\src\\__tests__\\integration\\GalleryAssignment.test.jsx:48:33)\n    at Generator.next (&lt;anonymous&gt;)\n    at asyncGeneratorStep (D:\\proyectomgafrontend\\node_modules\\@babel\\runtime\\helpers\\asyncToGenerator.js:3:24)\n    at _next (D:\\proyectomgafrontend\\node_modules\\@babel\\runtime\\helpers\\asyncToGenerator.js:22:9)\n    at D:\\proyectomgafrontend\\node_modules\\@babel\\runtime\\helpers\\asyncToGenerator.js:27:7\n    at new Promise (&lt;anonymous&gt;)\n    at Object.&lt;anonymous&gt; (D:\\proyectomgafrontend\\node_modules\\@babel\\runtime\\helpers\\asyncToGenerator.js:19:12)\n    at Promise.then.completed (D:\\proyectomgafrontend\\node_modules\\jest-circus\\build\\utils.js:298:28)\n    at new Promise (&lt;anonymous&gt;)\n    at callAsyncCircusFn (D:\\proyectomgafrontend\\node_modules\\jest-circus\\build\\utils.js:231:10)\n    at _callCircusTest (D:\\proyectomgafrontend\\node_modules\\jest-circus\\build\\run.js:316:40)\n    at processTicksAndRejections (node:internal&#x2F;process&#x2F;task_queues:95:5)\n    at _runTest (D:\\proyectomgafrontend\\node_modules\\jest-circus\\build\\run.js:252:3)\n    at _runTestsForDescribeBlock (D:\\proyectomgafrontend\\node_modules\\jest-circus\\build\\run.js:126:9)\n    at _runTestsForDescribeBlock (D:\\proyectomgafrontend\\node_modules\\jest-circus\\build\\run.js:121:9)\n    at run (D:\\proyectomgafrontend\\node_modules\\jest-circus\\build\\run.js:71:3)\n    at runAndTransformResultsToJestFormat (D:\\proyectomgafrontend\\node_modules\\jest-circus\\build\\legacy-code-todo-rewrite\\jestAdapterInit.js:122:21)\n    at jestAdapter (D:\\proyectomgafrontend\\node_modules\\jest-circus\\build\\legacy-code-todo-rewrite\\jestAdapter.js:79:19)\n    at runTestInternal (D:\\proyectomgafrontend\\node_modules\\jest-runner\\build\\runTest.js:367:16)\n    at runTest (D:\\proyectomgafrontend\\node_modules\\jest-runner\\build\\runTest.js:444:34)\n    at Object.worker (D:\\proyectomgafrontend\\node_modules\\jest-runner\\build\\testWorker.js:106:12)&quot;,
+            &quot;Error: &#x60;loadSingleFontAsync&#x60; expected resource of type &#x60;Asset&#x60; from expo-asset on native\n    at D:\\proyectomgafrontend\\node_modules\\expo-font\\src\\FontLoader.ts:46:11\n    at Generator.next (&lt;anonymous&gt;)\n    at asyncGeneratorStep (D:\\proyectomgafrontend\\node_modules\\@babel\\runtime\\helpers\\asyncToGenerator.js:3:24)\n    at _next (D:\\proyectomgafrontend\\node_modules\\@babel\\runtime\\helpers\\asyncToGenerator.js:22:9)\n    at D:\\proyectomgafrontend\\node_modules\\@babel\\runtime\\helpers\\asyncToGenerator.js:27:7\n    at new Promise (&lt;anonymous&gt;)\n    at D:\\proyectomgafrontend\\node_modules\\@babel\\runtime\\helpers\\asyncToGenerator.js:19:12\n    at apply (D:\\proyectomgafrontend\\node_modules\\expo-font\\src\\FontLoader.ts:40:42)\n    at D:\\proyectomgafrontend\\node_modules\\expo-font\\src\\Font.ts:133:32\n    at Generator.next (&lt;anonymous&gt;)\n    at asyncGeneratorStep (D:\\proyectomgafrontend\\node_modules\\@babel\\runtime\\helpers\\asyncToGenerator.js:3:24)\n    at _next (D:\\proyectomgafrontend\\node_modules\\@babel\\runtime\\helpers\\asyncToGenerator.js:22:9)\n    at D:\\proyectomgafrontend\\node_modules\\@babel\\runtime\\helpers\\asyncToGenerator.js:27:7\n    at new Promise (&lt;anonymous&gt;)\n    at D:\\proyectomgafrontend\\node_modules\\@babel\\runtime\\helpers\\asyncToGenerator.js:19:12\n    at D:\\proyectomgafrontend\\node_modules\\expo-font\\src\\Font.ts:138:4\n    at Generator.next (&lt;anonymous&gt;)\n    at asyncGeneratorStep (D:\\proyectomgafrontend\\node_modules\\@babel\\runtime\\helpers\\asyncToGenerator.js:3:24)\n    at _next (D:\\proyectomgafrontend\\node_modules\\@babel\\runtime\\helpers\\asyncToGenerator.js:22:9)\n    at D:\\proyectomgafrontend\\node_modules\\@babel\\runtime\\helpers\\asyncToGenerator.js:27:7\n    at new Promise (&lt;anonymous&gt;)\n    at D:\\proyectomgafrontend\\node_modules\\@babel\\runtime\\helpers\\asyncToGenerator.js:19:12\n    at apply (D:\\proyectomgafrontend\\node_modules\\expo-font\\src\\Font.ts:106:40)\n    at loadFontInNamespaceAsync (D:\\proyectomgafrontend\\node_modules\\expo-font\\src\\Font.ts:99:43)\n    at Array.map (&lt;anonymous&gt;)\n    at Object.map (D:\\proyectomgafrontend\\node_modules\\expo-font\\src\\Font.ts:99:29)\n    at Generator.next (&lt;anonymous&gt;)\n    at asyncGeneratorStep (D:\\proyectomgafrontend\\node_modules\\@babel\\runtime\\helpers\\asyncToGenerator.js:3:24)\n    at _next (D:\\proyectomgafrontend\\node_modules\\@babel\\runtime\\helpers\\asyncToGenerator.js:22:9)\n    at D:\\proyectomgafrontend\\node_modules\\@babel\\runtime\\helpers\\asyncToGenerator.js:27:7\n    at new Promise (&lt;anonymous&gt;)\n    at Object.&lt;anonymous&gt; (D:\\proyectomgafrontend\\node_modules\\@babel\\runtime\\helpers\\asyncToGenerator.js:19:12)\n    at Object.apply [as loadAsync] (D:\\proyectomgafrontend\\node_modules\\expo-font\\src\\Font.ts:86:32)\n    at Icon.loadAsync (D:\\proyectomgafrontend\\node_modules\\@expo\\vector-icons\\src\\createIconSet.tsx:131:20)\n    at Generator.next (&lt;anonymous&gt;)\n    at asyncGeneratorStep (D:\\proyectomgafrontend\\node_modules\\@babel\\runtime\\helpers\\asyncToGenerator.js:3:24)\n    at _next (D:\\proyectomgafrontend\\node_modules\\@babel\\runtime\\helpers\\asyncToGenerator.js:22:9)\n    at D:\\proyectomgafrontend\\node_modules\\@babel\\runtime\\helpers\\asyncToGenerator.js:27:7\n    at new Promise (&lt;anonymous&gt;)\n    at Icon.&lt;anonymous&gt; (D:\\proyectomgafrontend\\node_modules\\@babel\\runtime\\helpers\\asyncToGenerator.js:19:12)\n    at Icon.apply [as componentDidMount] (D:\\proyectomgafrontend\\node_modules\\@expo\\vector-icons\\src\\createIconSet.tsx:134:6)\n    at commitLayoutEffectOnFiber (D:\\proyectomgafrontend\\node_modules\\react-test-renderer\\cjs\\react-test-renderer.development.js:13151:28)\n    at commitLayoutMountEffects_complete (D:\\proyectomgafrontend\\node_modules\\react-test-renderer\\cjs\\react-test-renderer.development.js:14330:9)\n    at commitLayoutEffects_begin (D:\\proyectomgafrontend\\node_modules\\react-test-renderer\\cjs\\react-test-renderer.development.js:14316:7)\n    at commitLayoutEffects (D:\\proyectomgafrontend\\node_modules\\react-test-renderer\\cjs\\react-test-renderer.development.js:14301:3)\n    at commitRootImpl (D:\\proyectomgafrontend\\node_modules\\react-test-renderer\\cjs\\react-test-renderer.development.js:16062:5)\n    at commitRoot (D:\\proyectomgafrontend\\node_modules\\react-test-renderer\\cjs\\react-test-renderer.development.js:15933:5)\n    at performSyncWorkOnRoot (D:\\proyectomgafrontend\\node_modules\\react-test-renderer\\cjs\\react-test-renderer.development.js:15454:3)\n    at flushSyncCallbacks (D:\\proyectomgafrontend\\node_modules\\react-test-renderer\\cjs\\react-test-renderer.development.js:2597:22)\n    at flushActQueue (D:\\proyectomgafrontend\\node_modules\\react\\cjs\\react.development.js:2667:24)\n    at Object.act (D:\\proyectomgafrontend\\node_modules\\react\\cjs\\react.development.js:2521:11)\n    at act (D:\\proyectomgafrontend\\node_modules\\@testing-library\\react-native\\src\\render-act.ts:13:16)\n    at renderInternal (D:\\proyectomgafrontend\\node_modules\\@testing-library\\react-native\\src\\render.tsx:62:33)\n    at renderInternal (D:\\proyectomgafrontend\\node_modules\\@testing-library\\react-native\\src\\render.tsx:32:10)\n    at Object.&lt;anonymous&gt; (D:\\proyectomgafrontend\\src\\__tests__\\integration\\GalleryAssignment.test.jsx:48:33)\n    at Generator.next (&lt;anonymous&gt;)\n    at asyncGeneratorStep (D:\\proyectomgafrontend\\node_modules\\@babel\\runtime\\helpers\\asyncToGenerator.js:3:24)\n    at _next (D:\\proyectomgafrontend\\node_modules\\@babel\\runtime\\helpers\\asyncToGenerator.js:22:9)\n    at D:\\proyectomgafrontend\\node_modules\\@babel\\runtime\\helpers\\asyncToGenerator.js:27:7\n    at new Promise (&lt;anonymous&gt;)\n    at Object.&lt;anonymous&gt; (D:\\proyectomgafrontend\\node_modules\\@babel\\runtime\\helpers\\asyncToGenerator.js:19:12)\n    at Promise.then.completed (D:\\proyectomgafrontend\\node_modules\\jest-circus\\build\\utils.js:298:28)\n    at new Promise (&lt;anonymous&gt;)\n    at callAsyncCircusFn (D:\\proyectomgafrontend\\node_modules\\jest-circus\\build\\utils.js:231:10)\n    at _callCircusTest (D:\\proyectomgafrontend\\node_modules\\jest-circus\\build\\run.js:316:40)\n    at processTicksAndRejections (node:internal&#x2F;process&#x2F;task_queues:95:5)\n    at _runTest (D:\\proyectomgafrontend\\node_modules\\jest-circus\\build\\run.js:252:3)\n    at _runTestsForDescribeBlock (D:\\proyectomgafrontend\\node_modules\\jest-circus\\build\\run.js:126:9)\n    at _runTestsForDescribeBlock (D:\\proyectomgafrontend\\node_modules\\jest-circus\\build\\run.js:121:9)\n    at run (D:\\proyectomgafrontend\\node_modules\\jest-circus\\build\\run.js:71:3)\n    at runAndTransformResultsToJestFormat (D:\\proyectomgafrontend\\node_modules\\jest-circus\\build\\legacy-code-todo-rewrite\\jestAdapterInit.js:122:21)\n    at jestAdapter (D:\\proyectomgafrontend\\node_modules\\jest-circus\\build\\legacy-code-todo-rewrite\\jestAdapter.js:79:19)\n    at runTestInternal (D:\\proyectomgafrontend\\node_modules\\jest-runner\\build\\runTest.js:367:16)\n    at runTest (D:\\proyectomgafrontend\\node_modules\\jest-runner\\build\\runTest.js:444:34)\n    at Object.worker (D:\\proyectomgafrontend\\node_modules\\jest-runner\\build\\testWorker.js:106:12)&quot;,
+            &quot;TypeError: Cannot read properties of null (reading &#39;data&#39;)\n    at data (D:\\proyectomgafrontend\\src\\components\\CardAssignment\\CardAssignment.jsx:45:18)\n    at commitHookEffectListMount (D:\\proyectomgafrontend\\node_modules\\react-test-renderer\\cjs\\react-test-renderer.development.js:12999:26)\n    at commitPassiveMountOnFiber (D:\\proyectomgafrontend\\node_modules\\react-test-renderer\\cjs\\react-test-renderer.development.js:14422:11)\n    at commitPassiveMountEffects_complete (D:\\proyectomgafrontend\\node_modules\\react-test-renderer\\cjs\\react-test-renderer.development.js:14382:9)\n    at commitPassiveMountEffects_begin (D:\\proyectomgafrontend\\node_modules\\react-test-renderer\\cjs\\react-test-renderer.development.js:14369:7)\n    at commitPassiveMountEffects (D:\\proyectomgafrontend\\node_modules\\react-test-renderer\\cjs\\react-test-renderer.development.js:14357:3)\n    at flushPassiveEffectsImpl (D:\\proyectomgafrontend\\node_modules\\react-test-renderer\\cjs\\react-test-renderer.development.js:16248:3)\n    at flushPassiveEffects (D:\\proyectomgafrontend\\node_modules\\react-test-renderer\\cjs\\react-test-renderer.development.js:16197:14)\n    at D:\\proyectomgafrontend\\node_modules\\react-test-renderer\\cjs\\react-test-renderer.development.js:16012:9\n    at workLoop (D:\\proyectomgafrontend\\node_modules\\react-test-renderer\\node_modules\\scheduler\\cjs\\scheduler.development.js:266:34)\n    at flushWork (D:\\proyectomgafrontend\\node_modules\\react-test-renderer\\node_modules\\scheduler\\cjs\\scheduler.development.js:239:14)\n    at performWorkUntilDeadline (D:\\proyectomgafrontend\\node_modules\\react-test-renderer\\node_modules\\scheduler\\cjs\\scheduler.development.js:533:21)\n    at Timeout.task [as _onTimeout] (D:\\proyectomgafrontend\\node_modules\\jsdom\\lib\\jsdom\\browser\\Window.js:520:19)\n    at listOnTimeout (node:internal&#x2F;timers:573:17)\n    at processTimers (node:internal&#x2F;timers:514:7)&quot;
+          ],
+          &quot;fullName&quot;: &quot;GalleryAssignment renders correctly&quot;,
+          &quot;invocations&quot;: 1,
+          &quot;location&quot;: null,
+          &quot;numPassingAsserts&quot;: 1,
+          &quot;retryReasons&quot;: [],
+          &quot;status&quot;: &quot;failed&quot;,
+          &quot;title&quot;: &quot;renders correctly&quot;
+        }
+      ],
+      &quot;failureMessage&quot;: &quot;\u001b[1m\u001b[31m  \u001b[1m● \u001b[22m\u001b[1mGalleryAssignment › renders correctly\u001b[39m\u001b[22m\n\n    &#x60;loadSingleFontAsync&#x60; expected resource of type &#x60;Asset&#x60; from expo-asset on native\n\u001b[2m\u001b[22m\n\u001b[2m    \u001b[0m \u001b[90m 46 |\u001b[39m     useApi\u001b[33m.\u001b[39mmockReturnValue([\u001b[36mnull\u001b[39m\u001b[33m,\u001b[39m \u001b[36mnull\u001b[39m\u001b[33m,\u001b[39m handleRequestMock])\u001b[0m\u001b[22m\n\u001b[2m    \u001b[0m \u001b[90m 47 |\u001b[39m\u001b[0m\u001b[22m\n\u001b[2m    \u001b[0m\u001b[31m\u001b[1m&gt;\u001b[22m\u001b[2m\u001b[39m\u001b[90m 48 |\u001b[39m     \u001b[36mconst\u001b[39m { getByText } \u001b[33m&#x3D;\u001b[39m render(\u001b[33m&lt;\u001b[39m\u001b[33mGalleryAssignment\u001b[39m \u001b[33m&#x2F;\u001b[39m\u001b[33m&gt;\u001b[39m)\u001b[0m\u001b[22m\n\u001b[2m    \u001b[0m \u001b[90m    |\u001b[39m                                 \u001b[31m\u001b[1m^\u001b[22m\u001b[2m\u001b[39m\u001b[0m\u001b[22m\n\u001b[2m    \u001b[0m \u001b[90m 49 |\u001b[39m\u001b[0m\u001b[22m\n\u001b[2m    \u001b[0m \u001b[90m 50 |\u001b[39m     \u001b[90m&#x2F;&#x2F; Use waitFor to wait for the asynchronous task to complete\u001b[39m\u001b[0m\u001b[22m\n\u001b[2m    \u001b[0m \u001b[90m 51 |\u001b[39m     \u001b[36mawait\u001b[39m waitFor(() \u001b[33m&#x3D;&gt;\u001b[39m {\u001b[0m\u001b[22m\n\u001b[2m\u001b[22m\n\u001b[2m      \u001b[2mat \u001b[22m\u001b[2mnode_modules&#x2F;expo-font&#x2F;src&#x2F;FontLoader.ts\u001b[2m:46:11\u001b[22m\u001b[2m\u001b[22m\n\u001b[2m      \u001b[2mat asyncGeneratorStep (\u001b[22m\u001b[2mnode_modules&#x2F;@babel&#x2F;runtime&#x2F;helpers&#x2F;asyncToGenerator.js\u001b[2m:3:24)\u001b[22m\u001b[2m\u001b[22m\n\u001b[2m      \u001b[2mat _next (\u001b[22m\u001b[2mnode_modules&#x2F;@babel&#x2F;runtime&#x2F;helpers&#x2F;asyncToGenerator.js\u001b[2m:22:9)\u001b[22m\u001b[2m\u001b[22m\n\u001b[2m      \u001b[2mat \u001b[22m\u001b[2mnode_modules&#x2F;@babel&#x2F;runtime&#x2F;helpers&#x2F;asyncToGenerator.js\u001b[2m:27:7\u001b[22m\u001b[2m\u001b[22m\n\u001b[2m      \u001b[2mat \u001b[22m\u001b[2mnode_modules&#x2F;@babel&#x2F;runtime&#x2F;helpers&#x2F;asyncToGenerator.js\u001b[2m:19:12\u001b[22m\u001b[2m\u001b[22m\n\u001b[2m      \u001b[2mat apply (\u001b[22m\u001b[2mnode_modules&#x2F;expo-font&#x2F;src&#x2F;FontLoader.ts\u001b[2m:57:2)\u001b[22m\u001b[2m\u001b[22m\n\u001b[2m      \u001b[2mat apply (\u001b[22m\u001b[2mnode_modules&#x2F;expo-font&#x2F;src&#x2F;FontLoader.ts\u001b[2m:40:42)\u001b[22m\u001b[2m\u001b[22m\n\u001b[2m      \u001b[2mat \u001b[22m\u001b[2mnode_modules&#x2F;expo-font&#x2F;src&#x2F;Font.ts\u001b[2m:133:32\u001b[22m\u001b[2m\u001b[22m\n\u001b[2m      \u001b[2mat asyncGeneratorStep (\u001b[22m\u001b[2mnode_modules&#x2F;@babel&#x2F;runtime&#x2F;helpers&#x2F;asyncToGenerator.js\u001b[2m:3:24)\u001b[22m\u001b[2m\u001b[22m\n\u001b[2m      \u001b[2mat _next (\u001b[22m\u001b[2mnode_modules&#x2F;@babel&#x2F;runtime&#x2F;helpers&#x2F;asyncToGenerator.js\u001b[2m:22:9)\u001b[22m\u001b[2m\u001b[22m\n\u001b[2m      \u001b[2mat \u001b[22m\u001b[2mnode_modules&#x2F;@babel&#x2F;runtime&#x2F;helpers&#x2F;asyncToGenerator.js\u001b[2m:27:7\u001b[22m\u001b[2m\u001b[22m\n\u001b[2m      \u001b[2mat \u001b[22m\u001b[2mnode_modules&#x2F;@babel&#x2F;runtime&#x2F;helpers&#x2F;asyncToGenerator.js\u001b[2m:19:12\u001b[22m\u001b[2m\u001b[22m\n\u001b[2m      \u001b[2mat \u001b[22m\u001b[2mnode_modules&#x2F;expo-font&#x2F;src&#x2F;Font.ts\u001b[2m:138:4\u001b[22m\u001b[2m\u001b[22m\n\u001b[2m      \u001b[2mat asyncGeneratorStep (\u001b[22m\u001b[2mnode_modules&#x2F;@babel&#x2F;runtime&#x2F;helpers&#x2F;asyncToGenerator.js\u001b[2m:3:24)\u001b[22m\u001b[2m\u001b[22m\n\u001b[2m      \u001b[2mat _next (\u001b[22m\u001b[2mnode_modules&#x2F;@babel&#x2F;runtime&#x2F;helpers&#x2F;asyncToGenerator.js\u001b[2m:22:9)\u001b[22m\u001b[2m\u001b[22m\n\u001b[2m      \u001b[2mat \u001b[22m\u001b[2mnode_modules&#x2F;@babel&#x2F;runtime&#x2F;helpers&#x2F;asyncToGenerator.js\u001b[2m:27:7\u001b[22m\u001b[2m\u001b[22m\n\u001b[2m      \u001b[2mat \u001b[22m\u001b[2mnode_modules&#x2F;@babel&#x2F;runtime&#x2F;helpers&#x2F;asyncToGenerator.js\u001b[2m:19:12\u001b[22m\u001b[2m\u001b[22m\n\u001b[2m      \u001b[2mat apply (\u001b[22m\u001b[2mnode_modules&#x2F;expo-font&#x2F;src&#x2F;Font.ts\u001b[2m:141:2)\u001b[22m\u001b[2m\u001b[22m\n\u001b[2m      \u001b[2mat apply (\u001b[22m\u001b[2mnode_modules&#x2F;expo-font&#x2F;src&#x2F;Font.ts\u001b[2m:106:40)\u001b[22m\u001b[2m\u001b[22m\n\u001b[2m      \u001b[2mat loadFontInNamespaceAsync (\u001b[22m\u001b[2mnode_modules&#x2F;expo-font&#x2F;src&#x2F;Font.ts\u001b[2m:99:43)\u001b[22m\u001b[2m\u001b[22m\n\u001b[2m          at Array.map (&lt;anonymous&gt;)\u001b[22m\n\u001b[2m      \u001b[2mat Object.map (\u001b[22m\u001b[2mnode_modules&#x2F;expo-font&#x2F;src&#x2F;Font.ts\u001b[2m:99:29)\u001b[22m\u001b[2m\u001b[22m\n\u001b[2m      \u001b[2mat asyncGeneratorStep (\u001b[22m\u001b[2mnode_modules&#x2F;@babel&#x2F;runtime&#x2F;helpers&#x2F;asyncToGenerator.js\u001b[2m:3:24)\u001b[22m\u001b[2m\u001b[22m\n\u001b[2m      \u001b[2mat _next (\u001b[22m\u001b[2mnode_modules&#x2F;@babel&#x2F;runtime&#x2F;helpers&#x2F;asyncToGenerator.js\u001b[2m:22:9)\u001b[22m\u001b[2m\u001b[22m\n\u001b[2m      \u001b[2mat \u001b[22m\u001b[2mnode_modules&#x2F;@babel&#x2F;runtime&#x2F;helpers&#x2F;asyncToGenerator.js\u001b[2m:27:7\u001b[22m\u001b[2m\u001b[22m\n\u001b[2m      \u001b[2mat Object.&lt;anonymous&gt; (\u001b[22m\u001b[2mnode_modules&#x2F;@babel&#x2F;runtime&#x2F;helpers&#x2F;asyncToGenerator.js\u001b[2m:19:12)\u001b[22m\u001b[2m\u001b[22m\n\u001b[2m      \u001b[2mat Object.apply (\u001b[22m\u001b[2mnode_modules&#x2F;expo-font&#x2F;src&#x2F;Font.ts\u001b[2m:104:2)\u001b[22m\u001b[2m\u001b[22m\n\u001b[2m      \u001b[2mat Object.apply [as loadAsync] (\u001b[22m\u001b[2mnode_modules&#x2F;expo-font&#x2F;src&#x2F;Font.ts\u001b[2m:86:32)\u001b[22m\u001b[2m\u001b[22m\n\u001b[2m      \u001b[2mat Icon.loadAsync (\u001b[22m\u001b[2mnode_modules&#x2F;@expo&#x2F;vector-icons&#x2F;src&#x2F;createIconSet.tsx\u001b[2m:131:20)\u001b[22m\u001b[2m\u001b[22m\n\u001b[2m      \u001b[2mat asyncGeneratorStep (\u001b[22m\u001b[2mnode_modules&#x2F;@babel&#x2F;runtime&#x2F;helpers&#x2F;asyncToGenerator.js\u001b[2m:3:24)\u001b[22m\u001b[2m\u001b[22m\n\u001b[2m      \u001b[2mat _next (\u001b[22m\u001b[2mnode_modules&#x2F;@babel&#x2F;runtime&#x2F;helpers&#x2F;asyncToGenerator.js\u001b[2m:22:9)\u001b[22m\u001b[2m\u001b[22m\n\u001b[2m      \u001b[2mat \u001b[22m\u001b[2mnode_modules&#x2F;@babel&#x2F;runtime&#x2F;helpers&#x2F;asyncToGenerator.js\u001b[2m:27:7\u001b[22m\u001b[2m\u001b[22m\n\u001b[2m      \u001b[2mat Icon.&lt;anonymous&gt; (\u001b[22m\u001b[2mnode_modules&#x2F;@babel&#x2F;runtime&#x2F;helpers&#x2F;asyncToGenerator.js\u001b[2m:19:12)\u001b[22m\u001b[2m\u001b[22m\n\u001b[2m      \u001b[2mat Icon.apply [as componentDidMount] (\u001b[22m\u001b[2mnode_modules&#x2F;@expo&#x2F;vector-icons&#x2F;src&#x2F;createIconSet.tsx\u001b[2m:134:6)\u001b[22m\u001b[2m\u001b[22m\n\u001b[2m      \u001b[2mat commitLayoutEffectOnFiber (\u001b[22m\u001b[2mnode_modules&#x2F;react-test-renderer&#x2F;cjs&#x2F;react-test-renderer.development.js\u001b[2m:13151:28)\u001b[22m\u001b[2m\u001b[22m\n\u001b[2m      \u001b[2mat commitLayoutMountEffects_complete (\u001b[22m\u001b[2mnode_modules&#x2F;react-test-renderer&#x2F;cjs&#x2F;react-test-renderer.development.js\u001b[2m:14330:9)\u001b[22m\u001b[2m\u001b[22m\n\u001b[2m      \u001b[2mat commitLayoutEffects_begin (\u001b[22m\u001b[2mnode_modules&#x2F;react-test-renderer&#x2F;cjs&#x2F;react-test-renderer.development.js\u001b[2m:14316:7)\u001b[22m\u001b[2m\u001b[22m\n\u001b[2m      \u001b[2mat commitLayoutEffects (\u001b[22m\u001b[2mnode_modules&#x2F;react-test-renderer&#x2F;cjs&#x2F;react-test-renderer.development.js\u001b[2m:14301:3)\u001b[22m\u001b[2m\u001b[22m\n\u001b[2m      \u001b[2mat commitRootImpl (\u001b[22m\u001b[2mnode_modules&#x2F;react-test-renderer&#x2F;cjs&#x2F;react-test-renderer.development.js\u001b[2m:16062:5)\u001b[22m\u001b[2m\u001b[22m\n\u001b[2m      \u001b[2mat commitRoot (\u001b[22m\u001b[2mnode_modules&#x2F;react-test-renderer&#x2F;cjs&#x2F;react-test-renderer.development.js\u001b[2m:15933:5)\u001b[22m\u001b[2m\u001b[22m\n\u001b[2m      \u001b[2mat performSyncWorkOnRoot (\u001b[22m\u001b[2mnode_modules&#x2F;react-test-renderer&#x2F;cjs&#x2F;react-test-renderer.development.js\u001b[2m:15454:3)\u001b[22m\u001b[2m\u001b[22m\n\u001b[2m      \u001b[2mat flushSyncCallbacks (\u001b[22m\u001b[2mnode_modules&#x2F;react-test-renderer&#x2F;cjs&#x2F;react-test-renderer.development.js\u001b[2m:2597:22)\u001b[22m\u001b[2m\u001b[22m\n\u001b[2m      \u001b[2mat flushActQueue (\u001b[22m\u001b[2mnode_modules&#x2F;react&#x2F;cjs&#x2F;react.development.js\u001b[2m:2667:24)\u001b[22m\u001b[2m\u001b[22m\n\u001b[2m      \u001b[2mat Object.act (\u001b[22m\u001b[2mnode_modules&#x2F;react&#x2F;cjs&#x2F;react.development.js\u001b[2m:2521:11)\u001b[22m\u001b[2m\u001b[22m\n\u001b[2m      \u001b[2mat act (\u001b[22m\u001b[2mnode_modules&#x2F;@testing-library&#x2F;react-native&#x2F;src&#x2F;render-act.ts\u001b[2m:13:16)\u001b[22m\u001b[2m\u001b[22m\n\u001b[2m      \u001b[2mat renderInternal (\u001b[22m\u001b[2mnode_modules&#x2F;@testing-library&#x2F;react-native&#x2F;src&#x2F;render.tsx\u001b[2m:62:33)\u001b[22m\u001b[2m\u001b[22m\n\u001b[2m      \u001b[2mat renderInternal (\u001b[22m\u001b[2mnode_modules&#x2F;@testing-library&#x2F;react-native&#x2F;src&#x2F;render.tsx\u001b[2m:32:10)\u001b[22m\u001b[2m\u001b[22m\n\u001b[2m      \u001b[2mat Object.&lt;anonymous&gt; (\u001b[22m\u001b[2m\u001b[0m\u001b[36msrc&#x2F;__tests__&#x2F;integration&#x2F;GalleryAssignment.test.jsx\u001b[39m\u001b[0m\u001b[2m:48:33)\u001b[22m\u001b[2m\u001b[22m\n\u001b[2m      \u001b[2mat asyncGeneratorStep (\u001b[22m\u001b[2mnode_modules&#x2F;@babel&#x2F;runtime&#x2F;helpers&#x2F;asyncToGenerator.js\u001b[2m:3:24)\u001b[22m\u001b[2m\u001b[22m\n\u001b[2m      \u001b[2mat _next (\u001b[22m\u001b[2mnode_modules&#x2F;@babel&#x2F;runtime&#x2F;helpers&#x2F;asyncToGenerator.js\u001b[2m:22:9)\u001b[22m\u001b[2m\u001b[22m\n\u001b[2m      \u001b[2mat \u001b[22m\u001b[2mnode_modules&#x2F;@babel&#x2F;runtime&#x2F;helpers&#x2F;asyncToGenerator.js\u001b[2m:27:7\u001b[22m\u001b[2m\u001b[22m\n\u001b[2m      \u001b[2mat Object.&lt;anonymous&gt; (\u001b[22m\u001b[2mnode_modules&#x2F;@babel&#x2F;runtime&#x2F;helpers&#x2F;asyncToGenerator.js\u001b[2m:19:12)\u001b[22m\u001b[2m\u001b[22m\n\n\u001b[1m\u001b[31m  \u001b[1m● \u001b[22m\u001b[1mGalleryAssignment › renders correctly\u001b[39m\u001b[22m\n\n    &#x60;loadSingleFontAsync&#x60; expected resource of type &#x60;Asset&#x60; from expo-asset on native\n\u001b[2m\u001b[22m\n\u001b[2m    \u001b[0m \u001b[90m 46 |\u001b[39m     useApi\u001b[33m.\u001b[39mmockReturnValue([\u001b[36mnull\u001b[39m\u001b[33m,\u001b[39m \u001b[36mnull\u001b[39m\u001b[33m,\u001b[39m handleRequestMock])\u001b[0m\u001b[22m\n\u001b[2m    \u001b[0m \u001b[90m 47 |\u001b[39m\u001b[0m\u001b[22m\n\u001b[2m    \u001b[0m\u001b[31m\u001b[1m&gt;\u001b[22m\u001b[2m\u001b[39m\u001b[90m 48 |\u001b[39m     \u001b[36mconst\u001b[39m { getByText } \u001b[33m&#x3D;\u001b[39m render(\u001b[33m&lt;\u001b[39m\u001b[33mGalleryAssignment\u001b[39m \u001b[33m&#x2F;\u001b[39m\u001b[33m&gt;\u001b[39m)\u001b[0m\u001b[22m\n\u001b[2m    \u001b[0m \u001b[90m    |\u001b[39m                                 \u001b[31m\u001b[1m^\u001b[22m\u001b[2m\u001b[39m\u001b[0m\u001b[22m\n\u001b[2m    \u001b[0m \u001b[90m 49 |\u001b[39m\u001b[0m\u001b[22m\n\u001b[2m    \u001b[0m \u001b[90m 50 |\u001b[39m     \u001b[90m&#x2F;&#x2F; Use waitFor to wait for the asynchronous task to complete\u001b[39m\u001b[0m\u001b[22m\n\u001b[2m    \u001b[0m \u001b[90m 51 |\u001b[39m     \u001b[36mawait\u001b[39m waitFor(() \u001b[33m&#x3D;&gt;\u001b[39m {\u001b[0m\u001b[22m\n\u001b[2m\u001b[22m\n\u001b[2m      \u001b[2mat \u001b[22m\u001b[2mnode_modules&#x2F;expo-font&#x2F;src&#x2F;FontLoader.ts\u001b[2m:46:11\u001b[22m\u001b[2m\u001b[22m\n\u001b[2m      \u001b[2mat asyncGeneratorStep (\u001b[22m\u001b[2mnode_modules&#x2F;@babel&#x2F;runtime&#x2F;helpers&#x2F;asyncToGenerator.js\u001b[2m:3:24)\u001b[22m\u001b[2m\u001b[22m\n\u001b[2m      \u001b[2mat _next (\u001b[22m\u001b[2mnode_modules&#x2F;@babel&#x2F;runtime&#x2F;helpers&#x2F;asyncToGenerator.js\u001b[2m:22:9)\u001b[22m\u001b[2m\u001b[22m\n\u001b[2m      \u001b[2mat \u001b[22m\u001b[2mnode_modules&#x2F;@babel&#x2F;runtime&#x2F;helpers&#x2F;asyncToGenerator.js\u001b[2m:27:7\u001b[22m\u001b[2m\u001b[22m\n\u001b[2m      \u001b[2mat \u001b[22m\u001b[2mnode_modules&#x2F;@babel&#x2F;runtime&#x2F;helpers&#x2F;asyncToGenerator.js\u001b[2m:19:12\u001b[22m\u001b[2m\u001b[22m\n\u001b[2m      \u001b[2mat apply (\u001b[22m\u001b[2mnode_modules&#x2F;expo-font&#x2F;src&#x2F;FontLoader.ts\u001b[2m:40:42)\u001b[22m\u001b[2m\u001b[22m\n\u001b[2m      \u001b[2mat \u001b[22m\u001b[2mnode_modules&#x2F;expo-font&#x2F;src&#x2F;Font.ts\u001b[2m:133:32\u001b[22m\u001b[2m\u001b[22m\n\u001b[2m      \u001b[2mat asyncGeneratorStep (\u001b[22m\u001b[2mnode_modules&#x2F;@babel&#x2F;runtime&#x2F;helpers&#x2F;asyncToGenerator.js\u001b[2m:3:24)\u001b[22m\u001b[2m\u001b[22m\n\u001b[2m      \u001b[2mat _next (\u001b[22m\u001b[2mnode_modules&#x2F;@babel&#x2F;runtime&#x2F;helpers&#x2F;asyncToGenerator.js\u001b[2m:22:9)\u001b[22m\u001b[2m\u001b[22m\n\u001b[2m      \u001b[2mat \u001b[22m\u001b[2mnode_modules&#x2F;@babel&#x2F;runtime&#x2F;helpers&#x2F;asyncToGenerator.js\u001b[2m:27:7\u001b[22m\u001b[2m\u001b[22m\n\u001b[2m      \u001b[2mat \u001b[22m\u001b[2mnode_modules&#x2F;@babel&#x2F;runtime&#x2F;helpers&#x2F;asyncToGenerator.js\u001b[2m:19:12\u001b[22m\u001b[2m\u001b[22m\n\u001b[2m      \u001b[2mat \u001b[22m\u001b[2mnode_modules&#x2F;expo-font&#x2F;src&#x2F;Font.ts\u001b[2m:138:4\u001b[22m\u001b[2m\u001b[22m\n\u001b[2m      \u001b[2mat asyncGeneratorStep (\u001b[22m\u001b[2mnode_modules&#x2F;@babel&#x2F;runtime&#x2F;helpers&#x2F;asyncToGenerator.js\u001b[2m:3:24)\u001b[22m\u001b[2m\u001b[22m\n\u001b[2m      \u001b[2mat _next (\u001b[22m\u001b[2mnode_modules&#x2F;@babel&#x2F;runtime&#x2F;helpers&#x2F;asyncToGenerator.js\u001b[2m:22:9)\u001b[22m\u001b[2m\u001b[22m\n\u001b[2m      \u001b[2mat \u001b[22m\u001b[2mnode_modules&#x2F;@babel&#x2F;runtime&#x2F;helpers&#x2F;asyncToGenerator.js\u001b[2m:27:7\u001b[22m\u001b[2m\u001b[22m\n\u001b[2m      \u001b[2mat \u001b[22m\u001b[2mnode_modules&#x2F;@babel&#x2F;runtime&#x2F;helpers&#x2F;asyncToGenerator.js\u001b[2m:19:12\u001b[22m\u001b[2m\u001b[22m\n\u001b[2m      \u001b[2mat apply (\u001b[22m\u001b[2mnode_modules&#x2F;expo-font&#x2F;src&#x2F;Font.ts\u001b[2m:106:40)\u001b[22m\u001b[2m\u001b[22m\n\u001b[2m      \u001b[2mat loadFontInNamespaceAsync (\u001b[22m\u001b[2mnode_modules&#x2F;expo-font&#x2F;src&#x2F;Font.ts\u001b[2m:99:43)\u001b[22m\u001b[2m\u001b[22m\n\u001b[2m          at Array.map (&lt;anonymous&gt;)\u001b[22m\n\u001b[2m      \u001b[2mat Object.map (\u001b[22m\u001b[2mnode_modules&#x2F;expo-font&#x2F;src&#x2F;Font.ts\u001b[2m:99:29)\u001b[22m\u001b[2m\u001b[22m\n\u001b[2m      \u001b[2mat asyncGeneratorStep (\u001b[22m\u001b[2mnode_modules&#x2F;@babel&#x2F;runtime&#x2F;helpers&#x2F;asyncToGenerator.js\u001b[2m:3:24)\u001b[22m\u001b[2m\u001b[22m\n\u001b[2m      \u001b[2mat _next (\u001b[22m\u001b[2mnode_modules&#x2F;@babel&#x2F;runtime&#x2F;helpers&#x2F;asyncToGenerator.js\u001b[2m:22:9)\u001b[22m\u001b[2m\u001b[22m\n\u001b[2m      \u001b[2mat \u001b[22m\u001b[2mnode_modules&#x2F;@babel&#x2F;runtime&#x2F;helpers&#x2F;asyncToGenerator.js\u001b[2m:27:7\u001b[22m\u001b[2m\u001b[22m\n\u001b[2m      \u001b[2mat Object.&lt;anonymous&gt; (\u001b[22m\u001b[2mnode_modules&#x2F;@babel&#x2F;runtime&#x2F;helpers&#x2F;asyncToGenerator.js\u001b[2m:19:12)\u001b[22m\u001b[2m\u001b[22m\n\u001b[2m      \u001b[2mat Object.apply [as loadAsync] (\u001b[22m\u001b[2mnode_modules&#x2F;expo-font&#x2F;src&#x2F;Font.ts\u001b[2m:86:32)\u001b[22m\u001b[2m\u001b[22m\n\u001b[2m      \u001b[2mat Icon.loadAsync (\u001b[22m\u001b[2mnode_modules&#x2F;@expo&#x2F;vector-icons&#x2F;src&#x2F;createIconSet.tsx\u001b[2m:131:20)\u001b[22m\u001b[2m\u001b[22m\n\u001b[2m      \u001b[2mat asyncGeneratorStep (\u001b[22m\u001b[2mnode_modules&#x2F;@babel&#x2F;runtime&#x2F;helpers&#x2F;asyncToGenerator.js\u001b[2m:3:24)\u001b[22m\u001b[2m\u001b[22m\n\u001b[2m      \u001b[2mat _next (\u001b[22m\u001b[2mnode_modules&#x2F;@babel&#x2F;runtime&#x2F;helpers&#x2F;asyncToGenerator.js\u001b[2m:22:9)\u001b[22m\u001b[2m\u001b[22m\n\u001b[2m      \u001b[2mat \u001b[22m\u001b[2mnode_modules&#x2F;@babel&#x2F;runtime&#x2F;helpers&#x2F;asyncToGenerator.js\u001b[2m:27:7\u001b[22m\u001b[2m\u001b[22m\n\u001b[2m      \u001b[2mat Icon.&lt;anonymous&gt; (\u001b[22m\u001b[2mnode_modules&#x2F;@babel&#x2F;runtime&#x2F;helpers&#x2F;asyncToGenerator.js\u001b[2m:19:12)\u001b[22m\u001b[2m\u001b[22m\n\u001b[2m      \u001b[2mat Icon.apply [as componentDidMount] (\u001b[22m\u001b[2mnode_modules&#x2F;@expo&#x2F;vector-icons&#x2F;src&#x2F;createIconSet.tsx\u001b[2m:134:6)\u001b[22m\u001b[2m\u001b[22m\n\u001b[2m      \u001b[2mat commitLayoutEffectOnFiber (\u001b[22m\u001b[2mnode_modules&#x2F;react-test-renderer&#x2F;cjs&#x2F;react-test-renderer.development.js\u001b[2m:13151:28)\u001b[22m\u001b[2m\u001b[22m\n\u001b[2m      \u001b[2mat commitLayoutMountEffects_complete (\u001b[22m\u001b[2mnode_modules&#x2F;react-test-renderer&#x2F;cjs&#x2F;react-test-renderer.development.js\u001b[2m:14330:9)\u001b[22m\u001b[2m\u001b[22m\n\u001b[2m      \u001b[2mat commitLayoutEffects_begin (\u001b[22m\u001b[2mnode_modules&#x2F;react-test-renderer&#x2F;cjs&#x2F;react-test-renderer.development.js\u001b[2m:14316:7)\u001b[22m\u001b[2m\u001b[22m\n\u001b[2m      \u001b[2mat commitLayoutEffects (\u001b[22m\u001b[2mnode_modules&#x2F;react-test-renderer&#x2F;cjs&#x2F;react-test-renderer.development.js\u001b[2m:14301:3)\u001b[22m\u001b[2m\u001b[22m\n\u001b[2m      \u001b[2mat commitRootImpl (\u001b[22m\u001b[2mnode_modules&#x2F;react-test-renderer&#x2F;cjs&#x2F;react-test-renderer.development.js\u001b[2m:16062:5)\u001b[22m\u001b[2m\u001b[22m\n\u001b[2m      \u001b[2mat commitRoot (\u001b[22m\u001b[2mnode_modules&#x2F;react-test-renderer&#x2F;cjs&#x2F;react-test-renderer.development.js\u001b[2m:15933:5)\u001b[22m\u001b[2m\u001b[22m\n\u001b[2m      \u001b[2mat performSyncWorkOnRoot (\u001b[22m\u001b[2mnode_modules&#x2F;react-test-renderer&#x2F;cjs&#x2F;react-test-renderer.development.js\u001b[2m:15454:3)\u001b[22m\u001b[2m\u001b[22m\n\u001b[2m      \u001b[2mat flushSyncCallbacks (\u001b[22m\u001b[2mnode_modules&#x2F;react-test-renderer&#x2F;cjs&#x2F;react-test-renderer.development.js\u001b[2m:2597:22)\u001b[22m\u001b[2m\u001b[22m\n\u001b[2m      \u001b[2mat flushActQueue (\u001b[22m\u001b[2mnode_modules&#x2F;react&#x2F;cjs&#x2F;react.development.js\u001b[2m:2667:24)\u001b[22m\u001b[2m\u001b[22m\n\u001b[2m      \u001b[2mat Object.act (\u001b[22m\u001b[2mnode_modules&#x2F;react&#x2F;cjs&#x2F;react.development.js\u001b[2m:2521:11)\u001b[22m\u001b[2m\u001b[22m\n\u001b[2m      \u001b[2mat act (\u001b[22m\u001b[2mnode_modules&#x2F;@testing-library&#x2F;react-native&#x2F;src&#x2F;render-act.ts\u001b[2m:13:16)\u001b[22m\u001b[2m\u001b[22m\n\u001b[2m      \u001b[2mat renderInternal (\u001b[22m\u001b[2mnode_modules&#x2F;@testing-library&#x2F;react-native&#x2F;src&#x2F;render.tsx\u001b[2m:62:33)\u001b[22m\u001b[2m\u001b[22m\n\u001b[2m      \u001b[2mat renderInternal (\u001b[22m\u001b[2mnode_modules&#x2F;@testing-library&#x2F;react-native&#x2F;src&#x2F;render.tsx\u001b[2m:32:10)\u001b[22m\u001b[2m\u001b[22m\n\u001b[2m      \u001b[2mat Object.&lt;anonymous&gt; (\u001b[22m\u001b[2m\u001b[0m\u001b[36msrc&#x2F;__tests__&#x2F;integration&#x2F;GalleryAssignment.test.jsx\u001b[39m\u001b[0m\u001b[2m:48:33)\u001b[22m\u001b[2m\u001b[22m\n\u001b[2m      \u001b[2mat asyncGeneratorStep (\u001b[22m\u001b[2mnode_modules&#x2F;@babel&#x2F;runtime&#x2F;helpers&#x2F;asyncToGenerator.js\u001b[2m:3:24)\u001b[22m\u001b[2m\u001b[22m\n\u001b[2m      \u001b[2mat _next (\u001b[22m\u001b[2mnode_modules&#x2F;@babel&#x2F;runtime&#x2F;helpers&#x2F;asyncToGenerator.js\u001b[2m:22:9)\u001b[22m\u001b[2m\u001b[22m\n\u001b[2m      \u001b[2mat \u001b[22m\u001b[2mnode_modules&#x2F;@babel&#x2F;runtime&#x2F;helpers&#x2F;asyncToGenerator.js\u001b[2m:27:7\u001b[22m\u001b[2m\u001b[22m\n\u001b[2m      \u001b[2mat Object.&lt;anonymous&gt; (\u001b[22m\u001b[2mnode_modules&#x2F;@babel&#x2F;runtime&#x2F;helpers&#x2F;asyncToGenerator.js\u001b[2m:19:12)\u001b[22m\u001b[2m\u001b[22m\n\n\u001b[1m\u001b[31m  \u001b[1m● \u001b[22m\u001b[1mGalleryAssignment › renders correctly\u001b[39m\u001b[22m\n\n    &#x60;loadSingleFontAsync&#x60; expected resource of type &#x60;Asset&#x60; from expo-asset on native\n\u001b[2m\u001b[22m\n\u001b[2m    \u001b[0m \u001b[90m 46 |\u001b[39m     useApi\u001b[33m.\u001b[39mmockReturnValue([\u001b[36mnull\u001b[39m\u001b[33m,\u001b[39m \u001b[36mnull\u001b[39m\u001b[33m,\u001b[39m handleRequestMock])\u001b[0m\u001b[22m\n\u001b[2m    \u001b[0m \u001b[90m 47 |\u001b[39m\u001b[0m\u001b[22m\n\u001b[2m    \u001b[0m\u001b[31m\u001b[1m&gt;\u001b[22m\u001b[2m\u001b[39m\u001b[90m 48 |\u001b[39m     \u001b[36mconst\u001b[39m { getByText } \u001b[33m&#x3D;\u001b[39m render(\u001b[33m&lt;\u001b[39m\u001b[33mGalleryAssignment\u001b[39m \u001b[33m&#x2F;\u001b[39m\u001b[33m&gt;\u001b[39m)\u001b[0m\u001b[22m\n\u001b[2m    \u001b[0m \u001b[90m    |\u001b[39m                                 \u001b[31m\u001b[1m^\u001b[22m\u001b[2m\u001b[39m\u001b[0m\u001b[22m\n\u001b[2m    \u001b[0m \u001b[90m 49 |\u001b[39m\u001b[0m\u001b[22m\n\u001b[2m    \u001b[0m \u001b[90m 50 |\u001b[39m     \u001b[90m&#x2F;&#x2F; Use waitFor to wait for the asynchronous task to complete\u001b[39m\u001b[0m\u001b[22m\n\u001b[2m    \u001b[0m \u001b[90m 51 |\u001b[39m     \u001b[36mawait\u001b[39m waitFor(() \u001b[33m&#x3D;&gt;\u001b[39m {\u001b[0m\u001b[22m\n\u001b[2m\u001b[22m\n\u001b[2m      \u001b[2mat \u001b[22m\u001b[2mnode_modules&#x2F;expo-font&#x2F;src&#x2F;FontLoader.ts\u001b[2m:46:11\u001b[22m\u001b[2m\u001b[22m\n\u001b[2m      \u001b[2mat asyncGeneratorStep (\u001b[22m\u001b[2mnode_modules&#x2F;@babel&#x2F;runtime&#x2F;helpers&#x2F;asyncToGenerator.js\u001b[2m:3:24)\u001b[22m\u001b[2m\u001b[22m\n\u001b[2m      \u001b[2mat _next (\u001b[22m\u001b[2mnode_modules&#x2F;@babel&#x2F;runtime&#x2F;helpers&#x2F;asyncToGenerator.js\u001b[2m:22:9)\u001b[22m\u001b[2m\u001b[22m\n\u001b[2m      \u001b[2mat \u001b[22m\u001b[2mnode_modules&#x2F;@babel&#x2F;runtime&#x2F;helpers&#x2F;asyncToGenerator.js\u001b[2m:27:7\u001b[22m\u001b[2m\u001b[22m\n\u001b[2m      \u001b[2mat \u001b[22m\u001b[2mnode_modules&#x2F;@babel&#x2F;runtime&#x2F;helpers&#x2F;asyncToGenerator.js\u001b[2m:19:12\u001b[22m\u001b[2m\u001b[22m\n\u001b[2m      \u001b[2mat apply (\u001b[22m\u001b[2mnode_modules&#x2F;expo-font&#x2F;src&#x2F;FontLoader.ts\u001b[2m:40:42)\u001b[22m\u001b[2m\u001b[22m\n\u001b[2m      \u001b[2mat \u001b[22m\u001b[2mnode_modules&#x2F;expo-font&#x2F;src&#x2F;Font.ts\u001b[2m:133:32\u001b[22m\u001b[2m\u001b[22m\n\u001b[2m      \u001b[2mat asyncGeneratorStep (\u001b[22m\u001b[2mnode_modules&#x2F;@babel&#x2F;runtime&#x2F;helpers&#x2F;asyncToGenerator.js\u001b[2m:3:24)\u001b[22m\u001b[2m\u001b[22m\n\u001b[2m      \u001b[2mat _next (\u001b[22m\u001b[2mnode_modules&#x2F;@babel&#x2F;runtime&#x2F;helpers&#x2F;asyncToGenerator.js\u001b[2m:22:9)\u001b[22m\u001b[2m\u001b[22m\n\u001b[2m      \u001b[2mat \u001b[22m\u001b[2mnode_modules&#x2F;@babel&#x2F;runtime&#x2F;helpers&#x2F;asyncToGenerator.js\u001b[2m:27:7\u001b[22m\u001b[2m\u001b[22m\n\u001b[2m      \u001b[2mat \u001b[22m\u001b[2mnode_modules&#x2F;@babel&#x2F;runtime&#x2F;helpers&#x2F;asyncToGenerator.js\u001b[2m:19:12\u001b[22m\u001b[2m\u001b[22m\n\u001b[2m      \u001b[2mat \u001b[22m\u001b[2mnode_modules&#x2F;expo-font&#x2F;src&#x2F;Font.ts\u001b[2m:138:4\u001b[22m\u001b[2m\u001b[22m\n\u001b[2m      \u001b[2mat asyncGeneratorStep (\u001b[22m\u001b[2mnode_modules&#x2F;@babel&#x2F;runtime&#x2F;helpers&#x2F;asyncToGenerator.js\u001b[2m:3:24)\u001b[22m\u001b[2m\u001b[22m\n\u001b[2m      \u001b[2mat _next (\u001b[22m\u001b[2mnode_modules&#x2F;@babel&#x2F;runtime&#x2F;helpers&#x2F;asyncToGenerator.js\u001b[2m:22:9)\u001b[22m\u001b[2m\u001b[22m\n\u001b[2m      \u001b[2mat \u001b[22m\u001b[2mnode_modules&#x2F;@babel&#x2F;runtime&#x2F;helpers&#x2F;asyncToGenerator.js\u001b[2m:27:7\u001b[22m\u001b[2m\u001b[22m\n\u001b[2m      \u001b[2mat \u001b[22m\u001b[2mnode_modules&#x2F;@babel&#x2F;runtime&#x2F;helpers&#x2F;asyncToGenerator.js\u001b[2m:19:12\u001b[22m\u001b[2m\u001b[22m\n\u001b[2m      \u001b[2mat apply (\u001b[22m\u001b[2mnode_modules&#x2F;expo-font&#x2F;src&#x2F;Font.ts\u001b[2m:106:40)\u001b[22m\u001b[2m\u001b[22m\n\u001b[2m      \u001b[2mat loadFontInNamespaceAsync (\u001b[22m\u001b[2mnode_modules&#x2F;expo-font&#x2F;src&#x2F;Font.ts\u001b[2m:99:43)\u001b[22m\u001b[2m\u001b[22m\n\u001b[2m          at Array.map (&lt;anonymous&gt;)\u001b[22m\n\u001b[2m      \u001b[2mat Object.map (\u001b[22m\u001b[2mnode_modules&#x2F;expo-font&#x2F;src&#x2F;Font.ts\u001b[2m:99:29)\u001b[22m\u001b[2m\u001b[22m\n\u001b[2m      \u001b[2mat asyncGeneratorStep (\u001b[22m\u001b[2mnode_modules&#x2F;@babel&#x2F;runtime&#x2F;helpers&#x2F;asyncToGenerator.js\u001b[2m:3:24)\u001b[22m\u001b[2m\u001b[22m\n\u001b[2m      \u001b[2mat _next (\u001b[22m\u001b[2mnode_modules&#x2F;@babel&#x2F;runtime&#x2F;helpers&#x2F;asyncToGenerator.js\u001b[2m:22:9)\u001b[22m\u001b[2m\u001b[22m\n\u001b[2m      \u001b[2mat \u001b[22m\u001b[2mnode_modules&#x2F;@babel&#x2F;runtime&#x2F;helpers&#x2F;asyncToGenerator.js\u001b[2m:27:7\u001b[22m\u001b[2m\u001b[22m\n\u001b[2m      \u001b[2mat Object.&lt;anonymous&gt; (\u001b[22m\u001b[2mnode_modules&#x2F;@babel&#x2F;runtime&#x2F;helpers&#x2F;asyncToGenerator.js\u001b[2m:19:12)\u001b[22m\u001b[2m\u001b[22m\n\u001b[2m      \u001b[2mat Object.apply [as loadAsync] (\u001b[22m\u001b[2mnode_modules&#x2F;expo-font&#x2F;src&#x2F;Font.ts\u001b[2m:86:32)\u001b[22m\u001b[2m\u001b[22m\n\u001b[2m      \u001b[2mat Icon.loadAsync (\u001b[22m\u001b[2mnode_modules&#x2F;@expo&#x2F;vector-icons&#x2F;src&#x2F;createIconSet.tsx\u001b[2m:131:20)\u001b[22m\u001b[2m\u001b[22m\n\u001b[2m      \u001b[2mat asyncGeneratorStep (\u001b[22m\u001b[2mnode_modules&#x2F;@babel&#x2F;runtime&#x2F;helpers&#x2F;asyncToGenerator.js\u001b[2m:3:24)\u001b[22m\u001b[2m\u001b[22m\n\u001b[2m      \u001b[2mat _next (\u001b[22m\u001b[2mnode_modules&#x2F;@babel&#x2F;runtime&#x2F;helpers&#x2F;asyncToGenerator.js\u001b[2m:22:9)\u001b[22m\u001b[2m\u001b[22m\n\u001b[2m      \u001b[2mat \u001b[22m\u001b[2mnode_modules&#x2F;@babel&#x2F;runtime&#x2F;helpers&#x2F;asyncToGenerator.js\u001b[2m:27:7\u001b[22m\u001b[2m\u001b[22m\n\u001b[2m      \u001b[2mat Icon.&lt;anonymous&gt; (\u001b[22m\u001b[2mnode_modules&#x2F;@babel&#x2F;runtime&#x2F;helpers&#x2F;asyncToGenerator.js\u001b[2m:19:12)\u001b[22m\u001b[2m\u001b[22m\n\u001b[2m      \u001b[2mat Icon.apply [as componentDidMount] (\u001b[22m\u001b[2mnode_modules&#x2F;@expo&#x2F;vector-icons&#x2F;src&#x2F;createIconSet.tsx\u001b[2m:134:6)\u001b[22m\u001b[2m\u001b[22m\n\u001b[2m      \u001b[2mat commitLayoutEffectOnFiber (\u001b[22m\u001b[2mnode_modules&#x2F;react-test-renderer&#x2F;cjs&#x2F;react-test-renderer.development.js\u001b[2m:13151:28)\u001b[22m\u001b[2m\u001b[22m\n\u001b[2m      \u001b[2mat commitLayoutMountEffects_complete (\u001b[22m\u001b[2mnode_modules&#x2F;react-test-renderer&#x2F;cjs&#x2F;react-test-renderer.development.js\u001b[2m:14330:9)\u001b[22m\u001b[2m\u001b[22m\n\u001b[2m      \u001b[2mat commitLayoutEffects_begin (\u001b[22m\u001b[2mnode_modules&#x2F;react-test-renderer&#x2F;cjs&#x2F;react-test-renderer.development.js\u001b[2m:14316:7)\u001b[22m\u001b[2m\u001b[22m\n\u001b[2m      \u001b[2mat commitLayoutEffects (\u001b[22m\u001b[2mnode_modules&#x2F;react-test-renderer&#x2F;cjs&#x2F;react-test-renderer.development.js\u001b[2m:14301:3)\u001b[22m\u001b[2m\u001b[22m\n\u001b[2m      \u001b[2mat commitRootImpl (\u001b[22m\u001b[2mnode_modules&#x2F;react-test-renderer&#x2F;cjs&#x2F;react-test-renderer.development.js\u001b[2m:16062:5)\u001b[22m\u001b[2m\u001b[22m\n\u001b[2m      \u001b[2mat commitRoot (\u001b[22m\u001b[2mnode_modules&#x2F;react-test-renderer&#x2F;cjs&#x2F;react-test-renderer.development.js\u001b[2m:15933:5)\u001b[22m\u001b[2m\u001b[22m\n\u001b[2m      \u001b[2mat performSyncWorkOnRoot (\u001b[22m\u001b[2mnode_modules&#x2F;react-test-renderer&#x2F;cjs&#x2F;react-test-renderer.development.js\u001b[2m:15454:3)\u001b[22m\u001b[2m\u001b[22m\n\u001b[2m      \u001b[2mat flushSyncCallbacks (\u001b[22m\u001b[2mnode_modules&#x2F;react-test-renderer&#x2F;cjs&#x2F;react-test-renderer.development.js\u001b[2m:2597:22)\u001b[22m\u001b[2m\u001b[22m\n\u001b[2m      \u001b[2mat flushActQueue (\u001b[22m\u001b[2mnode_modules&#x2F;react&#x2F;cjs&#x2F;react.development.js\u001b[2m:2667:24)\u001b[22m\u001b[2m\u001b[22m\n\u001b[2m      \u001b[2mat Object.act (\u001b[22m\u001b[2mnode_modules&#x2F;react&#x2F;cjs&#x2F;react.development.js\u001b[2m:2521:11)\u001b[22m\u001b[2m\u001b[22m\n\u001b[2m      \u001b[2mat act (\u001b[22m\u001b[2mnode_modules&#x2F;@testing-library&#x2F;react-native&#x2F;src&#x2F;render-act.ts\u001b[2m:13:16)\u001b[22m\u001b[2m\u001b[22m\n\u001b[2m      \u001b[2mat renderInternal (\u001b[22m\u001b[2mnode_modules&#x2F;@testing-library&#x2F;react-native&#x2F;src&#x2F;render.tsx\u001b[2m:62:33)\u001b[22m\u001b[2m\u001b[22m\n\u001b[2m      \u001b[2mat renderInternal (\u001b[22m\u001b[2mnode_modules&#x2F;@testing-library&#x2F;react-native&#x2F;src&#x2F;render.tsx\u001b[2m:32:10)\u001b[22m\u001b[2m\u001b[22m\n\u001b[2m      \u001b[2mat Object.&lt;anonymous&gt; (\u001b[22m\u001b[2m\u001b[0m\u001b[36msrc&#x2F;__tests__&#x2F;integration&#x2F;GalleryAssignment.test.jsx\u001b[39m\u001b[0m\u001b[2m:48:33)\u001b[22m\u001b[2m\u001b[22m\n\u001b[2m      \u001b[2mat asyncGeneratorStep (\u001b[22m\u001b[2mnode_modules&#x2F;@babel&#x2F;runtime&#x2F;helpers&#x2F;asyncToGenerator.js\u001b[2m:3:24)\u001b[22m\u001b[2m\u001b[22m\n\u001b[2m      \u001b[2mat _next (\u001b[22m\u001b[2mnode_modules&#x2F;@babel&#x2F;runtime&#x2F;helpers&#x2F;asyncToGenerator.js\u001b[2m:22:9)\u001b[22m\u001b[2m\u001b[22m\n\u001b[2m      \u001b[2mat \u001b[22m\u001b[2mnode_modules&#x2F;@babel&#x2F;runtime&#x2F;helpers&#x2F;asyncToGenerator.js\u001b[2m:27:7\u001b[22m\u001b[2m\u001b[22m\n\u001b[2m      \u001b[2mat Object.&lt;anonymous&gt; (\u001b[22m\u001b[2mnode_modules&#x2F;@babel&#x2F;runtime&#x2F;helpers&#x2F;asyncToGenerator.js\u001b[2m:19:12)\u001b[22m\u001b[2m\u001b[22m\n\n\u001b[1m\u001b[31m  \u001b[1m● \u001b[22m\u001b[1mGalleryAssignment › renders correctly\u001b[39m\u001b[22m\n\n    &#x60;loadSingleFontAsync&#x60; expected resource of type &#x60;Asset&#x60; from expo-asset on native\n\u001b[2m\u001b[22m\n\u001b[2m    \u001b[0m \u001b[90m 46 |\u001b[39m     useApi\u001b[33m.\u001b[39mmockReturnValue([\u001b[36mnull\u001b[39m\u001b[33m,\u001b[39m \u001b[36mnull\u001b[39m\u001b[33m,\u001b[39m handleRequestMock])\u001b[0m\u001b[22m\n\u001b[2m    \u001b[0m \u001b[90m 47 |\u001b[39m\u001b[0m\u001b[22m\n\u001b[2m    \u001b[0m\u001b[31m\u001b[1m&gt;\u001b[22m\u001b[2m\u001b[39m\u001b[90m 48 |\u001b[39m     \u001b[36mconst\u001b[39m { getByText } \u001b[33m&#x3D;\u001b[39m render(\u001b[33m&lt;\u001b[39m\u001b[33mGalleryAssignment\u001b[39m \u001b[33m&#x2F;\u001b[39m\u001b[33m&gt;\u001b[39m)\u001b[0m\u001b[22m\n\u001b[2m    \u001b[0m \u001b[90m    |\u001b[39m                                 \u001b[31m\u001b[1m^\u001b[22m\u001b[2m\u001b[39m\u001b[0m\u001b[22m\n\u001b[2m    \u001b[0m \u001b[90m 49 |\u001b[39m\u001b[0m\u001b[22m\n\u001b[2m    \u001b[0m \u001b[90m 50 |\u001b[39m     \u001b[90m&#x2F;&#x2F; Use waitFor to wait for the asynchronous task to complete\u001b[39m\u001b[0m\u001b[22m\n\u001b[2m    \u001b[0m \u001b[90m 51 |\u001b[39m     \u001b[36mawait\u001b[39m waitFor(() \u001b[33m&#x3D;&gt;\u001b[39m {\u001b[0m\u001b[22m\n\u001b[2m\u001b[22m\n\u001b[2m      \u001b[2mat \u001b[22m\u001b[2mnode_modules&#x2F;expo-font&#x2F;src&#x2F;FontLoader.ts\u001b[2m:46:11\u001b[22m\u001b[2m\u001b[22m\n\u001b[2m      \u001b[2mat asyncGeneratorStep (\u001b[22m\u001b[2mnode_modules&#x2F;@babel&#x2F;runtime&#x2F;helpers&#x2F;asyncToGenerator.js\u001b[2m:3:24)\u001b[22m\u001b[2m\u001b[22m\n\u001b[2m      \u001b[2mat _next (\u001b[22m\u001b[2mnode_modules&#x2F;@babel&#x2F;runtime&#x2F;helpers&#x2F;asyncToGenerator.js\u001b[2m:22:9)\u001b[22m\u001b[2m\u001b[22m\n\u001b[2m      \u001b[2mat \u001b[22m\u001b[2mnode_modules&#x2F;@babel&#x2F;runtime&#x2F;helpers&#x2F;asyncToGenerator.js\u001b[2m:27:7\u001b[22m\u001b[2m\u001b[22m\n\u001b[2m      \u001b[2mat \u001b[22m\u001b[2mnode_modules&#x2F;@babel&#x2F;runtime&#x2F;helpers&#x2F;asyncToGenerator.js\u001b[2m:19:12\u001b[22m\u001b[2m\u001b[22m\n\u001b[2m      \u001b[2mat apply (\u001b[22m\u001b[2mnode_modules&#x2F;expo-font&#x2F;src&#x2F;FontLoader.ts\u001b[2m:40:42)\u001b[22m\u001b[2m\u001b[22m\n\u001b[2m      \u001b[2mat \u001b[22m\u001b[2mnode_modules&#x2F;expo-font&#x2F;src&#x2F;Font.ts\u001b[2m:133:32\u001b[22m\u001b[2m\u001b[22m\n\u001b[2m      \u001b[2mat asyncGeneratorStep (\u001b[22m\u001b[2mnode_modules&#x2F;@babel&#x2F;runtime&#x2F;helpers&#x2F;asyncToGenerator.js\u001b[2m:3:24)\u001b[22m\u001b[2m\u001b[22m\n\u001b[2m      \u001b[2mat _next (\u001b[22m\u001b[2mnode_modules&#x2F;@babel&#x2F;runtime&#x2F;helpers&#x2F;asyncToGenerator.js\u001b[2m:22:9)\u001b[22m\u001b[2m\u001b[22m\n\u001b[2m      \u001b[2mat \u001b[22m\u001b[2mnode_modules&#x2F;@babel&#x2F;runtime&#x2F;helpers&#x2F;asyncToGenerator.js\u001b[2m:27:7\u001b[22m\u001b[2m\u001b[22m\n\u001b[2m      \u001b[2mat \u001b[22m\u001b[2mnode_modules&#x2F;@babel&#x2F;runtime&#x2F;helpers&#x2F;asyncToGenerator.js\u001b[2m:19:12\u001b[22m\u001b[2m\u001b[22m\n\u001b[2m      \u001b[2mat \u001b[22m\u001b[2mnode_modules&#x2F;expo-font&#x2F;src&#x2F;Font.ts\u001b[2m:138:4\u001b[22m\u001b[2m\u001b[22m\n\u001b[2m      \u001b[2mat asyncGeneratorStep (\u001b[22m\u001b[2mnode_modules&#x2F;@babel&#x2F;runtime&#x2F;helpers&#x2F;asyncToGenerator.js\u001b[2m:3:24)\u001b[22m\u001b[2m\u001b[22m\n\u001b[2m      \u001b[2mat _next (\u001b[22m\u001b[2mnode_modules&#x2F;@babel&#x2F;runtime&#x2F;helpers&#x2F;asyncToGenerator.js\u001b[2m:22:9)\u001b[22m\u001b[2m\u001b[22m\n\u001b[2m      \u001b[2mat \u001b[22m\u001b[2mnode_modules&#x2F;@babel&#x2F;runtime&#x2F;helpers&#x2F;asyncToGenerator.js\u001b[2m:27:7\u001b[22m\u001b[2m\u001b[22m\n\u001b[2m      \u001b[2mat \u001b[22m\u001b[2mnode_modules&#x2F;@babel&#x2F;runtime&#x2F;helpers&#x2F;asyncToGenerator.js\u001b[2m:19:12\u001b[22m\u001b[2m\u001b[22m\n\u001b[2m      \u001b[2mat apply (\u001b[22m\u001b[2mnode_modules&#x2F;expo-font&#x2F;src&#x2F;Font.ts\u001b[2m:106:40)\u001b[22m\u001b[2m\u001b[22m\n\u001b[2m      \u001b[2mat loadFontInNamespaceAsync (\u001b[22m\u001b[2mnode_modules&#x2F;expo-font&#x2F;src&#x2F;Font.ts\u001b[2m:99:43)\u001b[22m\u001b[2m\u001b[22m\n\u001b[2m          at Array.map (&lt;anonymous&gt;)\u001b[22m\n\u001b[2m      \u001b[2mat Object.map (\u001b[22m\u001b[2mnode_modules&#x2F;expo-font&#x2F;src&#x2F;Font.ts\u001b[2m:99:29)\u001b[22m\u001b[2m\u001b[22m\n\u001b[2m      \u001b[2mat asyncGeneratorStep (\u001b[22m\u001b[2mnode_modules&#x2F;@babel&#x2F;runtime&#x2F;helpers&#x2F;asyncToGenerator.js\u001b[2m:3:24)\u001b[22m\u001b[2m\u001b[22m\n\u001b[2m      \u001b[2mat _next (\u001b[22m\u001b[2mnode_modules&#x2F;@babel&#x2F;runtime&#x2F;helpers&#x2F;asyncToGenerator.js\u001b[2m:22:9)\u001b[22m\u001b[2m\u001b[22m\n\u001b[2m      \u001b[2mat \u001b[22m\u001b[2mnode_modules&#x2F;@babel&#x2F;runtime&#x2F;helpers&#x2F;asyncToGenerator.js\u001b[2m:27:7\u001b[22m\u001b[2m\u001b[22m\n\u001b[2m      \u001b[2mat Object.&lt;anonymous&gt; (\u001b[22m\u001b[2mnode_modules&#x2F;@babel&#x2F;runtime&#x2F;helpers&#x2F;asyncToGenerator.js\u001b[2m:19:12)\u001b[22m\u001b[2m\u001b[22m\n\u001b[2m      \u001b[2mat Object.apply [as loadAsync] (\u001b[22m\u001b[2mnode_modules&#x2F;expo-font&#x2F;src&#x2F;Font.ts\u001b[2m:86:32)\u001b[22m\u001b[2m\u001b[22m\n\u001b[2m      \u001b[2mat Icon.loadAsync (\u001b[22m\u001b[2mnode_modules&#x2F;@expo&#x2F;vector-icons&#x2F;src&#x2F;createIconSet.tsx\u001b[2m:131:20)\u001b[22m\u001b[2m\u001b[22m\n\u001b[2m      \u001b[2mat asyncGeneratorStep (\u001b[22m\u001b[2mnode_modules&#x2F;@babel&#x2F;runtime&#x2F;helpers&#x2F;asyncToGenerator.js\u001b[2m:3:24)\u001b[22m\u001b[2m\u001b[22m\n\u001b[2m      \u001b[2mat _next (\u001b[22m\u001b[2mnode_modules&#x2F;@babel&#x2F;runtime&#x2F;helpers&#x2F;asyncToGenerator.js\u001b[2m:22:9)\u001b[22m\u001b[2m\u001b[22m\n\u001b[2m      \u001b[2mat \u001b[22m\u001b[2mnode_modules&#x2F;@babel&#x2F;runtime&#x2F;helpers&#x2F;asyncToGenerator.js\u001b[2m:27:7\u001b[22m\u001b[2m\u001b[22m\n\u001b[2m      \u001b[2mat Icon.&lt;anonymous&gt; (\u001b[22m\u001b[2mnode_modules&#x2F;@babel&#x2F;runtime&#x2F;helpers&#x2F;asyncToGenerator.js\u001b[2m:19:12)\u001b[22m\u001b[2m\u001b[22m\n\u001b[2m      \u001b[2mat Icon.apply [as componentDidMount] (\u001b[22m\u001b[2mnode_modules&#x2F;@expo&#x2F;vector-icons&#x2F;src&#x2F;createIconSet.tsx\u001b[2m:134:6)\u001b[22m\u001b[2m\u001b[22m\n\u001b[2m      \u001b[2mat commitLayoutEffectOnFiber (\u001b[22m\u001b[2mnode_modules&#x2F;react-test-renderer&#x2F;cjs&#x2F;react-test-renderer.development.js\u001b[2m:13151:28)\u001b[22m\u001b[2m\u001b[22m\n\u001b[2m      \u001b[2mat commitLayoutMountEffects_complete (\u001b[22m\u001b[2mnode_modules&#x2F;react-test-renderer&#x2F;cjs&#x2F;react-test-renderer.development.js\u001b[2m:14330:9)\u001b[22m\u001b[2m\u001b[22m\n\u001b[2m      \u001b[2mat commitLayoutEffects_begin (\u001b[22m\u001b[2mnode_modules&#x2F;react-test-renderer&#x2F;cjs&#x2F;react-test-renderer.development.js\u001b[2m:14316:7)\u001b[22m\u001b[2m\u001b[22m\n\u001b[2m      \u001b[2mat commitLayoutEffects (\u001b[22m\u001b[2mnode_modules&#x2F;react-test-renderer&#x2F;cjs&#x2F;react-test-renderer.development.js\u001b[2m:14301:3)\u001b[22m\u001b[2m\u001b[22m\n\u001b[2m      \u001b[2mat commitRootImpl (\u001b[22m\u001b[2mnode_modules&#x2F;react-test-renderer&#x2F;cjs&#x2F;react-test-renderer.development.js\u001b[2m:16062:5)\u001b[22m\u001b[2m\u001b[22m\n\u001b[2m      \u001b[2mat commitRoot (\u001b[22m\u001b[2mnode_modules&#x2F;react-test-renderer&#x2F;cjs&#x2F;react-test-renderer.development.js\u001b[2m:15933:5)\u001b[22m\u001b[2m\u001b[22m\n\u001b[2m      \u001b[2mat performSyncWorkOnRoot (\u001b[22m\u001b[2mnode_modules&#x2F;react-test-renderer&#x2F;cjs&#x2F;react-test-renderer.development.js\u001b[2m:15454:3)\u001b[22m\u001b[2m\u001b[22m\n\u001b[2m      \u001b[2mat flushSyncCallbacks (\u001b[22m\u001b[2mnode_modules&#x2F;react-test-renderer&#x2F;cjs&#x2F;react-test-renderer.development.js\u001b[2m:2597:22)\u001b[22m\u001b[2m\u001b[22m\n\u001b[2m      \u001b[2mat flushActQueue (\u001b[22m\u001b[2mnode_modules&#x2F;react&#x2F;cjs&#x2F;react.development.js\u001b[2m:2667:24)\u001b[22m\u001b[2m\u001b[22m\n\u001b[2m      \u001b[2mat Object.act (\u001b[22m\u001b[2mnode_modules&#x2F;react&#x2F;cjs&#x2F;react.development.js\u001b[2m:2521:11)\u001b[22m\u001b[2m\u001b[22m\n\u001b[2m      \u001b[2mat act (\u001b[22m\u001b[2mnode_modules&#x2F;@testing-library&#x2F;react-native&#x2F;src&#x2F;render-act.ts\u001b[2m:13:16)\u001b[22m\u001b[2m\u001b[22m\n\u001b[2m      \u001b[2mat renderInternal (\u001b[22m\u001b[2mnode_modules&#x2F;@testing-library&#x2F;react-native&#x2F;src&#x2F;render.tsx\u001b[2m:62:33)\u001b[22m\u001b[2m\u001b[22m\n\u001b[2m      \u001b[2mat renderInternal (\u001b[22m\u001b[2mnode_modules&#x2F;@testing-library&#x2F;react-native&#x2F;src&#x2F;render.tsx\u001b[2m:32:10)\u001b[22m\u001b[2m\u001b[22m\n\u001b[2m      \u001b[2mat Object.&lt;anonymous&gt; (\u001b[22m\u001b[2m\u001b[0m\u001b[36msrc&#x2F;__tests__&#x2F;integration&#x2F;GalleryAssignment.test.jsx\u001b[39m\u001b[0m\u001b[2m:48:33)\u001b[22m\u001b[2m\u001b[22m\n\u001b[2m      \u001b[2mat asyncGeneratorStep (\u001b[22m\u001b[2mnode_modules&#x2F;@babel&#x2F;runtime&#x2F;helpers&#x2F;asyncToGenerator.js\u001b[2m:3:24)\u001b[22m\u001b[2m\u001b[22m\n\u001b[2m      \u001b[2mat _next (\u001b[22m\u001b[2mnode_modules&#x2F;@babel&#x2F;runtime&#x2F;helpers&#x2F;asyncToGenerator.js\u001b[2m:22:9)\u001b[22m\u001b[2m\u001b[22m\n\u001b[2m      \u001b[2mat \u001b[22m\u001b[2mnode_modules&#x2F;@babel&#x2F;runtime&#x2F;helpers&#x2F;asyncToGenerator.js\u001b[2m:27:7\u001b[22m\u001b[2m\u001b[22m\n\u001b[2m      \u001b[2mat Object.&lt;anonymous&gt; (\u001b[22m\u001b[2mnode_modules&#x2F;@babel&#x2F;runtime&#x2F;helpers&#x2F;asyncToGenerator.js\u001b[2m:19:12)\u001b[22m\u001b[2m\u001b[22m\n\n\u001b[1m\u001b[31m  \u001b[1m● \u001b[22m\u001b[1mGalleryAssignment › renders correctly\u001b[39m\u001b[22m\n\n    TypeError: Cannot read properties of null (reading &#39;data&#39;)\n\u001b[2m\u001b[22m\n\u001b[2m    \u001b[0m \u001b[90m 43 |\u001b[39m\u001b[0m\u001b[22m\n\u001b[2m    \u001b[0m \u001b[90m 44 |\u001b[39m   useEffect(() \u001b[33m&#x3D;&gt;\u001b[39m {\u001b[0m\u001b[22m\n\u001b[2m    \u001b[0m\u001b[31m\u001b[1m&gt;\u001b[22m\u001b[2m\u001b[39m\u001b[90m 45 |\u001b[39m     \u001b[36mif\u001b[39m (response\u001b[33m.\u001b[39mdata \u001b[33m!&#x3D;&#x3D;\u001b[39m undefined \u001b[33m&amp;&amp;\u001b[39m response\u001b[33m.\u001b[39mdata \u001b[33m!&#x3D;&#x3D;\u001b[39m \u001b[36mnull\u001b[39m) {\u001b[0m\u001b[22m\n\u001b[2m    \u001b[0m \u001b[90m    |\u001b[39m                  \u001b[31m\u001b[1m^\u001b[22m\u001b[2m\u001b[39m\u001b[0m\u001b[22m\n\u001b[2m    \u001b[0m \u001b[90m 46 |\u001b[39m       \u001b[36mif\u001b[39m (response\u001b[33m.\u001b[39mdata\u001b[33m.\u001b[39mlength \u001b[33m&gt;\u001b[39m \u001b[35m0\u001b[39m) {\u001b[0m\u001b[22m\n\u001b[2m    \u001b[0m \u001b[90m 47 |\u001b[39m         setWorkers(response\u001b[33m.\u001b[39mdata)\u001b[0m\u001b[22m\n\u001b[2m    \u001b[0m \u001b[90m 48 |\u001b[39m       }\u001b[0m\u001b[22m\n\u001b[2m\u001b[22m\n\u001b[2m      \u001b[2mat data (\u001b[22m\u001b[2msrc&#x2F;components&#x2F;CardAssignment&#x2F;CardAssignment.jsx\u001b[2m:45:18)\u001b[22m\u001b[2m\u001b[22m\n\u001b[2m      \u001b[2mat commitHookEffectListMount (\u001b[22m\u001b[2mnode_modules&#x2F;react-test-renderer&#x2F;cjs&#x2F;react-test-renderer.development.js\u001b[2m:12999:26)\u001b[22m\u001b[2m\u001b[22m\n\u001b[2m      \u001b[2mat commitPassiveMountOnFiber (\u001b[22m\u001b[2mnode_modules&#x2F;react-test-renderer&#x2F;cjs&#x2F;react-test-renderer.development.js\u001b[2m:14422:11)\u001b[22m\u001b[2m\u001b[22m\n\u001b[2m      \u001b[2mat commitPassiveMountEffects_complete (\u001b[22m\u001b[2mnode_modules&#x2F;react-test-renderer&#x2F;cjs&#x2F;react-test-renderer.development.js\u001b[2m:14382:9)\u001b[22m\u001b[2m\u001b[22m\n\u001b[2m      \u001b[2mat commitPassiveMountEffects_begin (\u001b[22m\u001b[2mnode_modules&#x2F;react-test-renderer&#x2F;cjs&#x2F;react-test-renderer.development.js\u001b[2m:14369:7)\u001b[22m\u001b[2m\u001b[22m\n\u001b[2m      \u001b[2mat commitPassiveMountEffects (\u001b[22m\u001b[2mnode_modules&#x2F;react-test-renderer&#x2F;cjs&#x2F;react-test-renderer.development.js\u001b[2m:14357:3)\u001b[22m\u001b[2m\u001b[22m\n\u001b[2m      \u001b[2mat flushPassiveEffectsImpl (\u001b[22m\u001b[2mnode_modules&#x2F;react-test-renderer&#x2F;cjs&#x2F;react-test-renderer.development.js\u001b[2m:16248:3)\u001b[22m\u001b[2m\u001b[22m\n\u001b[2m      \u001b[2mat flushPassiveEffects (\u001b[22m\u001b[2mnode_modules&#x2F;react-test-renderer&#x2F;cjs&#x2F;react-test-renderer.development.js\u001b[2m:16197:14)\u001b[22m\u001b[2m\u001b[22m\n\u001b[2m      \u001b[2mat \u001b[22m\u001b[2mnode_modules&#x2F;react-test-renderer&#x2F;cjs&#x2F;react-test-renderer.development.js\u001b[2m:16012:9\u001b[22m\u001b[2m\u001b[22m\n\u001b[2m      \u001b[2mat workLoop (\u001b[22m\u001b[2mnode_modules&#x2F;react-test-renderer&#x2F;node_modules&#x2F;scheduler&#x2F;cjs&#x2F;scheduler.development.js\u001b[2m:266:34)\u001b[22m\u001b[2m\u001b[22m\n\u001b[2m      \u001b[2mat flushWork (\u001b[22m\u001b[2mnode_modules&#x2F;react-test-renderer&#x2F;node_modules&#x2F;scheduler&#x2F;cjs&#x2F;scheduler.development.js\u001b[2m:239:14)\u001b[22m\u001b[2m\u001b[22m\n\u001b[2m      \u001b[2mat performWorkUntilDeadline (\u001b[22m\u001b[2mnode_modules&#x2F;react-test-renderer&#x2F;node_modules&#x2F;scheduler&#x2F;cjs&#x2F;scheduler.development.js\u001b[2m:533:21)\u001b[22m\u001b[2m\u001b[22m\n\u001b[2m      \u001b[2mat Timeout.task [as _onTimeout] (\u001b[22m\u001b[2mnode_modules&#x2F;jsdom&#x2F;lib&#x2F;jsdom&#x2F;browser&#x2F;Window.js\u001b[2m:520:19)\u001b[22m\u001b[2m\u001b[22m\n&quot;
+    },
+    {
+      &quot;leaks&quot;: false,
+      &quot;numFailingTests&quot;: 1,
+      &quot;numPassingTests&quot;: 1,
+      &quot;numPendingTests&quot;: 0,
+      &quot;numTodoTests&quot;: 0,
+      &quot;openHandles&quot;: [],
+      &quot;perfStats&quot;: {
+        &quot;end&quot;: 1700581238475,
+        &quot;runtime&quot;: 11809,
+        &quot;slow&quot;: true,
+        &quot;start&quot;: 1700581226666
+      },
+      &quot;skipped&quot;: false,
+      &quot;snapshot&quot;: {
+        &quot;added&quot;: 0,
+        &quot;fileDeleted&quot;: false,
+        &quot;matched&quot;: 0,
+        &quot;unchecked&quot;: 0,
+        &quot;uncheckedKeys&quot;: [],
+        &quot;unmatched&quot;: 0,
+        &quot;updated&quot;: 0
+      },
+      &quot;testFilePath&quot;: &quot;D:\\proyectomgafrontend\\src\\__tests__\\integration\\CreationScreen.test.jsx&quot;,
+      &quot;testResults&quot;: [
+        {
+          &quot;ancestorTitles&quot;: [],
+          &quot;duration&quot;: 833,
+          &quot;failureDetails&quot;: [
+            {
+              &quot;matcherResult&quot;: {
+                &quot;message&quot;: &quot;\u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBeTruthy\u001b[2m()\u001b[22m\n\nReceived: \u001b[31mnull\u001b[39m&quot;,
+                &quot;pass&quot;: false
+              }
+            }
+          ],
+          &quot;failureMessages&quot;: [
+            &quot;Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBeTruthy\u001b[2m()\u001b[22m\n\nReceived: \u001b[31mnull\u001b[39m\n    at Object.toBeTruthy (D:\\proyectomgafrontend\\src\\__tests__\\integration\\CreationScreen.test.jsx:39:48)\n    at Generator.next (&lt;anonymous&gt;)\n    at asyncGeneratorStep (D:\\proyectomgafrontend\\node_modules\\@babel\\runtime\\helpers\\asyncToGenerator.js:3:24)\n    at _next (D:\\proyectomgafrontend\\node_modules\\@babel\\runtime\\helpers\\asyncToGenerator.js:22:9)\n    at processTicksAndRejections (node:internal&#x2F;process&#x2F;task_queues:95:5)&quot;
+          ],
+          &quot;fullName&quot;: &quot;handles the \&quot;Añadir más registros\&quot; button click&quot;,
+          &quot;invocations&quot;: 1,
+          &quot;location&quot;: null,
+          &quot;numPassingAsserts&quot;: 0,
+          &quot;retryReasons&quot;: [],
+          &quot;status&quot;: &quot;failed&quot;,
+          &quot;title&quot;: &quot;handles the \&quot;Añadir más registros\&quot; button click&quot;
+        },
+        {
+          &quot;ancestorTitles&quot;: [],
+          &quot;duration&quot;: 23,
+          &quot;failureDetails&quot;: [],
+          &quot;failureMessages&quot;: [],
+          &quot;fullName&quot;: &quot;handles the \&quot;Completar\&quot; button click&quot;,
+          &quot;invocations&quot;: 1,
+          &quot;location&quot;: null,
+          &quot;numPassingAsserts&quot;: 0,
+          &quot;retryReasons&quot;: [],
+          &quot;status&quot;: &quot;passed&quot;,
+          &quot;title&quot;: &quot;handles the \&quot;Completar\&quot; button click&quot;
+        }
+      ],
+      &quot;failureMessage&quot;: &quot;\u001b[1m\u001b[31m  \u001b[1m● \u001b[22m\u001b[1mhandles the \&quot;Añadir más registros\&quot; button click\u001b[39m\u001b[22m\n\n    \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBeTruthy\u001b[2m()\u001b[22m\n\n    Received: \u001b[31mnull\u001b[39m\n\u001b[2m\u001b[22m\n\u001b[2m    \u001b[0m \u001b[90m 37 |\u001b[39m   \u001b[36mconst\u001b[39m { getByText\u001b[33m,\u001b[39m queryByText } \u001b[33m&#x3D;\u001b[39m render(\u001b[33m&lt;\u001b[39m\u001b[33mCreationScreen\u001b[39m \u001b[33m&#x2F;\u001b[39m\u001b[33m&gt;\u001b[39m)\u001b[0m\u001b[22m\n\u001b[2m    \u001b[0m \u001b[90m 38 |\u001b[39m   \u001b[36mawait\u001b[39m fireEvent\u001b[33m.\u001b[39mpress(getByText(\u001b[32m&#39;Añadir más registros&#39;\u001b[39m))\u001b[0m\u001b[22m\n\u001b[2m    \u001b[0m\u001b[31m\u001b[1m&gt;\u001b[22m\u001b[2m\u001b[39m\u001b[90m 39 |\u001b[39m   expect(queryByText(\u001b[32m&#39;Peso total de pollos:&#39;\u001b[39m))\u001b[33m.\u001b[39mtoBeTruthy() \u001b[90m&#x2F;&#x2F; Check if new slider appears\u001b[39m\u001b[0m\u001b[22m\n\u001b[2m    \u001b[0m \u001b[90m    |\u001b[39m                                                \u001b[31m\u001b[1m^\u001b[22m\u001b[2m\u001b[39m\u001b[0m\u001b[22m\n\u001b[2m    \u001b[0m \u001b[90m 40 |\u001b[39m })\u001b[0m\u001b[22m\n\u001b[2m    \u001b[0m \u001b[90m 41 |\u001b[39m\u001b[0m\u001b[22m\n\u001b[2m    \u001b[0m \u001b[90m 42 |\u001b[39m it(\u001b[32m&#39;handles the \&quot;Completar\&quot; button click&#39;\u001b[39m\u001b[33m,\u001b[39m \u001b[36masync\u001b[39m () \u001b[33m&#x3D;&gt;\u001b[39m {\u001b[0m\u001b[22m\n\u001b[2m\u001b[22m\n\u001b[2m      \u001b[2mat Object.toBeTruthy (\u001b[22m\u001b[2m\u001b[0m\u001b[36msrc&#x2F;__tests__&#x2F;integration&#x2F;CreationScreen.test.jsx\u001b[39m\u001b[0m\u001b[2m:39:48)\u001b[22m\u001b[2m\u001b[22m\n\u001b[2m      \u001b[2mat asyncGeneratorStep (\u001b[22m\u001b[2mnode_modules&#x2F;@babel&#x2F;runtime&#x2F;helpers&#x2F;asyncToGenerator.js\u001b[2m:3:24)\u001b[22m\u001b[2m\u001b[22m\n\u001b[2m      \u001b[2mat _next (\u001b[22m\u001b[2mnode_modules&#x2F;@babel&#x2F;runtime&#x2F;helpers&#x2F;asyncToGenerator.js\u001b[2m:22:9)\u001b[22m\u001b[2m\u001b[22m\n&quot;
+    },
+    {
+      &quot;leaks&quot;: false,
+      &quot;numFailingTests&quot;: 0,
+      &quot;numPassingTests&quot;: 1,
+      &quot;numPendingTests&quot;: 0,
+      &quot;numTodoTests&quot;: 0,
+      &quot;openHandles&quot;: [],
+      &quot;perfStats&quot;: {
+        &quot;end&quot;: 1700581238267,
+        &quot;runtime&quot;: 570,
+        &quot;slow&quot;: false,
+        &quot;start&quot;: 1700581237697
+      },
+      &quot;skipped&quot;: false,
+      &quot;snapshot&quot;: {
+        &quot;added&quot;: 0,
+        &quot;fileDeleted&quot;: false,
+        &quot;matched&quot;: 0,
+        &quot;unchecked&quot;: 0,
+        &quot;uncheckedKeys&quot;: [],
+        &quot;unmatched&quot;: 0,
+        &quot;updated&quot;: 0
+      },
+      &quot;testFilePath&quot;: &quot;D:\\proyectomgafrontend\\src\\__tests__\\integration\\CrearGalera.test.jsx&quot;,
+      &quot;testResults&quot;: [
+        {
+          &quot;ancestorTitles&quot;: [
+            &quot;CrearGalera component&quot;
+          ],
+          &quot;duration&quot;: 174,
+          &quot;failureDetails&quot;: [],
+          &quot;failureMessages&quot;: [],
+          &quot;fullName&quot;: &quot;CrearGalera component should render correctly&quot;,
+          &quot;invocations&quot;: 1,
+          &quot;location&quot;: null,
+          &quot;numPassingAsserts&quot;: 5,
+          &quot;retryReasons&quot;: [],
+          &quot;status&quot;: &quot;passed&quot;,
+          &quot;title&quot;: &quot;should render correctly&quot;
+        }
+      ],
+      &quot;failureMessage&quot;: null
+    },
+    {
+      &quot;leaks&quot;: false,
+      &quot;numFailingTests&quot;: 0,
+      &quot;numPassingTests&quot;: 3,
+      &quot;numPendingTests&quot;: 0,
+      &quot;numTodoTests&quot;: 0,
+      &quot;openHandles&quot;: [],
+      &quot;perfStats&quot;: {
+        &quot;end&quot;: 1700581238600,
+        &quot;runtime&quot;: 407,
+        &quot;slow&quot;: false,
+        &quot;start&quot;: 1700581238193
+      },
+      &quot;skipped&quot;: false,
+      &quot;snapshot&quot;: {
+        &quot;added&quot;: 0,
+        &quot;fileDeleted&quot;: false,
+        &quot;matched&quot;: 0,
+        &quot;unchecked&quot;: 0,
+        &quot;uncheckedKeys&quot;: [],
+        &quot;unmatched&quot;: 0,
+        &quot;updated&quot;: 0
+      },
+      &quot;testFilePath&quot;: &quot;D:\\proyectomgafrontend\\src\\__tests__\\unit\\SliderComponentRefactor.test.jsx&quot;,
+      &quot;testResults&quot;: [
+        {
+          &quot;ancestorTitles&quot;: [
+            &quot;SliderComponentRefactor&quot;
+          ],
+          &quot;duration&quot;: 65,
+          &quot;failureDetails&quot;: [],
+          &quot;failureMessages&quot;: [],
+          &quot;fullName&quot;: &quot;SliderComponentRefactor should render correctly&quot;,
+          &quot;invocations&quot;: 1,
+          &quot;location&quot;: null,
+          &quot;numPassingAsserts&quot;: 4,
+          &quot;retryReasons&quot;: [],
+          &quot;status&quot;: &quot;passed&quot;,
+          &quot;title&quot;: &quot;should render correctly&quot;
+        },
+        {
+          &quot;ancestorTitles&quot;: [
+            &quot;SliderComponentRefactor&quot;
+          ],
+          &quot;duration&quot;: 12,
+          &quot;failureDetails&quot;: [],
+          &quot;failureMessages&quot;: [],
+          &quot;fullName&quot;: &quot;SliderComponentRefactor should update value on slider change&quot;,
+          &quot;invocations&quot;: 1,
+          &quot;location&quot;: null,
+          &quot;numPassingAsserts&quot;: 1,
+          &quot;retryReasons&quot;: [],
+          &quot;status&quot;: &quot;passed&quot;,
+          &quot;title&quot;: &quot;should update value on slider change&quot;
+        },
+        {
+          &quot;ancestorTitles&quot;: [
+            &quot;SliderComponentRefactor&quot;
+          ],
+          &quot;duration&quot;: 13,
+          &quot;failureDetails&quot;: [],
+          &quot;failureMessages&quot;: [],
+          &quot;fullName&quot;: &quot;SliderComponentRefactor should update value on text input change&quot;,
+          &quot;invocations&quot;: 1,
+          &quot;location&quot;: null,
+          &quot;numPassingAsserts&quot;: 1,
+          &quot;retryReasons&quot;: [],
+          &quot;status&quot;: &quot;passed&quot;,
+          &quot;title&quot;: &quot;should update value on text input change&quot;
+        }
+      ],
+      &quot;failureMessage&quot;: null
+    },
+    {
+      &quot;leaks&quot;: false,
+      &quot;numFailingTests&quot;: 0,
+      &quot;numPassingTests&quot;: 1,
+      &quot;numPendingTests&quot;: 0,
+      &quot;numTodoTests&quot;: 0,
+      &quot;openHandles&quot;: [],
+      &quot;perfStats&quot;: {
+        &quot;end&quot;: 1700581238895,
+        &quot;runtime&quot;: 2498,
+        &quot;slow&quot;: false,
+        &quot;start&quot;: 1700581236397
+      },
+      &quot;skipped&quot;: false,
+      &quot;snapshot&quot;: {
+        &quot;added&quot;: 0,
+        &quot;fileDeleted&quot;: false,
+        &quot;matched&quot;: 0,
+        &quot;unchecked&quot;: 0,
+        &quot;uncheckedKeys&quot;: [],
+        &quot;unmatched&quot;: 0,
+        &quot;updated&quot;: 0
+      },
+      &quot;testFilePath&quot;: &quot;D:\\proyectomgafrontend\\src\\__tests__\\integration\\CreationScreenAdministrador.test.jsx&quot;,
+      &quot;testResults&quot;: [
+        {
+          &quot;ancestorTitles&quot;: [
+            &quot;CreationScreenAdministrator&quot;
+          ],
+          &quot;duration&quot;: 133,
+          &quot;failureDetails&quot;: [],
+          &quot;failureMessages&quot;: [],
+          &quot;fullName&quot;: &quot;CreationScreenAdministrator renders correctly&quot;,
+          &quot;invocations&quot;: 1,
+          &quot;location&quot;: null,
+          &quot;numPassingAsserts&quot;: 1,
+          &quot;retryReasons&quot;: [],
+          &quot;status&quot;: &quot;passed&quot;,
+          &quot;title&quot;: &quot;renders correctly&quot;
+        }
+      ],
+      &quot;failureMessage&quot;: null
+    },
+    {
+      &quot;leaks&quot;: false,
+      &quot;numFailingTests&quot;: 0,
+      &quot;numPassingTests&quot;: 1,
+      &quot;numPendingTests&quot;: 0,
+      &quot;numTodoTests&quot;: 0,
+      &quot;openHandles&quot;: [],
+      &quot;perfStats&quot;: {
+        &quot;end&quot;: 1700581238927,
+        &quot;runtime&quot;: 282,
+        &quot;slow&quot;: false,
+        &quot;start&quot;: 1700581238645
+      },
+      &quot;skipped&quot;: false,
+      &quot;snapshot&quot;: {
+        &quot;added&quot;: 0,
+        &quot;fileDeleted&quot;: false,
+        &quot;matched&quot;: 0,
+        &quot;unchecked&quot;: 0,
+        &quot;uncheckedKeys&quot;: [],
+        &quot;unmatched&quot;: 0,
+        &quot;updated&quot;: 0
+      },
+      &quot;testFilePath&quot;: &quot;D:\\proyectomgafrontend\\src\\__tests__\\unit\\TrafficLight.test.jsx&quot;,
+      &quot;testResults&quot;: [
+        {
+          &quot;ancestorTitles&quot;: [
+            &quot;TrafficLight&quot;
+          ],
+          &quot;duration&quot;: 65,
+          &quot;failureDetails&quot;: [],
+          &quot;failureMessages&quot;: [],
+          &quot;fullName&quot;: &quot;TrafficLight renders correctly with the provided values&quot;,
+          &quot;invocations&quot;: 1,
+          &quot;location&quot;: null,
+          &quot;numPassingAsserts&quot;: 3,
+          &quot;retryReasons&quot;: [],
+          &quot;status&quot;: &quot;passed&quot;,
+          &quot;title&quot;: &quot;renders correctly with the provided values&quot;
+        }
+      ],
+      &quot;failureMessage&quot;: null
+    },
+    {
+      &quot;leaks&quot;: false,
+      &quot;numFailingTests&quot;: 0,
+      &quot;numPassingTests&quot;: 1,
+      &quot;numPendingTests&quot;: 0,
+      &quot;numTodoTests&quot;: 0,
+      &quot;openHandles&quot;: [],
+      &quot;perfStats&quot;: {
+        &quot;end&quot;: 1700581239215,
+        &quot;runtime&quot;: 249,
+        &quot;slow&quot;: false,
+        &quot;start&quot;: 1700581238966
+      },
+      &quot;skipped&quot;: false,
+      &quot;snapshot&quot;: {
+        &quot;added&quot;: 0,
+        &quot;fileDeleted&quot;: false,
+        &quot;matched&quot;: 0,
+        &quot;unchecked&quot;: 0,
+        &quot;uncheckedKeys&quot;: [],
+        &quot;unmatched&quot;: 0,
+        &quot;updated&quot;: 0
+      },
+      &quot;testFilePath&quot;: &quot;D:\\proyectomgafrontend\\src\\__tests__\\unit\\TextCard.test.jsx&quot;,
+      &quot;testResults&quot;: [
+        {
+          &quot;ancestorTitles&quot;: [
+            &quot;TextCard component&quot;
+          ],
+          &quot;duration&quot;: 60,
+          &quot;failureDetails&quot;: [],
+          &quot;failureMessages&quot;: [],
+          &quot;fullName&quot;: &quot;TextCard component renders correctly&quot;,
+          &quot;invocations&quot;: 1,
+          &quot;location&quot;: null,
+          &quot;numPassingAsserts&quot;: 1,
+          &quot;retryReasons&quot;: [],
+          &quot;status&quot;: &quot;passed&quot;,
+          &quot;title&quot;: &quot;renders correctly&quot;
+        }
+      ],
+      &quot;failureMessage&quot;: null
+    },
+    {
+      &quot;leaks&quot;: false,
+      &quot;numFailingTests&quot;: 0,
+      &quot;numPassingTests&quot;: 1,
+      &quot;numPendingTests&quot;: 0,
+      &quot;numTodoTests&quot;: 0,
+      &quot;openHandles&quot;: [],
+      &quot;perfStats&quot;: {
+        &quot;end&quot;: 1700581239800,
+        &quot;runtime&quot;: 526,
+        &quot;slow&quot;: false,
+        &quot;start&quot;: 1700581239274
+      },
+      &quot;skipped&quot;: false,
+      &quot;snapshot&quot;: {
+        &quot;added&quot;: 0,
+        &quot;fileDeleted&quot;: false,
+        &quot;matched&quot;: 0,
+        &quot;unchecked&quot;: 0,
+        &quot;uncheckedKeys&quot;: [],
+        &quot;unmatched&quot;: 0,
+        &quot;updated&quot;: 0
+      },
+      &quot;testFilePath&quot;: &quot;D:\\proyectomgafrontend\\src\\__tests__\\unit\\CardGaleraAdmin.test.jsx&quot;,
+      &quot;testResults&quot;: [
+        {
+          &quot;ancestorTitles&quot;: [
+            &quot;CardGaleraAdmin component&quot;
+          ],
+          &quot;duration&quot;: 117,
+          &quot;failureDetails&quot;: [],
+          &quot;failureMessages&quot;: [],
+          &quot;fullName&quot;: &quot;CardGaleraAdmin component renders without errors&quot;,
+          &quot;invocations&quot;: 1,
+          &quot;location&quot;: null,
+          &quot;numPassingAsserts&quot;: 1,
+          &quot;retryReasons&quot;: [],
+          &quot;status&quot;: &quot;passed&quot;,
+          &quot;title&quot;: &quot;renders without errors&quot;
+        }
+      ],
+      &quot;failureMessage&quot;: null
+    },
+    {
+      &quot;failureMessage&quot;: &quot;  \u001b[1m● \u001b[22mTest suite failed to run\n\n    TypeError: StyleSheet.create is not a function\n\n    \u001b[0m\u001b[31m\u001b[1m&gt;\u001b[22m\u001b[39m\u001b[90m 1 |\u001b[39m \u001b[36mconst\u001b[39m styles \u001b[33m&#x3D;\u001b[39m \u001b[33mStyleSheet\u001b[39m\u001b[33m.\u001b[39mcreate({\u001b[0m\n    \u001b[0m \u001b[90m   |\u001b[39m                           \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\u001b[0m\n    \u001b[0m \u001b[90m 2 |\u001b[39m   input\u001b[33m:\u001b[39m {\u001b[0m\n    \u001b[0m \u001b[90m 3 |\u001b[39m     borderWidth\u001b[33m:\u001b[39m \u001b[35m1\u001b[39m\u001b[33m,\u001b[39m\u001b[0m\n    \u001b[0m \u001b[90m 4 |\u001b[39m     height\u001b[33m:\u001b[39m \u001b[35m40\u001b[39m\u001b[33m,\u001b[39m\u001b[0m\n\n      \u001b[2mat Object.create (\u001b[22msrc&#x2F;components&#x2F;InputComponent&#x2F;styles.js\u001b[2m:1:27)\u001b[22m\n      \u001b[2mat Object.require (\u001b[22msrc&#x2F;components&#x2F;InputComponent&#x2F;InputComponent.jsx\u001b[2m:3:1)\u001b[22m\n      \u001b[2mat Object.require (\u001b[22m\u001b[0m\u001b[36msrc&#x2F;__tests__&#x2F;unit&#x2F;InputComponent.test.jsx\u001b[39m\u001b[0m\u001b[2m:3:1)\u001b[22m\n&quot;,
+      &quot;leaks&quot;: false,
+      &quot;numFailingTests&quot;: 0,
+      &quot;numPassingTests&quot;: 0,
+      &quot;numPendingTests&quot;: 0,
+      &quot;numTodoTests&quot;: 0,
+      &quot;openHandles&quot;: [],
+      &quot;perfStats&quot;: {
+        &quot;end&quot;: 0,
+        &quot;runtime&quot;: 0,
+        &quot;slow&quot;: false,
+        &quot;start&quot;: 0
+      },
+      &quot;skipped&quot;: false,
+      &quot;snapshot&quot;: {
+        &quot;added&quot;: 0,
+        &quot;fileDeleted&quot;: false,
+        &quot;matched&quot;: 0,
+        &quot;unchecked&quot;: 0,
+        &quot;uncheckedKeys&quot;: [],
+        &quot;unmatched&quot;: 0,
+        &quot;updated&quot;: 0
+      },
+      &quot;testExecError&quot;: &quot;StyleSheet.create is not a function&quot;,
+      &quot;testFilePath&quot;: &quot;D:\\proyectomgafrontend\\src\\__tests__\\unit\\InputComponent.test.jsx&quot;,
+      &quot;testResults&quot;: []
+    },
+    {
+      &quot;failureMessage&quot;: &quot;  \u001b[1m● \u001b[22mTest suite failed to run\n\n    Cannot find module &#39;..&#x2F;hooks&#x2F;useApi&#x2F;useApi&#39; from &#39;src&#x2F;__tests__&#x2F;unit&#x2F;CardAssigment.test.jsx&#39;\n\n    \u001b[0m \u001b[90m 25 |\u001b[39m\u001b[0m\n    \u001b[0m \u001b[90m 26 |\u001b[39m \u001b[90m&#x2F;&#x2F; Mock the useApi hook\u001b[39m\u001b[0m\n    \u001b[0m\u001b[31m\u001b[1m&gt;\u001b[22m\u001b[39m\u001b[90m 27 |\u001b[39m jest\u001b[33m.\u001b[39mmock(\u001b[32m&#39;..&#x2F;hooks&#x2F;useApi&#x2F;useApi&#39;\u001b[39m\u001b[33m,\u001b[39m () \u001b[33m&#x3D;&gt;\u001b[39m () \u001b[33m&#x3D;&gt;\u001b[39m ([\u001b[0m\n    \u001b[0m \u001b[90m    |\u001b[39m                                     \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\u001b[0m\n    \u001b[0m \u001b[90m 28 |\u001b[39m   { data\u001b[33m:\u001b[39m mockWorkers }\u001b[33m,\u001b[39m\u001b[0m\n    \u001b[0m \u001b[90m 29 |\u001b[39m   \u001b[36mfalse\u001b[39m\u001b[33m,\u001b[39m\u001b[0m\n    \u001b[0m \u001b[90m 30 |\u001b[39m   jest\u001b[33m.\u001b[39mfn()\u001b[33m.\u001b[39mmockResolvedValue({})\u001b[33m,\u001b[39m\u001b[0m\n\n      \u001b[2mat Resolver._throwModNotFoundError (\u001b[22mnode_modules&#x2F;jest-resolve&#x2F;build&#x2F;resolver.js\u001b[2m:427:11)\u001b[22m\n      \u001b[2mat Object.&lt;anonymous&gt; (\u001b[22m\u001b[0m\u001b[36msrc&#x2F;__tests__&#x2F;unit&#x2F;CardAssigment.test.jsx\u001b[39m\u001b[0m\u001b[2m:27:37)\u001b[22m\n&quot;,
+      &quot;leaks&quot;: false,
+      &quot;numFailingTests&quot;: 0,
+      &quot;numPassingTests&quot;: 0,
+      &quot;numPendingTests&quot;: 0,
+      &quot;numTodoTests&quot;: 0,
+      &quot;openHandles&quot;: [],
+      &quot;perfStats&quot;: {
+        &quot;end&quot;: 0,
+        &quot;runtime&quot;: 0,
+        &quot;slow&quot;: false,
+        &quot;start&quot;: 0
+      },
+      &quot;skipped&quot;: false,
+      &quot;snapshot&quot;: {
+        &quot;added&quot;: 0,
+        &quot;fileDeleted&quot;: false,
+        &quot;matched&quot;: 0,
+        &quot;unchecked&quot;: 0,
+        &quot;uncheckedKeys&quot;: [],
+        &quot;unmatched&quot;: 0,
+        &quot;updated&quot;: 0
+      },
+      &quot;testExecError&quot;: &quot;Cannot find module &#39;..&#x2F;hooks&#x2F;useApi&#x2F;useApi&#39; from &#39;src&#x2F;__tests__&#x2F;unit&#x2F;CardAssigment.test.jsx&#39;&quot;,
+      &quot;testFilePath&quot;: &quot;D:\\proyectomgafrontend\\src\\__tests__\\unit\\CardAssigment.test.jsx&quot;,
+      &quot;testResults&quot;: []
+    },
+    {
+      &quot;failureMessage&quot;: &quot;  \u001b[1m● \u001b[22mTest suite failed to run\n\n    ReferenceError: TextEncoder is not defined\n\n    \u001b[0m\u001b[31m\u001b[1m&gt;\u001b[22m\u001b[39m\u001b[90m 1 |\u001b[39m \u001b[36mimport\u001b[39m { render } \u001b[36mfrom\u001b[39m \u001b[32m&#39;enzyme&#39;\u001b[39m\u001b[0m\n    \u001b[0m \u001b[90m   |\u001b[39m \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\u001b[0m\n    \u001b[0m \u001b[90m 2 |\u001b[39m \u001b[36mimport\u001b[39m \u001b[33mBottomTabNavigation\u001b[39m \u001b[36mfrom\u001b[39m \u001b[32m&#39;..&#x2F;..&#x2F;components&#x2F;BottomTabNavigation&#x2F;BottomTabNavigation&#39;\u001b[39m\u001b[0m\n    \u001b[0m \u001b[90m 3 |\u001b[39m\u001b[0m\n    \u001b[0m \u001b[90m 4 |\u001b[39m \u001b[90m&#x2F;&#x2F; Renders correctly with valid props\u001b[39m\u001b[0m\n\n      \u001b[2mat \u001b[22mnode_modules&#x2F;react-dom&#x2F;cjs&#x2F;react-dom-server.browser.development.js\u001b[2m:145:19\u001b[22m\n      \u001b[2mat Object.&lt;anonymous&gt; (\u001b[22mnode_modules&#x2F;react-dom&#x2F;cjs&#x2F;react-dom-server.browser.development.js\u001b[2m:7002:5)\u001b[22m\n      \u001b[2mat Object.&lt;anonymous&gt; (\u001b[22mnode_modules&#x2F;react-dom&#x2F;server.browser.js\u001b[2m:9:7)\u001b[22m\n      \u001b[2mat \u001b[22mnode_modules&#x2F;enzyme&#x2F;build&#x2F;react-compat.js\u001b[2m:109:59\u001b[22m\n      \u001b[2mat Object.&lt;anonymous&gt; (\u001b[22mnode_modules&#x2F;enzyme&#x2F;build&#x2F;react-compat.js\u001b[2m:180:5)\u001b[22m\n      \u001b[2mat Object.&lt;anonymous&gt; (\u001b[22mnode_modules&#x2F;enzyme&#x2F;build&#x2F;Utils.js\u001b[2m:34:20)\u001b[22m\n      \u001b[2mat Object.&lt;anonymous&gt; (\u001b[22mnode_modules&#x2F;enzyme&#x2F;build&#x2F;MountedTraversal.js\u001b[2m:33:14)\u001b[22m\n      \u001b[2mat Object.&lt;anonymous&gt; (\u001b[22mnode_modules&#x2F;enzyme&#x2F;build&#x2F;ReactWrapper.js\u001b[2m:33:25)\u001b[22m\n      \u001b[2mat Object.&lt;anonymous&gt; (\u001b[22mnode_modules&#x2F;enzyme&#x2F;build&#x2F;index.js\u001b[2m:8:21)\u001b[22m\n      \u001b[2mat Object.require (\u001b[22m\u001b[0m\u001b[36msrc&#x2F;__tests__&#x2F;unit&#x2F;BottomTabNavigation.test.jsx\u001b[39m\u001b[0m\u001b[2m:1:1)\u001b[22m\n&quot;,
+      &quot;leaks&quot;: false,
+      &quot;numFailingTests&quot;: 0,
+      &quot;numPassingTests&quot;: 0,
+      &quot;numPendingTests&quot;: 0,
+      &quot;numTodoTests&quot;: 0,
+      &quot;openHandles&quot;: [],
+      &quot;perfStats&quot;: {
+        &quot;end&quot;: 0,
+        &quot;runtime&quot;: 0,
+        &quot;slow&quot;: false,
+        &quot;start&quot;: 0
+      },
+      &quot;skipped&quot;: false,
+      &quot;snapshot&quot;: {
+        &quot;added&quot;: 0,
+        &quot;fileDeleted&quot;: false,
+        &quot;matched&quot;: 0,
+        &quot;unchecked&quot;: 0,
+        &quot;uncheckedKeys&quot;: [],
+        &quot;unmatched&quot;: 0,
+        &quot;updated&quot;: 0
+      },
+      &quot;testExecError&quot;: &quot;TextEncoder is not defined&quot;,
+      &quot;testFilePath&quot;: &quot;D:\\proyectomgafrontend\\src\\__tests__\\unit\\BottomTabNavigation.test.jsx&quot;,
+      &quot;testResults&quot;: []
+    },
+    {
+      &quot;failureMessage&quot;: &quot;  \u001b[1m● \u001b[22mTest suite failed to run\n\n    \u001b[1m\u001b[31mJest encountered an unexpected token\u001b[39m\u001b[22m\n\n    Jest failed to parse a file. This happens e.g. when your code or its dependencies use non-standard JavaScript syntax, or when Jest is not configured to support such syntax.\n\n    Out of the box Jest supports Babel, which will be used to transform your files into valid JS based on your Babel configuration.\n\n    By default \&quot;node_modules\&quot; folder is ignored by transformers.\n\n    Here&#39;s what you can do:\n     • If you are trying to use ECMAScript Modules, see \u001b[4mhttps:&#x2F;&#x2F;jestjs.io&#x2F;docs&#x2F;ecmascript-modules\u001b[24m for how to enable it.\n     • If you are trying to use TypeScript, see \u001b[4mhttps:&#x2F;&#x2F;jestjs.io&#x2F;docs&#x2F;getting-started#using-typescript\u001b[24m\n     • To have some of your \&quot;node_modules\&quot; files transformed, you can specify a custom \u001b[1m\&quot;transformIgnorePatterns\&quot;\u001b[22m in your config.\n     • If you need a custom transformation specify a \u001b[1m\&quot;transform\&quot;\u001b[22m option in your config.\n     • If you simply want to mock your non-JS modules (e.g. binary assets) you can stub them out with the \u001b[1m\&quot;moduleNameMapper\&quot;\u001b[22m config option.\n\n    You&#39;ll find more details and examples of these config options in the docs:\n    \u001b[36mhttps:&#x2F;&#x2F;jestjs.io&#x2F;docs&#x2F;configuration\u001b[39m\n    For information about custom transformations, see:\n    \u001b[36mhttps:&#x2F;&#x2F;jestjs.io&#x2F;docs&#x2F;code-transformation\u001b[39m\n\n    \u001b[1m\u001b[31mDetails:\u001b[39m\u001b[22m\n\n    D:\\proyectomgafrontend\\node_modules\\@react-native-community\\datetimepicker\\src\\index.js:5\n    import RNDateTimePicker from &#39;.&#x2F;datetimepicker&#39;;\n    ^^^^^^\n\n    SyntaxError: Cannot use import statement outside a module\n\n    \u001b[0m \u001b[90m  5 |\u001b[39m   \u001b[33mView\u001b[39m\u001b[33m,\u001b[39m \u001b[33mScrollView\u001b[39m\u001b[33m,\u001b[39m \u001b[33mStatusBar\u001b[39m\u001b[33m,\u001b[39m\u001b[0m\n    \u001b[0m \u001b[90m  6 |\u001b[39m } \u001b[36mfrom\u001b[39m \u001b[32m&#39;react-native&#39;\u001b[39m\u001b[0m\n    \u001b[0m\u001b[31m\u001b[1m&gt;\u001b[22m\u001b[39m\u001b[90m  7 |\u001b[39m \u001b[36mimport\u001b[39m \u001b[33mDateTimePicker\u001b[39m \u001b[36mfrom\u001b[39m \u001b[32m&#39;@react-native-community&#x2F;datetimepicker&#39;\u001b[39m\u001b[0m\n    \u001b[0m \u001b[90m    |\u001b[39m \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\u001b[0m\n    \u001b[0m \u001b[90m  8 |\u001b[39m \u001b[36mimport\u001b[39m \u001b[33mPropTypes\u001b[39m \u001b[36mfrom\u001b[39m \u001b[32m&#39;prop-types&#39;\u001b[39m\u001b[0m\n    \u001b[0m \u001b[90m  9 |\u001b[39m \u001b[36mimport\u001b[39m {\u001b[0m\n    \u001b[0m \u001b[90m 10 |\u001b[39m   \u001b[33mSelectDate\u001b[39m\u001b[33m,\u001b[39m\u001b[0m\n\n      \u001b[2mat Runtime.createScriptFromCode (\u001b[22mnode_modules&#x2F;jest-runtime&#x2F;build&#x2F;index.js\u001b[2m:1505:14)\u001b[22m\n      \u001b[2mat Object.require (\u001b[22msrc&#x2F;screens&#x2F;ReportScreenAdmin&#x2F;ReportScreenAdmin.jsx\u001b[2m:7:1)\u001b[22m\n      \u001b[2mat Object.require (\u001b[22m\u001b[0m\u001b[36msrc&#x2F;__tests__&#x2F;integration&#x2F;ReportScreenAdmin.test.jsx\u001b[39m\u001b[0m\u001b[2m:6:1)\u001b[22m\n&quot;,
+      &quot;leaks&quot;: false,
+      &quot;numFailingTests&quot;: 0,
+      &quot;numPassingTests&quot;: 0,
+      &quot;numPendingTests&quot;: 0,
+      &quot;numTodoTests&quot;: 0,
+      &quot;openHandles&quot;: [],
+      &quot;perfStats&quot;: {
+        &quot;end&quot;: 0,
+        &quot;runtime&quot;: 0,
+        &quot;slow&quot;: false,
+        &quot;start&quot;: 0
+      },
+      &quot;skipped&quot;: false,
+      &quot;snapshot&quot;: {
+        &quot;added&quot;: 0,
+        &quot;fileDeleted&quot;: false,
+        &quot;matched&quot;: 0,
+        &quot;unchecked&quot;: 0,
+        &quot;uncheckedKeys&quot;: [],
+        &quot;unmatched&quot;: 0,
+        &quot;updated&quot;: 0
+      },
+      &quot;testExecError&quot;: &quot;Cannot use import statement outside a module&quot;,
+      &quot;testFilePath&quot;: &quot;D:\\proyectomgafrontend\\src\\__tests__\\integration\\ReportScreenAdmin.test.jsx&quot;,
+      &quot;testResults&quot;: []
+    }
+  ],
+  &quot;wasInterrupted&quot;: false
+}</div>
+        </div>
+        <div class="d-none" id="test-global-config">{
+  &quot;bail&quot;: 0,
+  &quot;changedFilesWithAncestor&quot;: false,
+  &quot;ci&quot;: false,
+  &quot;collectCoverage&quot;: false,
+  &quot;collectCoverageFrom&quot;: [],
+  &quot;coverageDirectory&quot;: &quot;D:\\proyectomgafrontend\\coverage&quot;,
+  &quot;coverageProvider&quot;: &quot;babel&quot;,
+  &quot;coverageReporters&quot;: [
+    &quot;json&quot;,
+    &quot;text&quot;,
+    &quot;lcov&quot;,
+    &quot;clover&quot;
+  ],
+  &quot;detectLeaks&quot;: false,
+  &quot;detectOpenHandles&quot;: false,
+  &quot;errorOnDeprecated&quot;: false,
+  &quot;expand&quot;: false,
+  &quot;findRelatedTests&quot;: false,
+  &quot;forceExit&quot;: false,
+  &quot;json&quot;: false,
+  &quot;lastCommit&quot;: false,
+  &quot;listTests&quot;: false,
+  &quot;logHeapUsage&quot;: false,
+  &quot;maxConcurrency&quot;: 5,
+  &quot;maxWorkers&quot;: 11,
+  &quot;noStackTrace&quot;: false,
+  &quot;nonFlagArgs&quot;: [],
+  &quot;notify&quot;: false,
+  &quot;notifyMode&quot;: &quot;failure-change&quot;,
+  &quot;onlyChanged&quot;: false,
+  &quot;onlyFailures&quot;: false,
+  &quot;openHandlesTimeout&quot;: 1000,
+  &quot;passWithNoTests&quot;: false,
+  &quot;projects&quot;: [],
+  &quot;reporters&quot;: [
+    [
+      &quot;default&quot;,
+      {}
+    ],
+    [
+      &quot;D:\\proyectomgafrontend\\node_modules\\jest-stare\\lib\\index.js&quot;,
+      {}
+    ]
+  ],
+  &quot;rootDir&quot;: &quot;D:\\proyectomgafrontend&quot;,
+  &quot;runTestsByPath&quot;: false,
+  &quot;seed&quot;: 616066601,
+  &quot;skipFilter&quot;: false,
+  &quot;snapshotFormat&quot;: {
+    &quot;escapeString&quot;: false,
+    &quot;printBasicPrototype&quot;: false
+  },
+  &quot;testFailureExitCode&quot;: 1,
+  &quot;testPathPattern&quot;: &quot;&quot;,
+  &quot;testSequencer&quot;: &quot;D:\\proyectomgafrontend\\node_modules\\@jest\\test-sequencer\\build\\index.js&quot;,
+  &quot;updateSnapshot&quot;: &quot;new&quot;,
+  &quot;useStderr&quot;: false,
+  &quot;watch&quot;: false,
+  &quot;watchAll&quot;: false,
+  &quot;watchman&quot;: true,
+  &quot;workerThreads&quot;: false
+}</div>
+
+    </main>
+    <hr>
+    <footer class="footer">
+        <div class="container">
+            <span class="text-muted">jest-stare 2022</span>
+        </div>
+    </footer>
+</body>
+
+</html>
+

@@ -906,7 +906,7 @@ FN:97,(anonymous_5)
 FN:132,(anonymous_6)
 FNF:7
 FNH:4
-FNDA:13,(anonymous_0)
+FNDA:9,(anonymous_0)
 FNDA:1,(anonymous_1)
 FNDA:0,(anonymous_2)
 FNDA:1,(anonymous_3)
@@ -914,11 +914,11 @@ FNDA:0,(anonymous_4)
 FNDA:0,(anonymous_5)
 FNDA:1,(anonymous_6)
 DA:9,2
-DA:12,13
-DA:13,13
-DA:14,13
-DA:15,13
-DA:17,13
+DA:12,9
+DA:13,9
+DA:14,9
+DA:15,9
+DA:17,9
 DA:19,1
 DA:22,1
 DA:25,1
@@ -927,10 +927,10 @@ DA:28,1
 DA:29,0
 DA:31,0
 DA:32,0
-DA:37,13
+DA:37,9
 DA:38,0
 DA:39,0
-DA:42,13
+DA:42,9
 DA:43,1
 DA:44,1
 DA:46,1
@@ -943,7 +943,7 @@ DA:57,1
 DA:59,0
 DA:62,0
 DA:64,1
-DA:67,13
+DA:67,9
 DA:68,0
 DA:69,0
 DA:71,0
@@ -956,7 +956,7 @@ DA:82,0
 DA:84,0
 DA:87,0
 DA:89,0
-DA:92,13
+DA:92,9
 DA:97,0
 DA:133,1
 DA:134,1
@@ -991,7 +991,7 @@ BRDA:79,10,0,0
 BRDA:79,10,1,0
 BRDA:79,11,0,0
 BRDA:79,11,1,0
-BRDA:115,12,0,13
+BRDA:115,12,0,9
 BRDA:115,12,1,0
 BRDA:133,13,0,1
 BRDA:133,13,1,0
@@ -1445,9 +1445,9 @@ BRDA:81,5,1,0
 BRDA:83,6,0,0
 BRDA:83,6,1,1
 BRDA:119,7,0,2
-BRDA:119,7,1,2
+BRDA:119,7,1,0
 BRF:16
-BRH:8
+BRH:7
 end_of_record
 TN:
 SF:src\screens\CreationScreen\styles.js

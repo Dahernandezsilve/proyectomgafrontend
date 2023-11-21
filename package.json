@@ -12,6 +12,7 @@
     "detox": "detox",
     "lint": "eslint src",
     "test": "jest --coverage=true",
+    "reporter-test": "jest --reporters default jest-stare", 
     "e2e:android": "detox test --configuration android.emulator",
     "detox:buid": "detox build -c android.emulator",
     "android:detox": "react-native run-android",
