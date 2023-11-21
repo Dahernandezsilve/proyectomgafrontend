@@ -7,10 +7,23 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
     bottom: 0,
     left: 0,
-    position: 'relative',
+    position: 'absolute',
     right: 0, // Ajusta el color de fondo según tus necesidades
   },
-  container: {
+  buttonContainer: {
+    marginBottom: windowWidth * 0.05,
+    marginLeft: windowWidth * 0.05,
+    marginTop: windowWidth * 0.03,
+    width: windowWidth * 0.9,
+    zIndex: -2,
+  },
+  container1: {
+    alignContent: 'center',
+    backgroundColor: '#f0f0f0',
+    flex: 1,
+  },
+  container2: {
+    alignContent: 'center',
     backgroundColor: '#f0f0f0',
     flex: 1,
   },
@@ -45,8 +58,30 @@ const styles = StyleSheet.create({
   scrollContainer: {
     flex: 1,
   },
-  scrollView: {
-    flex: 1, // También en el ScrollView para que se expanda correctamente
+  textContainer: {
+    alignItems: 'center',
+    backgroundColor: '#ffb552',
+    borderColor: 'gray',
+    borderRadius: 5,
+    borderWidth: 1,
+    marginLeft: windowWidth * 0.07,
+    marginRight: windowWidth * 0.07,
+    padding: windowWidth * 0.05,
+    shadowColor: 'gray',
+    shadowRadius: 2,
+  },
+  textContainer2: {
+    alignItems: 'center',
+    backgroundColor: '#E3E4E5',
+    borderColor: 'gray',
+    borderRadius: 5,
+    borderWidth: 1,
+    marginLeft: windowWidth * 0.05,
+    marginRight: windowWidth * 0.05,
+    marginTop: windowWidth * 0.02,
+    padding: windowWidth * 0.05,
+    shadowColor: 'gray',
+    shadowRadius: 2,
   },
   workerTitle: {
     color: '#2B4985',

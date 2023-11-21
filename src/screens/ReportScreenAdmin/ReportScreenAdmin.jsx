@@ -2,7 +2,7 @@
 /* eslint-disable no-unused-vars */
 import React, { useState, useEffect } from 'react'
 import {
-  View, ScrollView, StatusBar,
+  View, ScrollView, StatusBar, Button, Switch, Text,
 } from 'react-native'
 import DateTimePicker from '@react-native-community/datetimepicker'
 import PropTypes from 'prop-types'
@@ -38,12 +38,15 @@ const ReportScreenAdmin = (
   const [workers, setWorkers] = useState([])
   const [, setInfoWorkers] = useState()
   const [registers, setRegisters] = useState()
+  const [registersAnteriores, setRegistersAnteriores] = useState()
   const [registersActive, setRegistersActive] = useState(false)
   const [topValue, setTopValue] = useState(0)
   const [middleValue, setMiddleValue] = useState(0)
   const [bottomValue, setBottomValue] = useState(0)
   const [showNoInfo, setShowNoInfo] = useState(false)
   const [activeTabb, setActiveTabb] = useState(0)
+  const [filtroDecesos, setFiltroDecesos] = useState({ min: 0, max: 5 })
+  const [filtroActivo, setFiltroActivo] = useState(false)
 
   const handleDateChange = (event, date) => {
     setSelectedDate(date)
@@ -231,6 +234,23 @@ const ReportScreenAdmin = (
     setShowNoInfo(registers === undefined || registers.length === 0)
   }, [registers])
 
+  const aplicarFiltroDecesos = () => {
+    if (filtroActivo) {
+      // Si el filtro está activo, restaura los registros originales
+      setRegisters(registersAnteriores)
+    } else {
+      // Si el filtro no está activo, aplica el filtro
+      const registrosFiltrados = response.data.filter(
+        inform => inform.decesos >= filtroDecesos.max,
+      )
+      setRegistersAnteriores(registers)
+      setRegisters(registrosFiltrados)
+    }
+
+    // Cambia el estado del filtro
+    setFiltroActivo(!filtroActivo)
+  }
+
   const RenderContentRegisters = () => {
     if (showNoInfo) {
       return <NoInfo info="No hay información disponible" />
@@ -279,7 +299,7 @@ const ReportScreenAdmin = (
       label: 'Informe', route: 'Home', icon: 'ios-home', method: 'Ionicons',
     },
     {
-      label: 'Medición', route: 'Administrador', icon: 'new-message', method: 'Entypo',
+      label: 'Medición', route: 'Calculator', icon: 'new-message', method: 'Entypo',
     },
     {
       label: 'Granja', route: 'Finalizar galera', icon: 'book', method: 'Entypo',
@@ -324,6 +344,21 @@ const ReportScreenAdmin = (
                 setSelectedOption={setSelectedOption}
                 activeTab={activeTab}
               />
+              <View style={styles.containerColumn}>
+                <View style={styles.textContainer}>
+                  <Text style={{ fontSize: 15 }}>Registros alarmantes </Text>
+                </View>
+                <View style={styles.textContainer2}>
+                  <Switch
+                    value={filtroActivo}
+                    onValueChange={aplicarFiltroDecesos}
+                    trackColor={{ false: '#767577', true: 'gray' }}
+                    thumbColor={filtroActivo ? '#ff8c00' : '#f4f3f4'}
+                    ios_backgroundColor="#3e3e3e"
+                  />
+                </View>
+              </View>
+
             </View>
             <TrafficLight
               topValue={topValue} // Valor para el cuadro verde

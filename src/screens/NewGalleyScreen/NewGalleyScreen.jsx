@@ -15,9 +15,8 @@ const NewGalleyScreen = ({ navigation }) => {
   const [galleysPerLote, setGalleysPerLote] = useState([]); // Estado para almacenar los datos de las galeras
   const [listIdGalera, setidGalera] = useState([]);
 
-
   const navigateToGaleras = async () => {
-    navigation.navigate('Creacion')
+    navigation.navigate('Home')
   }
 
   const tabs = [
@@ -25,7 +24,7 @@ const NewGalleyScreen = ({ navigation }) => {
       label: 'Informe', route: 'Home', icon: 'ios-home', method: 'Ionicons',
     },
     {
-      label: 'Medición', route: 'Administrador', icon: 'new-message', method: 'Entypo',
+      label: 'Medición', route: 'Calculator', icon: 'new-message', method: 'Entypo',
     },
     {
       label: 'Granja', route: 'Finalizar galera', icon: 'book', method: 'Entypo',
@@ -98,7 +97,6 @@ const NewGalleyScreen = ({ navigation }) => {
           {galleysPerLote.map((galera, index) => (
             <CardNewGalley key={index} dataList={[galera.galeraYlote]} idGalley={listIdGalera[index]} />
           ))}
-
 
       </ScrollView>
       <View style={styles.bottomTabNavigator}>

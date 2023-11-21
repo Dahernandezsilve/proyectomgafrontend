@@ -5,14 +5,12 @@ const windowWidth = Dimensions.get('window').width
 
 const styles = StyleSheet.create({
   activeTabButton: {
-    backgroundColor: '#FFFFFF',
-    borderBottomColor: '#ff8c00',
+    borderBottomColor: '#FFC107',
     borderBottomWidth: 3,
     color: '#FFC107',
-    width: '33.33%',
   },
   activeTabButtonText: {
-    color: '#ff8c00',
+    color: '#FFC107',
     textAlign: 'center',
   },
   buttonContainer: {
@@ -24,34 +22,33 @@ const styles = StyleSheet.create({
   headerContainer: {
     backgroundColor: '#FFFFFF',
     borderBottomColor: '#CCCCCC',
-    borderBottomWidth: 1,
+    borderBottomWidth: 4,
     elevation: 2,
-    paddingTop: 20,
+    paddingBottom: windowWidth * 0.02,
+    paddingTop: windowWidth * 0.05,
     shadowColor: '#000',
     shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.5,
-    shadowRadius: 2,
+    shadowRadius: 10,
   },
   headerText: {
     fontFamily: SamsungOne,
-    fontSize: windowWidth * 0.055,
-    marginBottom: 8,
+    fontSize: windowWidth * 0.06,
+    marginBottom: windowWidth * 0.02,
     textAlign: 'center',
+    width: windowWidth,
   },
   tabButton: {
-    backgroundColor: 'transparent',
     borderBottomColor: '#CCCCCC',
     borderBottomWidth: 3,
     borderRadius: 0,
     color: '#FFC107',
-    marginHorizontal: 4,
-    paddingHorizontal: 16,
-    paddingVertical: 8,
+    paddingHorizontal: windowWidth * 0.04,
+    paddingVertical: windowWidth * 0.02,
   },
   tabButtonText: {
-    color: '#000000',
     fontFamily: SamsungOne,
-    fontSize: windowWidth * 0.036,
+    fontSize: windowWidth * 0.060,
     textAlign: 'center',
   },
 })

@@ -7,9 +7,37 @@ const styles = StyleSheet.create({
   caContainer: {
     alignItems: 'center',
     flexDirection: 'column',
+    padding: 0,
+  },
+  checkBoxChecked: {
+    alignItems: 'center', // Alinear contenido al centro horizontalmente
+    backgroundColor: '#2B4985', // Color de fondo para indicar que está marcado
+    borderColor: '#2B4985', // Color del borde
+    borderRadius: 5, // Hacer que el cuadro sea redondeado
+    borderWidth: 2, // Grosor del borde
+    height: windowWidth * 0.037,
+    justifyContent: 'center', // Alinear contenido al centro verticalmente
+    marginRight: windowWidth * 0.017,
+    marginTop: windowWidth * 0.017,
+    position: 'absolute', // Establecer posición absoluta
+    right: 5, // Ajustar la posición desde la derecha
+    top: 5, // Ajustar la posición desde la parte superior
+    width: windowWidth * 0.037,
+  },
+  circle: {
+    width: windowWidth * 0.07,
+    height: windowWidth * 0.07,
+    borderRadius: 75,
+    borderWidth: 2, // Ancho del borde
+    borderColor: 'gray', // Color del borde
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  circleText: {
+    textAlign: 'center',
   },
   column: {
-    flex: 0.5,
+    flex: 0.7,
   },
   column2: {
     flex: 1,
@@ -37,8 +65,14 @@ const styles = StyleSheet.create({
     fontFamily: SamsungOne,
     fontSize: windowWidth * 0.037,
   },
+  positionContainer: {
+    alignItems: 'center',
+    flexDirection: 'column',
+    paddingRight: windowWidth * 0.05,
+    flex: windowWidth * 0.00025,
+  },
   rightAlignedText: {
-    textAlign: 'justify',
+    textAlign: 'right',
   },
   row: {
     alignItems: 'flex-start',
@@ -63,26 +97,10 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.5,
     shadowRadius: 2,
     width: windowWidth * 0.2,
-
   },
   title: {
     fontFamily: SamsungOne,
     fontSize: windowWidth * 0.037,
-  },
-  checkBoxChecked: {
-    width: windowWidth * 0.037,
-    height: windowWidth * 0.037,
-    backgroundColor: '#2B4985', // Color de fondo para indicar que está marcado
-    borderWidth: 2, // Grosor del borde
-    borderColor: '#2B4985', // Color del borde
-    borderRadius: 5, // Hacer que el cuadro sea redondeado
-    alignItems: 'center', // Alinear contenido al centro horizontalmente
-    justifyContent: 'center', // Alinear contenido al centro verticalmente
-    marginRight: windowWidth * 0.017,
-    marginTop: windowWidth * 0.017,
-    position: 'absolute', // Establecer posición absoluta
-    top: 5, // Ajustar la posición desde la parte superior
-    right: 5, // Ajustar la posición desde la derecha
   },
 })
 

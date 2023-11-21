@@ -8,7 +8,8 @@ import {
   ChoiceScreen, DetailsScreen, CreationScreen, HomeWorkerScreen, LoginAdministrator,
   CreationScreenAdministrator,
   PersonalScreen,
-  CreateGalleyScreen
+  CreateGalleyScreen,
+  Calculator,
 } from './src/screens'
 import ReportScreenAdmin from './src/screens/ReportScreenAdmin'
 import LoginWorker from './src/screens/LoginWorker/LoginWorker'
@@ -39,9 +40,10 @@ const App = () => {
           <Stack.Screen name="Trabajador" component={LoginWorker} options={{ header: () => null }} />
           <Stack.Screen name="Finalizar galera" component={NewGalleyScreen} options={{ header: () => null }} />
           <Stack.Screen name="Crear galera" component={CreateGalleyScreen} options={{ header: () => null }} />
+          <Stack.Screen name="Calculator" component={Calculator} options={{ header: () => null, animation: 'none' }} />
           <Stack.Screen name="MeasurementsHistory" component={MeasurementsHistory} options={{ header: () => null }} />
-          <Stack.Screen name="Asignacion" component={GalleyAssignment} options={{ header: () => null }} />
-          <Stack.Screen name="Mi personal" component={PersonalScreen} options={{ header: () => null, animation: 'none' }} />
+          <Stack.Screen name="Asignacion" component={GalleyAssignment} options={{ header: () => null, animation: 'none' }} />
+          <Stack.Screen name="PersonalScreen" component={PersonalScreen} options={{ header: () => null, animation: 'none' }} />
           <Stack.Screen
             name="HomeWorker"
             component={HomeWorkerScreen}

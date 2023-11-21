@@ -17,6 +17,13 @@ const CreationScreen = () => {
   const route = useRoute()
   const idGalera = route.params?.idGalera || null
   const galera = route.params?.galera || null
+  const tiempoEnDias = route.params?.tiempoEnDias || null
+  const tiempoEnDiasRegex = /\b(\d+)\s+days\b/
+  const tiempoEnDiasMatch = tiempoEnDiasRegex.exec(tiempoEnDias)
+  console.log("t",tiempoEnDias)
+  const tiempoEnDiasValue = tiempoEnDiasMatch ? parseInt(tiempoEnDiasMatch[1]) : null
+  const isMultipleOf7 = tiempoEnDiasValue % 7 === 0
+  console.log("mul",isMultipleOf7)
   const navigation = useNavigation()
   const [pollos, setPollos] = useState(0)
   const [pesado, setPesado] = useState(0)
@@ -34,8 +41,8 @@ const CreationScreen = () => {
     }))
   }
   const promedioPesado = arraySliderPesado
-    .reduce((acc, value) => value + acc, 0)
-    / arraySliderPesado.filter(valor => valor !== 0).length
+    .reduce((acc, value) => value + acc, 0) + pesado
+    / 1 + (arraySliderPesado.filter(valor => valor !== 0).length)
   console.log('promedio pesado:', promedioPesado)
   const handleRegistrar = () => {
     const newSending = sending
@@ -107,8 +114,6 @@ const CreationScreen = () => {
     }
   }
 
-  const dayOfWeek = new Date().getDay()
-  console.log(arraySliderPesado)
   return (
     <View style={{ flex: 1, backgroundColor: '#ECECEC' }}>
       <StatusBar barStyle="light-content" backgroundColor="#fff" />
@@ -116,19 +121,8 @@ const CreationScreen = () => {
       <HeaderCreation galera={galera} />
       <View style={{ height: 2, width: '100%', backgroundColor: '#2B4985' }} />
       <ScrollView>
-        {dayOfWeek === 1 && (
+        {isMultipleOf7 && (
           <>
-            <SliderComponentRefactor
-              title="Cantidad de pollos pesados: "
-              minimumValue={20}
-              maximumValue={100}
-              step={1}
-              medida="pollos"
-              fixed={0}
-              value={pollos}
-              setValue={setPollos}
-
-            />
             <SliderComponentRefactor
               title="Peso total de pollos: "
               minimumValue={0}
@@ -137,8 +131,31 @@ const CreationScreen = () => {
               medida="lbs"
               value={pesado}
               setValue={setPesado}
-
             />
+            {arraySliderPesado.map((reg, index) => (
+              <SliderComponentRefactor
+            // eslint-disable-next-line react/no-array-index-key
+                key={index}
+                title="Peso total de pollos: "
+                minimumValue={0}
+                maximumValue={200}
+                step={1}
+                medida="lbs"
+                value={reg}
+                setValue={setValueArrayPesado(index)}
+                maxLength={3}
+              />
+            ))}
+            <Text
+              style={styles.text}
+            >
+              Promedio de Peso:
+              {' '}
+              {promedioPesado}
+            </Text>
+            <View style={styles.container}>
+              <Button title="Añadir más registros" color="#2e4a85" style={styles.buttonT} onPress={showAlert} />
+            </View>
           </>
         )}
         <SliderComponentRefactor
@@ -149,7 +166,6 @@ const CreationScreen = () => {
           medida="qq"
           value={alimento}
           setValue={setAlimento}
-
         />
         <SliderComponentRefactor
           title="Cantidad de pollos muertos: "
@@ -160,30 +176,6 @@ const CreationScreen = () => {
           value={decesos}
           setValue={setDecesos}
         />
-        <View style={styles.buttonContainer}>
-          <Button title="Añadir más registros" style={styles.button} onPress={showAlert} />
-        </View>
-        {arraySliderPesado.map((reg, index) => (
-          <SliderComponentRefactor
-            // eslint-disable-next-line react/no-array-index-key
-            key={index}
-            title="Peso total de pollos: "
-            minimumValue={0}
-            maximumValue={200}
-            step={1}
-            medida="lbs"
-            value={reg}
-            setValue={setValueArrayPesado(index)}
-            maxLength={3}
-          />
-        ))}
-        <Text
-          style={styles.text}
-        >
-          Promedio de Peso:
-          {' '}
-          {promedioPesado}
-        </Text>
         <CommentsComponent code="observaciones" value={comentario} setValue={setComentario} />
         <View style={styles.buttonContainer}>
           <Button
