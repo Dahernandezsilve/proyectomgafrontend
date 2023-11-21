@@ -71,7 +71,7 @@ const PersonalScreen = ({ navigation }) => {
       label: 'Medición', route: 'Calculator', icon: 'new-message', method: 'Entypo',
     },
     {
-      label: 'Granja', route: 'Crear galera', icon: 'book', method: 'Entypo',
+      label: 'Granja', route: 'Finalizar galera', icon: 'book', method: 'Entypo',
     },
     {
       label: 'Personal', route: 'PersonalScreen', icon: 'people-alt', method: 'MaterialIcons',
@@ -88,7 +88,7 @@ const PersonalScreen = ({ navigation }) => {
         setActiveTab={setActiveTab}
         showLote={false}
         navigation={navigation}
-        shouldNavigate={true}
+        shouldNavigate={false}
       />
       {activeTab === 'Mi personal' ? (
         <ScrollView style={styles.scrollabe}>

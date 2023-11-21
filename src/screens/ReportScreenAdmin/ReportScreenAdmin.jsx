@@ -338,12 +338,14 @@ const ReportScreenAdmin = (
                 onChange={handleDateChange}
               />
               )}
-              <SelectOption
-                selectedOption={selectedOption}
-                options={WorkersPerLote}
-                setSelectedOption={setSelectedOption}
-                activeTab={activeTab}
-              />
+              <View style={styles.selectOp}>
+                <SelectOption
+                  selectedOption={selectedOption}
+                  options={WorkersPerLote}
+                  setSelectedOption={setSelectedOption}
+                  activeTab={activeTab}
+                />
+              </View>
               <View style={styles.containerColumn}>
                 <View style={styles.textContainer}>
                   <Text style={{ fontSize: 15 }}>Registros alarmantes </Text>
@@ -358,7 +360,6 @@ const ReportScreenAdmin = (
                   />
                 </View>
               </View>
-
             </View>
             <TrafficLight
               topValue={topValue} // Valor para el cuadro verde

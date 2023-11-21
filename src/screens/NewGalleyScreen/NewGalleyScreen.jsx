@@ -3,17 +3,16 @@ import {
   View, Text, TextInput, ScrollView,
 } from 'react-native'
 import PropTypes from 'prop-types'
-import {CardNewGalley, HeaderInformation, BottomTabNavigation } from '../../components'
+import { CardNewGalley, HeaderInformation, BottomTabNavigation } from '../../components'
 import styles from './styles'
 import useApi from '../../hooks/useApi/useApi'
 
-
 const NewGalleyScreen = ({ navigation }) => {
-  const lotes = ['Mi granja', 'Finalizar galera','Crear galera']
-  const [activeTab, setActiveTab] = useState(lotes[1])
+  const lotes = ['Finalizar galera', 'Crear galera']
+  const [activeTab, setActiveTab] = useState(lotes[0])
   const [response, , handleRequest] = useApi()
-  const [galleysPerLote, setGalleysPerLote] = useState([]); // Estado para almacenar los datos de las galeras
-  const [listIdGalera, setidGalera] = useState([]);
+  const [galleysPerLote, setGalleysPerLote] = useState([])
+  const [listIdGalera, setidGalera] = useState([])
 
   const navigateToGaleras = async () => {
     navigation.navigate('Home')
@@ -30,53 +29,51 @@ const NewGalleyScreen = ({ navigation }) => {
       label: 'Granja', route: 'Finalizar galera', icon: 'book', method: 'Entypo',
     },
     {
-      label: 'Personal', route: 'Mi personal', icon: 'people-alt', method: 'MaterialIcons',
+      label: 'Personal', route: 'PersonalScreen', icon: 'people-alt', method: 'MaterialIcons',
     },
   ]
 
   // eslint-disable-next-line no-shadow
   const handleObtainGalleysPerLote = async () => {
-    const response = await handleRequest('GET', '/galerasWorker');
-    console.log('Mensaje:', response);
-  
+    const response = await handleRequest('GET', '/galerasWorker')
+    console.log('Mensaje:', response)
+
     if (Array.isArray(response.data) && response.data.length > 0) {
       const galleysData = response.data.map(galley => ({
-        id_gale : galley.idGalera,
+        id_gale: galley.idGalera,
         // Agrega una nueva propiedad que contenga ambos valores
         galeraYlote: `Galera ${galley.numeroGalera} - Lote ${galley.idLote}`,
-      }));
-      
+      }))
+
       const newGalleyData = response.data.map(galley => ({
         id_galera: galley.idGalera,
         id_lote: galley.idLote,
         no_galera: galley.numeroGalera,
         existencia: galley.existence,
         tipo_pollo: galley.typeChicken,
-      }));
-  
+      }))
+
       // Accede a la nueva propiedad que contiene ambos valores
-      const galerasYlotes = galleysData.map(galley => galley.galeraYlote);
-      const idGalera = galleysData.map(galley => galley.id_gale);
-      //console.log(galerasYlotes);
-      console.log(idGalera);
-      console.log(newGalleyData);
-      setGalleysPerLote(galleysData);
-      setidGalera(idGalera);
-    } 
-  };
-  
+      const galerasYlotes = galleysData.map(galley => galley.galeraYlote)
+      const idGalera = galleysData.map(galley => galley.id_gale)
+      // console.log(galerasYlotes);
+      console.log(idGalera)
+      console.log(newGalleyData)
+      setGalleysPerLote(galleysData)
+      setidGalera(idGalera)
+    }
+  }
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        await handleObtainGalleysPerLote(); // Llama a la función con el valor de lote deseado
+        await handleObtainGalleysPerLote() // Llama a la función con el valor de lote deseado
       } catch (error) {
-        console.error('Error al obtener galeras:', error);
+        console.error('Error al obtener galeras:', error)
       }
-    };
-    fetchData(); // Llama a la función al montar el componente
-  }, []); 
-  
+    }
+    fetchData() // Llama a la función al montar el componente
+  }, [])
 
   const [activeTabb] = useState(2)
 
@@ -84,19 +81,19 @@ const NewGalleyScreen = ({ navigation }) => {
     <View style={styles.container}>
       <HeaderInformation
         title="Granja"
-        customTitles={['Mi granja', 'Finalizar galera','Crear galera']}
+        customTitles={['Finalizar galera', 'Crear galera']}
         lotes={lotes}
         activeTab={activeTab}
         setActiveTab={setActiveTab}
         showLote={false}
         navigation={navigation}
-        shouldNavigate={true}
+        shouldNavigate
       />
       <ScrollView style={styles.scrollView}>
 
-          {galleysPerLote.map((galera, index) => (
-            <CardNewGalley key={index} dataList={[galera.galeraYlote]} idGalley={listIdGalera[index]} />
-          ))}
+        {galleysPerLote.map((galera, index) => (
+          <CardNewGalley key={index} dataList={[galera.galeraYlote]} idGalley={listIdGalera[index]} />
+        ))}
 
       </ScrollView>
       <View style={styles.bottomTabNavigator}>

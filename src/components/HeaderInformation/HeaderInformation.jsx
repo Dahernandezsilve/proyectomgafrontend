@@ -4,7 +4,7 @@ import PropTypes from 'prop-types'
 import styles from './styles'
 
 const HeaderInformation = ({
-  lotes, title, customTitles, activeTab, setActiveTab, showLote, navigation, shouldNavigate
+  lotes, title, customTitles, activeTab, setActiveTab, showLote, navigation, shouldNavigate,
 }) => {
   const handleTabPress = tabName => {
     setActiveTab(tabName)
@@ -26,11 +26,11 @@ const HeaderInformation = ({
             activeOpacity={0.7}
             onPress={() => {
               if (shouldNavigate) {
-                //handleTabPress(lote);
-                navigation.navigate(customTitles[index], { activeTab: customTitles[index] });
-                handleTabPress(activeTab);
+                // handleTabPress(lote);
+                navigation.navigate(customTitles[index], { activeTab: customTitles[index] })
+                handleTabPress(activeTab)
               } else {
-                handleTabPress(lote);
+                handleTabPress(lote)
               }
             }}
           >

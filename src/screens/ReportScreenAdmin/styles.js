@@ -11,6 +11,9 @@ const styles = StyleSheet.create({
     right: 0, // Ajusta el color de fondo según tus necesidades
     zIndex: 3,
   },
+  selectOp: {
+    zIndex: 5,
+  },
   containerColumn: {
     flexDirection: 'row',
   },

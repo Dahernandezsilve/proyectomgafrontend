@@ -18,7 +18,7 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.5,
     shadowRadius: 2,
     width: windowWidth * 0.51, // Ajustar el ancho según el ancho de la pantalla
-    zIndex: 1,
+    zIndex: 5,
     // Ajuste de zIndex para asegurar que el contenedor esté por encima de otros componentes
   },
   optionButton: {
@@ -38,7 +38,7 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.5,
     shadowRadius: 2,
     width: '100%',
-    zIndex: 2,
+    zIndex: 5,
   },
   selectedOptionText: {
     fontSize: windowWidth * 0.04,
