@@ -11,7 +11,6 @@ import CreationScreenAdministrator from './CreationScreenAdministrator'
 import CardAssignment from '../components/CardAssignment'
 import PersonalScreen from './PersonalScreen'
 
-
 export {
   ChoiceScreen,
   CreationScreen,

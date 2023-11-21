@@ -16,6 +16,7 @@ import TrafficLight from './TrafficLight'
 import BottomTabNavigation from './BottomTabNavigation'
 import CardAssignment from './CardAssignment'
 import CardPersonal from './CardPersonal'
+import CardNewGalley from './CardNewGalley'
 
 export {
   CardGalera,
@@ -36,4 +37,5 @@ export {
   BottomTabNavigation,
   CardAssignment,
   CardPersonal,
+  CardNewGalley,
 }

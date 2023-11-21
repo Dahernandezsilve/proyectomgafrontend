@@ -11,6 +11,8 @@ const PersonalScreen = ({ navigation }) => {
   const lotes = ['20', '1', '2']
   const [workers, setWorkers] = useState()
   const [activeTab, setActiveTab] = useState(lotes[0])
+  const submenu = ['Mi personal', 'Ranking', 'Añadir personal']
+  const [menuActive, setMenuActive] = useState(submenu[0])
   const [response, , handleRequest] = useApi()
 
   const handleObtainWorkers = () => {
@@ -62,9 +64,11 @@ const PersonalScreen = ({ navigation }) => {
         title="Personal"
         customTitles={['Mi personal', 'Ranking', 'Añadir personal']}
         lotes={lotes}
-        activeTab={activeTab}
-        setActiveTab={setActiveTab}
+        activeTab={menuActive}
+        setActiveTab={setMenuActive}
         showLote={false}
+        navigation={navigation}
+        shouldNavigate={true}
       />
       <ScrollView style={styles.scrollabe}>
         <View style={styles.container2}>

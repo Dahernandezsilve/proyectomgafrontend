@@ -3,17 +3,18 @@ import {
   View, Text, TextInput, ScrollView,
 } from 'react-native'
 import PropTypes from 'prop-types'
-import { CardGaleraAdmin, HeaderInformation, BottomTabNavigation } from '../../components'
+import {CardNewGalley, HeaderInformation, BottomTabNavigation } from '../../components'
 import styles from './styles'
 import useApi from '../../hooks/useApi/useApi'
 
 
 const NewGalleyScreen = ({ navigation }) => {
-  const lotes = ['Mi granja', 'Asignacion', 'Crear galera']
-  const [activeTab, setActiveTab] = useState(lotes[2])
+  const lotes = ['Mi granja', 'Crear galera']
+  const [activeTab, setActiveTab] = useState(lotes[1])
   const [response, , handleRequest] = useApi()
-  const cant_lotes = ['1', '2', '3', '4']
-  const [verLotes, setLotes] = useState(cant_lotes[0])
+  const [galleysPerLote, setGalleysPerLote] = useState([]); // Estado para almacenar los datos de las galeras
+  const [listIdGalera, setidGalera] = useState([]);
+
 
   const navigateToGaleras = async () => {
     navigation.navigate('Creacion')
@@ -30,42 +31,46 @@ const NewGalleyScreen = ({ navigation }) => {
       label: 'Granja', route: 'Crear galera', icon: 'book', method: 'Entypo',
     },
     {
-      label: 'Personal', route: 'PersonalScreen', icon: 'people-alt', method: 'MaterialIcons',
+      label: 'Personal', route: 'Mi personal', icon: 'people-alt', method: 'MaterialIcons',
     },
   ]
 
   // eslint-disable-next-line no-shadow
-  const handleObtainGalleysPerLote = async verLotes => {
-    const body = {
-      numLote: parseInt(verLotes, 10),
-    }
-
-    console.log('body', body)
-
-    // Realiza una solicitud POST a la ruta de Flask
-    const response = await handleRequest('POST', '/galerasAdmin', body)
-    console.log('Mensaje:', response)
+  const handleObtainGalleysPerLote = async () => {
+    const response = await handleRequest('GET', '/galerasWorker');
+    console.log('Mensaje:', response);
+  
     if (Array.isArray(response.data) && response.data.length > 0) {
       const galleysData = response.data.map(galley => ({
-        numeroGalera: galley.numeroGalera,
-        typeChicken: galley.typeChicken,
-        existence: galley.existence
+        id_gale : galley.idGalera,
+        // Agrega una nueva propiedad que contenga ambos valores
+        galeraYlote: `Galera ${galley.numeroGalera} - Lote ${galley.idLote}`,
       }));
-      console.log('Datos de las galeras:');
-      console.log(galleysData);
-
-      // Accede solo al número de galera
-      const numerosGalera = galleysData.map(galley => galley.numeroGalera);
-
-      setGalleysPerLote(galleysData); // Asegúrate de tener una función setWorkersPerLote para establecer los datos en tu estado
+      
+      const newGalleyData = response.data.map(galley => ({
+        id_galera: galley.idGalera,
+        id_lote: galley.idLote,
+        no_galera: galley.numeroGalera,
+        existencia: galley.existence,
+        tipo_pollo: galley.typeChicken,
+      }));
+  
+      // Accede a la nueva propiedad que contiene ambos valores
+      const galerasYlotes = galleysData.map(galley => galley.galeraYlote);
+      const idGalera = galleysData.map(galley => galley.id_gale);
+      //console.log(galerasYlotes);
+      console.log(idGalera);
+      console.log(newGalleyData);
+      setGalleysPerLote(galleysData);
+      setidGalera(idGalera);
     } 
-    //console.log("Datos:", galleysPerLote)
-  }
+  };
+  
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        await handleObtainGalleysPerLote('1'); // Llama a la función con el valor de lote deseado
+        await handleObtainGalleysPerLote(); // Llama a la función con el valor de lote deseado
       } catch (error) {
         console.error('Error al obtener galeras:', error);
       }
@@ -80,7 +85,7 @@ const NewGalleyScreen = ({ navigation }) => {
     <View style={styles.container}>
       <HeaderInformation
         title="Granja"
-        customTitles={['Mi granja', 'Asignacion', 'Crear galera']}
+        customTitles={['Mi granja', 'Crear galera']}
         lotes={lotes}
         activeTab={activeTab}
         setActiveTab={setActiveTab}
@@ -88,15 +93,13 @@ const NewGalleyScreen = ({ navigation }) => {
         navigation={navigation}
         shouldNavigate={true}
       />
-      <ScrollView>
-        <View style={styles.container}>
+      <ScrollView style={styles.scrollView}>
 
-          <View style={styles.rectangle}>
-            <Text style={styles.workerTitle}>Asignar trabajador</Text>
-          </View>
+          {galleysPerLote.map((galera, index) => (
+            <CardNewGalley key={index} dataList={[galera.galeraYlote]} idGalley={listIdGalera[index]} />
+          ))}
 
 
-        </View>
       </ScrollView>
       <View style={styles.bottomTabNavigator}>
         <BottomTabNavigation

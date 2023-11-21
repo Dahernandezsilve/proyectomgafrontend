@@ -5,7 +5,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
     bottom: 0,
     left: 0,
-    position: 'absolute',
+    position: 'relative',
     right: 0, // Ajusta el color de fondo según tus necesidades
   },
   container: {
@@ -40,6 +40,9 @@ const styles = StyleSheet.create({
   },
   scrollContainer: {
     flex: 1,
+  },
+  scrollView: {
+    flex: 1, // También en el ScrollView para que se expanda correctamente
   },
   workerTitle: {
     color: '#2B4985',
