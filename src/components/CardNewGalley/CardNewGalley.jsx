@@ -59,13 +59,6 @@ const CustomCard = ({ dataList, idGalley }) => {
         >
           <Text style={styles.buttonText}>Finalizar</Text>
         </TouchableOpacity>
-        <TouchableOpacity
-          style={[styles.button, styles.greenButton, iniciarDisabled && styles.disabledButton]}
-          onPress={handleIniciarPress}
-          disabled={iniciarDisabled}
-        >
-          <Text style={styles.buttonText}>Iniciar</Text>
-        </TouchableOpacity>
       </View>
     </View>
   );

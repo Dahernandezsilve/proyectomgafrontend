@@ -9,7 +9,7 @@ import useApi from '../../hooks/useApi/useApi'
 
 
 const NewGalleyScreen = ({ navigation }) => {
-  const lotes = ['Mi granja', 'Crear galera']
+  const lotes = ['Mi granja', 'Finalizar galera','Crear galera']
   const [activeTab, setActiveTab] = useState(lotes[1])
   const [response, , handleRequest] = useApi()
   const [galleysPerLote, setGalleysPerLote] = useState([]); // Estado para almacenar los datos de las galeras
@@ -28,7 +28,7 @@ const NewGalleyScreen = ({ navigation }) => {
       label: 'Medición', route: 'Administrador', icon: 'new-message', method: 'Entypo',
     },
     {
-      label: 'Granja', route: 'Crear galera', icon: 'book', method: 'Entypo',
+      label: 'Granja', route: 'Finalizar galera', icon: 'book', method: 'Entypo',
     },
     {
       label: 'Personal', route: 'Mi personal', icon: 'people-alt', method: 'MaterialIcons',
@@ -85,7 +85,7 @@ const NewGalleyScreen = ({ navigation }) => {
     <View style={styles.container}>
       <HeaderInformation
         title="Granja"
-        customTitles={['Mi granja', 'Crear galera']}
+        customTitles={['Mi granja', 'Finalizar galera','Crear galera']}
         lotes={lotes}
         activeTab={activeTab}
         setActiveTab={setActiveTab}
