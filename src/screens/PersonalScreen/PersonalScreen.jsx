@@ -87,6 +87,8 @@ const PersonalScreen = ({ navigation }) => {
         activeTab={activeTab}
         setActiveTab={setActiveTab}
         showLote={false}
+        navigation={navigation}
+        shouldNavigate={true}
       />
       {activeTab === 'Mi personal' ? (
         <ScrollView style={styles.scrollabe}>

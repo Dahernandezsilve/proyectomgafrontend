@@ -42,9 +42,8 @@ const GalleyAssignment = ({ navigation }) => {
       console.log(galleysData)
 
       // Accede solo al número de galera
-      const numerosGalera = galleysData.map(galley => galley.numeroGalera)
-      // console.log('Números de Galera:');
-      // console.log(numerosGalera);
+      const numerosGalera = galleysData.map(galley => galley.numeroGalera);
+
 
       setGalleysPerLote(galleysData) // Asegúrate de tener una función setWorkersPerLote para establecer los datos en tu estado
     }

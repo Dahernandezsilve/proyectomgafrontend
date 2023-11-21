@@ -302,10 +302,10 @@ const ReportScreenAdmin = (
       label: 'Medición', route: 'Calculator', icon: 'new-message', method: 'Entypo',
     },
     {
-      label: 'Granja', route: 'Crear galera', icon: 'book', method: 'Entypo',
+      label: 'Granja', route: 'Finalizar galera', icon: 'book', method: 'Entypo',
     },
     {
-      label: 'Personal', route: 'PersonalScreen', icon: 'people-alt', method: 'MaterialIcons',
+      label: 'Personal', route: 'Mi personal', icon: 'people-alt', method: 'MaterialIcons',
     },
   ]
 
