@@ -97,7 +97,7 @@ const CardPersonalRanking = ({
             <View style={[styles.column2, styles.valuesContainer]}>
               {Object.entries(customValues).map(([key, value]) => (
                 <Text key={key} style={[styles.info, styles.rightAlignedText]}>
-                  {value !== null ? (value.length > 15 ? `${value.substring(0, 12)}...` : value) : 'Sin registros'}
+                  {value !== null && value !== undefined ? (value.length > 15 ? `${value.substring(0, 12)}...` : value) : 'Sin registros'}
                 </Text>
               ))}
             </View>
@@ -161,7 +161,7 @@ const CardPersonalRanking = ({
             <View style={[styles.column2, styles.valuesContainer]}>
               {Object.entries(customValues).map(([key, value]) => (
                 <Text key={key} style={[styles.info, styles.rightAlignedText]}>
-                  {value !== null ? (value.length > 15 ? `${value.substring(0, 12)}...` : value) : 'Sin registros'}
+                  {value !== null && value !== undefined ? (value.length > 15 ? `${value.substring(0, 12)}...` : value) : 'Sin registros'}
                 </Text>
               ))}
             </View>

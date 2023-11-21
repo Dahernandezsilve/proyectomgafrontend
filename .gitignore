@@ -9,6 +9,7 @@ npm-debug.*
 *.mobileprovision
 *.orig.*
 web-build/
+mga-app-404416-2efa905a55bb.json
 
 # macOS
 .DS_Store
