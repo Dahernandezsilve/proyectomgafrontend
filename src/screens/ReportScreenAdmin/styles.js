@@ -11,6 +11,9 @@ const styles = StyleSheet.create({
     right: 0, // Ajusta el color de fondo según tus necesidades
     zIndex: 3,
   },
+  containerColumn: {
+    flexDirection: 'row',
+  },
   optionsContainer: {
     flex: 1,
     flexDirection: 'column',
@@ -34,6 +37,33 @@ const styles = StyleSheet.create({
     left: 0,
     position: 'absolute',
     right: 0,
+  },
+  textContainer: {
+    alignItems: 'center',
+    backgroundColor: 'white',
+    borderBottomRightRadius: 0,
+    borderColor: 'gray',
+    borderRadius: 5,
+    borderRightWidth: 0,
+    borderTopRightRadius: 0,
+    borderWidth: 1,
+    marginLeft: windowWidth * 0.04,
+    marginTop: windowWidth * 0.05,
+    padding: windowWidth * 0.05,
+    shadowColor: 'gray',
+    shadowRadius: 2,
+  },
+  textContainer2: {
+    alignItems: 'center',
+    backgroundColor: 'white',
+    borderBottomLeftRadius: 0,
+    borderColor: 'gray',
+    borderLeftWidth: 0,
+    borderRadius: 5,
+    borderTopLeftRadius: 0,
+    borderWidth: 1,
+    marginTop: windowWidth * 0.05,
+    paddingTop: windowWidth * 0.01,
   },
 
 })
