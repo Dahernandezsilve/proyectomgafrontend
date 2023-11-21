@@ -2,7 +2,7 @@ import CardGalera from './CardGalera'
 import CardGaleraAdmin from './CardGaleraAdmin'
 import CommentsComponent from './CommentsComponent'
 import HeaderCreation from './HeaderCreation'
-import HeaderGalley from './HeaderGalley'
+import HeaderGallery from './HeaderGallery'
 import HeaderInformation from './HeaderInformation'
 import HeaderComponent from './HeaderComponent'
 import ModalComponent from './ModalComponent'
@@ -22,7 +22,7 @@ export {
   CardGaleraAdmin,
   CommentsComponent,
   HeaderCreation,
-  HeaderGalley,
+  HeaderGallery,
   HeaderInformation,
   HeaderComponent,
   ModalComponent,

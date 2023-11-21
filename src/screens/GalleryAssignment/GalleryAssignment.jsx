@@ -1,12 +1,13 @@
+/* eslint-disable react/require-default-props */
 /* eslint-disable max-len */
 import React, { useState, useEffect } from 'react'
 import {
   View, Text, Button, Dimensions, ScrollView,
 } from 'react-native'
+import PropTypes from 'prop-types'
 import {
   CardAssignment, HeaderInformation, BottomTabNavigation,
 } from '../../components'
-
 import styles from './styles'
 import useApi from '../../hooks/useApi/useApi'
 
@@ -64,7 +65,7 @@ const GalleryAssignment = ({ navigation }) => {
         cantidadPollos: galley.existence.toString(),
       }}
       customTitles={['No. Galera:', 'Tipo de población:', 'Cantidad de pollos:']}
-      selectedGalera={galley.numeroGalera} 
+      selectedGalera={galley.numeroGalera}
     />
   ))
 
@@ -117,6 +118,10 @@ const GalleryAssignment = ({ navigation }) => {
       />
     </>
   )
+}
+GalleryAssignment.propTypes = {
+
+  navigation: PropTypes.object,
 }
 
 export default GalleryAssignment

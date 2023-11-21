@@ -85,6 +85,7 @@ const CreationScreenAdministrator = () => {
       <StatusBar barStyle="light-content" backgroundColor="#fff" />
       <StatusBar barStyle="dark-content" backgroundColor="#fff" />
       <HeaderComponent
+        testID="continuar"
         title="Mediciones"
         customTitles={customTitles}
         activeTab={activeTab}
@@ -139,7 +140,7 @@ const CreationScreenAdministrator = () => {
           maxLength={4}
           setRegistro={setRegistro}
         />
-        <CommentsComponent code="observaciones" registro={registro} setRegistro={setRegistro} handleRegistrar={handleSend} />
+        <CommentsComponent testID="Continuar" code="observaciones" registro={registro} setRegistro={setRegistro} handleRegistrar={handleSend} />
       </ScrollView>
     </View>
   )
